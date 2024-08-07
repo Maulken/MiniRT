@@ -25,7 +25,7 @@ MLX = minilibx-linux
 LIBMLX = $(MLX)/libmlx.a
 
 ### SOURCE FILES ###
-SOURCES = main.c init.c clear.c
+SOURCES = main.c rt/init.c rt/clear.c
 
 ### OBJECTS ###
 
