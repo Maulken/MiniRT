@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:21:12 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/08 15:34:58 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:20:15 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	canvas_to_viewport(t_data *data)
 
 void	intersect_ray_sphere(t_data *data)
 {
-	t_point	CO;
+	t_point	*CO;
 	double	a;
 	double	b;
 	double	c;
 	double	discriminant;
 
-	CO.x = data->camera->x - data->sphere->sp_point->x;
-	CO.y = data->camera->y - data->sphere->sp_point->y;
-	CO.z = data->camera->z - data->sphere->sp_point->z;
+	CO->x = data->camera->x - data->sphere->sp_point->x;
+	CO->y = data->camera->y - data->sphere->sp_point->y;
+	CO->z = data->camera->z - data->sphere->sp_point->z;
 	a = data->D->x * data->D->x + data->D->y * data->D->y + data->D->z * data->D->z;
 	b = 2 * (CO->x * data->D->x + CO->y * data->D->y + CO->z * data->D->z);
 	c = CO->x * CO->x + CO->y * CO->y + CO->z * CO->z - (data->sphere->sp_diam * data->sphere->sp_diam);
@@ -37,24 +37,24 @@ void	intersect_ray_sphere(t_data *data)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 	{
-		data->t[0] = inf;
-		data->t[1] = inf;
+		data->t[0] = data->t_max;
+		data->t[1] = data->t_max;
 		return ;
 	}
-	t[0] = (-b + sqrt(discriminant)) / (2 * a);
-	t[1] = (-b - sqrt(discriminant)) / (2 * a);	
+	data->t[0] = (-b + sqrt(discriminant)) / (2 * a);
+	data->t[1] = (-b - sqrt(discriminant)) / (2 * a);	
 	return ;
 }
 
 t_colors	*trace_ray(t_data *data)
 {
-	t_colors	background;
+	t_colors	*background;
 	double	closest_t = data->t_max;
 	// t_sphere	closest_sphere = NULL;
 	// double	t[2];
 
-	while (sphere)
-	{
+	// while (sphere)
+	// {
 		intersect_ray_sphere(data);
 		if ((data->t[0] >= data->t_min && data->t[0] < data->t_max) && data->t[0] < closest_t)
 		{
@@ -66,14 +66,14 @@ t_colors	*trace_ray(t_data *data)
 			closest_t = data->t[1];
 			// closest_sphere = sphere;
 		}
-	}
+	// }
 	// if (closest_sphere == NULL)
 	// 	return (BACKGROUND_COLOR);
 	if (closest_t == data->t_max)
 	{
-		background.r = 255;
-		background.g = 255;
-		background.b = 255;
+		background->r = 255;
+		background->g = 255;
+		background->b = 255;
 		return (background);
 	}
 	// return (closest_sphere.color);
@@ -91,7 +91,7 @@ void	draw(t_data *data)
 		while (data->y < (data->Ch / 2)) //pour y allant de -Ch/2 à Ch/2
 		{
 			canvas_to_viewport(data);
-			pixel_color = trace_ray(origin, D, t_min, t_max);
+			pixel_color = trace_ray(data);
 			data->y++;
 		}
 		data->x++;
