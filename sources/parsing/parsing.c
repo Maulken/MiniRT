@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/08 13:58:02 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:45:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ int ft_axis_parse(char *arg, t_axis axis)
 	axis.z_axis = ft_atof(view_point[2]);
 	return(0);
 }
-int ft_point_parse(char *arg, t_point point)
+int ft_point_parse(char *arg, t_cord cord)
 {
 	char **start;
 
 	start = ft_split(arg, ',');
 	if(!start)
 		return(0);
-	point.x = ft_atof(start[0]);
-	point.y = ft_atof(start[1]);
-	point.z = ft_atof(start[2]);
+	cord.x = ft_atof(start[0]);
+	cord.y = ft_atof(start[1]);
+	cord.z = ft_atof(start[2]);
 	return(0);
 }
 
@@ -213,7 +213,7 @@ int ft_parse_pl( char *line, t_scenes scene)
 	ft_colors_parse(tab[3], scene.pl_list.pl_colors);
 	return(0);
 }
-int	ft_parse_arg(char *line, t_scenes scene)
+int	ft_parse_arg(char *line, t_scenes *scene)
 {
 	int i;
 
@@ -221,62 +221,64 @@ int	ft_parse_arg(char *line, t_scenes scene)
 	while(line[i])
 	{
 		if(line[0] && strcmp(line, "R "))
-			ft_parse_R(line, scene);
+			ft_parse_R(line, *scene);
 		else if(line[0] && strcmp(line, "A "))
-			ft_parse_A(line, scene);
+			ft_parse_A(line, *scene);
 		else if(line[0] && strcmp(line, "C "))
-			ft_parse_C(line, scene);
+			ft_parse_C(line, *scene);
 		else if(line[0] && strcmp(line, "L "))
-			ft_parse_L(line, scene);
+			ft_parse_L(line, *scene);
 		else if(line[0] && strcmp(line, "sp "))
-			ft_parse_sp(line, scene);
+			ft_parse_sp(line, *scene);
 		else if(line[0] && strcmp(line, "cy "))
-			ft_parse_cy(line, scene);
+			ft_parse_cy(line, *scene);
 		else if(line[0] && strcmp(line, "pl "))
-			ft_parse_pl(line, scene);
+			ft_parse_pl(line, *scene);
 		else
 			return(0);
 	}
 	return(0);
 }
 
-// int main(int argc, char **argv)
-// {
-// 	char *line;
-// 	int scene_fd;
-// 	char **tab;
-// 	int i;
-// 	t_scenes  scene;
+int parsing(int argc , char **argv, t_data *data)
+{
+	char *line;
+	int scene_fd;
+	char **tab;
+	int i;
 
-// 	scene.res_height = 0;
-// 	scene.res_width = 0;
-// 	scene_fd = open(argv[1], O_RDWR);
-// 	line = get_next_line(scene_fd);
-// 		printf("line = %s\n", line);
-// 	tab = malloc(sizeof(char*) * 40);
-// 	if(!tab)
-// 		return(0);
-// 	if(argc != 2)
-// 		return(0);
-// 	i = 0;
-// 	while ((line != NULL))
-// 	{
-// 		if(line[0] != '\n')
-// 		{
-// 			tab[i] = malloc(sizeof(char) * ft_strlen(line));
-// 			tab[i] =  line;
-// 			//printf("tab[%d] = %s", i, tab[i]);
-// 			i++;
-// 		}
-// 	line = get_next_line(scene_fd);
-// 	}
-// 	i = 0;
-// 	// while(line != NULL)
-// 	// {
-// 		printf("test\n");
-// 		ft_parse_arg(line, scene);
-// 	//}
-// 	free(line);
-// 	close(scene_fd);
-// 	return(1);
-// }
+
+	// test de fichier si on n'a les droit si le nom et valide 
+	scene_fd = open(argv[1], O_RDWR);
+	if(scene_fd == NULL)
+		return(clean(data,1));
+	
+	line = get_next_line(scene_fd);
+		printf("line = %s\n", line);
+
+	tab = malloc(sizeof(char*) * 40);
+	if(!tab)
+		return(0);
+
+	i = 0;
+	while ((line != NULL))
+	{
+		if(line[0] != '\n')
+		{
+			tab[i] = malloc(sizeof(char) * ft_strlen(line));
+			tab[i] =  line;
+			//printf("tab[%d] = %s", i, tab[i]);
+			i++;
+		}
+	line = get_next_line(scene_fd);
+	}
+	i = 0;
+	// while(line != NULL)
+	// {
+		printf("test\n");
+		ft_parse_arg(line, data->scenes);
+	//}
+	free(line);
+	close(scene_fd);
+	return(1);
+}

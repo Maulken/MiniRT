@@ -11,10 +11,12 @@ int	event(t_data *data)
 	return (0);
 }
 
-int main(void)
+int main(int argc , char **argv)
 {
   t_data data;
   init_struct(&data);
+  if(parsing(argc , argv ,&data) == ERROR)
+		return(clean(&data , 1));
 
   data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, data.wx, data.wy, "MiniRT");
