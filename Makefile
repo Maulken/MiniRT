@@ -6,7 +6,7 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/08 14:33:29 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/08 14:37:50 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(LIBFT): libft
 	cd libft && $(MAKE)
 
 clean:
-	cd libft $(MAKE) --quiet clean
+	cd libft && $(MAKE) --quiet clean
 	$(RM) $(OBJS)
 
 fclean: clean
