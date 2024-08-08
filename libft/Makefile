@@ -118,10 +118,12 @@ $(OBJ_DIR)/%.o: $(SRC_PRINTF_FD_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
 all: $(NAME)
 
 clean:
+
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
+
 
 re: fclean all
 
@@ -132,5 +134,6 @@ $(NAME): $(OBJ_FULL)
 # Create object directory
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
 
 .PHONY: all clean fclean re
