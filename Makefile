@@ -6,7 +6,7 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/08 14:37:50 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/08 14:51:41 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ CLINKS  = -lXext -lX11 -lm
 NAME   = MiniRT
 
 ### PATH ###
-OBJ_DIR			= obj
 HEADER_PATH		= includes/minirt.h libft/includes/libt.h
 SRC_PATH 		= sources
 MLX				= minilibx-linux
@@ -47,9 +46,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)  $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME) $(CLINKS) $(LFLAGS)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
 
 $(LIBMLX):
 	make -C $(MLX)
