@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/06 14:42:16 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/08 08:57:46 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ typedef struct s_data // data principal . pour la mlx
 
 int	ft_close(t_data *data);
 int	init_struct(t_data *data);
+
+int parsing(int argc ,char **argv ,t_data *data);
 
 #endif
