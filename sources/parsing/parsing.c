@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/08 15:45:03 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:25:21 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,20 +240,17 @@ int	ft_parse_arg(char *line, t_scenes *scene)
 	return(0);
 }
 
+
 int parsing(int argc , char **argv, t_data *data)
 {
 	char *line;
-	int scene_fd;
 	char **tab;
 	int i;
 
-
-	// test de fichier si on n'a les droit si le nom et valide 
-	scene_fd = open(argv[1], O_RDWR);
-	if(scene_fd == NULL)
-		return(clean(data,1));
+	data->fd = check_argument(argc , argv);
+	line = checkget_file_content(data->fd);
 	
-	line = get_next_line(scene_fd);
+	line = get_next_line(data->fd);
 		printf("line = %s\n", line);
 
 	tab = malloc(sizeof(char*) * 40);
@@ -267,10 +264,10 @@ int parsing(int argc , char **argv, t_data *data)
 		{
 			tab[i] = malloc(sizeof(char) * ft_strlen(line));
 			tab[i] =  line;
-			//printf("tab[%d] = %s", i, tab[i]);
+		
 			i++;
 		}
-	line = get_next_line(scene_fd);
+	line = get_next_line(data->fd);
 	}
 	i = 0;
 	// while(line != NULL)
@@ -279,6 +276,6 @@ int parsing(int argc , char **argv, t_data *data)
 		ft_parse_arg(line, data->scenes);
 	//}
 	free(line);
-	close(scene_fd);
+	close(data->fd);
 	return(1);
 }

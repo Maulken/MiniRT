@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/08 15:48:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:38:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_data // data principal . pour la mlx
     int		bits_per_pixel;
     int		line_length;
 	int		endin;
+
+	int fd;
 
 } t_data ;
 
@@ -144,6 +146,7 @@ int		clean(t_data *data ,int code_error);
 
 	//init.c
 int		init_struct(t_data *data);
+int		endwith(char *argv, char *value);
 
 int	event(t_data *data);
 
