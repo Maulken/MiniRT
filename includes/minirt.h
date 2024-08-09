@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/09 09:38:38 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/10 00:36:22 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,22 @@ typedef struct s_scenes
 //##########fonction#########//
 
 /*PARSING*/
+	//parsing.c
 int		parsing(int argc ,char **argv ,t_data *data);
-
+	//check.c
+int 	endwith(char *argv, char *value);
+int 	check_argument(int argc , char **argv);
+void	check_tab(char **rows , t_data *data);
+int		check_min_scene(char **tab);
+int 	check_type(char *rows ,t_data *data);
+	//get_file
+char	check_last_char(char *str);
+void	delete_comment(char *str);
+char	*get_string(int fd);
+char	**checkget_file_content(int fd);
+	//utils.c
+char	*ft_strjoin_free(char *s1, char *s2);
+void printf_row(char **row);
 /*RT*/
 	//clear.c
 int		ft_close(t_data *data);
@@ -146,7 +160,7 @@ int		clean(t_data *data ,int code_error);
 
 	//init.c
 int		init_struct(t_data *data);
-int		endwith(char *argv, char *value);
+
 
 int	event(t_data *data);
 
