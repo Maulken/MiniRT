@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/10 13:56:44 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:47:29 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 t_scenes alloc_scene(char **tab, t_data *data)
 {
-
+    int nb_elem[6];
     
+    
+
 }
 
-t_scenes alloc_scen
 
 // on sait que le tableau et bon on n'a plus qu'a faire allocation de structure et la remplir le probleme et comment faire de manier la plus optimiser en memmoir . 
 t_scenes *create_scenes_getinfo(char **tab ,t_data *data)

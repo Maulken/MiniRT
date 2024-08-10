@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/10 13:55:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:45:34 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ typedef struct s_axis
 	float	z_axis;
 } t_axis;
 
+
+
+
 typedef struct s_plane
 {
 	t_cord		pl_point;
@@ -124,15 +127,17 @@ typedef struct s_light
 
 typedef struct s_scenes
 {
+	t_camera	cam;
+	t_ambient	ambient;
+	t_light		light_list;
+
 	t_cylinder	cy_list;
 	t_plane		pl_list;
 	t_sphere	sp_list;
-	t_light		light_list;
-	t_ambient	ambient;
-	t_camera	cam;
-	int			res_height;
-	int			res_width;
+
 } t_scenes;
+
+
 
 //##########fonction#########//
 
