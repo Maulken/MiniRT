@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/10 01:03:50 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/10 13:22:07 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int endwith(char *argv, char *value)
     j = 0;
     while(argv[i] == '\0')
             i++;
-    i =- ft_strlen(value);
+    i -= ft_strlen(value);
     while(argv[i])
     {
         if(argv[i] == value[j])
@@ -46,36 +46,39 @@ int check_argument(int argc , char **argv)
 
     i = 0;
     if(argc != 2 )
-		(printf("plese ./Minirt enter the secene.rt"),exit(1));
+    {
+		printf("plese ./Minirt enter the secene.rt");
+        return(-1);
+    }
     if(!argv[1] || !*argv[1])
     {
         printf("error fichier vide");
-        return(1);
+        return(-1);
     }
     while(argv[i])
         i++;
     if(i >= 3)
     {
         printf("error size of the ... ");
-        return(1);
+        return(-1);
     }
     if(!endwith(argv[1],".rt"))
     {
         printf("error plese file finish.rt");
-        return(1);
+        return(-1);
     }
     fd = open(argv[1], O_RDWR);
 	if(fd == -1)
     {
         printf("no accessed the file.rt");
-        return(1);
+        return(-1);
     }
     return(fd);
 
 }
 
 // verificaiton si tout et bon . avant de faire des allocation . et tout le ... 
-void check_tab(char **rows , t_data *data)
+int check_tab(char **rows , t_data *data)
 {
     int i;
 
@@ -93,7 +96,7 @@ void check_tab(char **rows , t_data *data)
             }
         i++;
     }
-
+    return(OK);
 }
 
 
@@ -122,7 +125,7 @@ while(tab)
 if(len_a == 1 || len_c == 1 || len_l < 1 ) 
 {
     printf("error : il doit avoir  (1)A,(1)C,(inf)L");
-    reutn(ERROR);
+    return(ERROR);
 }
 return(OK);
 }
@@ -141,19 +144,20 @@ int check_type(char *str ,t_data *data)
     }
     if(tab[0])
     {
-        if(!ft_strncmp(tab[0],"A",2));
-            return(check_a(tab));
-        if(!ft_strncmp(tab[0],"C",2));
-            return(check_a(tab));
-        if(!ft_strncmp(tab[0],"L",2));
-            return(check_a(tab));
-        if(!ft_strncmp(tab[0],"sp",2));
-            return(check_a(tab));
-        if(!ft_strncmp(tab[0],"pl",2));
-            return(check_a(tab));
-        if(!ft_strncmp(tab[0],"cy",2));
-            return(check_a(tab));
+       // COMMENT: A FINIR
+        // if(!ft_strncmp(tab[0],"A",2));
+        //     return(check_a(tab));
+        // if(!ft_strncmp(tab[0],"C",2));
+        //     return(check_a(tab));
+        // if(!ft_strncmp(tab[0],"L",2));
+        //     return(check_a(tab));
+        // if(!ft_strncmp(tab[0],"sp",2));
+        //     return(check_a(tab));
+        // if(!ft_strncmp(tab[0],"pl",2));
+        //     return(check_a(tab));
+        // if(!ft_strncmp(tab[0],"cy",2));
+        //     return(check_a(tab));
         
     }
-
+    return(OK);
 }

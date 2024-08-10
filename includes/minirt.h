@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/10 00:36:22 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/10 13:55:08 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int		parsing(int argc ,char **argv ,t_data *data);
 	//check.c
 int 	endwith(char *argv, char *value);
 int 	check_argument(int argc , char **argv);
-void	check_tab(char **rows , t_data *data);
+int	check_tab(char **rows , t_data *data);
 int		check_min_scene(char **tab);
 int 	check_type(char *rows ,t_data *data);
 	//get_file
@@ -152,7 +152,11 @@ char	*get_string(int fd);
 char	**checkget_file_content(int fd);
 	//utils.c
 char	*ft_strjoin_free(char *s1, char *s2);
-void printf_row(char **row);
+void	printf_row(char **row);
+	//get_scenes.c
+t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
+
+
 /*RT*/
 	//clear.c
 int		ft_close(t_data *data);

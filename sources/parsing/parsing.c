@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/10 10:22:48 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/10 13:25:34 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,9 +249,12 @@ int parsing(int argc , char **argv, t_data *data)
 
 
 	data->fd = check_argument(argc , argv);
+	if(data->fd == -1)
+		return(ERROR);
 	tab = checkget_file_content(data->fd);
+	
 	data->scenes = create_scenes_getinfo(tab , data );
 	printf_row(tab);
 	
-	return(1);
+	return(OK);
 }

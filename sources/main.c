@@ -15,10 +15,6 @@ int main(int argc , char **argv)
 {
   t_data data;
 
-  if(argc != 2 && !endwith(argv[1],".rt"))
-		return(printf("plese enter the secene.rt"));
-
-
   init_struct(&data);
 
   if(parsing(argc , argv ,&data) == ERROR)

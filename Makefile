@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: viktor <viktor@student.42.fr>              +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/09 23:33:45 by viktor           ###   ########.fr        #
+#    Updated: 2024/08/10 13:16:47 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LFLAGS			= -L libft -lft -lreadline
 ### SOURCE FILES ###
 SOURCES = main.c \
  rt/init.c rt/clear.c \
- parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c
+ parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/get_scenes.c
 
 ### OBJECTS ###
 
