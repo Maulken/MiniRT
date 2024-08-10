@@ -6,7 +6,7 @@
 /*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/10 00:09:04 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/10 10:22:48 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,36 +247,11 @@ int parsing(int argc , char **argv, t_data *data)
 	char **tab;
 	int i;
 
+
 	data->fd = check_argument(argc , argv);
 	tab = checkget_file_content(data->fd);
+	data->scenes = create_scenes_getinfo(tab , data );
 	printf_row(tab);
 	
-	// line = get_next_line(data->fd);
-	// 	printf("line = %s\n", line);
-
-	// tab = malloc(sizeof(char*) * 40);
-	// if(!tab)
-	// 	return(0);
-
-	// i = 0;
-	// while ((line != NULL))
-	// {
-	// 	if(line[0] != '\n')
-	// 	{
-	// 		tab[i] = malloc(sizeof(char) * ft_strlen(line));
-	// 		tab[i] =  line;
-		
-	// 		i++;
-	// 	}
-	// line = get_next_line(data->fd);
-	// }
-	// i = 0;
-	// // while(line != NULL)
-	// // {
-	// 	printf("test\n");
-	// 	ft_parse_arg(line, data->scenes);
-	// //}
-	// free(line);
-	// close(data->fd);
 	return(1);
 }
