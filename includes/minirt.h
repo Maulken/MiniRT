@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/11 10:21:51 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/11 16:00:05 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,11 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_cord	cam_point;
-	t_cord	cam_axis;
+	t_cord	cam_cord;
+	t_cord	cam_or;
 	int		cam_fov;
+
+
 } t_camera;
 
 typedef struct s_light
@@ -130,7 +132,7 @@ typedef struct s_scenes
 	t_camera	cam;
 	t_ambient	ambient;
 	t_light		light_list;
-	t_object	object;
+	t_object	*object;
 
 } t_scenes;
 
@@ -144,9 +146,9 @@ int		parsing(int argc ,char **argv ,t_data *data);
 	//check.c
 int 	endwith(char *argv, char *value);
 int 	check_argument(int argc , char **argv);
-int	check_tab(char **rows , t_data *data);
+int		check_tab(char **rows , t_data *data);
 int		check_min_scene(char **tab);
-int 	check_type(char *rows ,t_data *data);
+int 	check_type(char *src ,t_data *data);
 	//get_file
 char	check_last_char(char *str);
 void	delete_comment(char *str);
@@ -157,6 +159,16 @@ char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
 	//get_scenes.c
 t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
+
+	//check_object.c
+int		check_num(char *tab, char *str, int size_setting);
+int		check_correct_type(char *content, char *tab);
+int		check_a(char *tab);
+int		check_c(char *tab);
+int		check_l(char *tab);
+int		check_sp(char *tab);
+int		check_pl(char *tab);
+int		check_cy(char *tab);
 
 
 /*RT*/

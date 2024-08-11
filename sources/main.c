@@ -20,16 +20,16 @@ int main(int argc , char **argv)
   if(parsing(argc , argv ,&data) == ERROR)
 		return(clean(&data , 1));
 
-  data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, data.wx, data.wy, "MiniRT");
-	event(&data);
-	//mlx_hook(data.win, 2, 1L << 0, control, &data); deplacement
-	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
-	mlx_loop(data.mlx);
+//   data.mlx = mlx_init();
+// 	data.win = mlx_new_window(data.mlx, data.wx, data.wy, "MiniRT");
+// 	event(&data);
+// 	//mlx_hook(data.win, 2, 1L << 0, control, &data); deplacement
+// 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
+// 	mlx_loop(data.mlx);
 
-	mlx_destroy_window(data.mlx, data.win);
-	mlx_destroy_display(data.mlx);
-	free(data.mlx);
+// 	mlx_destroy_window(data.mlx, data.win);
+// 	mlx_destroy_display(data.mlx);
+// 	free(data.mlx);
 
   return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/10 13:22:07 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:26:29 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,18 @@ int check_tab(char **rows , t_data *data)
 {
     int i;
 
-    i=0;
+    i = 0;
     if(check_min_scene(rows) == ERROR) //
         {
             //free ??
-           return(ERROR);
+           return(1);
         }
     while(rows[i])
     {
         if(check_type(rows[i], data))
             {
-                printf("parse eroor");
+                printf("\nparse eroor\n");
+                return(1);
             }
         i++;
     }
@@ -113,30 +114,29 @@ len_a = 0;
 len_c = 0;
 len_l = 0;
 
-while(tab)
+while(tab[i])
 {
-    if(!ft_strncmp(tab[i], "A", 2))
+    if(!ft_strncmp(tab[i], "A ", 2))
         len_a++;
-    if(!ft_strncmp(tab[i], "C", 2))
+    if(!ft_strncmp(tab[i], "C ", 2))
         len_c++;
-    if(!ft_strncmp(tab[i], "L", 2))
+    if(!ft_strncmp(tab[i], "L ", 2))
         len_l++;
+    i++;
 }
-if(len_a == 1 || len_c == 1 || len_l < 1 ) 
+if(len_a != 1 || len_c != 1 || len_l < 1 ) 
 {
-    printf("error : il doit avoir  (1)A,(1)C,(inf)L");
+    printf("error : il doit avoir  (1)A|%d|,(1)C|%d|,(inf)L|%d|",len_a , len_c, len_l);
     return(ERROR);
 }
 return(OK);
 }
 
-int check_type(char *str ,t_data *data)
+int check_type(char *src ,t_data *data)
 {
-    char **tab;
-    int value_return ;
-
-    value_return = 0;
-    tab = ft_split(str,' ');
+    char    **tab;
+    
+    tab = ft_split(src,' ');
     if(!tab)
     {
         printf("malloc error");
@@ -144,20 +144,23 @@ int check_type(char *str ,t_data *data)
     }
     if(tab[0])
     {
-       // COMMENT: A FINIR
-        // if(!ft_strncmp(tab[0],"A",2));
-        //     return(check_a(tab));
-        // if(!ft_strncmp(tab[0],"C",2));
-        //     return(check_a(tab));
-        // if(!ft_strncmp(tab[0],"L",2));
-        //     return(check_a(tab));
-        // if(!ft_strncmp(tab[0],"sp",2));
-        //     return(check_a(tab));
-        // if(!ft_strncmp(tab[0],"pl",2));
-        //     return(check_a(tab));
-        // if(!ft_strncmp(tab[0],"cy",2));
-        //     return(check_a(tab));
-        
+        if(!ft_strncmp(tab[0],"A",2))
+            return(0);//return(check_a(src));
+        else if(!ft_strncmp(tab[0],"C",2))
+            return(check_c(src));
+        else if(!ft_strncmp(tab[0],"L",2))
+            return(0);//return(check_l(src));
+        else if(!ft_strncmp(tab[0],"sp",3))
+            return(0);//return(check_sp(src));
+        else if(!ft_strncmp(tab[0],"pl",3))
+            return(0);//return(check_pl(src));
+        else if(!ft_strncmp(tab[0],"cy",3))
+            return(check_cy(src));
+        else if(tab[0][0]==' ')
+           return(0);// return(0);
+        else 
+            return(1);
+         printf("why fuking line :%s\n",tab[0]);
     }
-    return(OK);
+    return(0);
 }

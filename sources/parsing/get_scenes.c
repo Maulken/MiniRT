@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_scenes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/11 11:07:26 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/11 12:50:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_scenes alloc_scene(char **tab, t_data *data)
 {
-    
+    //if(tab[0] == 'C')
+        
 
 }
 
