@@ -6,7 +6,7 @@
 /*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/10 10:24:00 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/11 11:13:20 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void printf_row(char **row)
         while(row[j][i])
             printf("%c",row[j][i++]);
         j++;
+        printf("\n\n");
     }
     printf("\n");
 

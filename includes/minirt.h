@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/10 20:45:34 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/11 10:21:51 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,6 @@ typedef struct s_data // data principal . pour la mlx
 
 } t_data ;
 
-
-typedef struct s_cord
-{
-	float	x;
-	float	y;
-	float	z;
-} t_cord;
-
 typedef struct s_colors
 {
 	int	r;
@@ -72,27 +64,25 @@ typedef struct s_colors
 	int	b;
 } t_colors;
 
-typedef struct s_axis
+typedef struct s_cord // ou vec ?? 
 {
-	float	x_axis;
-	float	y_axis;
-	float	z_axis;
-} t_axis;
-
-
+	float	x;
+	float	y;
+	float	z;
+} t_cord;
 
 
 typedef struct s_plane
 {
 	t_cord		pl_point;
-	t_axis		pl_axis;
+	t_cord		pl_axis;
 	t_colors	pl_colors;
 } t_plane;
 
 typedef struct s_cylinder
 {
 	t_cord		cy_point;
-	t_axis		cy_axis;
+	t_cord		cy_axis;
 	float		cy_diam;
 	float		cy_height;
 	t_colors	cy_colors;
@@ -114,7 +104,7 @@ typedef struct s_ambient
 typedef struct s_camera
 {
 	t_cord	cam_point;
-	t_axis	cam_axis;
+	t_cord	cam_axis;
 	int		cam_fov;
 } t_camera;
 
@@ -125,15 +115,22 @@ typedef struct s_light
 	t_colors	light_colors;
 } t_light;
 
+
+ typedef struct s_object
+{
+	int			id;
+	t_cylinder	cy;
+	t_plane		pl;
+	t_sphere	sp;
+
+} t_object;
+
 typedef struct s_scenes
 {
 	t_camera	cam;
 	t_ambient	ambient;
 	t_light		light_list;
-
-	t_cylinder	cy_list;
-	t_plane		pl_list;
-	t_sphere	sp_list;
+	t_object	object;
 
 } t_scenes;
 
