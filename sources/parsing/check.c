@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/11 16:26:29 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 09:28:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,22 +145,22 @@ int check_type(char *src ,t_data *data)
     if(tab[0])
     {
         if(!ft_strncmp(tab[0],"A",2))
-            return(0);//return(check_a(src));
+            return(check_a(src,data));
         else if(!ft_strncmp(tab[0],"C",2))
-            return(check_c(src));
+            return(check_c(src,data));
         else if(!ft_strncmp(tab[0],"L",2))
-            return(0);//return(check_l(src));
+            return(check_l(src,data));
         else if(!ft_strncmp(tab[0],"sp",3))
-            return(0);//return(check_sp(src));
+            return(check_sp(src,data));
         else if(!ft_strncmp(tab[0],"pl",3))
-            return(0);//return(check_pl(src));
+            return(check_pl(src,data));
         else if(!ft_strncmp(tab[0],"cy",3))
-            return(check_cy(src));
+            return(check_cy(src,data));
         else if(tab[0][0]==' ')
            return(0);// return(0);
         else 
             return(1);
-         printf("why fuking line :%s\n",tab[0]);
+        printf("why fuking line :%s\n",tab[0]);
     }
     return(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/11 11:13:20 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/12 09:32:10 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ void printf_row(char **row)
     }
     printf("\n");
 
+}
+
+void print_objet_liste(t_data)
+{
+    
 }
