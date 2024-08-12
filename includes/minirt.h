@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/12 14:58:13 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:57:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,15 +162,23 @@ int size_tab(char **tab);
 t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
 
 	//check_object.c
-int		check_num(char *tab, char *str, int size_setting);
 int		check_correct_type(char *content, char *tab);
 int		check_a(char *tab, t_data *data);
+
+	//chech_object2.c
 int		check_c(char *tab, t_data *data);
 int		check_l(char *tab, t_data *data);
 int		check_sp(char *tab, t_data *data);
 int		check_pl(char *tab, t_data *data);
 int		check_cy(char *tab, t_data *data);
-
+	//check_utils.c
+int		check_num(char *tab, char *str, int size_setting);
+	//check_type.c
+int check_correct_intxyz(char **tmp, int *j);
+int check_correct_floatxyz(char **tmp , int *j);
+int check_correct_char(char **tmp, int *j);
+int check_correct_int(char **tmp , int *j);
+int check_correct_float(char **tmp , int *j);
 
 /*RT*/
 	//clear.c

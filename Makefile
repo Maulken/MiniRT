@@ -6,7 +6,7 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/11 14:51:02 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/12 16:53:25 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LFLAGS			= -L libft -lft -lreadline
 ### SOURCE FILES ###
 SOURCES = main.c \
  rt/init.c rt/clear.c \
- parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/get_scenes.c parsing/check_object.c
+ parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/get_scenes.c parsing/check_object.c parsing/check_object2.c parsing/check_type.c parsing/check_utils.c
 
 ### OBJECTS ###
 
