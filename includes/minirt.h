@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/12 09:28:05 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:58:13 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ char	**checkget_file_content(int fd);
 	//utils.c
 char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
+int size_tab(char **tab);
 	//get_scenes.c
 t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
 
@@ -183,3 +184,4 @@ int		init_struct(t_data *data);
 int	event(t_data *data);
 
 #endif
+

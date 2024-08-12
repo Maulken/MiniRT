@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 09:28:39 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:16:56 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ int check_tab(char **rows , t_data *data)
     int i;
 
     i = 0;
-    if(check_min_scene(rows) == ERROR) //
-        {
+  //  if(check_min_scene(rows) == ERROR) //
+     //   {
             //free ??
-           return(1);
-        }
+     //      return(1);
+     //   }
     while(rows[i])
     {
-        if(check_type(rows[i], data))
+        if(check_type(rows[i], data)) // test tout 
             {
-                printf("\nparse eroor\n");
+                printf("\nparse eror ligne : %d \n",i);
                 return(1);
             }
         i++;

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/12 09:32:10 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:59:19 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,23 @@ void printf_row(char **row)
 
 }
 
-void print_objet_liste(t_data)
+void print_objet_liste(t_scenes *scenes)
 {
-    
+
+}
+
+int size_tab(char **tab)
+{
+    int j; 
+
+    j = 0;
+
+    if (tab == NULL || *tab == NULL)
+        return(0);
+    while(tab[j])
+    {
+        j++;
+    }
+    return(j);
+
 }
