@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/08 15:48:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:57:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,9 @@ typedef struct s_data // data principal . pour la mlx
     int		line_length;
 	int		endin;
 
+	int fd;
+
 } t_data ;
-
-
-typedef struct s_cord
-{
-	float	x;
-	float	y;
-	float	z;
-} t_cord;
 
 typedef struct s_colors
 {
@@ -70,24 +64,25 @@ typedef struct s_colors
 	int	b;
 } t_colors;
 
-typedef struct s_axis
+typedef struct s_cord // ou vec ?? 
 {
-	float	x_axis;
-	float	y_axis;
-	float	z_axis;
-} t_axis;
+	float	x;
+	float	y;
+	float	z;
+} t_cord;
+
 
 typedef struct s_plane
 {
 	t_cord		pl_point;
-	t_axis		pl_axis;
+	t_cord		pl_axis;
 	t_colors	pl_colors;
 } t_plane;
 
 typedef struct s_cylinder
 {
 	t_cord		cy_point;
-	t_axis		cy_axis;
+	t_cord		cy_axis;
 	float		cy_diam;
 	float		cy_height;
 	t_colors	cy_colors;
@@ -108,9 +103,11 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_cord	cam_point;
-	t_axis	cam_axis;
+	t_cord	cam_cord;
+	t_cord	cam_or;
 	int		cam_fov;
+
+
 } t_camera;
 
 typedef struct s_light
@@ -120,22 +117,68 @@ typedef struct s_light
 	t_colors	light_colors;
 } t_light;
 
+
+ typedef struct s_object
+{
+	int			id;
+	t_cylinder	cy;
+	t_plane		pl;
+	t_sphere	sp;
+
+} t_object;
+
 typedef struct s_scenes
 {
-	t_cylinder	cy_list;
-	t_plane		pl_list;
-	t_sphere	sp_list;
-	t_light		light_list;
-	t_ambient	ambient;
 	t_camera	cam;
-	int			res_height;
-	int			res_width;
+	t_ambient	ambient;
+	t_light		light_list;
+	t_object	*object;
+
 } t_scenes;
+
+
 
 //##########fonction#########//
 
 /*PARSING*/
+	//parsing.c
 int		parsing(int argc ,char **argv ,t_data *data);
+	//check.c
+int 	endwith(char *argv, char *value);
+int 	check_argument(int argc , char **argv);
+int		check_tab(char **rows , t_data *data);
+int		check_min_scene(char **tab);
+int 	check_type(char *src ,t_data *data);
+	//get_file
+char	check_last_char(char *str);
+void	delete_comment(char *str);
+char	*get_string(int fd);
+char	**checkget_file_content(int fd);
+	//utils.c
+char	*ft_strjoin_free(char *s1, char *s2);
+void	printf_row(char **row);
+int size_tab(char **tab);
+	//get_scenes.c
+t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
+
+	//check_object.c
+int		check_correct_type(char *content, char *tab);
+int		check_a(char *tab, t_data *data);
+
+	//chech_object2.c
+int		check_c(char *tab, t_data *data);
+int		check_l(char *tab, t_data *data);
+int		check_sp(char *tab, t_data *data);
+int		check_pl(char *tab, t_data *data);
+int		check_cy(char *tab, t_data *data);
+	//check_utils.c
+int		check_num(char *tab, char *str, int size_setting);
+	//check_type.c
+int check_correct_intxyz(char **tmp, int *j);
+int check_correct_floatxyz(char **tmp , int *j);
+int check_correct_char(char **tmp, int *j);
+int check_correct_int(char **tmp , int *j);
+int check_correct_float(char **tmp , int *j);
 
 /*RT*/
 	//clear.c
@@ -145,6 +188,8 @@ int		clean(t_data *data ,int code_error);
 	//init.c
 int		init_struct(t_data *data);
 
+
 int	event(t_data *data);
 
 #endif
+

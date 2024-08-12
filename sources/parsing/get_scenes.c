@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   get_scenes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/12 14:12:44 by vharatyk         ###   ########.fr       */
+/*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
+/*   Updated: 2024/08/12 09:29:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-
-int parsing(int argc , char **argv, t_data *data)
+t_scenes alloc_scene(char **tab, t_data *data)
 {
-	char *line;
-	char **tab;
-	int i;
+   
+
+}
 
 
-	data->fd = check_argument(argc , argv); // check file user
-	if(data->fd == -1)
-		return(ERROR);
+// on sait que le tableau et bon on n'a plus qu'a faire allocation de structure et la remplir le probleme et comment faire de manier la plus optimiser en memmoir . 
+t_scenes *create_scenes_getinfo(char **tab ,t_data *data)
+{
+    //allocation de la scenes 
 
-	tab = checkget_file_content(data->fd); // get file + verifacation de la taille
-	if (check_tab(tab ,data))
-		return(ERROR);
-	
-	if(create_scenes_getinfo(tab , data ))
-		return(ERROR);
-	
-	printf_row(tab);
+    // set scene 
 
-	
-	return(OK);
+
+return(NULL);
 }

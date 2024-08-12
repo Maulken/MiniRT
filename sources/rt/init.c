@@ -1,5 +1,6 @@
 #include "../../includes/minirt.h"
 
+
 int	init_struct(t_data *data)
 {
 	data->height = 0;
