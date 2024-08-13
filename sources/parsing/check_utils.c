@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 16:33:01 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:41:13 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int check_num(char *tab, char *str, int size_setting)
     j = 0;
     i = 0;
     len = 0;
+    in_word = 0 ;
 
 
     while(tab[i] != '\0')
@@ -62,7 +63,6 @@ int check_num(char *tab, char *str, int size_setting)
         }
         i++;
     }
-    len++;
     if(len != size_setting)
     {
         printf("error trop ou pas asser de parametre ou char dans le int : %d \n", len);

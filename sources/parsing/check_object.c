@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 16:48:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:56:22 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,57 @@ int check_correct_type(char *content, char *tab)
     while (tmp[j])
     {
         if (content[j] == 'i') //  verifiaction cord x, y , z et RGB
+        {
             if(check_correct_intxyz(tmp, &j))
+            {
+                printf("ERROR TYPE (R,G,B) \n");
                 break;
-
-        if (content[j] == 'f' )// Vérification des flottants  x ,y , z
+            }
+        }
+        else if (content[j] == 'f' )// Vérification des flottants  x ,y , z
+        {
             if(check_correct_floatxyz(tmp, &j))
-                break;
-        
-        if (content[j] == 'c')//Vérification char
+                {
+                printf("ERROR TYPE (x,y,z) \n");
+                return(1);
+                } 
+            j++; 
+        }
+        else if (content[j] == 'c')//Vérification char
+        {
             if(check_correct_char(tmp, &j))
-                break;
+                {
+                printf("ERROR TYPE CHAR\n");
+                return(1);
+                }
+            j++;
+        }
 
-        if(content[j] == 'k') //Vérification des int 
+        else if(content[j] == 'k') //Vérification des int 
         {
             if(check_correct_int(tmp , &j))
-                break;
+                {
+                printf("ERROR TYPE INT\n");
+                return(1);
+                }
+            j++;
         }
-        if(content[j] == 't')//Vérification des flottants
+        else if(content[j] == 't')//Vérification des flottants
         {   
             if(check_correct_float( tmp , &j)==1)
-                break;
+                {
+                printf("ERROR TYPE FLOAT\n");
+                return(1);
+                }  
+            j++; 
         }
-        free(tmp);
-        return 0;
+        else
+        {
+            j++;
+        }
     }
     free(tmp);
-    return(1);
+    return(0);
  }
 
 /*
