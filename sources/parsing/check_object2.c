@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 16:39:35 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:30:44 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 int check_c(char *tab , t_data *data) // a ton la place pour creer objec
 {
-    char **tmp;
+    char **tmp = ft_split(tab, ' ');
+
     char content[6] = {'c','f','f','k','v','v'};
     if (check_num(tab, "C", 4))
         return (1);
-    if(check_correct_type(content, tab))
+    if(check_correct_type(content, tmp))
         return(1);
     
+    data->scenes->cam.cam_cord = add_cord_float(tmp[1]);
+    add_cord_int(data);
+    add_int();
+    add_rgb();
+
+
     
        
   return(0);

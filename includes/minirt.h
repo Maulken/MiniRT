@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/12 16:57:03 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:28:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,13 @@ char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
 int size_tab(char **tab);
 	//get_scenes.c
-t_scenes	*create_scenes_getinfo(char **tab ,t_data *data);
+
+t_cord add_cord_float(char *str);
 
 	//check_object.c
-int		check_correct_type(char *content, char *tab);
+int		check_correct_type(char *content, char **tab);
 int		check_a(char *tab, t_data *data);
+
 
 	//chech_object2.c
 int		check_c(char *tab, t_data *data);
@@ -173,6 +175,7 @@ int		check_pl(char *tab, t_data *data);
 int		check_cy(char *tab, t_data *data);
 	//check_utils.c
 int		check_num(char *tab, char *str, int size_setting);
+double ft_atof_custom(const char *str);
 	//check_type.c
 int check_correct_intxyz(char **tmp, int *j);
 int check_correct_floatxyz(char **tmp , int *j);

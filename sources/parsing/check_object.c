@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/13 22:56:22 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/14 09:37:07 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
 
-int check_correct_type(char *content, char *tab)
+int check_correct_type(char *content, char **tmp)
 {
-    char **tmp = ft_split(tab, ' ');
     int j;
 
     j = 0;
