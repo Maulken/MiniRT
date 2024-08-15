@@ -6,13 +6,26 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/14 17:54:44 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:41:23 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_sphere *new_sphere(t_vector *center, float diameter)
+t_scene	*new_scene(t_camera *cam, t_sphere *sphere)
+{
+	t_scene	*scene;
+
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
+		return(0);
+	scene->camera = cam;
+	scene->sphere = sphere;
+	scene->width = 0;
+	scene->height = 0;
+	return (scene);
+}
+t_sphere *new_sphere(t_vector *center, float diameter, t_colors *colors)
 {
 	t_sphere	*sphere;
 
@@ -21,6 +34,7 @@ t_sphere *new_sphere(t_vector *center, float diameter)
 		return(NULL);
 	sphere->center = center;
 	sphere->diameter = diameter;
+	sphere->colors = colors;
 	return(sphere);
 }
 
@@ -49,16 +63,3 @@ t_sphere *new_sphere(t_vector *center, float diameter)
 // 	return(cylinder);
 // }
 
-t_scene	*new_scene(t_camera *cam, t_sphere *sphere)
-{
-	t_scene	*scene;
-
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-		return(0);
-	scene->camera = cam;
-	scene->sphere = sphere;
-	scene->width = 0;
-	scene->height = 0;
-	return (scene);
-}

@@ -6,28 +6,29 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/14 18:45:10 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:27:50 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// a coriger avec mxl put image to window
 void	ray_tracing(void *mlx, void *window, t_scene *scene)
 {
-	int	mlx_x;
-	int	mlx_y;
-	float	x_angle;
-	float	y_angle;
-	int	color;
-	float	x_ray;
-	float	y_ray;
+	int			mlx_x;
+	int			mlx_y;
+	float		x_angle;
+	float		y_angle;
+	int			trgb;
+	float		x_ray;
+	float		y_ray;
 	t_vector	*ray;
 	t_view		*view;
 
 	view = get_view_plane(scene->width, scene->height, scene->camera->fov);
 	mlx_y = 0;
 	y_angle = (scene->height / 2);
-	while(y_angle >= (scene->height /2) * (-1))
+	while(y_angle >= (scene->height / 2) * (-1))
 	{
 		y_ray = y_angle * view->y_pixel;
 		x_angle = (scene->width / 2) * (-1);
@@ -38,10 +39,10 @@ void	ray_tracing(void *mlx, void *window, t_scene *scene)
 			ray = new_vector(x_ray, y_ray, -1);
 			vec_normalize(ray);
 			if(sphere_intersect(scene->camera, ray, scene->sphere))
-				color = 16777215;
+				trgb = create_trgb(250, scene->sphere->colors);
 			else
-				color = 0;
-			mlx_pixel_put(mlx, window, mlx_x, mlx_y, color);
+				trgb = 0;
+			mlx_pixel_put(mlx, window, mlx_x, mlx_y, trgb);
 			free(ray);
 			x_angle++;
 			mlx_x++;
@@ -104,4 +105,11 @@ int	sphere_intersect(t_camera *camera, t_vector *ray, t_sphere *sphere)
 
 // }
 
+// trouver theta:
 
+// 	scalaire de light normale
+// 	longueur Light
+// 	longueur norm
+// 	diviser scalaire par l light *l Norm
+// 	arc cos
+// acos()

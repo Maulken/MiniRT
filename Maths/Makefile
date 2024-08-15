@@ -6,7 +6,7 @@
 #    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 11:32:32 by mpelluet          #+#    #+#              #
-#    Updated: 2024/08/14 18:40:29 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/08/15 12:08:25 by vmassoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS =	camera\
 		objects\
 		ray_tracing\
 		vector\
+		colors\
 
 
 INC_FILES = -Iminilibx

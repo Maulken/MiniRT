@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/14 18:10:43 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:54:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(void)
 
 	mlx = mlx_init();
 	t_vector	*sphere_center = new_vector(3, 2 , -32);
-	t_sphere	*sphere = new_sphere(sphere_center, 12/2);
+	t_colors	*colors = new_colors(255, 0, 0);
+	t_sphere	*sphere = new_sphere(sphere_center, 12/2, colors);
 	t_vector	*cam_origin = new_vector(0, 0, 0);
 	t_vector	*cam_direction = new_vector(0, 0, -1);
 	t_camera	*cam = new_camera(cam_origin, cam_direction, 90);
