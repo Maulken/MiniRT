@@ -6,7 +6,8 @@ int	event(t_data *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
 	//draw(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	ray_tracing(data->mlx, data->win, data);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (0);
 }

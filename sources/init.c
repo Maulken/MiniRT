@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../includes/minirt.h"
 
 
 
@@ -10,11 +10,11 @@ int	init_struct(t_data *data)
     if (!data->view)
         return (0);
     data->scene = NULL;
-	data->view->height = 500;
+	data->view->height = 600;
     data->view->x_pixel = 0;
     data->view->y_pixel = 0;
-	data->view->width = 500;
-    data->bits_per_pixel = 20;
+	data->view->width = 800;
+    // data->bits_per_pixel = 20;
 
     return(0);
 }
@@ -27,6 +27,7 @@ void init_data(t_data *data)
         printf("Memory allocation failed \n");
         exit(1);
     }
+    data->scene->camera = malloc(sizeof(t_camera));
     data->scene->spheres = malloc(sizeof(t_sphere));
     if(data->scene->spheres == NULL)
     {

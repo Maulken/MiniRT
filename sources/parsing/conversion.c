@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/15 17:42:53 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:08:50 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ t_color    *add_color_int(char *str)
     rgb->r = ft_atoi(tmp[0]);
     if(rgb->r > 255)
         rgb->r = 255;
-    if(rgb->r > 0)
+    if(rgb->r < 0)
         rgb->r = 0;
     rgb->g = ft_atoi(tmp[1]);
     if(rgb->g > 255)
         rgb->g = 255;
-    if(rgb->g > 0)
+    if(rgb->g < 0)
         rgb->g = 0;
     rgb->b = ft_atoi(tmp[2]);
     if(rgb->b > 255)
         rgb->b = 255;
-    if(rgb->b > 0)
+    if(rgb->b < 0)
         rgb->b = 0;
     return(rgb);
 }
@@ -65,6 +65,6 @@ return(ft_atoi(str));
 
 float add_float(char *str)
 {
-return( ft_atof_custom(str));
+return(ft_atof_custom(str));
 }
 

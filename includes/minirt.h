@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/15 17:32:55 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:34:08 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,18 @@ int		clean(t_data *data ,int code_error);
 int		init_struct(t_data *data);
 void	init_data(t_data *data);
 
-
+	//vector.c
 t_vector 	*new_vector(float x, float y, float z);
 t_vector	*vec_subtract(t_vector *vec1, t_vector *vec2);
 void		vec_normalize(t_vector *vec);
 float		vec_lenght(t_vector *vec);
 float		vec_dot_product(t_vector *vec1, t_vector *vec2);
-t_camera	*new_camera(t_vector *origine, t_vector *direction, float fov);
-t_view		*get_view_plane(float width, float height, float fov);
-void		ray_tracing(void *mlx, void *window, t_scene *scene);
+	//ray_tracing
+void		get_view_plane(t_data *data);
+void		ray_tracing(void *mlx, void *window, t_data *data);
 int			sphere_intersect(t_camera *camera, t_vector *ray, t_sphere *sphere);
-
+//colors
+int		create_trgb(int t, t_color *colors);
 int	event(t_data *data);
 
 #endif
