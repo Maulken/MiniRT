@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 14:16:56 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:10:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,8 @@ int check_type(char *src ,t_data *data)
             return(check_pl(src,data));
         else if(!ft_strncmp(tab[0],"cy",3))
             return(check_cy(src,data));
-        else if(tab[0][0]==' ')
-           return(0);// return(0);
+        //else if(tab[0][0]==' ')
+          // return(0);
         else 
             return(1);
         printf("why fuking line :%s\n",tab[0]);

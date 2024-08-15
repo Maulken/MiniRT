@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/12 14:12:44 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:15:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int parsing(int argc , char **argv, t_data *data)
 	if (check_tab(tab ,data))
 		return(ERROR);
 	
-	if(create_scenes_getinfo(tab , data ))
-		return(ERROR);
 	
 	printf_row(tab);
 

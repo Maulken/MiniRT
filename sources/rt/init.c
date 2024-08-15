@@ -12,3 +12,16 @@ int	init_struct(t_data *data)
 
     return(0);
 }
+
+void init_data(t_data *data)
+ {
+    
+
+    data->scenes = (t_scene *)malloc(sizeof(t_scene));
+    if (data->scenes == NULL) {
+        fprintf(stderr, "Memory allocation failed for scenes\n");
+        exit(1);
+    }
+
+
+ }

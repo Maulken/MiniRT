@@ -1,5 +1,14 @@
 {
     "files.associations": {
-        "minirt.h": "c"
+        "minirt.h": "c",
+        "atomic": "c",
+        "*.tcc": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ios": "c",
+        "locale": "c",
+        "unistd.h": "c",
+        "keysym.h": "c",
+        "mlx.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/14 10:28:12 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:27:00 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int check_num(char *tab, char *str, int size_setting)
 
 
     while(tab[i] != '\0')
-    {
+    { 
         if(len == 0)
             {
                 while(tab[i] == ' ')
@@ -83,9 +83,10 @@ int check_num(char *tab, char *str, int size_setting)
                     printf("why to carathre plese IS NUMBER : {%c} ", tab[i]);
                     return 1;
                 }
-                i++;
-            }
-            i++;
+               i++;
+            } 
+            while (tab[i] == ' ' || tab[i] == '\t') {
+                i++;}
     }
     if(count_words(tab) != size_setting)
     {

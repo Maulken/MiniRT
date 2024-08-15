@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/14 10:28:53 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:53:12 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,41 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
+# include "scene.h"
 
+
+# define M_PI 3.14159265358979323846
 # define OK 0
 # define ERROR -1
-typedef struct s_scenes t_scenes;
 
+typedef struct s_sphere t_sphere;
+typedef struct	s_view t_view;
 //##########struct#########//
 
 typedef struct s_data // data principal . pour la mlx
 {
-	t_scenes *scenes;
+	t_scene *scene;
+    t_view 	*view;
 
-    int width;
-    int height;
-
-    int wx;
-    int wy;
-
-    
     void *mlx;
     void *win;
     void *img;
     void *addr;
-
     int		bits_per_pixel;
     int		line_length;
 	int		endin;
-
+	
 	int fd;
 
 } t_data ;
+
+typedef struct	s_view
+{
+	float	width;
+	float	height;
+	float	x_pixel;
+	float	y_pixel;
+}				t_view;
 
 typedef struct s_colors
 {
@@ -64,77 +69,19 @@ typedef struct s_colors
 	int	b;
 } t_colors;
 
-typedef struct s_cord // ou vec ?? 
+typedef struct s_vector
 {
 	float	x;
 	float	y;
 	float	z;
-} t_cord;
-
-
-typedef struct s_plane
-{
-	t_cord		pl_point;
-	t_cord		pl_axis;
-	t_colors	pl_colors;
-} t_plane;
-
-typedef struct s_cylinder
-{
-	t_cord		cy_point;
-	t_cord		cy_axis;
-	float		cy_diam;
-	float		cy_height;
-	t_colors	cy_colors;
-} t_cylinder;
-
-typedef struct s_sphere
-{
-	t_cord		sp_point;
-	float		sp_diam;
-	t_colors	sp_colors;
-} t_sphere;
-
-typedef struct s_ambient
-{
-	float		amb_ratio;
-	t_colors	amb_colors;
-} t_ambient;
+} t_vector;
 
 typedef struct s_camera
 {
-	t_cord	cam_cord;
-	t_cord	cam_or;
-	int		cam_fov;
-
-
+	t_vector *origine;
+	t_vector *direction;
+	float 		fov;
 } t_camera;
-
-typedef struct s_light
-{
-	t_cord		light_point;
-	int			light_ratio;
-	t_colors	light_colors;
-} t_light;
-
-
- typedef struct s_object
-{
-	int			id;
-	t_cylinder	cy;
-	t_plane		pl;
-	t_sphere	sp;
-
-} t_object;
-
-typedef struct s_scenes
-{
-	t_camera	cam;
-	t_ambient	ambient;
-	t_light		light_list;
-	t_object	*object;
-
-} t_scenes;
 
 
 
@@ -157,15 +104,17 @@ char	**checkget_file_content(int fd);
 	//utils.c
 char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
-int size_tab(char **tab);
+int		size_tab(char **tab);
 	//get_scenes.c
-
-t_cord add_cord_float(char *str);
+t_vector		*add_cord_float(char *str);
+t_vector		*add_cord_int(char *str); //usless ????
+int				add_int(char *str);
+float			add_float(char *str);
+t_colors		add_rgb(char *str);
 
 	//check_object.c
-int		check_correct_type(char *content, char **tab);
+char **check_correct_type(char *content, char *tab);
 int		check_a(char *tab, t_data *data);
-
 
 	//chech_object2.c
 int		check_c(char *tab, t_data *data);
@@ -176,6 +125,7 @@ int		check_cy(char *tab, t_data *data);
 	//check_utils.c
 int		check_num(char *tab, char *str, int size_setting);
 double ft_atof_custom(const char *str);
+
 	//check_type.c
 int check_correct_intxyz(char **tmp, int *j);
 int check_correct_floatxyz(char **tmp , int *j);

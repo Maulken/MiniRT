@@ -15,17 +15,20 @@ int main(int argc , char **argv)
 {
   t_data data;
 
-  init_struct(&data);
-
+	init_struct(&data);
+	init_data(&data);
   if(parsing(argc , argv ,&data) == ERROR)
 		return(clean(&data , 1));
 
-  data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, data.wx, data.wy, "MiniRT");
+	printf("test : %f",data.scene->camera->direction);
+
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
 	//mlx_hook(data.win, 2, 1L << 0, control, &data); deplacement
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
 	mlx_loop(data.mlx);
+
 
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);

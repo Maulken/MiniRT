@@ -6,17 +6,19 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/14 09:37:07 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:14:13 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
 
-int check_correct_type(char *content, char **tmp)
+char **check_correct_type(char *content, char *tab)
 {
-    int j;
+    char **tmp;
+    int j;  
 
+    tmp = ft_split(tab,' ');
     j = 0;
     while (tmp[j])
     {
@@ -25,7 +27,7 @@ int check_correct_type(char *content, char **tmp)
             if(check_correct_intxyz(tmp, &j))
             {
                 printf("ERROR TYPE (R,G,B) \n");
-                break;
+                return(NULL);
             }
         }
         else if (content[j] == 'f' )// Vérification des flottants  x ,y , z
@@ -33,7 +35,7 @@ int check_correct_type(char *content, char **tmp)
             if(check_correct_floatxyz(tmp, &j))
                 {
                 printf("ERROR TYPE (x,y,z) \n");
-                return(1);
+                return(NULL);
                 } 
             j++; 
         }
@@ -42,7 +44,7 @@ int check_correct_type(char *content, char **tmp)
             if(check_correct_char(tmp, &j))
                 {
                 printf("ERROR TYPE CHAR\n");
-                return(1);
+                return(NULL);
                 }
             j++;
         }
@@ -52,7 +54,7 @@ int check_correct_type(char *content, char **tmp)
             if(check_correct_int(tmp , &j))
                 {
                 printf("ERROR TYPE INT\n");
-                return(1);
+                return(NULL);
                 }
             j++;
         }
@@ -61,7 +63,7 @@ int check_correct_type(char *content, char **tmp)
             if(check_correct_float( tmp , &j)==1)
                 {
                 printf("ERROR TYPE FLOAT\n");
-                return(1);
+                return(NULL);
                 }  
             j++; 
         }
@@ -70,8 +72,7 @@ int check_correct_type(char *content, char **tmp)
             j++;
         }
     }
-    free(tmp);
-    return(0);
+    return(tmp);
  }
 
 /*
