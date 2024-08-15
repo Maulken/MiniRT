@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/15 13:04:13 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:12:44 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,5 @@ double ft_atof_custom(const char *str)
         result /= fraction;
     }
 
-    return sign * result;
+    return (sign * result);
 }

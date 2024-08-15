@@ -6,7 +6,7 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/15 15:02:37 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/15 18:59:05 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,21 @@ CFLAGS  = -g
 CLINKS  = -lXext -lX11 -lm
 
 ### EXECUTABLE ###
-NAME   = MiniRT
+NAME   = minirt
 
 ### PATH ###
-HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h
+HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h 
 SRC_PATH 		= sources
 MLX				= minilibx-linux
 LIBMLX			= $(MLX)/libmlx.a
 LIBFT			= libft/libft.a
-LFLAGS			= -L libft -lft -lreadline -lm
+LFLAGS			= -L libft -lft -lreadline #-lm
 
 ### SOURCE FILES ###
 SOURCES = main.c \
- rt/init.c rt/clear.c \
- parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/conversion.c parsing/check_object.c parsing/check_object2.c parsing/check_type.c parsing/check_utils.c
-
+ init.c clear.c \
+ parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/conversion.c parsing/check_object.c parsing/check_object2.c parsing/check_type.c parsing/check_utils.c\
+ rt/ray_tracing.c rt/vector.c rt/colors.c
 ### OBJECTS ###
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))

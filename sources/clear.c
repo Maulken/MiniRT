@@ -6,13 +6,13 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/15 17:04:32 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:32:46 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../../includes/minirt.h"
+#include "../includes/minirt.h"
 
 
 int	ft_close(t_data *data)
