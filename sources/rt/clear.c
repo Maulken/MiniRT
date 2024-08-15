@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/10 13:10:05 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:04:32 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_close(t_data *data)
 	return (0);
 }
 
-clean(t_data *data ,int code_error)
+int clean(t_data *data ,int code_error)
 {
-	printf("free");
-return(code_error);
+	
+	free(data->view);
 }

@@ -2,7 +2,7 @@
 
 int	event(t_data *data)
 {
-	data->img = mlx_new_image(data->mlx, data->wx, data->wy);
+	data->img = mlx_new_image(data->mlx, data->view->width, data->view->height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
 	//draw(data);
@@ -17,10 +17,8 @@ int main(int argc , char **argv)
 
 	init_struct(&data);
 	init_data(&data);
-  if(parsing(argc , argv ,&data) == ERROR)
+  	if(parsing(argc , argv ,&data) == ERROR)
 		return(clean(&data , 1));
-
-	printf("test : %f",data.scene->camera->direction);
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");

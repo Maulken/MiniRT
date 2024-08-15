@@ -6,13 +6,13 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/15 10:39:09 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/15 15:02:37 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-CC      = cc
-CFLAGS  = ##-Wall  -Wextra -Werror -g
+CC      = gcc
+CFLAGS  = -g
 CLINKS  = -lXext -lX11 -lm
 
 ### EXECUTABLE ###

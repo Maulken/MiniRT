@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/14 15:10:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:07:57 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int check_argument(int argc , char **argv)
         printf("no accessed the file.rt");
         return(-1);
     }
+    // test du dossier
     return(fd);
 
 }
@@ -83,7 +84,7 @@ int check_tab(char **rows , t_data *data)
     int i;
 
     i = 0;
-  //  if(check_min_scene(rows) == ERROR) //
+  //  if(check_min_scene(rows) == ERROR) //a de coomenter pour tester
      //   {
             //free ??
      //      return(1);
@@ -145,22 +146,24 @@ int check_type(char *src ,t_data *data)
     if(tab[0])
     {
         if(!ft_strncmp(tab[0],"A",2))
-            return(check_a(src,data));
+            return(check_ambiance(src,data));
         else if(!ft_strncmp(tab[0],"C",2))
-            return(check_c(src,data));
+            return(check_camera(src,data));
         else if(!ft_strncmp(tab[0],"L",2))
-            return(check_l(src,data));
+            return(check_light(src,data));
         else if(!ft_strncmp(tab[0],"sp",3))
-            return(check_sp(src,data));
+            return(check_sphere(src,data));
         else if(!ft_strncmp(tab[0],"pl",3))
-            return(check_pl(src,data));
+            return(check_plane(src,data));
         else if(!ft_strncmp(tab[0],"cy",3))
-            return(check_cy(src,data));
-        //else if(tab[0][0]==' ')
-          // return(0);
+            return(check_cylinder(src,data));
         else 
-            return(1);
-        printf("why fuking line :%s\n",tab[0]);
+           {
+              printf("why fuking line :%s\n",tab[0]);
+              return(1);
+            } 
+             
     }
+    
     return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/15 10:57:36 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:32:55 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define OK 0
 # define ERROR -1
 
-typedef struct s_sphere t_sphere;
 typedef struct	s_view t_view;
 //##########struct#########//
 
@@ -61,13 +60,6 @@ typedef struct	s_view
 	float	x_pixel;
 	float	y_pixel;
 }				t_view;
-
-typedef struct s_colors
-{
-	int	r;
-	int	g;
-	int	b;
-} t_colors;
 
 typedef struct s_vector
 {
@@ -105,33 +97,34 @@ char	**checkget_file_content(int fd);
 char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
 int		size_tab(char **tab);
-	//get_scenes.c
-t_vector		*add_cord_float(char *str);
-t_vector		*add_cord_int(char *str); //usless ????
+void	free_tab(char **tab);
+	//conversion.c
+t_vector *add_vector_float(char *str);
+t_color   *add_color_int(char *str);
 int				add_int(char *str);
 float			add_float(char *str);
-t_colors		add_rgb(char *str);
+
 
 	//check_object.c
 char **check_correct_type(char *content, char *tab);
-int		check_a(char *tab, t_data *data);
+int check_ambiance(char *tab, t_data *data);
 
 	//chech_object2.c
-int		check_c(char *tab, t_data *data);
-int		check_l(char *tab, t_data *data);
-int		check_sp(char *tab, t_data *data);
-int		check_pl(char *tab, t_data *data);
-int		check_cy(char *tab, t_data *data);
+int check_camera    (char *tab , t_data *data);
+int check_light(char *tab, t_data *data);
+int check_sphere(char *tab , t_data *data);
+int check_plane(char *tab, t_data *data);
+int check_cylinder(char *tab, t_data *data);
 	//check_utils.c
 int		check_num(char *tab, char *str, int size_setting);
 double ft_atof_custom(const char *str);
 
 	//check_type.c
-int check_correct_intxyz(char **tmp, int *j);
-int check_correct_floatxyz(char **tmp , int *j);
-int check_correct_char(char **tmp, int *j);
-int check_correct_int(char **tmp , int *j);
-int check_correct_float(char **tmp , int *j);
+int check_correct_intxyz(char **tmp, int j);
+int check_correct_floatxyz(char **tmp , int j);
+int check_correct_char(char **tmp, int j);
+int check_correct_int(char **tmp , int j);
+int check_correct_float(char **tmp , int j);
 
 /*RT*/
 	//clear.c
@@ -140,6 +133,7 @@ int		clean(t_data *data ,int code_error);
 
 	//init.c
 int		init_struct(t_data *data);
+void	init_data(t_data *data);
 
 
 t_vector 	*new_vector(float x, float y, float z);

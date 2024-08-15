@@ -6,35 +6,56 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/15 09:20:06 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:42:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_cord *add_cord_float(char *str) //  pas de gestion en cas double point .....
+t_vector *add_vector_float(char *str) //  pas de gestion en cas double point .....
 {
     char **tmp;
-    t_cord *cord;
+    t_vector *vector;
 
-    cord = malloc(sizeof(t_cord));
+    vector = malloc(sizeof(t_vector));
+    if (!vector)
+    {
+        return(NULL);
+    }
     tmp = ft_split(str,',');
-    cord->x = ft_atof_custom(tmp[0]);
-    cord->y = ft_atof_custom(tmp[1]);
-    cord->z = ft_atof_custom(tmp[2]);
-    return(cord);
+    vector->x = ft_atof_custom(tmp[0]);
+    vector->y = ft_atof_custom(tmp[1]);
+    vector->z = ft_atof_custom(tmp[2]);
+    return(vector);
 }
 
-t_cord    *add_cord_int(char *str) //usless ????
+t_color    *add_color_int(char *str)
 {
-    char **tmp;
-    t_cord *cord;
-
+     char **tmp;
+    t_color *rgb;
+    
+    rgb = malloc(sizeof(t_color));
+    if (!rgb)
+        return (NULL);
     tmp = ft_split(str,',');
-    cord->x = ft_atoi(tmp[0]);
-    cord->y = ft_atoi(tmp[1]);
-    cord->z = ft_atoi(tmp[2]);
-    return(cord);
+    if (!tmp)
+        return (NULL);
+    rgb->r = ft_atoi(tmp[0]);
+    if(rgb->r > 255)
+        rgb->r = 255;
+    if(rgb->r > 0)
+        rgb->r = 0;
+    rgb->g = ft_atoi(tmp[1]);
+    if(rgb->g > 255)
+        rgb->g = 255;
+    if(rgb->g > 0)
+        rgb->g = 0;
+    rgb->b = ft_atoi(tmp[2]);
+    if(rgb->b > 255)
+        rgb->b = 255;
+    if(rgb->b > 0)
+        rgb->b = 0;
+    return(rgb);
 }
 
 int add_int(char *str)
@@ -45,21 +66,5 @@ return(ft_atoi(str));
 float add_float(char *str)
 {
 return( ft_atof_custom(str));
-}
-
-t_colors add_rgb(char *str)
-{
-      char **tmp;
-    t_colors rgb;
-
-    tmp = ft_split(str,',');
-    rgb.r = ft_atoi(tmp[0]);
-    if(rgb.r > 255)
-        rgb.r = 255;
-    if(rgb.r > 0)
-        rgb.r = 0;
-  
-    return(rgb);
-
 }
 
