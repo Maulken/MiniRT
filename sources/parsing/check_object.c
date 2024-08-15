@@ -6,48 +6,74 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/12 16:48:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:36:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
 
-int check_correct_type(char *content, char *tab)
+char **check_correct_type(char *content, char *tab)
 {
-    char **tmp = ft_split(tab, ' ');
-    int j;
+    char **tmp;
+    int j;  
 
+    tmp = ft_split(tab,' ');
     j = 0;
     while (tmp[j])
     {
         if (content[j] == 'i') //  verifiaction cord x, y , z et RGB
-            if(check_correct_intxyz(tmp, &j))
-                break;
-
-        if (content[j] == 'f' )// Vérification des flottants  x ,y , z
-            if(check_correct_floatxyz(tmp, &j))
-                break;
-        
-        if (content[j] == 'c')//Vérification char
-            if(check_correct_char(tmp, &j))
-                break;
-
-        if(content[j] == 'k') //Vérification des int 
         {
-            if(check_correct_int(tmp , &j))
-                break;
+            if(check_correct_intxyz(tmp, j))
+            {
+                printf("ERROR TYPE (R,G,B) \n");
+                return(NULL);
+            }
+            j++;
         }
-        if(content[j] == 't')//Vérification des flottants
+        else if (content[j] == 'f' )// Vérification des flottants  x ,y , z
+        {
+            if(check_correct_floatxyz(tmp, j))
+                {
+                printf("ERROR TYPE (x,y,z) \n");
+                return(NULL);
+                } 
+            j++; 
+        }
+        else if (content[j] == 'c')//Vérification char
+        {
+            if(check_correct_char(tmp, j))
+                {
+                printf("ERROR TYPE CHAR\n");
+                return(NULL);
+                }
+            j++;
+        }
+
+        else if(content[j] == 'k') //Vérification des int 
+        {
+            if(check_correct_int(tmp , j))
+                {
+                printf("ERROR TYPE INT\n");
+                return(NULL);
+                }
+            j++;
+        }
+        else if(content[j] == 't')//Vérification des flottants
         {   
-            if(check_correct_float( tmp , &j)==1)
-                break;
+            if(check_correct_float( tmp , j)==1)
+                {
+                printf("ERROR TYPE FLOAT\n");
+                return(NULL);
+                }  
+            j++; 
         }
-        free(tmp);
-        return 0;
+        else
+        {
+            j++;
+        }
     }
-    free(tmp);
-    return(1);
+    return(tmp);
  }
 
 /*
@@ -59,15 +85,20 @@ int check_correct_type(char *content, char *tab)
     t = une taille de volume floate (utile pour L , cy) 
 
 */
-int check_a(char *tab, t_data *data)
+int check_ambiance(char *tab, t_data *data)
 {
     char **tmp;
     char content[6] = {'c','t','i','v','v','v'};
 
     if (check_num(tab, "A", 3))
         return (1);
-    if(check_correct_type(content, tab))
+    tmp = check_correct_type(content, tab);
+    if(tmp == NULL)
+    {
+        free_tab(tmp);
         return(1);
+    }
+    free_tab(tmp);
     return(0);
 }
 
