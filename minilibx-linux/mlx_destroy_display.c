@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 12:01:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/15 12:06:03 by vmassoli         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2024/08/16 11:07:58 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "mlx_int.h"
 
-int	create_trgb(int t, t_colors *colors)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	return (t << 24 | colors->r << 16 | colors->g << 8 | colors->b);
+	XCloseDisplay(xvar->display);
 }
