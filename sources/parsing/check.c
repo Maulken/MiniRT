@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/15 17:07:57 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 08:50:07 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int check_type(char *src ,t_data *data)
     if(!tab)
     {
         printf("malloc error");
+         free_tab(tab);
         return(ERROR);
     }
     if(tab[0])
@@ -160,10 +161,11 @@ int check_type(char *src ,t_data *data)
         else 
            {
               printf("why fuking line :%s\n",tab[0]);
+               free_tab(tab);
               return(1);
             } 
              
     }
-    
+    free_tab(tab);
     return(0);
 }

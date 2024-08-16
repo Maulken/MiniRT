@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/15 20:12:40 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:27:59 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	get_view_plane(t_data *data)
 	// view->x_pixel = view->width / width;
 	// view->y_pixel = view->height / height;
 	aspect_ratio = data->view->width / data->view->height;
-	// printf("fov : %f\n", data->scene->camera->fov);
+	 printf("fov : %f\n", data->scene->camera->fov);
 	width = 2 * tan(data->scene->camera->fov / 2 * (M_PI / 180));
 	height = width / aspect_ratio;
 	data->view->x_pixel = width / data->view->width;
