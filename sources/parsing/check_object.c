@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/15 17:36:26 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 09:48:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char **check_correct_type(char *content, char *tab)
             if(check_correct_intxyz(tmp, j))
             {
                 printf("ERROR TYPE (R,G,B) \n");
+                 free_tab(tmp);
                 return(NULL);
             }
             j++;
@@ -36,6 +37,7 @@ char **check_correct_type(char *content, char *tab)
             if(check_correct_floatxyz(tmp, j))
                 {
                 printf("ERROR TYPE (x,y,z) \n");
+                 free_tab(tmp);
                 return(NULL);
                 } 
             j++; 
@@ -45,6 +47,7 @@ char **check_correct_type(char *content, char *tab)
             if(check_correct_char(tmp, j))
                 {
                 printf("ERROR TYPE CHAR\n");
+                 free_tab(tmp);
                 return(NULL);
                 }
             j++;
@@ -55,6 +58,7 @@ char **check_correct_type(char *content, char *tab)
             if(check_correct_int(tmp , j))
                 {
                 printf("ERROR TYPE INT\n");
+                 free_tab(tmp);
                 return(NULL);
                 }
             j++;
@@ -64,6 +68,7 @@ char **check_correct_type(char *content, char *tab)
             if(check_correct_float( tmp , j)==1)
                 {
                 printf("ERROR TYPE FLOAT\n");
+                 free_tab(tmp);
                 return(NULL);
                 }  
             j++; 

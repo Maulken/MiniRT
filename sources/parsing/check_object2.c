@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/15 19:46:50 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:27:19 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 int check_camera(char *tab , t_data *data)
 {
     char        **tmp;
-    // t_camera    *cam;
 
-    // cam = malloc(sizeof(t_camera));
-    char content[6] = {'c','f','f','k','v','v'}; // float k->t
+    char content[6] = {'c','f','f','t','v','v'}; // float k->t
 
     if (check_num(tab, "C", 4))
         return (1);
@@ -27,22 +25,16 @@ int check_camera(char *tab , t_data *data)
     if(tmp == NULL)
         return(1);
     
-    // cam->origine = add_vector_float(tmp[1]);
     data->scene->camera->origine = add_vector_float(tmp[1]);
-    // cam->direction = add_vector_float(tmp[2]);
     data->scene->camera->direction = add_vector_float(tmp[2]);
-    // cam->fov = add_float(tmp[3]);
     data->scene->camera->fov = add_float(tmp[3]);
-    // cam->fov = 90.0;
-    // if(cam->fov > 180 || cam->fov < 0)
-    // {
-    //     printf("ERROR fov superieur a 180 ou inferieur a 0");
-    //     free(cam);
-    //     free_tab(tmp);
-    //     return(1);
-    // }
-    // data->scene->camera = cam;
-    // free(cam);
+    if(data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
+    {
+        printf("ERROR fov superieur a 180 ou inferieur a 0");
+        free(data->scene->camera); // c'est pas bon ca !!!!
+        free_tab(tmp);
+        return(1);
+    }
     free_tab(tmp);
     return(0);
 }
@@ -50,7 +42,7 @@ int check_camera(char *tab , t_data *data)
 
 int check_light(char *tab, t_data *data)
 {
-    char **tmp;
+    char    **tmp;
 
     char content[6] = {'c','f','t','i','v','v'};
 
@@ -62,6 +54,10 @@ int check_light(char *tab, t_data *data)
         free(tmp);
         return(1);
         }
+    data->scene->light->origine = add_vector_float(tmp[1]);
+    data->scene->light->ratio = add_float(tmp[2]);
+    data->scene->light->color = add_color_int(tmp[3]);
+    
     free_tab(tmp);
     return(0);
 
@@ -115,12 +111,15 @@ int check_plane(char *tab, t_data *data)
     current->direction = add_vector_float(tmp[2]);
     current->color = add_color_int(tmp[3]);
 
+     data->scene->plane->next = current;
+    data->scene->plane = data->scene->plane->next;
     free_tab(tmp);
     return(0);
 }
 
 int check_cylinder(char *tab, t_data *data)
 {
+    t_cylinder *current;
     char **tmp;
     char content[6] = {'c','f','f','t','t','i'};
 
@@ -132,6 +131,14 @@ int check_cylinder(char *tab, t_data *data)
             free_tab(tmp);
             return(1);
         }
+    current->center = add_vector_float(tmp[1]);
+    current->direction = add_vector_float(tmp[2]);
+    current->diameter = add_float(tmp[3]);
+    current->height = add_float(tmp[4]);
+    current->color = add_color_int(tmp[5]);
+
+    data->scene->cylinder->next = current;
+    data->scene->cylinder = data->scene->cylinder->next;
     free_tab(tmp);
     return(0);
 }

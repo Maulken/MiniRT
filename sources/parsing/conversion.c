@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/15 20:08:50 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 08:47:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vector *add_vector_float(char *str) //  pas de gestion en cas double point ...
     vector->x = ft_atof_custom(tmp[0]);
     vector->y = ft_atof_custom(tmp[1]);
     vector->z = ft_atof_custom(tmp[2]);
+    free_tab(tmp);
     return(vector);
 }
 
@@ -55,6 +56,7 @@ t_color    *add_color_int(char *str)
         rgb->b = 255;
     if(rgb->b < 0)
         rgb->b = 0;
+    free_tab(tmp);
     return(rgb);
 }
 

@@ -24,7 +24,6 @@ int main(int argc , char **argv)
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
-	//mlx_hook(data.win, 2, 1L << 0, control, &data); deplacement
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
 	mlx_loop(data.mlx);
 
@@ -32,6 +31,7 @@ int main(int argc , char **argv)
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
 	free(data.mlx);
+	clean(&data,0);
 
   return (0);
 }

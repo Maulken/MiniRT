@@ -28,8 +28,32 @@ void init_data(t_data *data)
         exit(1);
     }
     data->scene->camera = malloc(sizeof(t_camera));
+    if(data->scene->camera == NULL){
+            printf("Memory allocation failed \n");
+            exit(1);
+    }
     data->scene->spheres = malloc(sizeof(t_sphere));
     if(data->scene->spheres == NULL)
+    {
+        printf("Memory allocation failed \n");
+        exit(1);
+    }
+      data->scene->cylinder = malloc(sizeof(t_cylinder));
+    if(data->scene->cylinder == NULL)
+    {
+        printf("Memory allocation failed \n");
+        exit(1);
+    }
+
+      data->scene->plane = malloc(sizeof(t_plane));
+    if(data->scene->plane == NULL)
+    {
+        printf("Memory allocation failed \n");
+        exit(1);
+    }
+
+     data->scene->light = malloc(sizeof(t_light));
+    if(data->scene->light == NULL)
     {
         printf("Memory allocation failed \n");
         exit(1);
