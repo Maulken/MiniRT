@@ -6,7 +6,7 @@
 #    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 10:58:17 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/16 10:59:59 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/07/11 10:58:30 by vmassoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,40 +100,37 @@ OBJ_FULL			=	$(OBJ) $(OBJ_BONUS) $(OBJ_OTHER) $(OBJ_GNL) $(OBJ_PRINTF) $(OBJ_PRI
 
 # Compile individual source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_BONUS_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_GNL_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_PRINTF_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_PRINTF_FD_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Phony Targets
 all: $(NAME)
 
 clean:
-
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-
+	@$(RM) $(NAME)
 
 re: fclean all
 
 # Target Rules
 $(NAME): $(OBJ_FULL)
-	$(AR) $(NAME) $(OBJ_FULL)
+	@$(AR) $(NAME) $(OBJ_FULL)
 
 # Create object directory
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
+	@mkdir -p $(OBJ_DIR)
 
 .PHONY: all clean fclean re

@@ -7,7 +7,7 @@ int	event(t_data *data)
 			&data->line_length, &data->endin);
 	//draw(data);
 	ray_tracing(data->mlx, data->win, data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (0);
 }

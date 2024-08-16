@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/16 09:26:10 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:39:13 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_data // data principal . pour la mlx
     int		bits_per_pixel;
     int		line_length;
 	int		endin;
-	
+
 	int fd;
 
 } t_data ;
@@ -144,10 +144,11 @@ float		vec_dot_product(t_vector *vec1, t_vector *vec2);
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		ray_tracing(void *mlx, void *window, t_data *data);
-int			sphere_intersect(t_camera *camera, t_vector *ray, t_sphere *sphere);
+int			sphere_intersect(t_vector *origine, t_vector *ray, t_sphere *sphere);
 //colors
 int		create_trgb(int t, t_color *colors);
-int	event(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int mlx_x, int mlx_y, int color);
+int		event(t_data *data);
 
 #endif
 

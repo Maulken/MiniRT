@@ -5,7 +5,7 @@
 int	init_struct(t_data *data)
 {
     t_scene *scene;
-    
+
     data->view = malloc(sizeof(t_view));
     if (!data->view)
         return (0);
@@ -21,8 +21,8 @@ int	init_struct(t_data *data)
 
 void init_data(t_data *data)
 {
-    data->scene = (t_scene *)malloc(sizeof(t_scene));
-    if (data->scene == NULL) 
+    data->scene = malloc(sizeof(t_scene));
+    if (data->scene == NULL)
     {
         printf("Memory allocation failed \n");
         exit(1);
@@ -58,5 +58,4 @@ void init_data(t_data *data)
         printf("Memory allocation failed \n");
         exit(1);
     }
- 
 }

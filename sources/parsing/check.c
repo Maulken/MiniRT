@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/16 08:50:07 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:59:32 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int endwith(char *argv, char *value)
             j++;
             i++;
         }
-        else 
+        else
             return(ERROR);
     }
     return(OK);
@@ -78,7 +78,7 @@ int check_argument(int argc , char **argv)
 
 }
 
-// verificaiton si tout et bon . avant de faire des allocation . et tout le ... 
+// verificaiton si tout et bon . avant de faire des allocation . et tout le ...
 int check_tab(char **rows , t_data *data)
 {
     int i;
@@ -91,7 +91,7 @@ int check_tab(char **rows , t_data *data)
      //   }
     while(rows[i])
     {
-        if(check_type(rows[i], data)) // test tout 
+        if(check_type(rows[i], data)) // test tout
             {
                 printf("\nparse eror ligne : %d \n",i);
                 return(1);
@@ -102,7 +102,7 @@ int check_tab(char **rows , t_data *data)
 }
 
 
-// verifaication de controle du nombre de lumier si il y a une camera ect .... 
+// verifaication de controle du nombre de lumier si il y a une camera ect ....
 int check_min_scene(char **tab)
 {
 int i;
@@ -125,7 +125,7 @@ while(tab[i])
         len_l++;
     i++;
 }
-if(len_a != 1 || len_c != 1 || len_l < 1 ) 
+if(len_a != 1 || len_c != 1 || len_l < 1 )
 {
     printf("error : il doit avoir  (1)A|%d|,(1)C|%d|,(inf)L|%d|",len_a , len_c, len_l);
     return(ERROR);
@@ -136,7 +136,7 @@ return(OK);
 int check_type(char *src ,t_data *data)
 {
     char    **tab;
-    
+
     tab = ft_split(src,' ');
     if(!tab)
     {
@@ -158,13 +158,13 @@ int check_type(char *src ,t_data *data)
             return(check_plane(src,data));
         else if(!ft_strncmp(tab[0],"cy",3))
             return(check_cylinder(src,data));
-        else 
+        else
            {
               printf("why fuking line :%s\n",tab[0]);
                free_tab(tab);
               return(1);
-            } 
-             
+            }
+
     }
     free_tab(tab);
     return(0);
