@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/16 12:39:13 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/17 21:07:59 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,25 @@ void	init_data(t_data *data);
 t_vector 	*new_vector(float x, float y, float z);
 t_vector	*vec_subtract(t_vector *vec1, t_vector *vec2);
 void		vec_normalize(t_vector *vec);
-float		vec_lenght(t_vector *vec);
+float		vec_lenght(t_vector *vec1, t_vector *vec2);
 float		vec_dot_product(t_vector *vec1, t_vector *vec2);
+
+	//vector2.c
+t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
+t_vector	*vec_multiplying(t_vector *vec1, float nbr);
+bool		vec_compare(t_vector *vec1, t_vector *vec2);
+
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		ray_tracing(void *mlx, void *window, t_data *data);
-int			sphere_intersect(t_vector *origine, t_vector *ray, t_sphere *sphere);
+float		sphere_intersect(t_data *data);
+bool		is_light_intersect(t_data *data);
+float		get_color_coef(t_data *data, float dist_light_sphere);
 //colors
 int		create_trgb(int t, t_color *colors);
+int		create_rgb(t_color *colors);
 void	my_mlx_pixel_put(t_data *data, int mlx_x, int mlx_y, int color);
+
 int		event(t_data *data);
 
 #endif

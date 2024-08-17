@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/16 12:03:02 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:38:18 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int check_sphere(char *tab , t_data *data)
 	current->center =  add_vector_float(tmp[1]);
 	current->diameter = add_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
+	current->impact_point = NULL;
+	current->ray = NULL;
+	current->center = NULL;
 	current->next = NULL;
 
 	data->scene->spheres->next = current;

@@ -22,8 +22,11 @@ typedef struct	s_sphere
 {
     t_sphere    *next;
 	t_vector	*center;
-	float		diameter;
     t_color     *color;
+	t_vector	*impact_point;
+	t_vector	*ray;
+	t_vector	*ray_light;
+	float		diameter;
 }				t_sphere;
 
 typedef struct	s_plane

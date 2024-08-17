@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:12:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/15 18:34:32 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:21:56 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ t_vector *vec_subtract(t_vector *vec1, t_vector *vec2)
 	result = new_vector(vec1->x - vec2->x, vec1->y - vec2->y, vec1->z - vec2->z);
 	return(result);
 }
-float	vec_lenght(t_vector *vec)
+
+float	vec_lenght(t_vector *vec1, t_vector *vec2)
 {
 	float result;
 
-	result = sqrt((vec->x * vec->x) + (vec->y * vec->y) + (vec->z * vec->z));
+	result = sqrt((vec1->x * vec2->x) + (vec1->y * vec2->y) + (vec1->z * vec2->z));
 	return(result);
 }
 
@@ -45,7 +46,7 @@ void	vec_normalize(t_vector *vec)
 {
 	float	lenght;
 
-	lenght = vec_lenght(vec);
+	lenght = vec_lenght(vec, vec);
 	vec->x /= lenght;
 	vec->y /= lenght;
 	vec->z /= lenght;
@@ -58,3 +59,4 @@ float	vec_dot_product(t_vector *vec1, t_vector *vec2)
 	result = ((vec1->x * vec2->x) + (vec1->y * vec2->y) + (vec1->z * vec2->z));
 	return(result);
 }
+
