@@ -6,13 +6,12 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/16 16:41:59 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:05:58 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// a corriger avec mxl put image to window
 void	ray_tracing(void *mlx, void *window, t_data *data)
 {
 	int			mlx_x;
