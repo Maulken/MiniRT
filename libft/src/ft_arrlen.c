@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
-/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
+/*   Created: 2024/03/12 18:09:38 by bszabo            #+#    #+#             */
+/*   Updated: 2024/05/06 14:20:18 by bszabo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_int.h"
+#include "libft.h"
 
-int	mlx_destroy_display(t_xvar *xvar)
+// return the length of the array
+int	ft_arrlen(char **arr)
 {
-	XCloseDisplay(xvar->display);
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

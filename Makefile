@@ -3,48 +3,64 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/11 11:32:32 by mpelluet          #+#    #+#              #
-#    Updated: 2024/08/08 12:29:12 by mpelluet         ###   ########.fr        #
+#    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
+#    Updated: 2024/08/15 18:59:05 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	render\
-		
 
-INC_FILES = -Iminilibx
+CC      = gcc
+CFLAGS  = -g
+CLINKS  = -lXext -lX11 -lm
 
-INC_ARCHIVES = minilibx/libmlx_Linux.a
+### EXECUTABLE ###
+NAME   = minirt
 
-LINKS = -L minilibx/ -lmlx -lXext -lX11
+### PATH ###
+HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h 
+SRC_PATH 		= sources
+MLX				= minilibx-linux
+LIBMLX			= $(MLX)/libmlx.a
+LIBFT			= libft/libft.a
+LFLAGS			= -L libft -lft -lreadline #-lm
 
-SRC = $(addsuffix .c,$(SRCS))
-OBJ = $(addsuffix .o,$(SRCS))
+### SOURCE FILES ###
+SOURCES = main.c \
+ init.c clear.c \
+ parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/conversion.c parsing/check_object.c parsing/check_object2.c parsing/check_type.c parsing/check_utils.c\
+ rt/ray_tracing.c rt/vector.c rt/colors.c
+### OBJECTS ###
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ofast
+SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 
-NAME = minirt
+OBJS = $(SRCS:.c=.o)
+
+
+### RULES ###
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	make -C minilibx
-	$(CC) -o $@ $(OBJ) $(INC_ARCHIVES) $(LINKS)
+$(NAME): $(OBJS)  $(LIBFT) $(LIBMLX)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME) $(CLINKS) $(LFLAGS)
 
-%.o: %.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(INC_FILES)
+$(LIBMLX):
+	make -C $(MLX)
 
-bonus : all
+$(LIBFT): libft
+	cd libft && $(MAKE)
 
-clean :
-	rm -rf $(OBJ) $(BOBJ)
+clean:
+	cd libft && $(MAKE) --quiet clean
+	$(RM) $(OBJS)
 
-fclean : clean
-	rm -rf $(NAME)
+fclean: clean
+	cd libft && $(MAKE) --quiet fclean
+	$(RM) $(NAME)
 
-re : fclean
-	make
+re: fclean all
 
-.PHONY : all bonus clean fclean re
+.PHONY: re, fclean, clean
