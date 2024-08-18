@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 15:26:38 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:14:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,17 @@ typedef struct s_vector
 
 typedef struct s_camera
 {
-	t_vector *origine;
-	t_vector *direction;
+	t_vector	*origine;
+	t_vector	*direction;
 	float 		fov;
 } t_camera;
+
+//##########enum#########//
+typedef enum e_situation
+{
+	CAMERA,
+	LIGHT
+}	t_situation;
 
 
 
@@ -153,11 +160,17 @@ bool		vec_compare(t_vector *vec1, t_vector *vec2);
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		obtain_ray(t_data *data, float x_ray, float y_ray);
-float		sphere_intersect(t_data *data, int situation);
-bool		is_light_intersect(t_data *data);
+// float		sphere_intersect(t_data *data, t_situation situation);
+float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
+bool		is_light_intersect(t_light *light, t_sphere *sphere, t_camera *cam);
 float		get_light_coef(t_data *data);
 int			get_color(t_data *data);
 void		ray_tracing(void *mlx, void *window, t_data *data);
+
+	//maths_util
+int		quadratic_equation(float t[2], float a, float b, float c);
+float	ft_square(float a);
+
 //colors
 t_color	*multiplying_coef_color(float coef, t_color *colors);
 int		create_rgb(t_color *colors);
