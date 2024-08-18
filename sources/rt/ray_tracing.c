@@ -6,82 +6,11 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/17 21:17:23 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:11:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-void	ray_tracing(void *mlx, void *window, t_data *data)
-{
-	int			mlx_x;
-	int			mlx_y;
-	float		x_scale;
-	float		y_scale;
-	int			trgb;
-	float		x_ray;
-	float		y_ray;
-	// t_vector	*impact_point;
-	// t_vector	*ray;
-	// t_vector	*ray_light;
-
-	get_view_plane(data);
-	mlx_y = 0;
-	y_scale = (data->view->height / 2);
-	while(y_scale >= (data->view->height / 2) * (-1))
-	{
-		y_ray = y_scale * data->view->y_pixel;
-		x_scale = (data->view->width / 2) * (-1);
-		mlx_x = 0;
-		while(x_scale <= data->view->width / 2)
-		{
-			x_ray = x_scale * data->view->x_pixel;
-			// ray = new_vector(x_ray, y_ray, -1);
-			data->scene->spheres->impact_point = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
-			data->scene->spheres->ray = vec_subtract(data->scene->spheres->impact_point, data->scene->camera->origine);
-			data->scene->spheres->ray_light = vec_subtract(data->scene->spheres->ray, data->scene->light->origine);
-			vec_normalize(data->scene->spheres->ray);
-			vec_normalize(data->scene->spheres->ray_light);
-			if(sphere_intersect(data) > 0)
-			{
-				if (is_light_intersect(data))
-				{
-					// get_color_coef(data, ); //a continuer
-				}
-				else
-				{}
-				// trgb = create_trgb(250, data->scene->spheres->color);
-				trgb = create_rgb(data->scene->spheres->color);
-				// printf("trgb %d\n", trgb);
-			}
-			else
-				trgb = 0;
-			my_mlx_pixel_put(data, mlx_x, mlx_y, trgb);
-			// free(impact_point);
-			// free(ray);
-			// free(ray_light);
-			x_scale++;
-			mlx_x++;
-		}
-		y_scale--;
-		mlx_y++;
-	}
-}
-
-bool	is_light_intersect(t_data *data)
-{
-	t_vector	*light_point;
-	float		dist_light_sphere;
-	
-	dist_light_sphere = sphere_intersect(data);
-	if (dist_light_sphere > 0);
-	{
-		light_point = vec_add(data->scene->light->origine, vec_multiplying(data->scene->spheres->ray_light, dist_light_sphere));
-		if (vec_compare(light_point,data->scene->spheres->impact_point))
-			return (true);
-	}
-	return (false);
-}
 
 void	get_view_plane(t_data *data)
 {
@@ -96,6 +25,18 @@ void	get_view_plane(t_data *data)
 	data->view->y_pixel = height / data->view->height;
 }
 
+void	obtain_ray(t_data *data, float x_ray, float y_ray)
+{
+	data->scene->spheres->impact_point = new_vector(x_ray, y_ray,
+			data->scene->camera->direction->z);
+	data->scene->spheres->ray = vec_subtract(data->scene->spheres->impact_point,
+			data->scene->camera->origine);
+	data->scene->spheres->ray_light = vec_subtract(data->scene->spheres->ray,
+			data->scene->light->origine);
+	vec_normalize(data->scene->spheres->ray);
+	vec_normalize(data->scene->spheres->ray_light);
+}
+
 float	sphere_intersect(t_data *data)
 {
 	float	b;
@@ -107,34 +48,126 @@ float	sphere_intersect(t_data *data)
 
 	dist1 = 0;
 	dist2 = 0;
-	origine_sphere = vec_subtract(data->scene->camera->origine, data->scene->spheres->center);
+	origine_sphere = vec_subtract(data->scene->camera->origine,
+			data->scene->spheres->center);
 	b = 2 * (vec_dot_product(origine_sphere, data->scene->spheres->ray));
-	c = vec_dot_product(origine_sphere, origine_sphere) -
-		((data->scene->spheres->diameter / 2) * (data->scene->spheres->diameter / 2));
+	c = vec_dot_product(origine_sphere, origine_sphere)
+		- ((data->scene->spheres->diameter / 2)
+			* (data->scene->spheres->diameter / 2));
 	discr = (b * b) - (4 * c);
 	free(origine_sphere);
 	if (discr < 0)
 		return (0);
 	dist1 = ((b * (-1)) - sqrt(discr)) / 2;
 	dist2 = ((b * (-1)) + sqrt(discr)) / 2;
-	// if (dist1 > 0)
-	// 	return (1);
 	if (dist1 > 0)
 		return (dist1);
 	return (0);
 }
 
-float	get_color_coef(t_data *data, float dist_light_sphere) // pour la diffration de la lumiere
+bool	is_light_intersect(t_data *data, float *dist_light_sphere)
 {
-	float	color_coef;
-	float	dist_cam_sphere;
-	t_scene	*scene;
-	
-	scene = data->scene;
-	dist_cam_sphere = vec_lenght(scene->spheres->impact_point, scene->camera->origine);
-	color_coef = vec_dot_product(scene->spheres->ray_light, scene->spheres->ray) / (dist_light_sphere * dist_cam_sphere);
-	return (color_coef);
+	t_vector	*light_point;
+	// float		dist_light_sphere;
+
+	*dist_light_sphere = sphere_intersect(data);
+	if (dist_light_sphere > 0)
+	{
+		light_point = vec_add(data->scene->light->origine,
+				vec_multiplying(data->scene->spheres->ray_light,
+					*dist_light_sphere));
+		if (vec_compare(light_point, data->scene->spheres->impact_point))
+			return (true);
+	}
+	return (false);
 }
+
+float	get_light_coef(t_data *data, float *dist_light_sphere) // pour la diffration de la lumiere
+{
+	float	light_coef;
+	// float	dist_cam_sphere;
+	t_scene	*scene;
+	t_vector	*sphere_normale;
+
+	scene = data->scene;
+	// dist_cam_sphere = vec_lenght(scene->spheres->impact_point,
+	// 		scene->camera->origine);
+	// light_coef = vec_dot_product(scene->spheres->ray_light,
+	// 		scene->spheres->ray) / (*dist_light_sphere * dist_cam_sphere);
+	light_coef = vec_dot_product(scene->spheres->ray_light, sphere_normale)
+			/ (*dist_light_sphere * (scene->spheres->diameter / 2));
+	return (light_coef);
+}
+
+int	get_color(t_data *data)
+{
+	float	light_coef;
+	float	dist_light_sphere;
+	// int		color;
+	t_color	*color_with_light;
+
+	light_coef = 0;
+	if (sphere_intersect(data) > 0)
+	{
+		if (is_light_intersect(data, &dist_light_sphere))
+		{
+			light_coef = get_light_coef(data, &dist_light_sphere);
+			color_with_light = addition_color(data->scene->spheres->color,
+				multiplying_coef_color(light_coef, data->white_light));
+			return (create_rgb(color_with_light));
+		}
+		else
+			return (create_rgb(data->scene->spheres->color));
+	}
+	return (0);
+}
+
+void	ray_tracing(void *mlx, void *window, t_data *data)
+{
+	float		x_scale;
+	float		y_scale;
+	// int			trgb;
+	float		x_ray;
+	float		y_ray;
+
+	get_view_plane(data);
+	data->mlx_y = 0;
+	y_scale = (data->view->height / 2);
+	while (y_scale >= (data->view->height / 2) * (-1))
+	{
+		y_ray = y_scale * data->view->y_pixel;
+		x_scale = (data->view->width / 2) * (-1);
+		data->mlx_x = 0;
+		while (x_scale <= data->view->width / 2)
+		{
+			x_ray = x_scale * data->view->x_pixel;
+			obtain_ray(data, x_ray, y_ray);
+			// trgb = get_color(data);
+			// if(sphere_intersect(data) > 0)
+			// {
+			// 	if (is_light_intersect(data))
+			// 	{
+			// 		// get_color_coef(data, ); //a continuer
+			// 	}
+			// 	else
+			// 	{}
+			// 	// trgb = create_trgb(250, data->scene->spheres->color);
+			// 	trgb = create_rgb(data->scene->spheres->color);
+			// 	// printf("trgb %d\n", trgb);
+			// }
+			// else
+			// 	trgb = 0;
+			my_mlx_pixel_put(data, get_color(data));
+			x_scale++;
+			data->mlx++;
+		}
+		y_scale--;
+		data->mlx_y++;
+	}
+}
+
+
+
 	// lenght_normal = data->scene->spheres->diameter / 2;
 	// lenght_light = sphere_intersect(data->scene->light->origine, ray, data->scene->spheres);
 //!\ sphere intersect = a readapter
