@@ -20,31 +20,33 @@ typedef struct s_color
 
 typedef struct	s_sphere
 {
-    t_sphere    *next;
+	t_sphere	*next;
 	t_vector	*center;
-    t_color     *color;
+	t_color		*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
 	t_vector	*ray_light;
 	float		diameter;
+	float		dist_light_sphere;
+	float		dist_cam_sphere;
 }				t_sphere;
 
 typedef struct	s_plane
 {
-    t_plane     *next;
+	t_plane		*next;
 	t_vector	*origine;
 	t_vector	*direction;
-    t_color     *color;
+	t_color		*color;
 }				t_plane;
 
 typedef struct	s_cylinder
 {
-	t_cylinder *next;
+	t_cylinder	*next;
 	t_vector	*center;
 	t_vector	*direction;
 	float		diameter;
 	float		height;
-	t_color     *color;
+	t_color		*color;
 }				t_cylinder;
 
 typedef struct s_light

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 13:11:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:45:00 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ void	get_view_plane(t_data *data)
 
 void	obtain_ray(t_data *data, float x_ray, float y_ray)
 {
-	data->scene->spheres->impact_point = new_vector(x_ray, y_ray,
-			data->scene->camera->direction->z);
-	data->scene->spheres->ray = vec_subtract(data->scene->spheres->impact_point,
+	t_vector	*for_ray;
+	// data->scene->spheres->impact_point = new_vector(x_ray, y_ray,
+	// 		data->scene->camera->direction->z);
+	// data->scene->spheres->ray = vec_subtract(data->scene->spheres->impact_point,
+	// 		data->scene->camera->origine);
+	for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
+	data->scene->spheres->ray = vec_subtract(for_ray,
 			data->scene->camera->origine);
 	data->scene->spheres->ray_light = vec_subtract(data->scene->spheres->ray,
 			data->scene->light->origine);
@@ -37,7 +41,7 @@ void	obtain_ray(t_data *data, float x_ray, float y_ray)
 	vec_normalize(data->scene->spheres->ray_light);
 }
 
-float	sphere_intersect(t_data *data)
+float	sphere_intersect(t_data *data, int situation)
 {
 	float	b;
 	float	c;
@@ -48,9 +52,18 @@ float	sphere_intersect(t_data *data)
 
 	dist1 = 0;
 	dist2 = 0;
-	origine_sphere = vec_subtract(data->scene->camera->origine,
-			data->scene->spheres->center);
-	b = 2 * (vec_dot_product(origine_sphere, data->scene->spheres->ray));
+	if (situation == 1)
+	{
+		origine_sphere = vec_subtract(data->scene->camera->origine,
+				data->scene->spheres->center);
+		b = 2 * (vec_dot_product(origine_sphere, data->scene->spheres->ray));
+	}
+	else
+	{
+		origine_sphere = vec_subtract(data->scene->light->origine,
+				data->scene->spheres->center);
+		b = 2 * (vec_dot_product(origine_sphere, data->scene->spheres->ray_light));
+	}
 	c = vec_dot_product(origine_sphere, origine_sphere)
 		- ((data->scene->spheres->diameter / 2)
 			* (data->scene->spheres->diameter / 2));
@@ -65,53 +78,58 @@ float	sphere_intersect(t_data *data)
 	return (0);
 }
 
-bool	is_light_intersect(t_data *data, float *dist_light_sphere)
+bool	is_light_intersect(t_data *data)
 {
 	t_vector	*light_point;
-	// float		dist_light_sphere;
-
-	*dist_light_sphere = sphere_intersect(data);
-	if (dist_light_sphere > 0)
+	
+	data->scene->spheres->dist_light_sphere = sphere_intersect(data, 2);
+	printf("dist ligth sp %f\n", data->scene->spheres->dist_light_sphere);
+	if (data->scene->spheres->dist_light_sphere > 0)
 	{
+		printf("la\n");
 		light_point = vec_add(data->scene->light->origine,
 				vec_multiplying(data->scene->spheres->ray_light,
-					*dist_light_sphere));
+					data->scene->spheres->dist_light_sphere));
+		printf("changement de printf\n");
+		// printf("light %f %f %f\nimpact %f %f %f\n", light_point->x, light_point->y, light_point->z, data->scene->spheres->impact_point->x, data->scene->spheres->impact_point->y, data->scene->spheres->impact_point->z);
+		data->scene->spheres->impact_point = vec_add(data->scene->camera->origine,
+				vec_multiplying(data->scene->spheres->ray,
+					data->scene->spheres->dist_cam_sphere));
 		if (vec_compare(light_point, data->scene->spheres->impact_point))
+		{
+			printf("comapre\n");
 			return (true);
+		}
 	}
 	return (false);
 }
 
-float	get_light_coef(t_data *data, float *dist_light_sphere) // pour la diffration de la lumiere
+float	get_light_coef(t_data *data) // pour la diffration de la lumiere
 {
 	float	light_coef;
-	// float	dist_cam_sphere;
 	t_scene	*scene;
 	t_vector	*sphere_normale;
 
 	scene = data->scene;
-	// dist_cam_sphere = vec_lenght(scene->spheres->impact_point,
-	// 		scene->camera->origine);
-	// light_coef = vec_dot_product(scene->spheres->ray_light,
-	// 		scene->spheres->ray) / (*dist_light_sphere * dist_cam_sphere);
 	light_coef = vec_dot_product(scene->spheres->ray_light, sphere_normale)
-			/ (*dist_light_sphere * (scene->spheres->diameter / 2));
+			/ (data->scene->spheres->dist_light_sphere * (scene->spheres->diameter / 2));
 	return (light_coef);
 }
 
 int	get_color(t_data *data)
 {
 	float	light_coef;
-	float	dist_light_sphere;
 	// int		color;
 	t_color	*color_with_light;
 
 	light_coef = 0;
-	if (sphere_intersect(data) > 0)
+	data->scene->spheres->dist_cam_sphere = sphere_intersect(data, 1);
+	if (data->scene->spheres->dist_cam_sphere > 0)
 	{
-		if (is_light_intersect(data, &dist_light_sphere))
+		if (is_light_intersect(data))
 		{
-			light_coef = get_light_coef(data, &dist_light_sphere);
+			light_coef = get_light_coef(data);
+			printf("light coef %f\n", light_coef);
 			color_with_light = addition_color(data->scene->spheres->color,
 				multiplying_coef_color(light_coef, data->white_light));
 			return (create_rgb(color_with_light));
@@ -159,7 +177,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 			// 	trgb = 0;
 			my_mlx_pixel_put(data, get_color(data));
 			x_scale++;
-			data->mlx++;
+			data->mlx_x++;
 		}
 		y_scale--;
 		data->mlx_y++;

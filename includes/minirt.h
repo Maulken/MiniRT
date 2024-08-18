@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 13:10:45 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:26:38 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ bool		vec_compare(t_vector *vec1, t_vector *vec2);
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		obtain_ray(t_data *data, float x_ray, float y_ray);
-float		sphere_intersect(t_data *data);
-bool		is_light_intersect(t_data *data, float *dist_light_sphere);
-float		get_light_coef(t_data *data, float *dist_light_sphere);
+float		sphere_intersect(t_data *data, int situation);
+bool		is_light_intersect(t_data *data);
+float		get_light_coef(t_data *data);
 int			get_color(t_data *data);
 void		ray_tracing(void *mlx, void *window, t_data *data);
 //colors

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/17 19:38:18 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:30:07 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,13 @@ int check_sphere(char *tab , t_data *data)
 		}
 
 	current->center =  add_vector_float(tmp[1]);
-	current->diameter = add_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
 	current->impact_point = NULL;
 	current->ray = NULL;
-	current->center = NULL;
+	current->ray_light = NULL;
+	current->diameter = add_float(tmp[2]);
+	current->dist_light_sphere = 0.0;
+	current->dist_cam_sphere = 0.0;
 	current->next = NULL;
 
 	data->scene->spheres->next = current;

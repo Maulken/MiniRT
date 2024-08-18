@@ -6,11 +6,11 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:50:39 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/17 18:56:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:05:44 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../includes/minirt.h"
 
 t_vector	*vec_add(t_vector *vec1, t_vector *vec2)
 {
