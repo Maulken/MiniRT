@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 15:02:21 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/03 15:37:37 by vmassoli         ###   ########.fr       */
+/*   Created: 2024/08/18 20:11:31 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/08/19 20:26:20 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+void	next(char *str)
+{
+	while (*str == 32 || *str == 9)
+		(str)++;
+}
 double	ft_atof(char *str)
 {
 	int		w;

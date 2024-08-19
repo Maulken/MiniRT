@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 13:36:36 by bszabo            #+#    #+#             */
-/*   Updated: 2024/08/02 17:41:15 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:25:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ int	ft_atoi(const char *str)
 	}
 	return (num * sign);
 }
-

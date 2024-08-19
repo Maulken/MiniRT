@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
+/*   Updated: 2024/08/19 20:33:29 by mpelluet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 int	event(t_data *data)
@@ -7,8 +19,15 @@ int	event(t_data *data)
 			&data->line_length, &data->endin);
 	//draw(data);
 	ray_tracing(data->mlx, data->win, data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
+	return (0);
+}
+
+int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == XK_Escape)
+		ft_close(data);
 	return (0);
 }
 
@@ -24,6 +43,7 @@ int main(int argc , char **argv)
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
+	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
 	mlx_loop(data.mlx);
 

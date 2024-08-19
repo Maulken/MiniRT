@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/16 09:44:21 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:32:54 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 void free_vector(t_vector *vector);
-void free_rgb(t_color *color);
+void free_rgb(t_vector *color);
 int free_lc(t_sphere *head)
 {
     t_sphere* current = head;
@@ -36,7 +36,7 @@ void free_vector(t_vector *vector)
         free(vector);
     }
 }
-void free_rgb(t_color *color)
+void free_rgb(t_vector *color)
 {
 	if(color != NULL)
 		free(color);

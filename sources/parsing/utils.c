@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/15 16:54:27 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:31:47 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
 
 #include "../../includes/minirt.h"
 
@@ -46,7 +43,6 @@ void printf_row(char **row)
     int j;
 
     j = 0;
-    
     while(row[j])
     {
         i=0;
@@ -61,7 +57,7 @@ void printf_row(char **row)
 
 int size_tab(char **tab)
 {
-    int j; 
+    int j;
 
     j = 0;
 
@@ -78,7 +74,6 @@ int size_tab(char **tab)
 void free_tab(char **tab)
 {
     int i;
-    
     i=0;
     while (tab[i])
         free(tab[i++]);
