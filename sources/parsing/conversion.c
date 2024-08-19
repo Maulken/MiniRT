@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/16 08:47:53 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:11:41 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,39 @@
 
 t_vector *add_vector_float(char *str) //  pas de gestion en cas double point .....
 {
-    char **tmp;
-    t_vector *vector;
+	char **tmp;
+	t_vector *vector;
 
-    vector = malloc(sizeof(t_vector));
-    if (!vector)
-    {
-        return(NULL);
-    }
-    tmp = ft_split(str,',');
-    vector->x = ft_atof_custom(tmp[0]);
-    vector->y = ft_atof_custom(tmp[1]);
-    vector->z = ft_atof_custom(tmp[2]);
-    free_tab(tmp);
-    return(vector);
+	vector = malloc(sizeof(t_vector));
+	if (!vector)
+	{
+		return(NULL);
+	}
+	tmp = ft_split(str,',');
+	vector->x = ft_atof_custom(tmp[0]);
+	vector->y = ft_atof_custom(tmp[1]);
+	vector->z = ft_atof_custom(tmp[2]);
+	free_tab(tmp);
+	return(vector);
 }
 
-t_color    *add_color_int(char *str)
+t_vector    *add_color_int(char *str)
 {
-     char **tmp;
-    t_color *rgb;
-    
-    rgb = malloc(sizeof(t_color));
-    if (!rgb)
-        return (NULL);
-    tmp = ft_split(str,',');
-    if (!tmp)
-        return (NULL);
-    rgb->r = ft_atoi(tmp[0]);
-    if(rgb->r > 255)
-        rgb->r = 255;
-    if(rgb->r < 0)
-        rgb->r = 0;
-    rgb->g = ft_atoi(tmp[1]);
-    if(rgb->g > 255)
-        rgb->g = 255;
-    if(rgb->g < 0)
-        rgb->g = 0;
-    rgb->b = ft_atoi(tmp[2]);
-    if(rgb->b > 255)
-        rgb->b = 255;
-    if(rgb->b < 0)
-        rgb->b = 0;
-    free_tab(tmp);
-    return(rgb);
+	 char **tmp;
+	t_vector *rgb;
+	
+	rgb = malloc(sizeof(t_vector));
+	if (!rgb)
+		return (NULL);
+	tmp = ft_split(str,',');
+	if (!tmp)
+		return (NULL);
+	rgb->x = ft_atoi(tmp[0]);
+	rgb->y = ft_atoi(tmp[1]);
+	rgb->z = ft_atoi(tmp[2]);
+	checking_limit_color(rgb);
+	free_tab(tmp);
+	return(rgb);
 }
 
 int add_int(char *str)

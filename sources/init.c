@@ -10,17 +10,18 @@ int	init_struct(t_data *data)
 	if (!data->view)
 		return (0);
 	data->scene = NULL;
-	data->white_light = malloc(sizeof(t_color));
+	data->white_light = malloc(sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
-	data->white_light->r = 255;
-	data->white_light->g = 255;
-	data->white_light->b = 255;
+	data->white_light->x = 255;
+	data->white_light->y = 255;
+	data->white_light->z = 255;
 	data->view->height = 600;
 	data->view->x_pixel = 0;
 	data->view->y_pixel = 0;
 	data->view->width = 800;
-	// data->bits_per_pixel = 20;
+	data->x_ray = 0;
+	data->y_ray = 0;
 
 	return(0); // return (1) mieux ?
 }
@@ -64,4 +65,13 @@ void init_data(t_data *data)
 		printf("Memory allocation failed \n");
 		exit(1);
 	}
+	data->scene->ambient = malloc(sizeof(t_ambient));
+	if(data->scene->ambient == NULL)
+	{
+		printf("Memory allocation failed \n");
+		exit(1);
+	}
+
+	data->scene->ambient->colors = new_vector(255, 255, 255);
+	data->scene->ambient->ratio = 0.2;
 }

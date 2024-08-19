@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 22:14:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:45:43 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_data // data principal . pour la mlx
 {
 	t_scene	*scene;
 	t_view	*view;
-	t_color	*white_light;
+	t_vector	*white_light;
 
 	void	*mlx;
 	void	*win;
@@ -51,6 +51,8 @@ typedef struct s_data // data principal . pour la mlx
 	int		endin;
 	int		mlx_x;
 	int		mlx_y;
+	int		x_ray;
+	int		y_ray;
 
 	int	fd;
 
@@ -110,7 +112,7 @@ int		size_tab(char **tab);
 void	free_tab(char **tab);
 	//conversion.c
 t_vector	*add_vector_float(char *str);
-t_color		*add_color_int(char *str);
+t_vector		*add_color_int(char *str);
 int			add_int(char *str);
 float		add_float(char *str);
 
@@ -160,23 +162,25 @@ bool		vec_compare(t_vector *vec1, t_vector *vec2);
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		obtain_ray(t_data *data, float x_ray, float y_ray);
+// void		obtain_ray(float x, float y, float z, t_vector *ray, t_vector *origin);
 // float		sphere_intersect(t_data *data, t_situation situation);
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
-bool		is_light_intersect(t_light *light, t_sphere *sphere, t_camera *cam);
-float		get_light_coef(t_data *data);
+// bool		is_light_intersect(t_light *light, t_sphere *sphere, t_camera *cam);
+// float		get_light_coef(t_data *data);
 int			get_color(t_data *data);
 void		ray_tracing(void *mlx, void *window, t_data *data);
+t_vector	*get_diffuse_light(t_data *data);
 
 	//maths_util
 int		quadratic_equation(float t[2], float a, float b, float c);
 float	ft_square(float a);
 
 //colors
-t_color	*multiplying_coef_color(float coef, t_color *colors);
-int		create_rgb(t_color *colors);
+// t_vector	*multiplying_coef_color(float coef, t_vector *colors);
+int		create_rgb(t_vector *colors);
 void	my_mlx_pixel_put(t_data *data, int color);
-void	checking_limit_color(t_color *colors); // a utiliser aussi dans le parsing
-t_color	*addition_color(t_color *color1, t_color * color2);
+void	checking_limit_color(t_vector *colors); // a utiliser aussi dans le parsing
+// t_vector	*addition_color(t_vector *color1, t_vector * color2);
 
 int		event(t_data *data);
 

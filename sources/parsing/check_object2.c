@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/18 15:30:07 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:35:37 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int check_light(char *tab, t_data *data)
 		}
 	data->scene->light->origine = add_vector_float(tmp[1]);
 	data->scene->light->ratio = add_float(tmp[2]);
-	data->scene->light->color = add_color_int(tmp[3]);
 
 	free_tab(tmp);
 	return(0);

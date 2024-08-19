@@ -6,59 +6,31 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:01:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 13:03:10 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:12:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	checking_limit_color(t_color *colors)
+void	checking_limit_color(t_vector *colors)
 {
-	if (colors->r > 255)
-		colors->r = 255;
-	if (colors->g > 255)
-		colors->g = 255;
-	if (colors->b > 255)
-		colors->b = 255;
-	if (colors->r < 0)
-		colors->r = 0;
-	if (colors->g < 0)
-		colors->g = 0;
-	if (colors->b < 0)
-		colors->b = 0;
+	if (colors->x > 255)
+		colors->x = 255;
+	if (colors->y > 255)
+		colors->y = 255;
+	if (colors->z > 255)
+		colors->z = 255;
+	if (colors->x < 0)
+		colors->x = 0;
+	if (colors->y < 0)
+		colors->y = 0;
+	if (colors->z < 0)
+		colors->z = 0;
 }
 
-t_color	*multiplying_coef_color(float coef, t_color *colors)
+int	create_rgb(t_vector *colors)
 {
-	t_color	*new_color;
-
-	new_color = malloc(sizeof(t_color));
-	if (!new_color)
-		return (0);
-	new_color->r = colors->r * coef;
-	new_color->g = colors->g * coef;
-	new_color->b = colors->b * coef;
-	checking_limit_color(new_color);
-	return (new_color);
-}
-
-t_color	*addition_color(t_color *color1, t_color * color2)
-{
-	t_color	*new_color;
-
-	new_color = malloc(sizeof(t_color));
-	if (!new_color)
-		return (NULL);
-	new_color->r = color1->r + color2->r;
-	new_color->g = color1->g + color2->g;
-	new_color->b = color1->b + color2->b;
-	checking_limit_color(new_color);
-	return (new_color);
-}
-
-int	create_rgb(t_color *colors)
-{
-	return (colors->r << 16 | colors->g << 8 | colors->b);
+	return ((int)colors->x << 16 | (int)colors->y << 8 | (int)colors->z);
 }
 
 void	my_mlx_pixel_put(t_data *data, int color)
