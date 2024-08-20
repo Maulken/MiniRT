@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/19 20:33:29 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:00:43 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	event(t_data *data)
 	data->img = mlx_new_image(data->mlx, data->view->width, data->view->height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
-	//draw(data);
-	ray_tracing(data->mlx, data->win, data);
+	//ray_tracing(data->mlx, data->win, data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (0);
@@ -31,13 +30,13 @@ int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
-int main(int argc , char **argv)
+int main(int argc, char **argv)
 {
   t_data data;
 
 	init_struct(&data);
 	init_data(&data);
-  	if(parsing(argc , argv ,&data) == ERROR)
+  	if(parsing(argc, argv ,&data) == ERROR)
 		return(clean(&data , 1));
 
 	data.mlx = mlx_init();
@@ -52,6 +51,4 @@ int main(int argc , char **argv)
 	mlx_destroy_display(data.mlx);
 	free(data.mlx);
 	clean(&data,0);
-
-  return (0);
 }

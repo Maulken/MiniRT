@@ -6,104 +6,93 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/16 09:48:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:28:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-
-char **check_correct_type(char *content, char *tab)
+char	**check_error_type(char *str, char **tmp)
 {
-    char **tmp;
-    int j;  
+	printf("ERROR : %s\n", str);
+	free_tab(tmp);
+	return (NULL);
+}
 
-    tmp = ft_split(tab,' ');
-    j = 0;
-    while (tmp[j])
-    {
-        if (content[j] == 'i') //  verifiaction cord x, y , z et RGB
-        {
-            if(check_correct_intxyz(tmp, j))
-            {
-                printf("ERROR TYPE (R,G,B) \n");
-                 free_tab(tmp);
-                return(NULL);
-            }
-            j++;
-        }
-        else if (content[j] == 'f' )// Vérification des flottants  x ,y , z
-        {
-            if(check_correct_floatxyz(tmp, j))
-                {
-                printf("ERROR TYPE (x,y,z) \n");
-                 free_tab(tmp);
-                return(NULL);
-                } 
-            j++; 
-        }
-        else if (content[j] == 'c')//Vérification char
-        {
-            if(check_correct_char(tmp, j))
-                {
-                printf("ERROR TYPE CHAR\n");
-                 free_tab(tmp);
-                return(NULL);
-                }
-            j++;
-        }
+char	**check_correct_type_next(const char *content, char **tmp, int j)
+{
+	if (content[j] == 'c')
+	{
+		if (check_correct_char(tmp, j))
+			return (check_error_type("invalid char", tmp));
+		j++;
+	}
+	else if (content[j] == 'k')
+	{
+		if (check_correct_int(tmp, j))
+			return (check_error_type("invalid int", tmp));
+		j++;
+	}
+	else if (content[j] == 't')
+	{
+		if (check_correct_float(tmp, j) == 1)
+			return (check_error_type("invalid float", tmp));
+		j++;
+	}
+	return (tmp);
+}
 
-        else if(content[j] == 'k') //Vérification des int 
-        {
-            if(check_correct_int(tmp , j))
-                {
-                printf("ERROR TYPE INT\n");
-                 free_tab(tmp);
-                return(NULL);
-                }
-            j++;
-        }
-        else if(content[j] == 't')//Vérification des flottants
-        {   
-            if(check_correct_float( tmp , j)==1)
-                {
-                printf("ERROR TYPE FLOAT\n");
-                 free_tab(tmp);
-                return(NULL);
-                }  
-            j++; 
-        }
-        else
-        {
-            j++;
-        }
-    }
-    return(tmp);
- }
+char	**check_correct_type(const char *content, char *tab)
+{
+	int		j;
+	char	**tmp;
 
+	tmp = ft_split(tab, ' ');
+	j = 0;
+	while (tmp[j])
+	{
+		if (content[j] == 'i')
+			if (check_correct_intxyz(tmp, j))
+				return (check_error_type("invalid RGB", tmp));
+		else if (content[j] == 'f' )
+			if (check_correct_floatxyz(tmp, j))
+				return (check_error_type("invalid XYZ", tmp));
+		if (content[j] == 'c')
+			if (check_correct_char(tmp, j))
+				return (check_error_type("invalid char", tmp));
+		else if (content[j] == 'k')
+			if (check_correct_int(tmp, j))
+				return (check_error_type("invalid int", tmp));
+		else if (content[j] == 't')
+			if (check_correct_float(tmp, j) == 1)
+				return (check_error_type("invalid float", tmp));
+		j++;
+	}
+	return (tmp);
+}
 /*
     explication du tableau content
     c = char 
     f = cordonner flote mais sous trois axe x,y,z
     i = cordonner int sous trois axe z,y,z
     k = une FOV , en int 1 valeur attendu
-    t = une taille de volume floate (utile pour L , cy) 
-
+    t = une taille de volume floate (utile pour L , cy)
+    v = void
 */
-int check_ambiance(char *tab, t_data *data)
+
+int	check_ambiance(char *tab, t_data *data)
 {
-    char **tmp;
-    char content[6] = {'c','t','i','v','v','v'};
+	char				**tmp;
+	static const char	content[6] = {'c', 't', 'i', 'v', 'v', 'v'};
 
-    if (check_num(tab, "A", 3))
-        return (1);
-    tmp = check_correct_type(content, tab);
-    if(tmp == NULL)
-    {
-        free_tab(tmp);
-        return(1);
-    }
-    free_tab(tmp);
-    return(0);
+	if (check_num(tab, "A", 3))
+		return (1);
+	tmp = check_correct_type(content, tab);
+	if (tmp == NULL)
+	{
+		free_tab(tmp);
+		return (1);
+	}
+	free_tab(tmp);
+	return (0);
 }
-

@@ -1,16 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
+/*   Updated: 2024/08/20 17:54:30 by vharatyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
+int error_allocation(void)
+{
+    printf("Memory allocation failed \n");
+    exit(1);
+}
 
 
 int	init_struct(t_data *data)
 {
 	t_scene *scene;
 
-	data->view = malloc(sizeof(t_view));
+	data->view = ft_calloc(1, sizeof(t_view));
 	if (!data->view)
 		return (0);
 	data->scene = NULL;
-	data->white_light = malloc(sizeof(t_vector));
+	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
 	data->white_light->x = 255;
@@ -22,56 +39,37 @@ int	init_struct(t_data *data)
 	data->view->width = 800;
 	data->x_ray = 0;
 	data->y_ray = 0;
-
-	return(0); // return (1) mieux ?
+	return(0);
 }
 
 void init_data(t_data *data)
 {
-	data->scene = malloc(sizeof(t_scene));
-	if (data->scene == NULL)
-	{
-		printf("Memory allocation failed \n");
-		exit(1);
-	}
-	data->scene->camera = malloc(sizeof(t_camera));
-	if(data->scene->camera == NULL){
-			printf("Memory allocation failed \n");
-			exit(1);
-	}
-	data->scene->spheres = malloc(sizeof(t_sphere));
-	if(data->scene->spheres == NULL)
-	{
-		printf("Memory allocation failed \n");
-		exit(1);
-	}
-	  data->scene->cylinder = malloc(sizeof(t_cylinder));
-	if(data->scene->cylinder == NULL)
-	{
-		printf("Memory allocation failed \n");
-		exit(1);
-	}
-
-	  data->scene->plane = malloc(sizeof(t_plane));
-	if(data->scene->plane == NULL)
-	{
-		printf("Memory allocation failed \n");
-		exit(1);
-	}
-
-	 data->scene->light = malloc(sizeof(t_light));
-	if(data->scene->light == NULL)
-	{
-		printf("Memory allocation failed \n");
-		exit(1);
-	}
-	data->scene->ambient = malloc(sizeof(t_ambient));
+    data->scene = (t_scene *)malloc(sizeof(t_scene));
+    if (data->scene == NULL) 
+       error_allocation();
+	data->scene->light = NULL;
+    data->scene->light = malloc(sizeof(t_light));
+    if(data->scene->light == NULL)
+        error_allocation();
+    data->scene->camera = malloc(sizeof(t_camera));
+    if(data->scene->camera == NULL)
+    {
+        free(data->scene->light);
+        free(data->scene);
+        error_allocation();
+    }
+	data->scene->ambient = ft_calloc(1,sizeof(t_ambient));
 	if(data->scene->ambient == NULL)
 	{
-		printf("Memory allocation failed \n");
-		exit(1);
+        free(data->scene->plane);
+        free(data->scene->cylinder);
+        free(data->scene->spheres);
+        free(data->scene->camera);
+        free(data->scene->light);
+        free(data->scene);
+		error_allocation();
 	}
-
-	data->scene->ambient->colors = new_vector(255, 255, 255);
-	data->scene->ambient->ratio = 0.2;
+    data->scene->spheres = NULL;
+    data->scene->cylinder = NULL;
+    data->scene->plane = NULL;
 }

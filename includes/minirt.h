@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 17:52:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:35:32 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef enum e_object
 	//parsing.c
 int		parsing(int argc ,char **argv ,t_data *data);
 	//check.c
+int		ft_msg_error(char *str, int value);
+int		ft_msg_error_tab(char *str, int value, char **tab );
 int 	endwith(char *argv, char *value);
 int 	check_argument(int argc , char **argv);
 int		check_tab(char **rows , t_data *data);
@@ -113,33 +115,39 @@ char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
 int		size_tab(char **tab);
 void	free_tab(char **tab);
+int	check_float_point(char **tab);
 	//conversion.c
 t_vector	*add_vector_float(char *str);
-t_vector		*add_color_int(char *str);
+t_vector	*add_color_int(char *str);
 int			add_int(char *str);
 float		add_float(char *str);
 
-
 	//check_object.c
-char	**check_correct_type(char *content, char *tab);
+char	**check_error_type(char *str, char **tmp);
+char	**check_correct_type(const char *content, char *tab);
 int 	check_ambiance(char *tab, t_data *data);
 
 	//chech_object2.c
-int	check_camera    (char *tab , t_data *data);
-int	check_light(char *tab, t_data *data);
-int	check_sphere(char *tab , t_data *data);
-int	check_plane(char *tab, t_data *data);
-int	check_cylinder(char *tab, t_data *data);
+int		check_camera    (char *tab , t_data *data);
+int		check_light(char *tab, t_data *data);
+int		check_sphere(char *tab , t_data *data);
+int		check_plane(char *tab, t_data *data);
+int		check_cylinder(char *tab, t_data *data);
 	//check_utils.c
+int		ft_is_space(char c);
+int		ft_is_digit(char c);
+int		ft_is_good_char(char c);
 int		check_num(char *tab, char *str, int size_setting);
 double	ft_atof_custom(const char *str);
 
 	//check_type.c
-int	check_correct_intxyz(char **tmp, int j);
-int	check_correct_floatxyz(char **tmp , int j);
-int	check_correct_char(char **tmp, int j);
-int	check_correct_int(char **tmp , int j);
-int	check_correct_float(char **tmp , int j);
+int		check_correct_intxyz(char **tmp, int j);
+int		check_correct_floatxyz(char **tmp , int j);
+int		check_correct_char(char **tmp, int j);
+int		check_correct_int(char **tmp , int j);
+int		check_correct_float(char **tmp , int j);
+	//ft_atof.c
+double	ft_atof_custom(const char *str);
 
 /*RT*/
 	//clear.c
