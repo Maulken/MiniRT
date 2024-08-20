@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 01:04:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:28:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ char	**check_error_type(char *str, char **tmp)
 	return (NULL);
 }
 
+char	**check_correct_type_next(const char *content, char **tmp, int j)
+{
+	if (content[j] == 'c')
+	{
+		if (check_correct_char(tmp, j))
+			return (check_error_type("invalid char", tmp));
+		j++;
+	}
+	else if (content[j] == 'k')
+	{
+		if (check_correct_int(tmp, j))
+			return (check_error_type("invalid int", tmp));
+		j++;
+	}
+	else if (content[j] == 't')
+	{
+		if (check_correct_float(tmp, j) == 1)
+			return (check_error_type("invalid float", tmp));
+		j++;
+	}
+	return (tmp);
+}
+
 char	**check_correct_type(const char *content, char *tab)
 {
 	int		j;
@@ -29,37 +52,21 @@ char	**check_correct_type(const char *content, char *tab)
 	while (tmp[j])
 	{
 		if (content[j] == 'i')
-		{
 			if (check_correct_intxyz(tmp, j))
 				return (check_error_type("invalid RGB", tmp));
-			j++;
-		}
 		else if (content[j] == 'f' )
-		{
 			if (check_correct_floatxyz(tmp, j))
 				return (check_error_type("invalid XYZ", tmp));
-			j++;
-		}
-		else if (content[j] == 'c')
-		{
+		if (content[j] == 'c')
 			if (check_correct_char(tmp, j))
 				return (check_error_type("invalid char", tmp));
-			j++;
-		}
 		else if (content[j] == 'k')
-		{
 			if (check_correct_int(tmp, j))
 				return (check_error_type("invalid int", tmp));
-			j++;
-		}
 		else if (content[j] == 't')
-		{
 			if (check_correct_float(tmp, j) == 1)
 				return (check_error_type("invalid float", tmp));
-			j++;
-		}
-		else
-			j++;
+		j++;
 	}
 	return (tmp);
 }
@@ -75,7 +82,7 @@ char	**check_correct_type(const char *content, char *tab)
 
 int	check_ambiance(char *tab, t_data *data)
 {
-	char			**tmp;
+	char				**tmp;
 	static const char	content[6] = {'c', 't', 'i', 'v', 'v', 'v'};
 
 	if (check_num(tab, "A", 3))

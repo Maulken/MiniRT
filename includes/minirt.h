@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 10:40:49 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:24:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ typedef enum e_situation
 	//parsing.c
 int		parsing(int argc ,char **argv ,t_data *data);
 	//check.c
-int	ft_msg_error(char *str, int value);
-static int ft_msg_error_tab(char *str, int value, char **tab );
+int		ft_msg_error(char *str, int value);
+int		ft_msg_error_tab(char *str, int value, char **tab );
 int 	endwith(char *argv, char *value);
 int 	check_argument(int argc , char **argv);
 int		check_tab(char **rows , t_data *data);
@@ -112,6 +112,7 @@ char	*ft_strjoin_free(char *s1, char *s2);
 void	printf_row(char **row);
 int		size_tab(char **tab);
 void	free_tab(char **tab);
+int	check_float_point(char **tab);
 	//conversion.c
 t_vector	*add_vector_float(char *str);
 t_vector	*add_color_int(char *str);

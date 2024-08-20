@@ -6,26 +6,29 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:36:52 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 10:37:50 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:05:31 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-static int ft_atof_c_signe(const char *str , int *sign)
+static int	ft_atof_c_signe(const char *str, int *sign)
 {
-	int i = 0 ;
-if (str[i] == '-')
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
 	{
 		*sign = -1;
 		i++;
 	}
 	else if (str[i] == '+')
 		i++;
-	return(i);
+	return (i);
 }
 
-static int ft_atof_next(const char *str , int result, int decimal_point , int fraction)
+static int	ft_atof_next(const char *str, int result,
+	int decimal_point, int fraction)
 {
 	while (ft_is_digit(*str))
 	{
@@ -49,7 +52,7 @@ static int ft_atof_next(const char *str , int result, int decimal_point , int fr
 	{
 		result /= fraction;
 	}
-	return(result);
+	return (result);
 }
 
 double	ft_atof_custom(const char *str)

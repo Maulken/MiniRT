@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 13:14:59 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:46:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,15 @@ void free_plane_list(t_plane *head)
 
 void free_cylinder(t_cylinder *cylinder)
 {
-    if (cylinder)
-    {
-        // Libérez les membres de t_cylinder si nécessaire
-        free(cylinder);
-    }
+    if (cylinder == NULL)
+        return;
+    if(cylinder->center != NULL)
+        free(cylinder->center);
+    if(cylinder->color != NULL)
+        free(cylinder->color);
+    if(cylinder->direction != NULL)
+        free(cylinder->direction);
+    free(cylinder);
 }
 
 void free_cylinder_list(t_cylinder *cylinder_list)
@@ -96,8 +100,6 @@ void free_light(t_light *light)
 		return;
 	if (light->origine != NULL)
 		free(light->origine);
-	//if (light->color != NULL)
-		//free(light->color);
 	free(light);
 }
 int clean(t_data *data, int code_error)
@@ -112,44 +114,36 @@ int clean(t_data *data, int code_error)
         if (data->scene->plane != NULL)
         {
             free_plane_list(data->scene->plane);
-            data->scene->plane = NULL;
         }
         if (data->scene->cylinder != NULL)
         {
             free_cylinder_list(data->scene->cylinder);
-            data->scene->cylinder = NULL;
         }
         if (data->scene->spheres != NULL)
         {
             free_sphere_list(data->scene->spheres);
-            data->scene->spheres = NULL;
         }
         if (data->scene->light != NULL)
         {
             free_light(data->scene->light);
-            data->scene->light = NULL;
         }
         if (data->scene->camera != NULL)
         {
 			free(data->scene->camera->origine);
 			free(data->scene->camera->direction);
             free(data->scene->camera);
-            data->scene->camera = NULL;
         }
         if (data->scene->ambient != NULL)
         {
             free(data->scene->ambient);
-            data->scene->ambient = NULL;
         }
         free(data->scene);
         data->scene = NULL;
     }
-
     if (data->view != NULL)
     {
         free(data->view);
         data->view = NULL;
     }
-
     return code_error;
 }

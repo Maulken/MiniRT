@@ -6,24 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 09:13:05 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:00:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-int	ft_msg_error(char *str, int value)
-{
-	printf("ERROR : %s", str);
-	return (value);
-}
-
-static int ft_msg_error_tab(char *str, int value, char **tab )
-{
-	printf("plese ckeck : is not object\n");
-	free_tab(tab);
-	return (value); 
-}
 
 int	endwith(char *argv, char *value)
 {
@@ -57,7 +44,7 @@ int	check_argument(int argc, char **argv)
 
 	i = 0;
 	if (argc != 2)
-		return(ft_msg_error("plese ./Minirt enter the secene.rt", -1));
+		return (ft_msg_error("plese ./Minirt enter the secene.rt", -1));
 	if (!argv[1] || !*argv[1])
 		return (ft_msg_error("error fichier vide", -1));
 	while (argv[i])
@@ -68,7 +55,7 @@ int	check_argument(int argc, char **argv)
 		return (ft_msg_error("error plese file finish.rt", -1));
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
-		return(ft_msg_error("no accessed the file.rt", -1));
+		return (ft_msg_error("no accessed the file.rt", -1));
 	return (fd);
 }
 
@@ -121,7 +108,6 @@ int	check_min_scene(char **tab)
 	}
 	return (OK);
 }
-
 
 int	check_type(char *src, t_data *data)
 {

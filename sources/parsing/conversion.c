@@ -6,19 +6,19 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 12:40:39 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:01:08 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float   checking_limit(float a, float min, float max)
+float	checking_limit(float a, float min, float max)
 {
-    if (a < min)
-        return (min);
-    if (a > max)
-        return (max);
-    return (a);
+	if (a < min)
+		return (min);
+	if (a > max)
+		return (max);
+	return (a);
 }
 
 t_vector	*add_vector_float(char *str)

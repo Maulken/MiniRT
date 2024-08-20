@@ -6,40 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 12:18:58 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:56:27 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-int	check_float_point(char **tab)
-{
-	int	i;
-	int	j;
-	int	value;
-
-	i = 0;
-	j = 0;
-	value = 0;
-	while (tab[j])
-	{
-		while (tab[j][i] != '\0')
-		{
-			if (tab[j][i] == '.')
-			{
-				if (value == 0)
-					value = 1;
-				else
-					return (1);
-			}
-			i++;
-		}
-		i = 0;
-		value = 0;
-		j++;
-	}
-	return (0);
-}
 
 int	check_correct_intxyz(char **tmp, int j)
 {
@@ -88,7 +59,6 @@ int	check_correct_floatxyz(char **tmp, int j)
 	}
 	free_tab(tab);
 	j++;
-	
 	return (0);
 }
 

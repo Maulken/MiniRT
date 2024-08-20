@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 12:52:03 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:55:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_camera(char *tab, t_data *data)
 {
-	char			**tmp;
+	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 't', 'v', 'v'};
 
 	if (check_num(tab, "C", 4))
@@ -38,8 +38,9 @@ int	check_camera(char *tab, t_data *data)
 
 int	check_light(char *tab, t_data *data)
 {
-	char			**tmp;
+	char				**tmp;
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
+
 	if (check_num(tab, "L", 4))
 		return (1);
 	tmp = check_correct_type(content, tab);
@@ -50,20 +51,23 @@ int	check_light(char *tab, t_data *data)
 	}
 	data->scene->light->origine = add_vector_float(tmp[1]);
 	data->scene->light->ratio = add_float(tmp[2]);
-	// data->scene->light = add_color_int(tmp[3]); is optinale 
 	free_tab(tmp);
 	return (0);
 }
 
 int	check_sphere(char *tab, t_data *data)
 {
-	t_sphere		*current;
-	char			**tmp;
+	t_sphere			*current;
+	char				**tmp;
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_sphere));
+	if(current== NULL)
+		return (1);
+	current->next = NULL;
 	if (check_num(tab, "sp", 4))
 		return (1);
+	
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
 	{
@@ -73,23 +77,29 @@ int	check_sphere(char *tab, t_data *data)
 	current->center = add_vector_float(tmp[1]);
 	current->diameter = add_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
-	current->next = NULL;
-	data->scene->spheres->next = current;
-	data->scene->spheres = data->scene->spheres->next;
+	
+	if(data->scene->spheres->next == NULL)
+		data->scene->spheres->next = current;
+	else 
+	{
+		t_sphere *last = data->scene->spheres;
+		while (last->next != NULL)
+			last = last->next;
+		last->next = current;
+	}
 	free_tab(tmp);
 	return (0);
 }
-
+/*check plane experimental no leack fonction*/
 int	check_plane(char *tab, t_data *data)
 {
-	t_plane			*current;
-	char			**tmp;
+	t_plane				*current;
+	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_plane));
-	if(current == NULL)
+	if (current == NULL)
 		return (1);
-
 	current->next = NULL;
 	if (check_num(tab, "pl", 4))
 		return (1);
@@ -102,7 +112,7 @@ int	check_plane(char *tab, t_data *data)
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
-	if(data->scene->plane == NULL)
+	if (data->scene->plane == NULL)
 		data->scene->plane->next = current;
 	else 
 	{
@@ -117,8 +127,8 @@ int	check_plane(char *tab, t_data *data)
 
 int	check_cylinder(char *tab, t_data *data)
 {
-	t_cylinder		*current;
-	char			**tmp;
+	t_cylinder			*current;
+	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 't', 't', 'i'};
 
 	current = malloc(sizeof(t_cylinder));
@@ -138,8 +148,15 @@ int	check_cylinder(char *tab, t_data *data)
 	current->diameter = add_float(tmp[3]);
 	current->height = add_float(tmp[4]);
 	current->color = add_color_int(tmp[5]);
-	data->scene->cylinder->next = current;
-	data->scene->cylinder = data->scene->cylinder->next;
+	if(data->scene->cylinder->next == NULL)
+		data->scene->cylinder->next = current;
+	else 
+	{
+		t_cylinder *last = data->scene->cylinder;
+		while (last->next != NULL)
+			last = last->next;
+		last->next = current;
+	}
 	free_tab(tmp);
 	return (0);
 }

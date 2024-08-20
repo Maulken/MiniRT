@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 12:18:56 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:03:11 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,46 @@ int	size_tab(char **tab)
 	return (j);
 }
 
-void free_tab(char **tab)
+void	free_tab(char **tab)
 {
-    int i;
+	int	i;
 
-    if (!tab)
-        return;
-    i = 0;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+int	check_float_point(char **tab)
+{
+	int	i;
+	int	j;
+	int	value;
+
+	i = 0;
+	j = 0;
+	value = 0;
+	while (tab[j])
+	{
+		while (tab[j][i] != '\0')
+		{
+			if (tab[j][i] == '.')
+			{
+				if (value == 0)
+					value = 1;
+				else
+					return (1);
+			}
+			i++;
+		}
+		i = 0;
+		value = 0;
+		j++;
+	}
+	return (0);
 }
