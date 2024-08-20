@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:50:39 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/18 14:05:44 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:51:24 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,16 @@ bool	vec_compare(t_vector *vec1, t_vector *vec2)
 	if (vec1->x != vec2->x || (vec1->y != vec2->y) || (vec1->z != vec2->z))
 		return (false);
 	return (true);
+}
+
+t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2)
+{
+	t_vector	*result;
+
+	result = new_vector(
+		vec1->x * vec2->x,
+		vec1->y * vec2->y,
+		vec1->z * vec2->z
+	);
+	return(result);
 }

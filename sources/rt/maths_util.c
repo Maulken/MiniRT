@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:45:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/18 21:35:08 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:52:08 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ int	quadratic_equation(float t[2], float a, float b, float c)
 float	ft_square(float a)
 {
 	return (a * a);
+}
+
+float	checking_limit(float a, float min, float max)
+{
+	if (a < min)
+		return (min);
+	if (a > max)
+		return (max);
+	return (a);
 }

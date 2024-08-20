@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/19 20:21:41 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:52:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,14 @@ typedef struct s_camera
 } t_camera;
 
 //##########enum#########//
-typedef enum e_situation
+typedef enum e_object
 {
 	CAMERA,
-	LIGHT
-}	t_situation;
+	LIGHT,
+	SPHERE,
+	PLANE,
+	CYLINDER
+}	t_object;
 
 
 
@@ -158,22 +161,24 @@ float		vec_dot_product(t_vector *vec1, t_vector *vec2);
 t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
 t_vector	*vec_multiplying(t_vector *vec1, float nbr);
 bool		vec_compare(t_vector *vec1, t_vector *vec2);
+t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
 void		obtain_ray(t_data *data, float x_ray, float y_ray);
-// void		obtain_ray(float x, float y, float z, t_vector *ray, t_vector *origin);
-// float		sphere_intersect(t_data *data, t_situation situation);
-float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
-// bool		is_light_intersect(t_light *light, t_sphere *sphere, t_camera *cam);
-// float		get_light_coef(t_data *data);
-int			get_color(t_data *data);
+int			get_color(t_data *data, t_object);
 void		ray_tracing(void *mlx, void *window, t_data *data);
+
+	//sphere
+float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
+int			get_color_sphere(t_data *data);
 t_vector	*get_diffuse_light(t_data *data);
+
 
 	//maths_util
 int		quadratic_equation(float t[2], float a, float b, float c);
 float	ft_square(float a);
+float	checking_limit(float a, float min, float max);
 
 //colors
 // t_vector	*multiplying_coef_color(float coef, t_vector *colors);

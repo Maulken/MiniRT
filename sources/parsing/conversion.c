@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/19 20:31:26 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:17:42 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vector *add_vector_float(char *str) //  pas de gestion en cas double point ...
 	return(vector);
 }
 
-t_vector    *add_color_int(char *str)
+t_vector	*add_color_int(char *str)
 {
 	 char **tmp;
 	t_vector *rgb;
@@ -44,7 +44,9 @@ t_vector    *add_color_int(char *str)
 	rgb->x = ft_atoi(tmp[0]);
 	rgb->y = ft_atoi(tmp[1]);
 	rgb->z = ft_atoi(tmp[2]);
-	checking_limit_color(rgb);
+	checking_limit(rgb->x, 0.0f, 255.0f);
+	checking_limit(rgb->y, 0.0f, 255.0f);
+	checking_limit(rgb->z, 0.0f, 255.0f);
 	free_tab(tmp);
 	return(rgb);
 }
