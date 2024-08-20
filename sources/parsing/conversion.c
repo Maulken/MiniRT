@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 14:01:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:54:33 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_vector	*add_vector_float(char *str)
 	vector->x = ft_atof_custom(tmp[0]);
 	vector->y = ft_atof_custom(tmp[1]);
 	vector->z = ft_atof_custom(tmp[2]);
+	printf("%f , %f , %f\n", vector->x, vector->y, vector->z);
 	free_tab(tmp);
 	return (vector);
 }

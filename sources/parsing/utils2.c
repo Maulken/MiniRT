@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 13:59:54 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 14:18:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:22:16 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,21 @@ int	ft_msg_error_tab(char *str, int value, char **tab )
 	printf("plese ckeck : is not object\n");
 	free_tab(tab);
 	return (value);
+}
+
+int	ft_is_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r');
+}
+
+int	ft_is_digit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_is_good_char(char c)
+{
+	return ((c < '0' || c > '9')
+		&& c != '.' && c != ',' && c != '-' && c != '\n');
 }

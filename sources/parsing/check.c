@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 14:00:26 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:07:43 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int	check_type(char *src, t_data *data)
 		else
 			ft_msg_error_tab("plese ckeck : is not object", 1, tab);
 	}
+	printf("DEBUG: check_type : %f\n", data->scene->spheres->center->x);
 	free_tab(tab);
 	return (0);
 }

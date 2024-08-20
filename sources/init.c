@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:54 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:54:30 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,35 +58,6 @@ void init_data(t_data *data)
         free(data->scene);
         error_allocation();
     }
-    data->scene->spheres = ft_calloc(1, sizeof(t_sphere));
-    if(data->scene->spheres == NULL)
-    {   
-        free(data->scene->camera);
-        free(data->scene->light);
-        free(data->scene);
-        error_allocation();
-    }
-    data->scene->spheres->next = NULL;
-    data->scene->cylinder = ft_calloc(1, sizeof(t_cylinder));
-    if(data->scene->cylinder == NULL)
-    {
-        free(data->scene->spheres);
-        free(data->scene->camera);
-        free(data->scene->light);
-        free(data->scene);
-        error_allocation();
-    }
-    data->scene->cylinder->next = NULL;
-    data->scene->plane = ft_calloc(1, sizeof(t_plane));
-    if(data->scene->plane == NULL)
-    {
-        free(data->scene->cylinder);
-        free(data->scene->spheres);
-        free(data->scene->camera);
-        free(data->scene->light);
-        free(data->scene);
-        error_allocation();
-    }
 	data->scene->ambient = ft_calloc(1,sizeof(t_ambient));
 	if(data->scene->ambient == NULL)
 	{
@@ -98,4 +69,7 @@ void init_data(t_data *data)
         free(data->scene);
 		error_allocation();
 	}
+    data->scene->spheres = NULL;
+    data->scene->cylinder = NULL;
+    data->scene->plane = NULL;
 }

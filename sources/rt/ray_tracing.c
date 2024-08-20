@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/19 20:32:30 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:59:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 	float	c;
 	float	dist[2];
 	t_vector	*origine_sphere;
-	
+
 	origine_sphere = vec_subtract(origin, sph->center);
 	b = 2 * vec_dot_product(direction, origine_sphere);
 	c = vec_dot_product(origine_sphere, origine_sphere)

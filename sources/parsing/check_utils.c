@@ -6,28 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 10:13:57 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:20:11 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-int	ft_is_space(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r');
-}
-
-int	ft_is_digit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-int	ft_is_good_char(char c)
-{
-	return ((c < '0' || c > '9')
-		&& c != '.' && c != ',' && c != '-' && c != '\n');
-}
 
 static int	count_words(const char *phrase)
 {
