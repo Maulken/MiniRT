@@ -6,20 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 18:36:17 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:42:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-float	checking_limit(float a, float min, float max)
-{
-	if (a < min)
-		return (min);
-	if (a > max)
-		return (max);
-	return (a);
-}
 
 t_vector	*add_vector_float(char *str)
 {
@@ -36,7 +27,6 @@ t_vector	*add_vector_float(char *str)
 	vector->x = ft_atof_custom(tmp[0]);
 	vector->y = ft_atof_custom(tmp[1]);
 	vector->z = ft_atof_custom(tmp[2]);
-	printf("%f , %f , %f\n", vector->x, vector->y, vector->z);
 	free_tab(tmp);
 	return (vector);
 }
