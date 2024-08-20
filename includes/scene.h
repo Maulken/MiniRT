@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:46:51 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:07:04 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ typedef struct s_scene
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 	t_ambient	*ambient;
-	float		width;
-	float		height;
 }				t_scene;
 
 #endif

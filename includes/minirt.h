@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:35:32 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:03:54 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,29 @@ typedef struct s_vector
 	float	x;
 	float	y;
 	float	z;
-} t_vector;
+}				t_vector;
 
 typedef struct s_camera
 {
 	t_vector	*origine;
 	t_vector	*direction;
 	float 		fov;
-} t_camera;
+}				t_camera;
+
+typedef	struct s_ray
+{
+	
+};
+
+
+typedef	struct s_hit
+{
+	t_vector	*ray;
+	t_vector	*position;
+	t_vector	*normal;
+	float		*distance;
+}				t_hit;
+
 
 //##########enum#########//
 typedef enum e_object
@@ -187,13 +202,11 @@ t_vector	*get_diffuse_light(t_data *data);
 int		quadratic_equation(float t[2], float a, float b, float c);
 float	ft_square(float a);
 float	checking_limit(float a, float min, float max);
+void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray);
 
-//colors
-// t_vector	*multiplying_coef_color(float coef, t_vector *colors);
+	//colors
 int		create_rgb(t_vector *colors);
 void	my_mlx_pixel_put(t_data *data, int color);
-void	checking_limit_color(t_vector *colors); // a utiliser aussi dans le parsing
-// t_vector	*addition_color(t_vector *color1, t_vector * color2);
 
 int		event(t_data *data);
 

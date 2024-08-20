@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/20 19:40:12 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:44:50 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,14 @@ int	get_color_sphere(t_data *data)
 	free(diffuse_light);
 	free(mix_color);
 	return (new_color);
+}
+
+void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray)
+{
+	t_vector	*for_ray;
+	for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
+	data->scene->spheres->ray = vec_subtract(for_ray,
+			data->scene->camera->origine);
+	vec_normalize(data->scene->spheres->ray);
+	free(for_ray);
 }

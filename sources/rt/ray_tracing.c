@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:52:57 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:22:48 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void	get_view_plane(t_data *data)
 
 void	obtain_ray(t_data *data, float x_ray, float y_ray)
 {
-	t_vector	*for_ray;
-	for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
-	data->scene->spheres->ray = vec_subtract(for_ray,
-			data->scene->camera->origine);
-	vec_normalize(data->scene->spheres->ray);
-	free(for_ray);
+	obtain_ray_sphere(data, x_ray, y_ray);
+	if (object == PLANE)
+		obtain_ray_sphere(data, x_ray, y_ray);
+	if (object == CYLINDER)
+		obtain_ray_sphere(data, x_ray, y_ray);
 }
 
 int	get_color(t_data *data, t_object object)
@@ -51,7 +50,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 	float		y_scale;
 	float		x_ray;
 	float		y_ray;
-	printf("ici\n");
+
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);
