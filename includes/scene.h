@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:18:57 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:46:51 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_ambient
 {
 	float		ratio;
 	t_vector	*colors;
+	t_vector	*ambient_light;
 }				t_ambient;
 
 typedef struct s_scene

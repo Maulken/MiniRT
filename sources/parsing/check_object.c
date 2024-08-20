@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 14:28:26 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:51:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ int	check_ambiance(char *tab, t_data *data)
 		free_tab(tmp);
 		return (1);
 	}
+	data->scene->ambient->ratio = add_float(tmp[1]);
+	data->scene->ambient->colors = add_color_int(tmp[2]);
+	data->scene->ambient->ambient_light = vec_multiplying(
+		data->scene->ambient->colors, data->scene->ambient->ratio);
 	free_tab(tmp);
 	return (0);
 }

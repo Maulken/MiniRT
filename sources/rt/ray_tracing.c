@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:38:52 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:52:57 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 	float		y_scale;
 	float		x_ray;
 	float		y_ray;
-
+	printf("ici\n");
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/20 18:02:26 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:58:34 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_vector	*get_diffuse_light(t_data *data)
 int	get_color_sphere(t_data *data)
 {
 	int			new_color;
-	t_vector	*ambient_light; // a degager car a mettre dans la struc direct
 	t_vector	*diffuse_light;
 	t_vector	*mix_color;
 	
@@ -70,20 +69,17 @@ int	get_color_sphere(t_data *data)
 	if (data->scene->spheres->dist_cam_sphere > 0
 		&& data->scene->spheres->dist_cam_sphere != EXIT_FAILURE)
 	{
-		ambient_light = vec_multiplying(data->scene->ambient->colors,
-			data->scene->ambient->ratio);
-		mix_color = ambient_light;
+		mix_color = data->scene->ambient->ambient_light;
 		diffuse_light = get_diffuse_light(data);
 		if (diffuse_light)
-			mix_color = vec_add(ambient_light, diffuse_light);
+			mix_color = vec_add(data->scene->ambient->ambient_light, diffuse_light);
 		mix_color = vec_add(data->scene->spheres->color, mix_color);
 		mix_color->x = checking_limit(mix_color->x / 2., 0.0f, 255.0f);
 		mix_color->y = checking_limit(mix_color->y / 2., 0.0f, 255.0f);
 		mix_color->z = checking_limit(mix_color->z / 2., 0.0f, 255.0f);
 		new_color = create_rgb(mix_color);
 	}
-	// free(ambient_light);
-	// free(diffuse_light);
-	// free(mix_color);
+	free(diffuse_light);
+	free(mix_color);
 	return (new_color);
 }
