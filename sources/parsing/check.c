@@ -3,168 +3,150 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/19 20:31:13 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:13:05 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/minirt.h"
 
-// voir en dessous
-int endwith(char *argv, char *value)
+int	ft_msg_error(char *str, int value)
 {
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while(argv[i] == '\0')
-            i++;
-    i -= ft_strlen(value);
-    while(argv[i])
-    {
-        if(argv[i] == value[j])
-        {
-            j++;
-            i++;
-        }
-        else
-            return(ERROR);
-    }
-    return(OK);
+	printf("ERROR : %s", str);
+	return (value);
 }
 
-// verification que le fichier et correct
-int check_argument(int argc , char **argv)
+static int ft_msg_error_tab(char *str, int value, char **tab )
 {
-
-    int i;
-    int fd;
-
-    i = 0;
-    if(argc != 2 )
-    {
-		printf("plese ./Minirt enter the secene.rt");
-        return(-1);
-    }
-    if(!argv[1] || !*argv[1])
-    {
-        printf("error fichier vide");
-        return(-1);
-    }
-    while(argv[i])
-        i++;
-    if(i >= 3)
-    {
-        printf("error size of the ... ");
-        return(-1);
-    }
-    if(!endwith(argv[1],".rt"))
-    {
-        printf("error plese file finish.rt");
-        return(-1);
-    }
-    fd = open(argv[1], O_RDWR);
-	if(fd == -1)
-    {
-        printf("no accessed the file.rt");
-        return(-1);
-    }
-    // test du dossier
-    return(fd);
-
+	printf("plese ckeck : is not object\n");
+	free_tab(tab);
+	return (value); 
 }
 
-// verificaiton si tout et bon . avant de faire des allocation . et tout le ...
-int check_tab(char **rows , t_data *data)
+int	endwith(char *argv, char *value)
 {
-    int i;
+	int	i;
+	int	j;
 
-    i = 0;
-  //  if(check_min_scene(rows) == ERROR) //a de coomenter pour tester
-     //   {
-            //free ??
-     //      return(1);
-     //   }
-    while(rows[i])
-    {
-        if(check_type(rows[i], data)) // test tout
-            {
-                printf("\nparse eror ligne : %d \n",i);
-                return(1);
-            }
-        i++;
-    }
-    return(OK);
+	i = 0;
+	j = 0;
+	if (argv == NULL)
+		return (1);
+	while (argv[i] == '\0')
+		i++;
+	i -= ft_strlen(value);
+	while (argv[i])
+	{
+		if (argv[i] == value[j])
+		{
+			j++;
+			i++;
+		}
+		else
+			return (ERROR);
+	}
+	return (OK);
+}
+
+int	check_argument(int argc, char **argv)
+{
+	int	i;
+	int	fd;
+
+	i = 0;
+	if (argc != 2)
+		return(ft_msg_error("plese ./Minirt enter the secene.rt", -1));
+	if (!argv[1] || !*argv[1])
+		return (ft_msg_error("error fichier vide", -1));
+	while (argv[i])
+		i++;
+	if (i >= 3)
+		return (ft_msg_error("error size of the ... ", -1));
+	if (!endwith(argv[1], ".rt"))
+		return (ft_msg_error("error plese file finish.rt", -1));
+	fd = open(argv[1], O_RDWR);
+	if (fd == -1)
+		return(ft_msg_error("no accessed the file.rt", -1));
+	return (fd);
+}
+
+int	check_tab(char **rows, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (check_min_scene(rows) == ERROR)
+	{
+		return (1);
+	}
+	while (rows[i])
+	{
+		if (check_type(rows[i], data))
+		{
+			printf("\nparse ERROR ligne : %d \n", i);
+			return (1);
+		}
+		i++;
+	}
+	return (OK);
+}
+
+int	check_min_scene(char **tab)
+{
+	int	i;
+	int	len_a;
+	int	len_c;
+	int	len_l;
+
+	i = 0;
+	len_a = 0;
+	len_c = 0;
+	len_l = 0;
+	while (tab[i])
+	{
+		if (!ft_strncmp(tab[i], "A ", 2))
+			len_a++;
+		if (!ft_strncmp(tab[i], "C ", 2))
+			len_c++;
+		if (!ft_strncmp(tab[i], "L ", 2))
+			len_l++;
+		i++;
+	}
+	if (len_a != 1 || len_c != 1 || len_l < 1)
+	{
+		printf("error : il doit avoir  (1)A,(1)C,(inf)L");
+		return (ERROR);
+	}
+	return (OK);
 }
 
 
-// verifaication de controle du nombre de lumier si il y a une camera ect ....
-int check_min_scene(char **tab)
+int	check_type(char *src, t_data *data)
 {
-int i;
-int len_a;
-int len_c;
-int len_l;
+	char	**tab;
 
-i = 0;
-len_a = 0;
-len_c = 0;
-len_l = 0;
-
-while(tab[i])
-{
-    if(!ft_strncmp(tab[i], "A ", 2))
-        len_a++;
-    if(!ft_strncmp(tab[i], "C ", 2))
-        len_c++;
-    if(!ft_strncmp(tab[i], "L ", 2))
-        len_l++;
-    i++;
-}
-if(len_a != 1 || len_c != 1 || len_l < 1 )
-{
-    printf("error : il doit avoir  (1)A|%d|,(1)C|%d|,(inf)L|%d|",len_a , len_c, len_l);
-    return(ERROR);
-}
-return(OK);
-}
-
-int check_type(char *src ,t_data *data)
-{
-    char    **tab;
-    tab = ft_split(src,' ');
-    if(!tab)
-    {
-        printf("malloc error");
-         free_tab(tab);
-        return(ERROR);
-    }
-    if(tab[0])
-    {
-        if(!ft_strncmp(tab[0],"A",2))
-            return(check_ambiance(src,data));
-        else if(!ft_strncmp(tab[0],"C",2))
-            return(check_camera(src,data));
-        else if(!ft_strncmp(tab[0],"L",2))
-            return(check_light(src,data));
-        else if(!ft_strncmp(tab[0],"sp",3))
-            return(check_sphere(src,data));
-        else if(!ft_strncmp(tab[0],"pl",3))
-            return(check_plane(src,data));
-        else if(!ft_strncmp(tab[0],"cy",3))
-            return(check_cylinder(src,data));
-        else
-           {
-              printf("why fuking line :%s\n",tab[0]);
-               free_tab(tab);
-              return(1);
-            }
-
-    }
-    free_tab(tab);
-    return(0);
+	tab = ft_split(src, ' ');
+	if (!tab)
+		ft_msg_error_tab("", 1, NULL);
+	if (tab[0])
+	{
+		if (!ft_strncmp(tab[0], "A", 2))
+			return (check_ambiance(src, data));
+		else if (!ft_strncmp(tab[0], "C", 2))
+			return (check_camera(src, data));
+		else if (!ft_strncmp(tab[0], "L", 2))
+			return (check_light(src, data));
+		else if (!ft_strncmp(tab[0], "sp", 3))
+			return (check_sphere(src, data));
+		else if (!ft_strncmp(tab[0], "pl", 3))
+			return (check_plane(src, data));
+		else if (!ft_strncmp(tab[0], "cy", 3))
+			return (check_cylinder(src, data));
+		else
+			ft_msg_error_tab("plese ckeck : is not object", 1, tab);
+	}
+	free_tab(tab);
+	return (0);
 }

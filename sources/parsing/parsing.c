@@ -12,25 +12,19 @@
 
 #include "../../includes/minirt.h"
 
-
-int parsing(int argc , char **argv, t_data *data)
+int	parsing(int argc, char **argv, t_data *data)
 {
-	char *line;
-	char **tab;
-	int i;
+	char	*line;
+	char	**tab;
+	int		i;
 
-
-	data->fd = check_argument(argc , argv); // check file user
-	if(data->fd == -1)
-		return(ERROR);
-
-	tab = checkget_file_content(data->fd); // get file + verifacation de la taille
-	if (check_tab(tab ,data))
-		return(ERROR);
-	
-	
+	data->fd = check_argument(argc, argv);
+	if (data->fd == -1)
+		return (ERROR);
+	tab = checkget_file_content(data->fd);
+	if (check_tab(tab, data))
+		return (ERROR);
 	printf_row(tab);
 	free_tab(tab);
-	
-	return(OK);
+	return (OK);
 }

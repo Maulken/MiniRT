@@ -12,90 +12,80 @@
 
 #include "../../includes/minirt.h"
 
-
-char check_last_char(char *str)
+char	check_last_char(char *str)
 {
-    int i;
+	int	i;
 
-    i = ft_strlen(str);
-    if (i == 0)
-        return ('\0');
-    if(str[i - 1] != '\n')
-        return('\0');
-    return ('\n');
+	i = ft_strlen(str);
+	if (i == 0)
+		return ('\0');
+	if (str[i - 1] != '\n')
+		return ('\0');
+	return ('\n');
 }
 
-//petit trucs de merde ... merci github 
-void delete_comment(char *str)
+void	delete_comment(char *str)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while(str[++i])
-    {
-        if(str[i] == '#')
-        {
-            str[i] = '\n';
-            str[i + 1] = '\0';
-            break;
-        }
-    }
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '#')
+		{
+			str[i] = '\n';
+			str[i + 1] = '\0';
+			break ;
+		}
+	}
 }
 
-
-//cpoy tout le fichier avec la gestion des commentaire . normalement sa fuit pas . 
-char *get_string(int fd)
+char	*get_string(int fd)
 {
-    char *tmp;
-    char *str;
+	char	*tmp;
+	char	*str;
 
-    tmp = malloc(1);
-    if(!tmp)
-        return(NULL);
-    *tmp ='\0';
-    while(1)
-    {
-            str = get_next_line(fd);
-            if(!str && *tmp)   
-                return(tmp);
-            if(!str && !*tmp)
-                return(free(tmp), NULL);
-            delete_comment(str);
-            str = ft_strjoin_free(tmp, str);
-            if (!str)
-                return (NULL);
-            if(check_last_char(str) == '\0')
-                {
-                    return(str);
-                }
-            tmp = str;
-        }
+	tmp = malloc(1);
+	if (!tmp)
+		return (NULL);
+	*tmp = '\0';
+	while (1)
+	{
+		str = get_next_line(fd);
+		if (!str && *tmp)
+			return (tmp);
+		if (!str && !*tmp)
+			return (free(tmp), NULL);
+		delete_comment(str);
+		str = ft_strjoin_free(tmp, str);
+		if (!str)
+			return (NULL);
+		if (check_last_char(str) == '\0')
+			return (str);
+		tmp = str;
+	}
 }
 
-
-// copy de fichier sous frome de double tableaux
-char **checkget_file_content(int fd)
+char	**checkget_file_content(int fd)
 {
-    char *str;
-    char **rows;
+	char	*str;
+	char	**rows;
 
-    str = get_string(fd);
-    if(!str)
-        {
-            printf("error malloc"); 
-            close(fd);
-        }
-    close(fd);
-    printf("str :%s",str);
-
-    rows = ft_split(str, '\n');
-    if(!rows)
-        {
-            printf("error malloc");
-            free(str);
-            exit(1);
-        }
-    free(str);
-    return(rows);
-    
+	str = get_string(fd);
+	if (!str)
+	{
+		printf("error malloc");
+		close(fd);
+	}
+	close(fd);
+	printf("str :%s", str);
+	rows = ft_split(str, '\n');
+	if (!rows)
+	{
+		printf("error malloc");
+		free(str);
+		exit(1);
+	}
+	free(str);
+	return (rows);
 }
