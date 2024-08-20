@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/20 18:58:34 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:40:12 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	get_color_sphere(t_data *data)
 	t_vector	*mix_color;
 	
 	new_color = 0;
+	diffuse_light = NULL;
+	mix_color = NULL;
 	data->scene->spheres->dist_cam_sphere = 
 		sphere_intersect(data->scene->camera->origine,
 			data->scene->spheres->ray, data->scene->spheres);
