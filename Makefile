@@ -6,7 +6,7 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/20 18:37:41 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/20 19:56:25 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_PATH 		= sources
 MLX				= minilibx-linux
 LIBMLX			= $(MLX)/libmlx.a
 LIBFT			= libft/libft.a
-LFLAGS			= -L libft -lft -lreadline #-lm
+LFLAGS			= -L libft -lft -lreadline -fPIC
 
 ### SOURCE FILES ###
 SOURCES = main.c \
