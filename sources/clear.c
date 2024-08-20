@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 18:59:40 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:15:49 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void free_sphere(t_sphere *sphere)
 		free(sphere->center);
 	if (sphere->color != NULL)
 		free(sphere->color);
+    if (sphere->impact_point != NULL)
+        free(sphere->impact_point);
+    if (sphere->ray != NULL)
+	    free(sphere->ray);
+    if(sphere->ray_light != NULL)
+	    free(sphere->ray_light);
 	free(sphere);
 }
 
@@ -53,6 +59,12 @@ void free_plane(t_plane *plane)
 		free(plane->direction);
 	if (plane->color != NULL)
 		free(plane->color);
+    if(plane->impact_point != NULL)
+        free(plane->impact_point);
+    if(plane->ray != NULL)
+        free(plane->ray);
+    if(plane->ray_light != NULL)
+        free(plane->ray_light);
 	free(plane);
 }
 
@@ -79,6 +91,12 @@ void free_cylinder(t_cylinder *cylinder)
         free(cylinder->color);
     if(cylinder->direction != NULL)
         free(cylinder->direction);
+    if(cylinder->impact_point != NULL)
+        free(cylinder->impact_point);
+    if(cylinder->ray != NULL)
+        free(cylinder->ray);
+    if(cylinder->ray_light != NULL)
+        free(cylinder->ray_light);
     free(cylinder);
 }
 
