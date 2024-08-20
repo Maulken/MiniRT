@@ -6,26 +6,19 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 09:48:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:40:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-static void	color_max_min(t_vector *rgb)
+float   checking_limit(float a, float min, float max)
 {
-	if (rgb->x > 255)
-		rgb->x = 255;
-	if (rgb->x < 0)
-		rgb->y = 0;
-	if (rgb->y > 255)
-		rgb->y = 255;
-	if (rgb->y < 0)
-		rgb->z = 0;
-	if (rgb->z > 255)
-		rgb->z = 255;
-	if (rgb->z < 0)
-		rgb->z = 0;
+    if (a < min)
+        return (min);
+    if (a > max)
+        return (max);
+    return (a);
 }
 
 t_vector	*add_vector_float(char *str)
@@ -36,6 +29,7 @@ t_vector	*add_vector_float(char *str)
 	vector = malloc(sizeof(t_vector));
 	if (!vector)
 	{
+		free_tab(tmp);
 		return (NULL);
 	}
 	tmp = ft_split(str, ',');
@@ -57,10 +51,12 @@ t_vector	*add_color_int(char *str)
 	tmp = ft_split(str, ',');
 	if (!tmp)
 		return (NULL);
-	rgb->x = ft_atoi(tmp[0]);
+	rgb->x = (float)ft_atoi(tmp[0]);
 	rgb->y = ft_atoi(tmp[1]);
 	rgb->z = ft_atoi(tmp[2]);
-	color_max_min(rgb);
+	checking_limit(rgb->x, 0, 255);
+	checking_limit(rgb->y, 0, 255);
+	checking_limit(rgb->z, 0, 255);
 	free_tab(tmp);
 	return (rgb);
 }

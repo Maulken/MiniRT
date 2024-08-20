@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 10:57:23 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:52:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ int	check_plane(char *tab, t_data *data)
 	static const char	content[6] = {'c', 'f', 'f', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_plane));
+	if(current == NULL)
+		return (1);
+
+	current->next = NULL;
 	if (check_num(tab, "pl", 4))
 		return (1);
 	tmp = check_correct_type(content, tab);
@@ -98,8 +102,15 @@ int	check_plane(char *tab, t_data *data)
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
-	data->scene->plane->next = current;
-	data->scene->plane = data->scene->plane->next;
+	if(data->scene->plane == NULL)
+		data->scene->plane->next = current;
+	else 
+	{
+		t_plane *last = data->scene->plane;
+		while (last->next != NULL)
+			last = last->next;
+		last->next = current;
+	}
 	free_tab(tmp);
 	return (0);
 }
@@ -111,6 +122,9 @@ int	check_cylinder(char *tab, t_data *data)
 	static const char	content[6] = {'c', 'f', 'f', 't', 't', 'i'};
 
 	current = malloc(sizeof(t_cylinder));
+	if (current == NULL)
+		return (1);
+	current->next = NULL;
 	if (check_num(tab, "cy", 6))
 		return (1);
 	tmp = check_correct_type(content, tab);

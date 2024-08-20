@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/16 09:48:45 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:18:58 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_correct_intxyz(char **tmp, int j)
 		free_tab(tab);
 		return (1);
 	}
-	j++;
 	free_tab(tab);
+	j++;
 	return (0);
 }
 
@@ -86,8 +86,9 @@ int	check_correct_floatxyz(char **tmp, int j)
 		free_tab(tab);
 		return (1);
 	}
-	j++;
 	free_tab(tab);
+	j++;
+	
 	return (0);
 }
 

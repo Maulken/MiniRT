@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 11:44:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:14:59 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,23 @@ void free_plane_list(t_plane *head)
 
 void free_cylinder(t_cylinder *cylinder)
 {
-	if (cylinder == NULL)
-		return;
-	if (cylinder->center != NULL)
-		free(cylinder->center);
-	if (cylinder->direction != NULL)
-		free(cylinder->direction);
-	if (cylinder->color != NULL)
-		free(cylinder->color);
-	free(cylinder);
+    if (cylinder)
+    {
+        // Libérez les membres de t_cylinder si nécessaire
+        free(cylinder);
+    }
 }
 
-void free_cylinder_list(t_cylinder *head)
+void free_cylinder_list(t_cylinder *cylinder_list)
 {
-	t_cylinder *current = head;
-	t_cylinder *next;
+    t_cylinder *tmp;
 
-	while (current != NULL)
-	{
-		next = current->next;
-		free_cylinder(current);
-		current = next;
-	}
+    while (cylinder_list)
+    {
+        tmp = cylinder_list->next;
+        free_cylinder(cylinder_list);
+        cylinder_list = tmp;
+    }
 }
 
 void free_light(t_light *light)
@@ -105,23 +100,56 @@ void free_light(t_light *light)
 		//free(light->color);
 	free(light);
 }
-
-int clean(t_data *data ,int code_error)
+int clean(t_data *data, int code_error)
 {
-	if(data->scene != NULL)
-	{
-		free_plane_list(data->scene->plane);
-		free_cylinder_list(data->scene->cylinder);
-		free_sphere_list(data->scene->spheres);
-		free_light(data->scene->light);
-	
-		if (data->scene->camera != NULL)
-			free(data->scene->camera);
-		if(data->scene->ambient != NULL)
-			free(data->scene->ambient);
-		free(data->scene);
-	}
-	   if (data->view != NULL)
+    if (data->white_light != NULL)
+    {
+        free(data->white_light);
+        data->white_light = NULL;
+    }
+    if (data->scene != NULL)
+    {
+        if (data->scene->plane != NULL)
+        {
+            free_plane_list(data->scene->plane);
+            data->scene->plane = NULL;
+        }
+        if (data->scene->cylinder != NULL)
+        {
+            free_cylinder_list(data->scene->cylinder);
+            data->scene->cylinder = NULL;
+        }
+        if (data->scene->spheres != NULL)
+        {
+            free_sphere_list(data->scene->spheres);
+            data->scene->spheres = NULL;
+        }
+        if (data->scene->light != NULL)
+        {
+            free_light(data->scene->light);
+            data->scene->light = NULL;
+        }
+        if (data->scene->camera != NULL)
+        {
+			free(data->scene->camera->origine);
+			free(data->scene->camera->direction);
+            free(data->scene->camera);
+            data->scene->camera = NULL;
+        }
+        if (data->scene->ambient != NULL)
+        {
+            free(data->scene->ambient);
+            data->scene->ambient = NULL;
+        }
+        free(data->scene);
+        data->scene = NULL;
+    }
+
+    if (data->view != NULL)
+    {
         free(data->view);
-	return(0);
+        data->view = NULL;
+    }
+
+    return code_error;
 }
