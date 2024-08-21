@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 14:10:59 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:45:29 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	event(t_data *data)
 	data->img = mlx_new_image(data->mlx, data->view->width, data->view->height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
-	//ray_tracing(data->mlx, data->win, data);
+	ray_tracing(data->mlx, data->win, data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (0);
@@ -33,28 +33,23 @@ int	key_hook(int keycode, t_data *data)
 int main(int argc, char **argv)
 {
   t_data data;
-
-  data.view = malloc(sizeof(t_view));
-	if (data.view == NULL)
-		return(0);
 		
-	//init_struct(&data);
-	//init_data(&data);
-	//if (parsing(argc, argv, &data) == ERROR)
-		//return (clean(&data, 1));
+	init_struct(&data);
+	init_data(&data);
+	if (parsing(argc, argv, &data) == ERROR)
+		return (clean(&data, 1));
 
-	data.view->height = 600;
-	data.view->x_pixel = 0;
-	data.view->y_pixel = 0;
-	data.view->width = 800;
 	data.mlx = mlx_init();
 
 	if (data.mlx == NULL)
-		//return (printf("ERROR : MLX"),clean(&data, 1));
+		return (printf("ERROR : MLX"),clean(&data, 1));
 
+	printf("data->view->width = %f\n", data.view->width);
+	printf("data = %f\n", data.scene->spheres->diameter);
+	
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
-	//event(&data);
-	//mlx_key_hook(data.win, key_hook, &data);
+	event(&data);
+	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
 	mlx_loop(data.mlx);
 
@@ -62,5 +57,5 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
 	free(data.mlx);
-	//return(clean(&data,0));
+	return(clean(&data,0));
 }

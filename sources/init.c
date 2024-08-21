@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 13:58:03 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:46:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void init_data(t_data *data)
     data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
     if (data->scene == NULL) 
         error_allocation();   
-    data->view = NULL;
-    data->white_light = NULL;
 	
     data->scene->light = ft_calloc(1,sizeof(t_light));
     if(data->scene->light == NULL)

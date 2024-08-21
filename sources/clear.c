@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 13:52:42 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:47:49 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ void	free_light(t_light *light)
 
 int	clean(t_data *data, int code_error)
 {
-	if (data->white_light != NULL)
-		free(data->white_light);
+	// if (data->white_light != NULL)
+	// 	free(data->white_light);
 	if (data->scene != NULL)
 	{
 		if (data->scene->plane != NULL)
