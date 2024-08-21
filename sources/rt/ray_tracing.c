@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 14:14:08 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:44:40 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,23 @@ void	get_view_plane(t_data *data)
 // 		return (object);
 // 	return (NONE);
 // }
+
+int	is_sphere(t_data *data, t_scene *tmp)
+{
+	int	dist;
+	
+	dist = sphere_intersect(data->scene->camera->origine,
+			tmp->spheres->ray, tmp->spheres);
+	printf(";rjgoerjg\n");
+	printf("hit dist %f\n", data->hit->distance);
+	if (dist < data->hit->distance
+		&& tmp->spheres->dist_cam_sphere != EXIT_FAILURE)
+	{
+		data->hit->sphere = tmp->spheres;
+		return (SPHERE);
+	}
+	return (NONE);
+}
 
 int	get_hit(t_data *data, t_scene *tmp, float x_ray, float y_ray)
 {

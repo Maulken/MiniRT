@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 13:41:26 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:37:49 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,15 @@ void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray)
 	for_ray = NULL;
 }
 
-int	is_sphere(t_data *data, t_scene *tmp)
-{
-	tmp->spheres->dist_cam_sphere = sphere_intersect(tmp->camera->origine,
-			tmp->spheres->ray, tmp->spheres);
-	if (tmp->spheres->dist_cam_sphere < data->hit->distance
-		&& tmp->spheres->dist_cam_sphere != EXIT_FAILURE)
-	{
-		data->hit->sphere = tmp->spheres;
-		return (SPHERE);
-	}
-	return (NONE);
-}
+// int	is_sphere(t_data *data, t_scene *tmp)
+// {
+// 	tmp->spheres->dist_cam_sphere = sphere_intersect(tmp->camera->origine,
+// 			tmp->spheres->ray, tmp->spheres);
+// 	if (tmp->spheres->dist_cam_sphere < data->hit->distance
+// 		&& tmp->spheres->dist_cam_sphere != EXIT_FAILURE)
+// 	{
+// 		data->hit->sphere = tmp->spheres;
+// 		return (SPHERE);
+// 	}
+// 	return (NONE);
+// }
