@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:01:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:06:53 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:23:17 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,11 @@ void	my_mlx_pixel_put(t_data *data, int color)
 	dst = data->addr + (data->mlx_y * data->line_length + data->mlx_x *
 		(data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	limit_color(t_vector *color)
+{
+	color->x = checking_limit(color->x / 2., 0.0f, 255.0f);
+	color->y = checking_limit(color->y / 2., 0.0f, 255.0f);
+	color->z = checking_limit(color->z / 2., 0.0f, 255.0f);
 }

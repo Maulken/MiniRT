@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 20:22:48 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:14:08 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,87 @@ void	get_view_plane(t_data *data)
 	data->view->y_pixel = height / data->view->height;
 }
 
-void	obtain_ray(t_data *data, float x_ray, float y_ray)
+// int	is_plane(t_data *data, t_scene *tmp, int object)
+// {
+// 	tmp->plane->dist_cam_plane = plane_intersect(tmp->camera->origine,
+// 			tmp->plane->ray, tmp->plane);
+// 	if (tmp->plane->dist_cam_plane < data->hit->distance
+// 		&& tmp->plane->dist_cam_plane != EXIT_FAILURE)
+// 	{
+// 		data->hit->plane = tmp->plane;
+// 		data->hit->sphere = NULL;
+// 		return (PLANE);
+// 	}
+// 	if (object != NONE)
+// 		return (object);
+// 	return (NONE);
+// }
+
+// int	is_cylinder(t_data *data, t_scene *tmp, int object)
+// {
+// 	tmp->cylinder->dist_cam_cylinder = plane_intersect(tmp->camera->origine,
+// 			tmp->cylinder->ray, tmp->cylinder);
+// 	if (tmp->cylinder->dist_cam_cylinder < data->hit->distance
+// 		&& tmp->cylinder->dist_cam_cylinder != EXIT_FAILURE)
+// 	{
+// 		data->hit->cylinder = tmp->cylinder;
+// 		data->hit->sphere = NULL;
+// 		data->hit->plane = NULL;
+// 		return (CYLINDER);
+// 	}
+// 	if (object != NONE)
+// 		return (object);
+// 	return (NONE);
+// }
+
+int	get_hit(t_data *data, t_scene *tmp, float x_ray, float y_ray)
 {
-	obtain_ray_sphere(data, x_ray, y_ray);
-	if (object == PLANE)
+	int	object;
+	
+	object = NONE;
+	while (tmp->spheres)
+	{
+		// printf("la\n");
 		obtain_ray_sphere(data, x_ray, y_ray);
-	if (object == CYLINDER)
-		obtain_ray_sphere(data, x_ray, y_ray);
+		object = is_sphere(data, tmp); //problem la
+		printf("object %d\n", object);
+		tmp->spheres = tmp->spheres->next;
+	}
+	// while (tmp->plane)
+	// {
+	// 	obtain_ray_plane(data, PLANE, x_ray, y_ray);
+	// 	object = is_plane(data, tmp, object);
+	// 	tmp->plane = tmp->plane->next;
+	// }
+	// while (tmp->cylinder)
+	// {
+	// 	obtain_ray_cylinder(data, CYLINDER, x_ray, y_ray);
+	// 	object = is_cylinder(data, tmp, object);
+	// 	tmp->cylinder = tmp->cylinder->next;
+	// }
+	return (object);
 }
 
-int	get_color(t_data *data, t_object object)
+int	get_color(t_data *data, float x_ray, float y_ray)
 {
 	int	color;
-
+	int	object;
+	t_scene	*tmp;
+	
+	tmp = data->scene;
 	color = 0;
+	object = get_hit(data, tmp, x_ray, y_ray);
 	if (object == SPHERE)
-		color = get_color_sphere(data);
+	{
+		color = get_color_sphere(data, data->hit);
+		printf("color %d\n", color);
+	}
+	// if (object == PLANE)
+	// 	color = get_color_plane(data->hit);
+	// if (object == CYLINDER)
+	// 	color = get_color_cylinder(data->hit);
+	// free(tmp);
+	// tmp = NULL;
 	return (color);
 }
 
@@ -62,8 +127,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 		while (x_scale <= data->view->width / 2)
 		{
 			x_ray = x_scale * data->view->x_pixel;
-			obtain_ray(data, -x_ray, -y_ray);
-			my_mlx_pixel_put(data, get_color(data, SPHERE));
+			my_mlx_pixel_put(data, get_color(data, -x_ray, -y_ray));
 			x_scale++;
 			data->mlx_x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 20:07:04 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:50:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_plane
 	t_vector	*impact_point;
 	t_vector	*ray;
 	t_vector	*ray_light;
+	float		dist_light_plane;
+	float		dist_cam_plane;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -58,6 +60,8 @@ typedef struct s_cylinder
 	t_vector	*color;
 	float		diameter;
 	float		height;
+	float		dist_light_cylinder;
+	float		dist_cam_cylinder;
 }				t_cylinder;
 
 typedef struct s_light

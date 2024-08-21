@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/20 19:44:50 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:41:26 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,20 @@ float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 	return (dist[1]);
 }
 
-t_vector	*get_diffuse_light(t_data *data)
+t_vector	*get_diffuse_light(t_data *data, t_hit *hit)
 {
 	t_vector	*norm;
 	t_vector	*color;
 	float		ratio;
 
-	data->scene->spheres->impact_point = vec_add(data->scene->camera->origine,
-		vec_multiplying(data->scene->spheres->ray,
-		data->scene->spheres->dist_cam_sphere));
-	norm = vec_subtract(data->scene->spheres->impact_point,
-		data->scene->spheres->center);
+	hit->sphere->impact_point = vec_add(data->scene->camera->origine,
+		vec_multiplying(hit->sphere->ray, hit->sphere->dist_cam_sphere));
+	norm = vec_subtract(hit->sphere->impact_point, hit->sphere->center);
 	vec_normalize(norm);
-	data->scene->spheres->ray_light = 
-		vec_subtract(data->scene->spheres->impact_point,
+	hit->sphere->ray_light = vec_subtract(hit->sphere->impact_point,
 		data->scene->light->origine);
-	vec_normalize(data->scene->spheres->ray_light);
-	ratio = vec_dot_product(norm, data->scene->spheres->ray_light);
+	vec_normalize(hit->sphere->ray_light);
+	ratio = vec_dot_product(norm, hit->sphere->ray_light);
 	if (ratio < 0)
 		color = NULL;
 	else
@@ -56,7 +53,7 @@ t_vector	*get_diffuse_light(t_data *data)
 	return (color);
 }
 
-int	get_color_sphere(t_data *data)
+int	get_color_sphere(t_data *data, t_hit *hit)
 {
 	int			new_color;
 	t_vector	*diffuse_light;
@@ -65,20 +62,19 @@ int	get_color_sphere(t_data *data)
 	new_color = 0;
 	diffuse_light = NULL;
 	mix_color = NULL;
-	data->scene->spheres->dist_cam_sphere = 
-		sphere_intersect(data->scene->camera->origine,
-			data->scene->spheres->ray, data->scene->spheres);
-	if (data->scene->spheres->dist_cam_sphere > 0
-		&& data->scene->spheres->dist_cam_sphere != EXIT_FAILURE)
+	hit->sphere->dist_cam_sphere
+		= sphere_intersect(data->scene->camera->origine,
+			hit->sphere->ray, hit->sphere);
+	if (hit->sphere->dist_cam_sphere > 0
+		&& hit->sphere->dist_cam_sphere != EXIT_FAILURE)
 	{
 		mix_color = data->scene->ambient->ambient_light;
-		diffuse_light = get_diffuse_light(data);
+		diffuse_light = get_diffuse_light(data, hit);
 		if (diffuse_light)
-			mix_color = vec_add(data->scene->ambient->ambient_light, diffuse_light);
-		mix_color = vec_add(data->scene->spheres->color, mix_color);
-		mix_color->x = checking_limit(mix_color->x / 2., 0.0f, 255.0f);
-		mix_color->y = checking_limit(mix_color->y / 2., 0.0f, 255.0f);
-		mix_color->z = checking_limit(mix_color->z / 2., 0.0f, 255.0f);
+			mix_color = vec_add(data->scene->ambient->ambient_light,
+				diffuse_light);
+		mix_color = vec_add(hit->sphere->color, mix_color);
+		limit_color(mix_color);
 		new_color = create_rgb(mix_color);
 	}
 	free(diffuse_light);
@@ -94,4 +90,18 @@ void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray)
 			data->scene->camera->origine);
 	vec_normalize(data->scene->spheres->ray);
 	free(for_ray);
+	for_ray = NULL;
+}
+
+int	is_sphere(t_data *data, t_scene *tmp)
+{
+	tmp->spheres->dist_cam_sphere = sphere_intersect(tmp->camera->origine,
+			tmp->spheres->ray, tmp->spheres);
+	if (tmp->spheres->dist_cam_sphere < data->hit->distance
+		&& tmp->spheres->dist_cam_sphere != EXIT_FAILURE)
+	{
+		data->hit->sphere = tmp->spheres;
+		return (SPHERE);
+	}
+	return (NONE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 17:54:30 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:50:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	init_struct(t_data *data)
 	if (!data->view)
 		return (0);
 	data->scene = NULL;
+	data->hit = ft_calloc(1, sizeof(t_hit));
+	if (!data->hit)
+		return (0);
 	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
@@ -37,8 +40,10 @@ int	init_struct(t_data *data)
 	data->view->x_pixel = 0;
 	data->view->y_pixel = 0;
 	data->view->width = 800;
-	data->x_ray = 0;
-	data->y_ray = 0;
+	data->hit->distance = INFINITY;
+	data->hit->cylinder = NULL;
+	data->hit->sphere = NULL;
+	data->hit->plane = NULL;
 	return(0);
 }
 

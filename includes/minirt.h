@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 08:53:44 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:50:24 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,30 @@
 # define OK 0
 # define ERROR -1
 
-typedef struct s_view	t_view;
+// typedef struct s_view	t_view;
 //##########struct#########//
+
+typedef	struct s_hit
+{
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+	float		distance;
+}				t_hit;
+
+typedef struct s_view
+{
+	float	width;
+	float	height;
+	float	x_pixel;
+	float	y_pixel;
+}				t_view;
 
 typedef struct s_data // data principal . pour la mlx
 {
 	t_scene		*scene;
 	t_view		*view;
+	t_hit		*hit;
 	t_vector	*white_light;
 
 	void		*mlx;
@@ -50,18 +67,10 @@ typedef struct s_data // data principal . pour la mlx
 	int			endin;
 	int			mlx_x;
 	int			mlx_y;
-	int			x_ray;
-	int			y_ray;
 	int			fd;
+	int			count_object;
 }			t_data;
 
-typedef struct s_view
-{
-	float	width;
-	float	height;
-	float	x_pixel;
-	float	y_pixel;
-}				t_view;
 
 typedef struct s_vector
 {
@@ -77,21 +86,10 @@ typedef struct s_camera
 	float		fov;
 }				t_camera;
 
-typedef struct s_ray
-{
-}				t_ray;
-
-typedef	struct s_hit
-{
-	t_vector	*ray;
-	t_vector	*position;
-	t_vector	*normal;
-	float		*distance;
-}				t_hit;
-
 //##########enum#########//
 typedef enum e_object
 {
+	NONE,
 	CAMERA,
 	LIGHT,
 	SPHERE,
@@ -180,25 +178,26 @@ t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
-void		obtain_ray(t_data *data, float x_ray, float y_ray);
-int			get_color(t_data *data, t_object);
+int			get_hit(t_data *data, t_scene *tmp, float x_ray, float y_ray);
+int			get_color(t_data *data, float x_ray, float y_ray);
 void		ray_tracing(void *mlx, void *window, t_data *data);
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
-int			get_color_sphere(t_data *data);
-t_vector	*get_diffuse_light(t_data *data);
-
+int			get_color_sphere(t_data *data, t_hit *hit);
+t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
+void		obtain_ray_sphere(t_data *data, float x_ray, float y_ray);
+int			is_sphere(t_data *data, t_scene *tmp);
 
 	//maths_util
 int		quadratic_equation(float t[2], float a, float b, float c);
 float	ft_square(float a);
 float	checking_limit(float a, float min, float max);
-void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray);
 
 	//colors
 int		create_rgb(t_vector *colors);
 void	my_mlx_pixel_put(t_data *data, int color);
+void	limit_color(t_vector *color);
 
 int		event(t_data *data);
 
