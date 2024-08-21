@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 12:06:26 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:52:42 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,6 @@ int	clean(t_data *data, int code_error)
 		data->view = NULL;
 	}
 	free(data->scene);
+	data->scene = NULL;
 	return (code_error);
 }

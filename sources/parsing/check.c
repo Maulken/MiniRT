@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 12:08:15 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:00:23 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	check_tab(char **rows, t_data *data)
 	if (check_min_scene(rows) == ERROR)
 	{
 		free_tab(rows);
+		printf("ERROR");
 		return (1);
 		
 	}
@@ -117,7 +118,8 @@ int	check_type(char *src, t_data *data)
 {
 	char	**tab;
 
-	tab = ft_split_espace(src);
+	//tab = ft_split_espace(src);
+	tab = ft_split(src, ' ');
 	if (!tab)
 		ft_msg_error_tab("", 1, NULL);
 	if (tab[0])

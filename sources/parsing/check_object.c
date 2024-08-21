@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 11:48:21 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:00:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char	**check_correct_type(const char *content, char *tab)
 	int		j;
 	char	**tmp;
 
-	tmp = ft_split_espace(tab);
+	//tmp = ft_split_espace(tab);
+	tmp = ft_split(tab, ' ');
 	j = 0;
 	while (tmp[j])
 	{
