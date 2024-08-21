@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/20 18:42:54 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:58:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	parsing(int argc, char **argv, t_data *data)
 	if (check_tab(tab, data))
 		return (ERROR);
 	free_tab(tab);
+	printf("OK\n\n");
 	return (OK);
 }

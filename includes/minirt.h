@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 13:50:24 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:05:43 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ int		check_correct_int(char **tmp, int j);
 int		check_correct_float(char **tmp, int j);
 	//ft_atof.c
 double	ft_atof_custom(const char *str);
+
+char	**ft_split_espace(char const *str);
 
 /*RT*/
 	//clear.c

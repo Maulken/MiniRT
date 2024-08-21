@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 10:26:39 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/13 22:35:25 by viktor           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:06:58 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ char	**checkget_file_content(int fd)
 	{
 		printf("error malloc");
 		close(fd);
+		return(NULL);
 	}
 	close(fd);
-	printf("str :%s", str);
 	rows = ft_split(str, '\n');
 	if (!rows)
 	{

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 19:18:27 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:03:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	check_sphere(char *tab, t_data *data)
 	current->center = add_vector_float(tmp[1]);
 	current->diameter = add_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
+	current->impact_point = NULL;
+	current->ray = NULL;
+	current->ray_light = NULL;
 	last = &data->scene->spheres;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -101,6 +104,9 @@ int	check_plane(char *tab, t_data *data)
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
 	current->color = add_color_int(tmp[3]);
+	current->impact_point = NULL;
+	current->ray = NULL;
+	current->ray_light = NULL;
 	last = &data->scene->plane;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -130,6 +136,9 @@ int	check_cylinder(char *tab, t_data *data)
 	current->diameter = add_float(tmp[3]);
 	current->height = add_float(tmp[4]);
 	current->color = add_color_int(tmp[5]);
+	current->impact_point = NULL;
+	current->ray = NULL;
+	current->ray_light = NULL;
 	last = &data->scene->cylinder;
 	while (*last != NULL)
 		last = &(*last)->next;

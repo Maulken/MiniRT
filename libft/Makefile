@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 10:58:17 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/19 20:27:59 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/08/20 19:48:44 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,6 @@ fclean: clean
 
 re: fclean all
 
-# Target Rules
 $(NAME): $(OBJ_FULL)
 	@$(AR) $(NAME) $(OBJ_FULL)
 
