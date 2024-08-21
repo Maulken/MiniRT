@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 18:20:11 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:26:07 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int	check_num(char *tab, char *str, int size_setting)
 {
 	int	i;
 	int	len;
-	int	in_word;
 
 	i = 0;
 	len = 0;
-	in_word = 0;
 	while (tab[i] != '\0')
 	{
 		i = check_num_str(tab, str, i, len);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 15:07:02 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:39:16 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int error_allocation(void)
 
 int	init_struct(t_data *data)
 {
-    t_scene    *scene;
 	data->view = ft_calloc(1,sizeof(t_view));
 	if (!data->view)
 		return (0);
@@ -32,6 +31,10 @@ int	init_struct(t_data *data)
 	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
+
+}
+int init_data(t_data *data)
+{
 	data->white_light->x = 255;
 	data->white_light->y = 255;
 	data->white_light->z = 255;
@@ -46,8 +49,9 @@ int	init_struct(t_data *data)
 	return(0);
 }
 
-void init_data(t_data *data)
-{
+void init_scene(t_data *data)
+{   
+    data->scene = NULL;
     data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
     if (data->scene == NULL) 
         error_allocation();   

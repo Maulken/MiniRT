@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 15:06:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:35:10 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 	float		y_scale;
 	float		x_ray;
 	float		y_ray;
+
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);

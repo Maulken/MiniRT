@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 14:45:29 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:29:56 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int main(int argc, char **argv)
 
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"),clean(&data, 1));
-
-	printf("data->view->width = %f\n", data.view->width);
-	printf("data = %f\n", data.scene->spheres->diameter);
-	
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);

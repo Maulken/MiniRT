@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 14:00:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:23:35 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,35 @@ char	**check_correct_type(const char *content, char *tab)
 	int		j;
 	char	**tmp;
 
-	//tmp = ft_split_espace(tab);
-	tmp = ft_split(tab, ' ');
+	tmp = ft_split_espace(tab);
 	j = 0;
 	while (tmp[j])
 	{
 		if (content[j] == 'i')
+		{
 			if (check_correct_intxyz(tmp, j))
 				return (check_error_type("invalid RGB", tmp));
+		}
 		else if (content[j] == 'f' )
+		{
 			if (check_correct_floatxyz(tmp, j))
 				return (check_error_type("invalid XYZ", tmp));
+		}
 		if (content[j] == 'c')
+		{
 			if (check_correct_char(tmp, j))
 				return (check_error_type("invalid char", tmp));
+		}
 		else if (content[j] == 'k')
+		{
 			if (check_correct_int(tmp, j))
 				return (check_error_type("invalid int", tmp));
+		}
 		else if (content[j] == 't')
+		{
 			if (check_correct_float(tmp, j) == 1)
 				return (check_error_type("invalid float", tmp));
+		}
 		j++;
 	}
 	return (tmp);

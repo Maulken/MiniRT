@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/21 15:07:26 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/08/21 15:34:42 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_PATH 		= sources
 MLX				= minilibx-linux
 LIBMLX			= $(MLX)/libmlx.a
 LIBFT			= libft/libft.a
-LFLAGS			= -L libft -lft -lreadline -fPIC
+LFLAGS			= -L libft -lft -fPIC
 
 ### SOURCE FILES ###
 SOURCES = main.c \
