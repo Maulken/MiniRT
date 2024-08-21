@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 10:25:26 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:41:51 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ int error_allocation(void)
 
 int	init_struct(t_data *data)
 {
-	t_scene *scene;
-
-	//data->view = ft_calloc(1, sizeof(t_view));
-	//if (!data->view)
+    t_scene    *scene;
+	data->view = ft_calloc(1,sizeof(t_view));
+	if (!data->view)
 		return (0);
-	data->scene = NULL;
-	//data->white_light = ft_calloc(1, sizeof(t_vector));
-	//if (!data->white_light)
-	//	return (0);
+    data->scene = NULL;
+	data->white_light = ft_calloc(1, sizeof(t_vector));
+	if (!data->white_light)
+		return (0);
 	data->white_light->x = 255;
 	data->white_light->y = 255;
 	data->white_light->z = 255;
@@ -46,7 +45,7 @@ void init_data(t_data *data)
 {
     data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
     if (data->scene == NULL) 
-        error_allocation();
+        error_allocation();   
     data->view = NULL;
     data->white_light = NULL;
 	

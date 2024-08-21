@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 12:05:31 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:43:55 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int main(int argc, char **argv)
 		return (clean(&data, 1));
 
 	data.mlx = mlx_init();
-	if (data.mlx != NULL)
+	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"),clean(&data, 1));
+	printf("width: %f\n", data.view->width);
+	printf("height: %f\n", data.view->height);
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);
