@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 11:14:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 11:34:32 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:13:13 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	get_substr_len(char const *str, int i)
 	}
 	return (count);
 }
-
 
 static int	fill_arr(char **arr, char const *str)
 {

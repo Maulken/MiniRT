@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 15:05:43 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:53:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,17 @@ float		add_float(char *str);
 	//check_object.c
 char	**check_error_type(char *str, char **tmp);
 char	**check_correct_type(const char *content, char *tab);
-int		check_ambiance(char *tab, t_data *data);
 
-	//chech_object2.c
-int		check_camera    (char *tab , t_data *data);
-int		check_light(char *tab, t_data *data);
-int		check_sphere(char *tab, t_data *data);
-int		check_plane(char *tab, t_data *data);
-int		check_cylinder(char *tab, t_data *data);
+	//check_objet_essential.c
+int	check_ambiance(char *tab, t_data *data);
+int	check_camera(char *tab, t_data *data);
+int	check_light(char *tab, t_data *data);
+int	init_sphere(t_sphere *current, char **tmp);
+
+	//chech_object_liste.c
+int	check_sphere(char *tab, t_data *data);
+int	check_plane(char *tab, t_data *data);
+int	check_cylinder(char *tab, t_data *data);
 	//check_utils.c
 int		ft_is_space(char c);
 int		ft_is_digit(char c);
@@ -157,13 +160,7 @@ double	ft_atof_custom(const char *str);
 char	**ft_split_espace(char const *str);
 
 /*RT*/
-	//clear.c
-int		ft_close(t_data *data);
-int		clean(t_data *data, int code_error);
 
-	//init.c
-int		init_struct(t_data *data);
-void	init_data(t_data *data);
 
 	//vector.c
 t_vector		*new_vector(float x, float y, float z);
@@ -203,5 +200,15 @@ void	limit_color(t_vector *color);
 
 int		event(t_data *data);
 
+
+	//clear.c
+int		ft_close(t_data *data);
+int		clean(t_data *data, int code_error);
+
+	//init.c
+int		error_allocation(void);
+int		init_struct(t_data *data);
+int		init_data(t_data *data);
+void	init_scene(t_data *data);
 #endif
 

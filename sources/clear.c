@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 14:56:58 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:23:23 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,15 +149,20 @@ int	clean(t_data *data, int code_error)
 			free(data->scene->ambient->ambient_light);
 			free(data->scene->ambient);
 		}
+		free(data->scene);
+		data->scene = NULL;
+		return (code_error);
 	}
 	if (data->view != NULL)
 	{
 		free(data->view);
 		data->view = NULL;
 	}
-	// if (data->white_light != NULL) le dernier pb . 
-	// 	free(data->white_light);
-	free(data->scene);
-	data->scene = NULL;
-	return (code_error);
+	// if (data->white_light != NULL)
+	//  	free(data->white_light);
+	// data->white_light=NULL;
+	
+	// if (data->hit != NULL) 
+	// 	free(data->hit);
+	// data->hit = NULL;
 }

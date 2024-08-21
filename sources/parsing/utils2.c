@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 13:59:54 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 15:28:10 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:09:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_msg_error(char *str, int value)
 
 int	ft_msg_error_tab(char *str, int value, char **tab )
 {
-	printf("%s %s\n",str,tab[0]);
+	printf("%s %s\n", str, tab[0]);
 	free_tab(tab);
 	return (value);
 }

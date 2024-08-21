@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 15:29:56 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:06:56 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	key_hook(int keycode, t_data *data)
 
 int main(int argc, char **argv)
 {
-  t_data data;
+	t_data data;
 		
 	init_struct(&data);
+	init_scene(&data);
 	init_data(&data);
+
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean(&data, 1));
-
 	data.mlx = mlx_init();
-
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"),clean(&data, 1));
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
@@ -48,7 +48,6 @@ int main(int argc, char **argv)
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
 	mlx_loop(data.mlx);
-
 
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);

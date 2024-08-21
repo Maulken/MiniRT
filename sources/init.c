@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 15:39:16 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:26:59 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	init_struct(t_data *data)
 	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
+    return(0);
 
 }
 int init_data(t_data *data)
