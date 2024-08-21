@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 15:05:43 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:47:30 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ typedef enum e_object
 	CYLINDER
 }	t_object;
 
+typedef enum e_ray
+{
+	FOR_HIT,
+	FOR_COLOR
+}			t_ray;
+
 //##########fonction#########//
 
 /*PARSING*/
@@ -180,16 +186,16 @@ t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
-int			get_hit(t_data *data, t_scene *tmp, float x_ray, float y_ray);
+int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
 int			get_color(t_data *data, float x_ray, float y_ray);
 void		ray_tracing(void *mlx, void *window, t_data *data);
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
-int			get_color_sphere(t_data *data, t_hit *hit);
+int			get_color_sphere(t_data *data, t_hit *hit, t_scene tmp);
 t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
-void		obtain_ray_sphere(t_data *data, float x_ray, float y_ray);
-int			is_sphere(t_data *data, t_scene *tmp);
+void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
+int			is_sphere(t_data *data, t_scene tmp);
 
 	//maths_util
 int		quadratic_equation(float t[2], float a, float b, float c);

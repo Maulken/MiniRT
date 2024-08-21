@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 15:06:30 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:04:34 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 	c = vec_dot_product(origine_sphere, origine_sphere)
 		- ft_square(sph->diameter / 2);
 	free(origine_sphere);
-	if (quadratic_equation(dist, 1, b, c))
-		return (EXIT_FAILURE);
+	if (quadratic_equation(dist, 1, b, c) == EXIT_FAILURE)
+		return (-1);
 	if (dist[0] < dist[1])
 		return (dist[0]);
 	return (dist[1]);
@@ -53,20 +53,23 @@ t_vector	*get_diffuse_light(t_data *data, t_hit *hit)
 	return (color);
 }
 
-int	get_color_sphere(t_data *data, t_hit *hit)
+int	get_color_sphere(t_data *data, t_hit *hit, t_scene tmp)
 {
 	int			new_color;
 	t_vector	*diffuse_light;
 	t_vector	*mix_color;
+	// t_vector	*test;
 	
+	// test = new_vector(0.0, 255.0, 0.0);
 	new_color = 0;
 	diffuse_light = NULL;
 	mix_color = NULL;
 	hit->sphere->dist_cam_sphere
 		= sphere_intersect(data->scene->camera->origine,
 			hit->sphere->ray, hit->sphere);
-	if (hit->sphere->dist_cam_sphere > 0
-		&& hit->sphere->dist_cam_sphere != EXIT_FAILURE)
+	// if (hit->sphere->dist_cam_sphere > 0
+	// 	&& hit->sphere->dist_cam_sphere != EXIT_FAILURE)
+	if (hit->sphere->dist_cam_sphere > 0)
 	{
 		mix_color = data->scene->ambient->ambient_light;
 		diffuse_light = get_diffuse_light(data, hit);
@@ -76,19 +79,32 @@ int	get_color_sphere(t_data *data, t_hit *hit)
 		mix_color = vec_add(hit->sphere->color, mix_color);
 		limit_color(mix_color);
 		new_color = create_rgb(mix_color);
+		// new_color = create_rgb(test);
 	}
 	free(diffuse_light);
 	free(mix_color);
+	// printf("new color %d\n", new_color);
 	return (new_color);
 }
 
-void	obtain_ray_sphere(t_data *data, float x_ray, float y_ray)
+void	obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp,
+			float x_ray, float y_ray)
 {
 	t_vector	*for_ray;
 	for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
-	data->scene->spheres->ray = vec_subtract(for_ray,
-			data->scene->camera->origine);
-	vec_normalize(data->scene->spheres->ray);
+	if (type_ray == FOR_HIT)
+	{
+		tmp.spheres->ray = vec_subtract(for_ray, data->scene->camera->origine);
+		vec_normalize(tmp.spheres->ray);
+	}
+	else
+	{
+		// printf("\e[36mehrguilesrghuesilrgfsssssssssssshuia\e[0m\n");
+		data->hit->sphere->ray = vec_subtract(for_ray,
+				data->scene->camera->origine);
+		vec_normalize(data->hit->sphere->ray);
+		// printf("LAAAAAAAAAAAAAAAAAAAAAAA\n");
+	}
 	free(for_ray);
 	for_ray = NULL;
 }
