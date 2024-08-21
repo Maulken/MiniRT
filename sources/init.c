@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 17:54:30 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:25:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	init_struct(t_data *data)
 {
 	t_scene *scene;
 
-	data->view = ft_calloc(1, sizeof(t_view));
-	if (!data->view)
+	//data->view = ft_calloc(1, sizeof(t_view));
+	//if (!data->view)
 		return (0);
 	data->scene = NULL;
-	data->white_light = ft_calloc(1, sizeof(t_vector));
-	if (!data->white_light)
-		return (0);
+	//data->white_light = ft_calloc(1, sizeof(t_vector));
+	//if (!data->white_light)
+	//	return (0);
 	data->white_light->x = 255;
 	data->white_light->y = 255;
 	data->white_light->z = 255;
@@ -44,14 +44,16 @@ int	init_struct(t_data *data)
 
 void init_data(t_data *data)
 {
-    data->scene = (t_scene *)malloc(sizeof(t_scene));
+    data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
     if (data->scene == NULL) 
-       error_allocation();
-	data->scene->light = NULL;
-    data->scene->light = malloc(sizeof(t_light));
+        error_allocation();
+    data->view = NULL;
+    data->white_light = NULL;
+	
+    data->scene->light = ft_calloc(1,sizeof(t_light));
     if(data->scene->light == NULL)
         error_allocation();
-    data->scene->camera = malloc(sizeof(t_camera));
+    data->scene->camera = ft_calloc(1,sizeof(t_camera));
     if(data->scene->camera == NULL)
     {
         free(data->scene->light);

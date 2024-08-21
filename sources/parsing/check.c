@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 18:07:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:08:15 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	endwith(char *argv, char *value)
 	j = 0;
 	if (argv == NULL)
 		return (1);
-	while (argv[i] == '\0')
+	while (argv[i] != '\0')
 		i++;
+
 	i -= ft_strlen(value);
 	while (argv[i])
 	{
@@ -32,9 +33,9 @@ int	endwith(char *argv, char *value)
 			i++;
 		}
 		else
-			return (ERROR);
+			return (1);
 	}
-	return (OK);
+	return (0);
 }
 
 int	check_argument(int argc, char **argv)
@@ -51,7 +52,7 @@ int	check_argument(int argc, char **argv)
 		i++;
 	if (i >= 3)
 		return (ft_msg_error("error size of the ... ", -1));
-	if (!endwith(argv[1], ".rt"))
+	if (endwith(argv[1], ".rt") == 1)
 		return (ft_msg_error("error plese file finish.rt", -1));
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
@@ -66,12 +67,15 @@ int	check_tab(char **rows, t_data *data)
 	i = 0;
 	if (check_min_scene(rows) == ERROR)
 	{
+		free_tab(rows);
 		return (1);
+		
 	}
 	while (rows[i])
 	{
 		if (check_type(rows[i], data))
 		{
+			free_tab(rows);
 			printf("\nparse ERROR ligne : %d \n", i);
 			return (1);
 		}
@@ -113,27 +117,26 @@ int	check_type(char *src, t_data *data)
 {
 	char	**tab;
 
-	tab = ft_split(src, ' ');
+	tab = ft_split_espace(src);
 	if (!tab)
 		ft_msg_error_tab("", 1, NULL);
 	if (tab[0])
 	{
 		if (!ft_strncmp(tab[0], "A", 2))
-			return (check_ambiance(src, data));
+			return (free_tab(tab), check_ambiance(src, data));
 		else if (!ft_strncmp(tab[0], "C", 2))
-			return (check_camera(src, data));
+			return (free_tab(tab), check_camera(src, data));
 		else if (!ft_strncmp(tab[0], "L", 2))
-			return (check_light(src, data));
+			return (free_tab(tab),check_light(src, data));
 		else if (!ft_strncmp(tab[0], "sp", 3))
-			return (check_sphere(src, data));
+			return (free_tab(tab),check_sphere(src, data));
 		else if (!ft_strncmp(tab[0], "pl", 3))
-			return (check_plane(src, data));
+			return (free_tab(tab),check_plane(src, data));
 		else if (!ft_strncmp(tab[0], "cy", 3))
-			return (check_cylinder(src, data));
+			return (free_tab(tab),check_cylinder(src, data));
 		else
-			ft_msg_error_tab("plese ckeck : is not object", 1, tab);
+			ft_msg_error_tab("plese ckeck : is not object %s", 1, tab);
 	}
-	printf("DEBUG: check_type : %f\n", data->scene->spheres->center->x);
 	free_tab(tab);
 	return (0);
 }

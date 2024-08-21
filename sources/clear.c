@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 20:08:00 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:06:26 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,7 @@ void	free_light(t_light *light)
 int	clean(t_data *data, int code_error)
 {
 	if (data->white_light != NULL)
-	{
 		free(data->white_light);
-		data->white_light = NULL;
-	}
 	if (data->scene != NULL)
 	{
 		if (data->scene->plane != NULL)
@@ -142,8 +139,10 @@ int	clean(t_data *data, int code_error)
 			free_light(data->scene->light);
 		if (data->scene->camera != NULL)
 		{
-			free(data->scene->camera->origine);
-			free(data->scene->camera->direction);
+			if(data->scene->camera->origine != NULL)
+				free(data->scene->camera->origine);
+			if (data->scene->camera->direction != NULL)
+				free(data->scene->camera->direction);
 			free(data->scene->camera);
 		}
 		if (data->scene->ambient != NULL)
@@ -152,13 +151,12 @@ int	clean(t_data *data, int code_error)
 			free(data->scene->ambient->ambient_light);
 			free(data->scene->ambient);
 		}
-		free(data->scene);
-		data->scene = NULL;
 	}
 	if (data->view != NULL)
 	{
 		free(data->view);
 		data->view = NULL;
 	}
+	free(data->scene);
 	return (code_error);
 }
