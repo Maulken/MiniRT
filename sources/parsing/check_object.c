@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 14:00:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:32:56 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,30 @@ char	**check_correct_type(const char *content, char *tab)
 	while (tmp[j])
 	{
 		if (content[j] == 'i')
+		{
 			if (check_correct_intxyz(tmp, j))
 				return (check_error_type("invalid RGB", tmp));
+		}
 		else if (content[j] == 'f' )
+		{
 			if (check_correct_floatxyz(tmp, j))
 				return (check_error_type("invalid XYZ", tmp));
+		}
 		if (content[j] == 'c')
+		{
 			if (check_correct_char(tmp, j))
 				return (check_error_type("invalid char", tmp));
+		}
 		else if (content[j] == 'k')
+		{
 			if (check_correct_int(tmp, j))
 				return (check_error_type("invalid int", tmp));
+		}
 		else if (content[j] == 't')
+		{
 			if (check_correct_float(tmp, j) == 1)
 				return (check_error_type("invalid float", tmp));
+		}
 		j++;
 	}
 	return (tmp);

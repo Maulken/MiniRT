@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 19:04:34 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:11:30 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,18 @@ t_vector	*get_diffuse_light(t_data *data, t_hit *hit)
 	return (color);
 }
 
-int	get_color_sphere(t_data *data, t_hit *hit, t_scene tmp)
+int	get_color_sphere(t_data *data, t_hit *hit)
 {
 	int			new_color;
 	t_vector	*diffuse_light;
 	t_vector	*mix_color;
-	// t_vector	*test;
-	
-	// test = new_vector(0.0, 255.0, 0.0);
+
 	new_color = 0;
 	diffuse_light = NULL;
 	mix_color = NULL;
 	hit->sphere->dist_cam_sphere
 		= sphere_intersect(data->scene->camera->origine,
 			hit->sphere->ray, hit->sphere);
-	// if (hit->sphere->dist_cam_sphere > 0
-	// 	&& hit->sphere->dist_cam_sphere != EXIT_FAILURE)
 	if (hit->sphere->dist_cam_sphere > 0)
 	{
 		mix_color = data->scene->ambient->ambient_light;
@@ -79,11 +75,9 @@ int	get_color_sphere(t_data *data, t_hit *hit, t_scene tmp)
 		mix_color = vec_add(hit->sphere->color, mix_color);
 		limit_color(mix_color);
 		new_color = create_rgb(mix_color);
-		// new_color = create_rgb(test);
 	}
 	free(diffuse_light);
 	free(mix_color);
-	// printf("new color %d\n", new_color);
 	return (new_color);
 }
 
@@ -99,14 +93,12 @@ void	obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp,
 	}
 	else
 	{
-		// printf("\e[36mehrguilesrghuesilrgfsssssssssssshuia\e[0m\n");
 		data->hit->sphere->ray = vec_subtract(for_ray,
 				data->scene->camera->origine);
 		vec_normalize(data->hit->sphere->ray);
-		// printf("LAAAAAAAAAAAAAAAAAAAAAAA\n");
 	}
 	free(for_ray);
-	for_ray = NULL;
+	// for_ray = NULL;
 }
 
 // int	is_sphere(t_data *data, t_scene *tmp)

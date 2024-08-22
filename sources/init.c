@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 15:32:02 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:29:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int error_allocation(void)
 
 int	init_struct(t_data *data)
 {
-	t_scene    *scene;
+	// t_scene    *scene;
 	data->view = ft_calloc(1,sizeof(t_view));
 	if (!data->view)
 		return (0);
@@ -42,8 +42,7 @@ int	init_struct(t_data *data)
 	data->view->x_pixel = 0;
 	data->view->y_pixel = 0;
 	data->view->width = 800;
-	// data->hit->distance = INFINITY;
-	data->hit->distance = 100;
+	data->hit->distance = INFINITY;
 	data->hit->cylinder = NULL;
 	data->hit->sphere = NULL;
 	data->hit->plane = NULL;

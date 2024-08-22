@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 19:40:09 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:25:40 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,11 @@ int	is_sphere(t_data *data, t_scene tmp)
 	dist = 0;
 	dist = sphere_intersect(data->scene->camera->origine,
 			tmp.spheres->ray, tmp.spheres);
-	// printf("dist %f\n", dist);
-	// printf("hit dist %f\n", data->hit->distance);
-	// if (dist < data->hit->distance && dist != EXIT_FAILURE)
-		// printf("adress %p\n", tmp);
+	printf("dist %f\n", dist);
 	if (dist < data->hit->distance && dist > 0)
 	{
-		// printf("euh\n");
 		data->hit->distance = dist;
 		data->hit->sphere = tmp.spheres;
-		// printf("normalement pas \n");
 		return (SPHERE);
 	}
 	return (NONE);
@@ -84,18 +79,14 @@ int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
 {
 	int	object;
 	
-	// printf("dans get_it\n");
-	// object = NONE;
-	object = PLANE;
-	// printf("obejct avan boucle while dans get hit %d\n", object);
-	// while (tmp->spheres)
-	// printf("tmp %")
+	object = NONE;
 	while (tmp.spheres)
 	{
-		// printf("la\n");
 		obtain_ray_sphere(data, FOR_HIT, tmp, x_ray, y_ray);
-		object = is_sphere(data, tmp); 
-		// printf("object %d\n", object);
+		object = is_sphere(data, tmp);
+		// free(tmp.spheres->ray);
+		// tmp.spheres->ray = NULL;
+		free_inside_sphere(tmp.spheres);
 		tmp.spheres = tmp.spheres->next;
 	}
 	// while (tmp->plane)
@@ -121,27 +112,24 @@ int	get_color(t_data *data, float x_ray, float y_ray)
 	
 	color = 0;
 	// color = 0xff0000;
-	// tmp = ft_calloc(1, sizeof(t_scene));
 	tmp = *data->scene;
-	data->hit->distance = INFINITY;
-	// printf("diametre sph tmp %f\n", tmp.spheres->diameter);
+	// data->hit->distance = INFINITY;
+	data->hit->distance = 100.0;
 	object = NONE;
 	object = get_hit(data, tmp, x_ray, y_ray);
-	// printf("avant if sphere\n");
 	if (object == SPHERE)
 	{
-		// printf("\e[31mKHERGEAHGRUIHAEUGAEIRGH\e[0m\n");
 		obtain_ray_sphere(data, FOR_COLOR, tmp, x_ray, y_ray);
-		color = get_color_sphere(data, data->hit, tmp);
-		printf("color %d\n", color);
+		color = get_color_sphere(data, data->hit);
+		// printf("color %d\n", color);
 	}
 	// if (object == PLANE)
 	// 	color = get_color_plane(data->hit);
 	// if (object == CYLINDER)
 	// 	color = get_color_cylinder(data->hit);
-	// free(tmp);
-	// tmp = NULL;
 	// printf("before color\n");
+	free_inside_hit(data->hit);
+	// data->hit = NULL;
 	return (color);
 }
 
@@ -151,6 +139,7 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 	float		y_scale;
 	float		x_ray;
 	float		y_ray;
+	
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);
@@ -159,7 +148,6 @@ void	ray_tracing(void *mlx, void *window, t_data *data)
 		y_ray = y_scale * data->view->y_pixel;
 		x_scale = (data->view->width / 2) * (-1);
 		data->mlx_x = 0;
-		// printf("xRay %f, y_ray %f\n", x_ray, y_ray);
 		while (x_scale <= data->view->width / 2)
 		{
 			x_ray = x_scale * data->view->x_pixel;

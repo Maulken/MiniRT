@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 13:56:27 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:33:27 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	check_correct_char(char **tmp, int j)
 int	check_correct_int(char **tmp, int j)
 {
 	int		i;
-	char	**tab;
 
 	i = 0;
 	while (tmp[j][i] != '\0')
@@ -103,7 +102,6 @@ int	check_correct_int(char **tmp, int j)
 int	check_correct_float(char **tmp, int j)
 {
 	int		i;
-	char	**tab;
 
 	i = 0;
 	while (tmp[j][i] != '\0')

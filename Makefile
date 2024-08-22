@@ -6,13 +6,13 @@
 #    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/21 15:07:26 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/08/22 10:28:10 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC      = gcc
-CFLAGS  = -g 
+CFLAGS  = -g -Wall -Wextra -Werror
 CLINKS  = -lXext -lX11 -lm
 
 ### EXECUTABLE ###

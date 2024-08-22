@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 19:37:16 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:31:04 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ t_vector	*add_vector_float(char *str)
 
 	vector = malloc(sizeof(t_vector));
 	if (!vector)
-	{
-		free_tab(tmp);
 		return (NULL);
-	}
 	tmp = ft_split(str, ',');
 	vector->x = ft_atof_custom(tmp[0]);
 	vector->y = ft_atof_custom(tmp[1]);

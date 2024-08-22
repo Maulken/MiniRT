@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 14:47:49 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:23:34 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ void	free_sphere(t_sphere *sphere)
 	if (sphere->ray_light != NULL)
 		free(sphere->ray_light);
 	free(sphere);
+}
+
+void	free_inside_sphere(t_sphere *sphere)
+{
+	if (sphere == NULL)
+		return ;
+	if (sphere->center != NULL)
+		free(sphere->center);
+	if (sphere->color != NULL)
+		free(sphere->color);
+	if (sphere->impact_point != NULL)
+		free(sphere->impact_point);
+	if (sphere->ray != NULL)
+		free(sphere->ray);
+	if (sphere->ray_light != NULL)
+		free(sphere->ray_light);
 }
 
 void	free_sphere_list(t_sphere *head)
@@ -123,6 +139,33 @@ void	free_light(t_light *light)
 	free(light);
 }
 
+void	free_camera(t_camera *camera)
+{
+	if(camera->origine != NULL)
+		free(camera->origine);
+	if (camera->direction != NULL)
+		free(camera->direction);
+	free(camera);
+}
+
+void	free_ambient(t_ambient *ambient)
+{
+	free(ambient->colors);
+	free(ambient->ambient_light);
+	free(ambient);
+}
+
+void	free_inside_hit(t_hit *hit)
+{
+	if (hit->sphere != NULL)
+		free_sphere(hit->sphere);
+	if (hit->plane != NULL)
+		free_plane(hit->plane);
+	if (hit->cylinder != NULL)
+		free_cylinder(hit->cylinder);
+	// free(hit);
+}
+
 int	clean(t_data *data, int code_error)
 {
 	// if (data->white_light != NULL)
@@ -138,24 +181,19 @@ int	clean(t_data *data, int code_error)
 		if (data->scene->light != NULL)
 			free_light(data->scene->light);
 		if (data->scene->camera != NULL)
-		{
-			if(data->scene->camera->origine != NULL)
-				free(data->scene->camera->origine);
-			if (data->scene->camera->direction != NULL)
-				free(data->scene->camera->direction);
-			free(data->scene->camera);
-		}
+			free_camera(data->scene->camera);
 		if (data->scene->ambient != NULL)
-		{
-			free(data->scene->ambient->colors);
-			free(data->scene->ambient->ambient_light);
-			free(data->scene->ambient);
-		}
+			free_ambient(data->scene->ambient);
 	}
 	if (data->view != NULL)
 	{
 		free(data->view);
 		data->view = NULL;
+	}
+	if (data->hit != NULL)
+	{
+		free_inside_hit(data->hit);
+		free(data->hit);
 	}
 	free(data->scene);
 	data->scene = NULL;

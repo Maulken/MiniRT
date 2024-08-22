@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/20 18:20:11 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:33:53 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int	check_num(char *tab, char *str, int size_setting)
 {
 	int	i;
 	int	len;
-	int	in_word;
 
 	i = 0;
 	len = 0;
-	in_word = 0;
 	while (tab[i] != '\0')
 	{
 		i = check_num_str(tab, str, i, len);

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 18:47:30 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:35:34 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef enum e_ray
 int		parsing(int argc, char **argv, t_data *data);
 	//check.c
 int		ft_msg_error(char *str, int value);
-int		ft_msg_error_tab(char *str, int value, char **tab );
+int		ft_msg_error_tab(int value, char **tab );
 int		endwith(char *argv, char *value);
 int		check_argument(int argc, char **argv);
 int		check_tab(char **rows, t_data *data);
@@ -165,6 +165,17 @@ char	**ft_split_espace(char const *str);
 /*RT*/
 	//clear.c
 int		ft_close(t_data *data);
+void	free_sphere(t_sphere *sphere);
+void	free_inside_sphere(t_sphere *sphere);
+void	free_sphere_list(t_sphere *head);
+void	free_plane(t_plane *plane);
+void	free_plane_list(t_plane *head);
+void	free_cylinder(t_cylinder *cylinder);
+void	free_cylinder_list(t_cylinder *cylinder_list);
+void	free_light(t_light *light);
+void	free_camera(t_camera *camera);
+void	free_ambient(t_ambient *ambient);
+void	free_inside_hit(t_hit *hit);
 int		clean(t_data *data, int code_error);
 
 	//init.c
@@ -192,7 +203,7 @@ void		ray_tracing(void *mlx, void *window, t_data *data);
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
-int			get_color_sphere(t_data *data, t_hit *hit, t_scene tmp);
+int			get_color_sphere(t_data *data, t_hit *hit);
 t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
 void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
