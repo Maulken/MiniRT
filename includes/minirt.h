@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 10:38:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:48:05 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef enum e_ray
 int		parsing(int argc, char **argv, t_data *data);
 	//check.c
 int		ft_msg_error(char *str, int value);
-int		ft_msg_error_tab(int value, char **tab );
+int		ft_msg_error_tab(char *str, int value, char **tab );
 int		endwith(char *argv, char *value);
 int		check_argument(int argc, char **argv);
 int		check_tab(char **rows, t_data *data);
@@ -199,7 +199,7 @@ t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
 void		get_view_plane(t_data *data);
 int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
 int			get_color(t_data *data, float x_ray, float y_ray);
-void		ray_tracing(void *mlx, void *window, t_data *data);
+void		ray_tracing(t_data *data);
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 13:59:54 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:40:07 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:46:25 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_msg_error(char *str, int value)
 	return (value);
 }
 
-int	ft_msg_error_tab(int value, char **tab)
+int	ft_msg_error_tab(char *str, int value, char **tab)
 {
 	printf("%s %s\n", str, tab[0]);
 	free_tab(tab);

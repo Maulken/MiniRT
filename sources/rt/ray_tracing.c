@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 10:40:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:47:40 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	get_color(t_data *data, float x_ray, float y_ray)
 	return (color);
 }
 
-void	ray_tracing(void *mlx, void *window, t_data *data)
+void	ray_tracing(t_data *data)
 {
 	float		x_scale;
 	float		y_scale;
