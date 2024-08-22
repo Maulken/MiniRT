@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 10:58:17 by vmassoli          #+#    #+#              #
-#    Updated: 2024/07/11 10:58:30 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/08/22 09:43:49 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADERS				=	$(INCLUDE_DIR)/libft.h
 
 # Compiler and flags
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -I$(INCLUDE_DIR)
+CFLAGS				=	-Wall -Wextra -Werror -I$(INCLUDE_DIR) -fPIC
 
 # Archiver
 AR					=	ar rcs
@@ -125,7 +125,6 @@ fclean: clean
 
 re: fclean all
 
-# Target Rules
 $(NAME): $(OBJ_FULL)
 	@$(AR) $(NAME) $(OBJ_FULL)
 

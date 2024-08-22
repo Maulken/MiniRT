@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/18 22:38:32 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:13:33 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,28 @@ typedef struct s_plane
 {
 	t_plane		*next;
 	t_vector	*origine;
-	t_vector	*direction;
+	t_vector	*orientation;
 	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
 	t_vector	*ray_light;
+	float		dist_light_plane;
+	float		dist_cam_plane;
 }				t_plane;
 
 typedef struct s_cylinder
 {
 	t_cylinder	*next;
 	t_vector	*center;
-	t_vector	*direction;
+	t_vector	*orientation;
 	t_vector	*impact_point;
 	t_vector	*ray;
 	t_vector	*ray_light;
 	t_vector	*color;
 	float		diameter;
 	float		height;
+	float		dist_light_cylinder;
+	float		dist_cam_cylinder;
 }				t_cylinder;
 
 typedef struct s_light
@@ -70,6 +74,7 @@ typedef struct s_ambient
 {
 	float		ratio;
 	t_vector	*colors;
+	t_vector	*ambient_light;
 }				t_ambient;
 
 typedef struct s_scene
@@ -80,8 +85,6 @@ typedef struct s_scene
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 	t_ambient	*ambient;
-	float		width;
-	float		height;
 }				t_scene;
 
 #endif

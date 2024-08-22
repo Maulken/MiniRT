@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 13:36:36 by bszabo            #+#    #+#             */
-/*   Updated: 2023/09/07 13:36:38 by bszabo           ###   ########.fr       */
+/*   Updated: 2024/08/19 20:25:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,3 @@ int	ft_atoi(const char *str)
 	}
 	return (num * sign);
 }
-/*
-#include <stdlib.h>
-#include <stdio.h>
-int main(void)
-{
-	char *str1 = " 		 +482 ;lg";
-	char *str2 = " 	-=+ 271333";
-	char *str3 = "-2147483648";
-	int res1o = atoi(str1);
-	int res1 = ft_atoi(str1);
-	int res2o = atoi(str2);
-	int res2 = ft_atoi(str2);
-	int res3o = atoi(str3);
-	int res3 = ft_atoi(str3);
-	printf("%d | original\n", res1o);
-	printf("%d\n", res1);
-	printf("%d | original\n", res2o);
-	printf("%d\n", res2);
-	printf("%d | original\n", res3o);
-	printf("%d\n", res3);
-	return (0);
-}
-*/

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_space.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 10:59:28 by bszabo            #+#    #+#             */
-/*   Updated: 2024/08/21 15:48:59 by vharatyk         ###   ########.fr       */
+/*   Created: 2024/08/21 11:14:57 by vharatyk          #+#    #+#             */
+/*   Updated: 2024/08/21 17:13:13 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minirt.h"
 
-// count number of substrings in string 'str' separated by char 'c'
-static int	count_substrs(char const *str, char c)
+static int	count_substrs(char const *str)
 {
 	int	i;
 	int	count;
@@ -22,25 +21,25 @@ static int	count_substrs(char const *str, char c)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] != c)
+		if (str[i] != ' ' && str[i] != '\t')
 		{
 			count++;
-			while (str[i] != c && str[i])
+			while (str[i] != ' ' && str[i] != '\t' && str[i])
 				i++;
 		}
-		else if (str[i] == c)
+		else if (str[i] == ' ' || str[i] == '\t')
 			i++;
 	}
 	return (count);
 }
 
 // count number of characters in substring starting at index 'i'
-static int	get_substr_len(char const *str, char c, int i)
+static int	get_substr_len(char const *str, int i)
 {
 	int	count;
 
 	count = 0;
-	while (str[i] != c && str[i])
+	while (str[i] != ' ' && str[i] != '\t' && str[i])
 	{
 		count++;
 		i++;
@@ -48,9 +47,7 @@ static int	get_substr_len(char const *str, char c, int i)
 	return (count);
 }
 
-// fill 'arr' array with substrings
-// return 0 if successful, -1 if malloc fails
-static int	fill_arr(char **arr, char const *str, char c)
+static int	fill_arr(char **arr, char const *str)
 {
 	int	i;
 	int	str_index;
@@ -61,9 +58,9 @@ static int	fill_arr(char **arr, char const *str, char c)
 	substr_len = 0;
 	while (str[i])
 	{
-		while (str[i] == c)
+		while (str[i] == ' ' || str[i] == '\t')
 			i++;
-		substr_len = get_substr_len(str, c, i);
+		substr_len = get_substr_len(str, i);
 		if (substr_len > 0)
 		{
 			arr[str_index] = malloc(sizeof(char) * (substr_len + 1));
@@ -79,21 +76,21 @@ static int	fill_arr(char **arr, char const *str, char c)
 
 // split string 'str' into substrings using char 'c' as delimiter
 // return array of substrings with NULL ending if successful, NULL if fails
-char	**ft_split(char const *str, char c)
+char	**ft_split_espace(char const *str)
 {
 	int		substrs;
 	char	**arr;
 
 	if (str == NULL)
 		return (NULL);
-	substrs = count_substrs(str, c);
+	substrs = count_substrs(str);
 	arr = (char **)malloc((substrs + 1) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
 	arr[substrs] = NULL;
 	if (substrs == 0)
 		return (arr);
-	if (fill_arr(arr, str, c) == -1)
+	if (fill_arr(arr, str) == -1)
 		return (NULL);
 	return (arr);
 }

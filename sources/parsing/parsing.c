@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
-/*   Updated: 2024/08/19 20:29:20 by mpelluet         ###   ########.fr       */
+/*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/08/22 10:40:04 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_int.h"
+#include "../../includes/minirt.h"
 
-int	mlx_destroy_display(t_xvar *xvar)
+int	parsing(int argc, char **argv, t_data *data)
 {
-	XCloseDisplay(xvar->display);
+	char	**tab;
+
+	data->fd = check_argument(argc, argv);
+	if (data->fd == -1)
+		return (ERROR);
+	tab = checkget_file_content(data->fd);
+	if (check_tab(tab, data))
+		return (ERROR);
+	free_tab(tab);
+	printf("OK\n\n");
+	return (OK);
 }

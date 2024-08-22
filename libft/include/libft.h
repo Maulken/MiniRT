@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:57:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/07/11 10:57:21 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:23:07 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	**ft_split_quotes(char *str, char c);
 int		ft_strcmp(char *s1, char *s2);
 char	**ft_strdup_arr(char *arr[]);
 char	*ft_strreplace(char *str, char *old_s, char *new_s, int start_i);
+double	ft_atof(char *str);
 
 // get_next_line functions
 // File: get_next_line.c
