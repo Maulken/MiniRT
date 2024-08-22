@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 16:23:23 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:31:04 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,17 @@ void	free_cylinder(t_cylinder *cylinder)
 	free(cylinder);
 }
 
-void	free_cylinder_list(t_cylinder *cylinder_list)
+void	free_cylinder_list(t_cylinder *head)
 {
-	t_cylinder	*tmp;
+	t_cylinder	*current;
+	t_cylinder	*next;
 
-	while (cylinder_list)
+	current = head;
+	while (current != NULL)
 	{
-		tmp = cylinder_list->next;
-		free_cylinder(cylinder_list);
-		cylinder_list = tmp;
+		next = current->next;
+		free_cylinder(current);
+		current = next;
 	}
 }
 
@@ -125,6 +127,21 @@ void	free_light(t_light *light)
 
 int	clean(t_data *data, int code_error)
 {
+	if (data->view)
+	{
+        free(data->view);
+		data->view = NULL;
+	}
+    if (data->hit)
+	{
+        free(data->hit);
+		data->hit = NULL;
+	}
+    if (data->white_light)
+	{
+        free(data->white_light);
+		data->white_light = NULL;
+	}
 	if (data->scene != NULL)
 	{
 		if (data->scene->plane != NULL)
@@ -158,11 +175,5 @@ int	clean(t_data *data, int code_error)
 		free(data->view);
 		data->view = NULL;
 	}
-	// if (data->white_light != NULL)
-	//  	free(data->white_light);
-	// data->white_light=NULL;
-	
-	// if (data->hit != NULL) 
-	// 	free(data->hit);
-	// data->hit = NULL;
+	return (0);
 }

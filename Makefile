@@ -6,14 +6,14 @@
 #    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/21 17:43:11 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/08/22 10:34:03 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC      = gcc
-CFLAGS  = -g 
-CLINKS  = -lXext -lX11 -lm
+CFLAGS  = -g -Wall -Wextra -Werror
+CLINKS  = -lXext -lX11 -lm 
 
 ### EXECUTABLE ###
 NAME   = minirt
