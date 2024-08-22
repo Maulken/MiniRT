@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 10:26:39 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 12:06:58 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:28:01 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**checkget_file_content(int fd)
 	{
 		printf("error malloc");
 		close(fd);
-		return(NULL);
+		return (NULL);
 	}
 	close(fd);
 	rows = ft_split(str, '\n');

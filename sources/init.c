@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:29:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:41:54 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int error_allocation(void)
 	exit(1);
 }
 
-
 int	init_struct(t_data *data)
 {
-	// t_scene    *scene;
 	data->view = ft_calloc(1,sizeof(t_view));
 	if (!data->view)
 		return (0);
@@ -35,6 +33,11 @@ int	init_struct(t_data *data)
 	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (0);
+    return(0);
+
+}
+int init_data(t_data *data)
+{
 	data->white_light->x = 255;
 	data->white_light->y = 255;
 	data->white_light->z = 255;
@@ -49,21 +52,23 @@ int	init_struct(t_data *data)
 	return(0);
 }
 
-void init_data(t_data *data)
-{
-	data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
-	if (data->scene == NULL)
-		error_allocation();
-	data->scene->light = ft_calloc(1,sizeof(t_light));
-	if(data->scene->light == NULL)
-		error_allocation();
-	data->scene->camera = ft_calloc(1,sizeof(t_camera));
-	if(data->scene->camera == NULL)
-	{
-		free(data->scene->light);
-		free(data->scene);
-		error_allocation();
-	}
+void init_scene(t_data *data)
+{   
+    data->scene = NULL;
+    data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
+    if (data->scene == NULL) 
+        error_allocation();   
+	
+    data->scene->light = ft_calloc(1,sizeof(t_light));
+    if(data->scene->light == NULL)
+        error_allocation();
+    data->scene->camera = ft_calloc(1,sizeof(t_camera));
+    if(data->scene->camera == NULL)
+    {
+        free(data->scene->light);
+        free(data->scene);
+        error_allocation();
+    }
 	data->scene->ambient = ft_calloc(1,sizeof(t_ambient));
 	if(data->scene->ambient == NULL)
 	{

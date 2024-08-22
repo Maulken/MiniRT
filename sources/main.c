@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 19:13:16 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:42:30 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	key_hook(int keycode, t_data *data)
 
 int main(int argc, char **argv)
 {
-  t_data data;
+	t_data data;
 		
 	init_struct(&data);
+	init_scene(&data);
 	init_data(&data);
+
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean(&data, 1));
 	data.mlx = mlx_init();

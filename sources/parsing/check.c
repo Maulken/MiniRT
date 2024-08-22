@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 14:00:23 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:28:58 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	endwith(char *argv, char *value)
 		return (1);
 	while (argv[i] != '\0')
 		i++;
-
 	i -= ft_strlen(value);
 	while (argv[i])
 	{
@@ -70,7 +69,6 @@ int	check_tab(char **rows, t_data *data)
 		free_tab(rows);
 		printf("ERROR");
 		return (1);
-		
 	}
 	while (rows[i])
 	{
@@ -118,8 +116,7 @@ int	check_type(char *src, t_data *data)
 {
 	char	**tab;
 
-	//tab = ft_split_espace(src);
-	tab = ft_split(src, ' ');
+	tab = ft_split_espace(src);
 	if (!tab)
 		ft_msg_error_tab("", 1, NULL);
 	if (tab[0])
@@ -129,13 +126,13 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "C", 2))
 			return (free_tab(tab), check_camera(src, data));
 		else if (!ft_strncmp(tab[0], "L", 2))
-			return (free_tab(tab),check_light(src, data));
+			return (free_tab(tab), check_light(src, data));
 		else if (!ft_strncmp(tab[0], "sp", 3))
-			return (free_tab(tab),check_sphere(src, data));
+			return (free_tab(tab), check_sphere(src, data));
 		else if (!ft_strncmp(tab[0], "pl", 3))
-			return (free_tab(tab),check_plane(src, data));
+			return (free_tab(tab), check_plane(src, data));
 		else if (!ft_strncmp(tab[0], "cy", 3))
-			return (free_tab(tab),check_cylinder(src, data));
+			return (free_tab(tab), check_cylinder(src, data));
 		else
 			ft_msg_error_tab("plese ckeck : is not object %s", 1, tab);
 	}
