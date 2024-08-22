@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:40:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:00:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,17 +172,17 @@ int	clean(t_data *data, int code_error)
 {
 	if (data->view)
 	{
-        free(data->view);
+		free(data->view);
 		data->view = NULL;
 	}
-    if (data->hit)
+	if (data->hit)
 	{
-        free(data->hit);
+		free(data->hit);
 		data->hit = NULL;
 	}
-    if (data->white_light)
+	if (data->white_light)
 	{
-        free(data->white_light);
+		free(data->white_light);
 		data->white_light = NULL;
 	}
 	if (data->scene != NULL)

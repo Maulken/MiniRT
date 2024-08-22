@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 10:48:05 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:50:12 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ typedef	struct s_hit
 
 typedef struct s_view
 {
-	float	width;
-	float	height;
-	float	x_pixel;
-	float	y_pixel;
+	float		width;
+	float		height;
+	float		x_pixel;
+	float		y_pixel;
+	float		distance;
+	t_vector	*x;
+	t_vector	*y;
 }				t_view;
 
 typedef struct s_data // data principal . pour la mlx
@@ -194,6 +197,7 @@ t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
 t_vector	*vec_multiplying(t_vector *vec1, float nbr);
 bool		vec_compare(t_vector *vec1, t_vector *vec2);
 t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
+t_vector	*vec_cross(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);

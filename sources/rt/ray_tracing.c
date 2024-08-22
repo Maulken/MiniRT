@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 10:47:40 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:35:03 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,28 @@
 
 void	get_view_plane(t_data *data)
 {
-	float	aspect_ratio;
-	float	width;
-	float	height;
+	t_vector	*up_y;
 
-	aspect_ratio = data->view->width / data->view->height;
-	width = 2 * tan(data->scene->camera->fov / 2 * (M_PI / 180));
-	height = width / aspect_ratio;
-	data->view->x_pixel = width / data->view->width;
-	data->view->y_pixel = height / data->view->height;
+	up_y = new_vector(0,1,0);
+	data->view->distance = 1
+		/ (2 * tan(data->scene->camera->fov / 2 * (M_PI / 180)));
+	data->view->x = vec_cross(data->scene->camera->direction, up_y);
+	vec_normalize(data->view->x);
+	data->view->y = vec_cross(data->scene->camera->direction, data->view->x);
+	vec_normalize(data->view->y);
 }
+// void	get_view_plane(t_data *data)
+// {
+// 	float	aspect_ratio;
+// 	float	width;
+// 	float	height;
+
+// 	aspect_ratio = data->view->width / data->view->height;
+// 	width = 2 * tan(data->scene->camera->fov / 2 * (M_PI / 180));
+// 	height = width / aspect_ratio;
+// 	data->view->x_pixel = width / data->view->width;
+// 	data->view->y_pixel = height / data->view->height;
+// }
 
 // int	is_plane(t_data *data, t_scene *tmp, int object)
 // {
@@ -65,7 +77,7 @@ int	is_sphere(t_data *data, t_scene tmp)
 	dist = 0;
 	dist = sphere_intersect(data->scene->camera->origine,
 			tmp.spheres->ray, tmp.spheres);
-	printf("dist %f\n", dist);
+	// printf("dist %f\n", dist);
 	if (dist < data->hit->distance && dist > 0)
 	{
 		data->hit->distance = dist;
@@ -84,9 +96,9 @@ int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
 	{
 		obtain_ray_sphere(data, FOR_HIT, tmp, x_ray, y_ray);
 		object = is_sphere(data, tmp);
-		// free(tmp.spheres->ray);
-		// tmp.spheres->ray = NULL;
-		free_inside_sphere(tmp.spheres);
+		free(tmp.spheres->ray);
+		tmp.spheres->ray = NULL;
+		// free_inside_sphere(tmp.spheres);
 		tmp.spheres = tmp.spheres->next;
 	}
 	// while (tmp->plane)
@@ -102,6 +114,16 @@ int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
 	// 	tmp->cylinder = tmp->cylinder->next;
 	// }
 	return (object);
+}
+
+void	reinit_hit(t_hit *hit)
+{
+	if (hit->sphere != NULL)
+		hit->sphere = NULL;
+	if (hit->plane != NULL)
+		hit->plane = NULL;
+	if (hit->cylinder != NULL)
+		hit->cylinder = NULL;
 }
 
 int	get_color(t_data *data, float x_ray, float y_ray)
@@ -128,24 +150,24 @@ int	get_color(t_data *data, float x_ray, float y_ray)
 	// if (object == CYLINDER)
 	// 	color = get_color_cylinder(data->hit);
 	// printf("before color\n");
-	free_inside_hit(data->hit);
-	// data->hit = NULL;
+	reinit_hit(data->hit);
 	return (color);
 }
 
 void	ray_tracing(t_data *data)
 {
-	float		x_scale;
-	float		y_scale;
-	float		x_ray;
-	float		y_ray;
+	float	x_scale;
+	float	y_scale;
+	float	x_ray;
+	float	y_ray;
 	
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);
 	while (y_scale >= (data->view->height / 2) * (-1))
 	{
-		y_ray = y_scale * data->view->y_pixel;
+		// y_ray = y_scale * data->view->y_pixel;
+		// y_ray = y_ray * // 
 		x_scale = (data->view->width / 2) * (-1);
 		data->mlx_x = 0;
 		while (x_scale <= data->view->width / 2)
