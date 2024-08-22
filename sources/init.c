@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:41:54 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:31:18 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ int init_data(t_data *data)
 
 void init_scene(t_data *data)
 {   
-    data->scene = NULL;
     data->scene = (t_scene *)ft_calloc(1,sizeof(t_scene));
     if (data->scene == NULL) 
         error_allocation();   
-	
     data->scene->light = ft_calloc(1,sizeof(t_light));
     if(data->scene->light == NULL)
         error_allocation();

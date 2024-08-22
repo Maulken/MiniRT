@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 10:48:05 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:39:18 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ char	**check_error_type(char *str, char **tmp);
 char	**check_correct_type(const char *content, char *tab);
 
 	//check_objet_essential.c
+int check_vector_normalised(t_vector *vector);
 int	check_ambiance(char *tab, t_data *data);
 int	check_camera(char *tab, t_data *data);
 int	check_light(char *tab, t_data *data);
@@ -168,18 +169,11 @@ char	**ft_split_espace(char const *str);
 /*RT*/
 	//clear.c
 int		ft_close(t_data *data);
-void	free_sphere(t_sphere *sphere);
-void	free_inside_sphere(t_sphere *sphere);
-void	free_sphere_list(t_sphere *head);
-void	free_plane(t_plane *plane);
-void	free_plane_list(t_plane *head);
-void	free_cylinder(t_cylinder *cylinder);
-void	free_cylinder_list(t_cylinder *cylinder_list);
 void	free_light(t_light *light);
 void	free_camera(t_camera *camera);
+void	free_hit(t_hit *hit);
 void	free_ambient(t_ambient *ambient);
-void	free_inside_hit(t_hit *hit);
-int		clean(t_data *data, int code_error);
+int		clean_data(t_data *data, int code_error);
 
 
 	//vector.c
@@ -220,11 +214,27 @@ void	limit_color(t_vector *color);
 
 int		event(t_data *data);
 
-
 	//clear.c
 int		ft_close(t_data *data);
-int		clean(t_data *data, int code_error);
+void	free_light(t_light *light);
+void	free_camera(t_camera *camera);
+void	free_ambient(t_ambient *ambient);
+void	free_inside_hit(t_hit *hit);
+int		clean_data(t_data *data, int code_error);
 
+	//clear_object.c
+void	free_inside_sphere(t_sphere *sphere);
+void	free_sphere(t_sphere *sphere);
+void	free_sphere_list(t_sphere *head);
+void	free_plane(t_plane *plane);
+void	free_plane_list(t_plane *head);
+
+	//clear_object2.c
+void	free_cylinder(t_cylinder *cylinder);
+void	free_cylinder_list(t_cylinder *head);
+
+	//clear_scene.c
+int clear_scene(t_data *data);
 	//init.c
 int		error_allocation(void);
 int		init_struct(t_data *data);

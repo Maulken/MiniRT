@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/22 10:47:53 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:39:59 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	event(t_data *data)
 	data->img = mlx_new_image(data->mlx, data->view->width, data->view->height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
-	ray_tracing(data);
+	//ray_tracing(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (0);
@@ -39,10 +39,10 @@ int main(int argc, char **argv)
 	init_data(&data);
 
 	if (parsing(argc, argv, &data) == ERROR)
-		return (clean(&data, 1));
+		return (clean_data(&data, 1));
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
-		return (printf("ERROR : MLX"),clean(&data, 1));
+		return (printf("ERROR : MLX"),clean_data(&data, 1));
 	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);
@@ -51,5 +51,5 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
 	free(data.mlx);
-	return(clean(&data,0));
+	return(clean_data(&data,0));
 }

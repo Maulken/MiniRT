@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 18:01:01 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:09:45 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static int	init_plane(t_plane *current, char **tmp)
 {
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
+	if (check_vector_normalised(current->direction))
+	{
+		printf("ERROR : invalid vector plese [0][1]");
+		return (1);
+	}
 	current->color = add_color_int(tmp[3]);
 	current->impact_point = NULL;
 	current->ray = NULL;
@@ -64,7 +69,8 @@ int	check_plane(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	init_plane(current, tmp);
+	if (init_plane(current, tmp))
+		return (free_tab(tmp), 1);
 	last = &data->scene->plane;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -77,6 +83,11 @@ static int	init_cylinder(t_cylinder *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
+	if (check_vector_normalised(current->direction))
+	{
+		printf("ERROR : invalid Orientation");
+		return (1);
+	}
 	current->diameter = add_float(tmp[3]);
 	current->height = add_float(tmp[4]);
 	current->color = add_color_int(tmp[5]);
@@ -102,7 +113,8 @@ int	check_cylinder(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	init_cylinder(current, tmp);
+	if (init_cylinder(current, tmp) == 1)
+		return (free_tab(tmp), 1);
 	last = &data->scene->cylinder;
 	while (*last != NULL)
 		last = &(*last)->next;

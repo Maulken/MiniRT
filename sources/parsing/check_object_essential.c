@@ -6,11 +6,22 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 18:06:04 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:09:12 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+int	check_vector_normalised(t_vector *vector)
+{
+	if (vector->x > 1 || vector->x < -1)
+		return (1);
+	if (vector->y > 1 || vector->y < -1)
+		return (1);
+	if (vector->z > 1 || vector->z < -1)
+		return (1);
+	return (0);
+}
 
 int	check_ambiance(char *tab, t_data *data)
 {
@@ -45,13 +56,16 @@ int	check_camera(char *tab, t_data *data)
 		return (1);
 	data->scene->camera->origine = add_vector_float(tmp[1]);
 	data->scene->camera->direction = add_vector_float(tmp[2]);
+	if (check_vector_normalised(data->scene->camera->direction))
+	{
+		printf("ERROR : invalid Orientation");
+		return (free_tab(tmp), 1);
+	}
 	data->scene->camera->fov = add_float(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
 		printf("ERROR fov superieur a 180 ou inferieur a 0");
-		//free(data->scene->camera);
-		free_tab(tmp);
-		return (1);
+		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
 	return (0);

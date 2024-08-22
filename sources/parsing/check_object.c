@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:39:43 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:10:18 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ char	**check_error_type(char *str, char **tmp)
     explication du tableau content
     c = char 
     f = cordonner flote mais sous trois axe x,y,z
+	g = cordonner flote normalized mais sous trois axe x,y,z
     i = cordonner int sous trois axe z,y,z
     k = une FOV , en int 1 valeur attendu
     t = une taille de volume floate (utile pour L , cy)
+	n = normalalized vector [0.0,1.0]
     v = void
 */
 char	**check_correct_type(const char *content, char *tab)
