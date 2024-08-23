@@ -6,11 +6,24 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:09:12 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:14:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+
+int is_normalized(float x , float y , float z)
+{
+	double norm = 0;
+	norm += x * x;
+	norm += y * y;
+	norm += z * z;
+	norm = sqrt(norm);
+	const double tolerance = 1e-9;
+	return fabs(norm - 1.0) < tolerance;
+}
+
 
 int	check_vector_normalised(t_vector *vector)
 {
@@ -20,6 +33,8 @@ int	check_vector_normalised(t_vector *vector)
 		return (1);
 	if (vector->z > 1 || vector->z < -1)
 		return (1);
+	if (!is_normalized(vector->x, vector->y, vector->z))
+		printf("\033[38;5;208m WARNING: The vector is not normalized. \033[0m \n");
 	return (0);
 }
 
