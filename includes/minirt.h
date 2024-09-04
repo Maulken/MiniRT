@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 16:13:33 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:54:36 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,15 @@ char	**check_error_type(char *str, char **tmp);
 char	**check_correct_type(const char *content, char *tab);
 
 	//check_objet_essential.c
-int	check_ambiance(char *tab, t_data *data);
-int	check_camera(char *tab, t_data *data);
-int	check_light(char *tab, t_data *data);
-int	init_sphere(t_sphere *current, char **tmp);
+int		check_ambiance(char *tab, t_data *data);
+int		check_camera(char *tab, t_data *data);
+int		check_light(char *tab, t_data *data);
+int		init_sphere(t_sphere *current, char **tmp);
 
 	//chech_object_liste.c
-int	check_sphere(char *tab, t_data *data);
-int	check_plane(char *tab, t_data *data);
-int	check_cylinder(char *tab, t_data *data);
+int		check_sphere(char *tab, t_data *data);
+int		check_plane(char *tab, t_data *data);
+int		check_cylinder(char *tab, t_data *data);
 	//check_utils.c
 int		ft_is_space(char c);
 int		ft_is_digit(char c);
@@ -181,11 +181,11 @@ int		clean(t_data *data, int code_error);
 
 
 	//vector.c
-t_vector		*new_vector(float x, float y, float z);
-t_vector		*vec_subtract(t_vector *vec1, t_vector *vec2);
-void			vec_normalize(t_vector *vec);
-float			vec_lenght(t_vector *vec1, t_vector *vec2);
-float			vec_dot_product(t_vector *vec1, t_vector *vec2);
+t_vector	*new_vector(float x, float y, float z);
+t_vector	*vec_subtract(t_vector *vec1, t_vector *vec2);
+void		vec_normalize(t_vector *vec);
+float		vec_lenght(t_vector *vec1, t_vector *vec2);
+float		vec_dot_product(t_vector *vec1, t_vector *vec2);
 
 	//vector2.c
 t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
@@ -206,27 +206,43 @@ t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
 void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
+	//plane
+float		plane_intersect(t_data *data, t_plane *pl);
+int			get_color_plane(t_data *data);
+t_vector	*get_diffuse_light_pl(t_data *data);
+void		obtain_ray_pl(t_data *data, float x_ray, float y_ray);
+
+	//cylinder
+float		cylinder_intersect(t_data *data, t_cylinder *cy);
+float		on_cy(t_data *data, t_cylinder *cy);
+int			get_color_cylinder(t_data *data, t_cylinder *cy);
+t_vector	*get_diffuse_light_cy(t_data *data);
+void		obtain_ray_cy(t_data *data, float x_ray, float y_ray);
+
+	//cylinder2
+int			get_pl_intersect(t_data *data, t_cylinder *cy);
+void		add_plane(t_data *data, t_cylinder *cy);
+int			get_mix_color(t_data *data);
+
 	//maths_util
-int		quadratic_equation(float t[2], float a, float b, float c);
-float	ft_square(float a);
-float	checking_limit(float a, float min, float max);
+int			quadratic_equation(float t[2], float a, float b, float c);
+float		ft_square(float a);
+float		checking_limit(float a, float min, float max);
 
 	//colors
-int		create_rgb(t_vector *colors);
-void	my_mlx_pixel_put(t_data *data, int color);
-void	limit_color(t_vector *color);
-
-int		event(t_data *data);
-
+int			create_rgb(t_vector *colors);
+void		my_mlx_pixel_put(t_data *data, int color);
+void		limit_color(t_vector *color);
+int			event(t_data *data);
 
 	//clear.c
-int		ft_close(t_data *data);
-int		clean(t_data *data, int code_error);
+int			ft_close(t_data *data);
+int			clean(t_data *data, int code_error);
 
 	//init.c
-int		error_allocation(void);
-int		init_struct(t_data *data);
-int		init_data(t_data *data);
-void	init_scene(t_data *data);
+int			error_allocation(void);
+int			init_struct(t_data *data);
+int			init_data(t_data *data);
+void		init_scene(t_data *data);
 #endif
 

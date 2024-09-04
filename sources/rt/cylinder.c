@@ -6,34 +6,43 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 16:16:47 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:03:26 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float	cylinder_intersect(t_data *data, t_plane *pl)
+float	cylinder_intersect(t_data *data, t_cylinder *cy)
 {
-	// float		dist;
-	// float		num;
-	// float		den;
-	// t_vector	*pl_cam;
+	float	b;
+	float	c;
+	float	dist[2];
+	t_vector	*cy_cam;
 
-	// pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
-	// //vec_normalize(pl_cam);
-	// num = vec_dot_product(pl_cam, pl->orientation);
-	// //printf("num = %f\n", num);
-	// den = vec_dot_product(pl->ray, pl->orientation);
-	// 	//printf("den = %f\n", den);
-	// if (den != 0.0)
-	// {
-	// 	dist = num / den;
-	// 	return(dist);
-	// }
-	return (-1);
+	cy_cam = vec_subtract(data->scene->camera->origine, cy->center);
+	b = 2 * vec_dot_product(cy->orientation, cy_cam);
+	c = vec_dot_product(cy_cam, cy_cam)
+		- ft_square(cy->diameter / 2);
+	free(cy_cam);
+	if (quadratic_equation(dist, 1, b, c) == EXIT_FAILURE)
+		return (-1);
+	if (dist[0] < dist[1])
+		return (dist[0]);
+	return (dist[1]);
+}
+float	on_cy(t_data *data, t_cylinder *cy)
+{
+	float	dist;
+	float	height_pos;
+
+	dist = vec_lenght(cy->impact_point, cy->center);
+	height_pos = sqrt((cy->diameter / 2 * cy->diameter / 2) + (dist * dist));
+	if (height_pos <= cy->height / 2)
+		return (OK);
+	return(0);
 }
 
-int	get_color_cylinder(t_data *data)
+int	get_color_cylinder(t_data *data, t_cylinder *cy)
 {
 	int			new_color;
 	t_vector	*diffuse_light;
@@ -42,23 +51,18 @@ int	get_color_cylinder(t_data *data)
 	new_color = 0;
 	diffuse_light = NULL;
 	mix_color = NULL;
-	data->scene->cylinder->dist_cam_cylinder =
-		cylinder_intersect(data, data->scene->cylinder);
-	if (data->scene->cylinder->dist_cam_cylinder >= 0)
+	cy->dist_cam_cylinder = cylinder_intersect(data, cy);
+	if (cy->dist_cam_cylinder >= 0)
 	{
-		mix_color = data->scene->ambient->ambient_light;
-		diffuse_light = get_diffuse_light_pl(data);
-		if (diffuse_light)
-			mix_color = vec_add(data->scene->ambient->ambient_light,
-			diffuse_light);
-		mix_color = vec_add(data->scene->cylinder->color, mix_color);
-		mix_color->x = checking_limit(mix_color->x / 2., 0.0f, 255.0f);
-		mix_color->y = checking_limit(mix_color->y / 2., 0.0f, 255.0f);
-		mix_color->z = checking_limit(mix_color->z / 2., 0.0f, 255.0f);
-		new_color = create_rgb(mix_color);
+		cy->impact_point = vec_add(data->scene->camera->origine,
+			vec_multiplying(cy->ray, cy->dist_cam_cylinder));
+		if (on_cy(data, cy))
+			new_color = get_mix_color(data);
+		else
+			add_plane(data, cy);
 	}
-	free(diffuse_light);
-	free(mix_color);
+	else
+		add_plane(data, cy);
 	return (new_color);
 }
 
@@ -68,9 +72,6 @@ t_vector	*get_diffuse_light_cy(t_data *data)
 	t_vector	*color;
 	float		ratio;
 
-	data->scene->cylinder->impact_point = vec_add(data->scene->camera->origine,
-			vec_multiplying(data->scene->cylinder->ray,
-			data->scene->cylinder->dist_cam_cylinder));
 	norm = vec_subtract(data->scene->cylinder->impact_point,
 			data->scene->cylinder->center);
 	vec_normalize(norm);
@@ -88,16 +89,14 @@ t_vector	*get_diffuse_light_cy(t_data *data)
 	return (color);
 }
 
-void	obtain_ray_pl(t_data *data, float x_ray, float y_ray)
+void	obtain_ray_cy(t_data *data, float x_ray, float y_ray)
 {
 	//t_vector	*for_ray;
 	//for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
-	data->scene->plane->ray= new_vector(x_ray, y_ray, 1.0);
+	data->scene->cylinder->ray= new_vector(x_ray, y_ray, 1.0);
 	printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
-	//data->scene->plane->ray = vec_subtract(for_ray,
+	//data->scene->cylinder->ray = vec_subtract(for_ray,
 	///		data->scene->camera->origine);
-	vec_normalize(data->scene->plane->ray);
+	vec_normalize(data->scene->cylinder->ray);
 	//free(for_ray);
 }
-
-

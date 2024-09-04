@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 14:18:56 by bszabo            #+#    #+#             */
-/*   Updated: 2023/09/04 14:36:44 by bszabo           ###   ########.fr       */
+/*   Created: 2024/09/03 16:31:38 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/09/03 16:31:48 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// check if the character is a letter
-// return 1 if true, 0 if false
+#include "libft.h"
+
 int	ft_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))

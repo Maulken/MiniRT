@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 14:21:55 by bszabo            #+#    #+#             */
-/*   Updated: 2023/09/05 15:32:55 by bszabo           ###   ########.fr       */
+/*   Created: 2024/09/03 16:30:03 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/09/03 16:30:04 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 

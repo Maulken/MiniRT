@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:55:42 by bszabo            #+#    #+#             */
-/*   Updated: 2023/09/07 12:01:23 by bszabo           ###   ########.fr       */
+/*   Updated: 2024/09/03 16:33:31 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,3 @@ void	*ft_memchr(const void *ptr, int c, size_t n)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-int main(void)
-{
-    char str[] = "hello world";
-    char *res1o = memchr(str, 'o', 11);
-    char *res1 = ft_memchr(str, 'o', 11);
-    char *res2o = memchr(str, 'w', 6);
-    char *res2 = ft_memchr(str, 'w', 6);
-    printf("%s | original\n", res1o);
-    printf("%s\n", res1);
-    printf("%s | original\n", res2o);
-    printf("%s\n", res2);
-    return (0);
-}
-*/

@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 11:42:37 by bszabo            #+#    #+#             */
-/*   Updated: 2024/07/16 10:42:43 by vmassoli         ###   ########.fr       */
+/*   Created: 2024/09/03 16:32:56 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/09/03 16:33:11 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// check if the character is printable
-// return 1 if true, 0 if false
+#include "libft.h"
+
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)

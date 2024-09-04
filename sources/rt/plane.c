@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 16:02:50 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:49:05 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ int	get_color_plane(t_data *data)
 			mix_color = vec_add(data->scene->ambient->ambient_light,
 			diffuse_light);
 		mix_color = vec_add(data->scene->plane->color, mix_color);
-		mix_color->x = checking_limit(mix_color->x / 2., 0.0f, 255.0f);
-		mix_color->y = checking_limit(mix_color->y / 2., 0.0f, 255.0f);
-		mix_color->z = checking_limit(mix_color->z / 2., 0.0f, 255.0f);
+		limit_color(mix_color);
 		new_color = create_rgb(mix_color);
 	}
 	free(diffuse_light);
@@ -90,8 +88,9 @@ t_vector	*get_diffuse_light_pl(t_data *data)
 
 void	obtain_ray_pl(t_data *data, float x_ray, float y_ray)
 {
-	//t_vector	*for_ray;
-	//for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
+	// t_vector	*for_ray;
+
+	// for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
 	data->scene->plane->ray= new_vector(x_ray, y_ray, 1.0);
 	printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
 	//data->scene->plane->ray = vec_subtract(for_ray,
