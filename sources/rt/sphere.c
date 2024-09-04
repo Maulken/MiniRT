@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/22 16:13:33 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:46:30 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,26 @@ int	get_color_sphere(t_data *data, t_hit *hit)
 	free(mix_color);
 	return (new_color);
 }
+
+// void	obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp,
+// 			t_vector *x_ray, t_vector *y_ray)
+// {
+// 	t_vector	*ray_without_z;
+
+// 	ray_without_z = vec_add(x_ray, y_ray);
+// 	if (type_ray == FOR_HIT)
+// 	{
+// 		tmp.spheres->ray = vec_add(ray_without_z,
+// 			data->scene->camera->direction);
+// 		vec_normalize(tmp.spheres->ray);
+// 	}
+// 	else
+// 	{
+// 		data->hit->sphere->ray = vec_add(ray_without_z,
+// 			data->scene->camera->direction);
+// 		vec_normalize(data->hit->sphere->ray);
+// 	}
+// }
 
 void	obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp,
 			float x_ray, float y_ray)
