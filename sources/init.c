@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 15:49:55 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:52:12 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_struct(t_data *data)
 	data->view = ft_calloc(1,sizeof(t_view));
 	if (!data->view)
 		return (0);
-	data->view->x = ft_calloc(1, sizeof(t_vector));
-	data->view->y = ft_calloc(1, sizeof(t_vector));
+	data->view->viewplane_x = ft_calloc(1, sizeof(t_vector));
+	data->view->viewplane_y = ft_calloc(1, sizeof(t_vector));
 	data->scene = NULL;
 	data->hit = ft_calloc(1, sizeof(t_hit));
 	if (!data->hit)
@@ -47,8 +47,8 @@ int init_data(t_data *data)
 	data->view->x_pixel = 0;
 	data->view->y_pixel = 0;
 	data->view->width = 800;
-	data->view->x = NULL;
-	data->view->y = NULL;
+	data->view->viewplane_x = NULL;
+	data->view->viewplane_y = NULL;
 	data->view->distance = 0;
 	data->hit->distance = INFINITY;
 	data->hit->cylinder = NULL;

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 15:50:12 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:20:50 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_view
 	float		x_pixel;
 	float		y_pixel;
 	float		distance;
-	t_vector	*x;
-	t_vector	*y;
+	t_vector	*viewplane_x;
+	t_vector	*viewplane_y;
 }				t_view;
 
 typedef struct s_data // data principal . pour la mlx
@@ -201,7 +201,9 @@ t_vector	*vec_cross(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
+// int			get_hit(t_data *data, t_scene tmp, t_vector *x_ray, t_vector *y_ray);
 int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
+// int			get_color(t_data *data, t_vector *x_ray, t_vector *y_ray);
 int			get_color(t_data *data, float x_ray, float y_ray);
 void		ray_tracing(t_data *data);
 
@@ -209,6 +211,7 @@ void		ray_tracing(t_data *data);
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
+// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector *x_ray, t_vector *y_ray);
 void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
