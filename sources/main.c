@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/22 10:47:53 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:01:26 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	key_hook(int keycode, t_data *data)
 int main(int argc, char **argv)
 {
 	t_data data;
-		
+	
 	init_struct(&data);
 	init_scene(&data);
 	init_data(&data);
@@ -51,5 +51,5 @@ int main(int argc, char **argv)
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
 	free(data.mlx);
-	return(clean(&data,0));
+	return(clean(&data, 0));
 }

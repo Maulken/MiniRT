@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 18:01:01 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:48:47 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ static int	init_cylinder(t_cylinder *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
-	current->diameter = add_float(tmp[3]);
-	current->height = add_float(tmp[4]);
+	// current->diameter = add_float(tmp[3]);
+	current->diameter = ft_atof(tmp[3]);
+	// current->height = add_float(tmp[4]);
+	current->height = ft_atof(tmp[4]);
 	current->color = add_color_int(tmp[5]);
 	current->impact_point = NULL;
 	current->ray = NULL;

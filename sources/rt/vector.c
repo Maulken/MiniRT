@@ -6,32 +6,32 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:12:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/19 20:32:46 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:01:19 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_vector *new_vector(float x, float y, float z)
+t_vector new_vector(float x, float y, float z)
 {
-	t_vector	*vec;
+	t_vector	vec;
 
-	vec = malloc(sizeof(t_vector));
-	if(!vec)
-		return(NULL);
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
+	// vec = malloc(sizeof(t_vector));
+	// if(!vec)
+	// 	return(NULL);
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
 
-	return(vec);
+	return (vec);
 }
 
-t_vector *vec_subtract(t_vector *vec1, t_vector *vec2)
+t_vector vec_subtract(t_vector *vec1, t_vector *vec2)
 {
-	t_vector	*result;
+	t_vector	result;
 
 	result = new_vector(vec1->x - vec2->x, vec1->y - vec2->y, vec1->z - vec2->z);
-	return(result);
+	return (result);
 }
 
 float	vec_lenght(t_vector *vec1, t_vector *vec2)
@@ -39,7 +39,7 @@ float	vec_lenght(t_vector *vec1, t_vector *vec2)
 	float result;
 
 	result = sqrt((vec1->x * vec2->x) + (vec1->y * vec2->y) + (vec1->z * vec2->z));
-	return(result);
+	return (result);
 }
 
 void	vec_normalize(t_vector *vec)
@@ -57,5 +57,5 @@ float	vec_dot_product(t_vector *vec1, t_vector *vec2)
 	float	result;
 
 	result = ((vec1->x * vec2->x) + (vec1->y * vec2->y) + (vec1->z * vec2->z));
-	return(result);
+	return (result);
 }

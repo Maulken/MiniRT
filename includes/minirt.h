@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 13:20:50 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:48:58 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int		check_float_point(char **tab);
 t_vector	*add_vector_float(char *str);
 t_vector	*add_color_int(char *str);
 int			add_int(char *str);
-float		add_float(char *str);
+// float		add_float(char *str);
 
 	//check_object.c
 char	**check_error_type(char *str, char **tmp);
@@ -155,7 +155,7 @@ int		ft_is_space(char c);
 int		ft_is_digit(char c);
 int		ft_is_good_char(char c);
 int		check_num(char *tab, char *str, int size_setting);
-double	ft_atof_custom(const char *str);
+// double	ft_atof_custom(const char *str);
 
 	//check_type.c
 int		check_correct_intxyz(char **tmp, int j);
@@ -164,7 +164,8 @@ int		check_correct_char(char **tmp, int j);
 int		check_correct_int(char **tmp, int j);
 int		check_correct_float(char **tmp, int j);
 	//ft_atof.c
-double	ft_atof_custom(const char *str);
+// double	ft_atof_custom(const char *str);
+double	ft_atof(char *s);
 
 char	**ft_split_espace(char const *str);
 
@@ -182,37 +183,38 @@ void	free_light(t_light *light);
 void	free_camera(t_camera *camera);
 void	free_ambient(t_ambient *ambient);
 void	free_inside_hit(t_hit *hit);
+void	free_scene(t_data *data);
 int		clean(t_data *data, int code_error);
 
 
 	//vector.c
-t_vector		*new_vector(float x, float y, float z);
-t_vector		*vec_subtract(t_vector *vec1, t_vector *vec2);
+t_vector		new_vector(float x, float y, float z);
+t_vector		vec_subtract(t_vector *vec1, t_vector *vec2);
 void			vec_normalize(t_vector *vec);
 float			vec_lenght(t_vector *vec1, t_vector *vec2);
 float			vec_dot_product(t_vector *vec1, t_vector *vec2);
 
 	//vector2.c
-t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
-t_vector	*vec_multiplying(t_vector *vec1, float nbr);
+t_vector	vec_add(t_vector *vec1, t_vector *vec2);
+t_vector	vec_multiplying(t_vector *vec1, float nbr);
 bool		vec_compare(t_vector *vec1, t_vector *vec2);
-t_vector	*vec_vec_multi(t_vector *vec1, t_vector *vec2);
-t_vector	*vec_cross(t_vector *vec1, t_vector *vec2);
+t_vector	vec_vec_multi(t_vector *vec1, t_vector *vec2);
+t_vector	vec_cross(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
-// int			get_hit(t_data *data, t_scene tmp, t_vector *x_ray, t_vector *y_ray);
-int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
-// int			get_color(t_data *data, t_vector *x_ray, t_vector *y_ray);
-int			get_color(t_data *data, float x_ray, float y_ray);
+int			get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray);
+// int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
+int			get_color(t_data *data, t_vector x_ray, t_vector y_ray);
+// int			get_color(t_data *data, float x_ray, float y_ray);
 void		ray_tracing(t_data *data);
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
-t_vector	*get_diffuse_light(t_data *data, t_hit *hit);
-// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector *x_ray, t_vector *y_ray);
-void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
+t_vector	get_diffuse_light(t_data *data, t_hit *hit);
+void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector x_ray, t_vector y_ray);
+// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
 	//maths_util
@@ -228,9 +230,6 @@ void	limit_color(t_vector *color);
 int		event(t_data *data);
 
 
-	//clear.c
-int		ft_close(t_data *data);
-int		clean(t_data *data, int code_error);
 
 	//init.c
 int		error_allocation(void);

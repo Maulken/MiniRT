@@ -6,37 +6,37 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 13:20:00 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:19:49 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// void	get_view_plane(t_data *data)
-// {
-// 	t_vector	*up_y;
-
-// 	up_y = new_vector(0,1,0);
-// 	data->view->distance = 1
-// 		/ (2 * tan(data->scene->camera->fov / 2 * (M_PI / 180)));
-// 	data->view->viewplane_x = vec_cross(data->scene->camera->direction, up_y);
-// 	vec_normalize(data->view->viewplane_x);
-// 	data->view->viewplane_y = vec_cross(data->scene->camera->direction,
-// 		data->view->viewplane_x);
-// 	vec_normalize(data->view->viewplane_y);
-// }
 void	get_view_plane(t_data *data)
 {
-	float	aspect_ratio;
-	float	width;
-	float	height;
+	t_vector	up_y;
 
-	aspect_ratio = data->view->width / data->view->height;
-	width = 2 * tan(data->scene->camera->fov / 2 * (M_PI / 180));
-	height = width / aspect_ratio;
-	data->view->x_pixel = width / data->view->width;
-	data->view->y_pixel = height / data->view->height;
+	up_y = new_vector(0,1,0);
+	data->view->distance = 1
+		/ (2 * tan(data->scene->camera->fov / 2 * (M_PI / 180)));
+	*data->view->viewplane_x = vec_cross(data->scene->camera->direction, &up_y);
+	vec_normalize(data->view->viewplane_x);
+	*data->view->viewplane_y = vec_cross(data->scene->camera->direction,
+		data->view->viewplane_x);
+	vec_normalize(data->view->viewplane_y);
 }
+// void	get_view_plane(t_data *data)
+// {
+// 	float	aspect_ratio;
+// 	float	width;
+// 	float	height;
+
+// 	aspect_ratio = data->view->width / data->view->height;
+// 	width = 2 * tan(data->scene->camera->fov / 2 * (M_PI / 180));
+// 	height = width / aspect_ratio;
+// 	data->view->x_pixel = width / data->view->width;
+// 	data->view->y_pixel = height / data->view->height;
+// }
 
 // int	is_plane(t_data *data, t_scene *tmp, int object)
 // {
@@ -88,8 +88,8 @@ int	is_sphere(t_data *data, t_scene tmp)
 	return (NONE);
 }
 
-// int	get_hit(t_data *data, t_scene tmp, t_vector *x_ray, t_vector *y_ray)
-int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
+int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
+// int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
 {
 	int	object;
 	
@@ -128,8 +128,8 @@ void	reinit_hit(t_hit *hit)
 		hit->cylinder = NULL;
 }
 
-// int	get_color(t_data *data, t_vector *x_ray, t_vector *y_ray)
-int	get_color(t_data *data, float x_ray, float y_ray)
+int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
+// int	get_color(t_data *data, float x_ray, float y_ray)
 {
 	int	color;
 	int	object;
@@ -161,26 +161,32 @@ void	ray_tracing(t_data *data)
 {
 	float	x_scale;
 	float	y_scale;
-	float	x_ray;
-	float	y_ray;
-	// t_vector	*x_ray;
-	// t_vector	*y_ray;
+	// float	x_ray;
+	// float	y_ray;
+	t_vector	x_ray;
+	t_vector	y_ray;
 	
+	x_ray.x = 0;
+	x_ray.y = 0;
+	x_ray.z = 0;
+	y_ray.x = 0;
+	y_ray.y = 0;
+	y_ray.z = 0;
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);
 	while (y_scale >= (data->view->height / 2) * (-1))
 	{
-		y_ray = y_scale * data->view->y_pixel;
-		// y_ray = vec_multiplying(data->view->viewplane_y, y_scale);
+		// y_ray = y_scale * data->view->y_pixel;
+		y_ray = vec_multiplying(data->view->viewplane_y, y_scale);
 		x_scale = (data->view->width / 2) * (-1);
 		data->mlx_x = 0;
 		while (x_scale <= data->view->width / 2)
 		{
-			x_ray = x_scale * data->view->x_pixel;
-			// x_ray = vec_multiplying(data->view->viewplane_x, x_scale);
-			my_mlx_pixel_put(data, get_color(data, x_ray, y_ray));
-			// my_mlx_pixel_put(data, get_color(data, x_ray, y_ray)); //avec t_vec pour x_ray et y_ray
+			// x_ray = x_scale * data->view->x_pixel;
+			x_ray = vec_multiplying(data->view->viewplane_x, x_scale);
+			// my_mlx_pixel_put(data, get_color(data, x_ray, y_ray));
+			my_mlx_pixel_put(data, get_color(data, x_ray, y_ray)); //avec t_vec pour x_ray et y_ray
 			x_scale++;
 			data->mlx_x++;
 		}
