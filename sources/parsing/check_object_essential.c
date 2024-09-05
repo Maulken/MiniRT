@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 18:48:09 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:04:36 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	check_ambiance(char *tab, t_data *data)
 		free_tab(tmp);
 		return (1);
 	}
-	printf("tmp[1] %s\n", tmp[1]);
-	// data->scene->ambient->ratio = add_float(tmp[1]);
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
-	printf("ratio %f\n", data->scene->ambient->ratio);
 	data->scene->ambient->colors = add_color_int(tmp[2]);
 	*data->scene->ambient->ambient_light = vec_multiplying(
 			data->scene->ambient->colors, data->scene->ambient->ratio);
@@ -85,7 +82,6 @@ int	check_light(char *tab, t_data *data)
 int	init_sphere(t_sphere *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
-	// current->diameter = add_float(tmp[2]);
 	current->diameter = ft_atof(tmp[2]);
 	current->color = add_color_int(tmp[3]);
 	current->impact_point = NULL;

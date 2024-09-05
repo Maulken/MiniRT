@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 10:47:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 18:52:01 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:33:06 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,13 @@ int	init_struct_sphere(t_sphere *sphere)
 	if (sphere->ray_light == NULL)
 		return (error_allocation());
 	sphere->next = NULL;
+	sphere->diameter = 0.0;
+	sphere->dist_light_sphere = -1;
+	sphere->dist_cam_sphere = -1;
 	return (0);
 }
 
-int	init_plane(t_plane *plane)
+int	init_struct_plane(t_plane *plane)
 {
 	plane->origine = ft_calloc(1, sizeof(t_vector));
 	if (plane->origine == NULL)
@@ -115,7 +118,7 @@ int	init_plane(t_plane *plane)
 	return (0);
 }
 
-int	init_cylinder(t_cylinder *cylinder)
+int	init_struct_cy(t_cylinder *cylinder)
 {
 	cylinder->center = ft_calloc(1, sizeof(t_vector));
 	if (cylinder->center == NULL)
@@ -141,27 +144,31 @@ int	init_cylinder(t_cylinder *cylinder)
 
 int	init_struct_hit(t_data *data)
 {
-	data->hit = ft_calloc(1, sizeof(t_hit));
-	if (!data->hit)
-		return (error_allocation());
-	data->hit->sphere = ft_calloc(1, sizeof(t_sphere));
-	if (!data->hit->sphere)
-		return (error_allocation());
-	init_struct_sphere(data->hit->sphere);
-	data->hit->plane = ft_calloc(1, sizeof(t_plane));
-	if (!data->hit->plane)
-		return (error_allocation());
-	init_plane(data->hit->plane);
-	data->hit->cylinder = ft_calloc(1, sizeof(t_cylinder));
-	if (!data->hit->cylinder)
-		return (error_allocation());
+	// data->hit->sphere = ft_calloc(1, sizeof(t_sphere));
+	// if (!data->hit->sphere)
+	// 	return (error_allocation());
+	// init_struct_sphere(data->hit->sphere);
+	// data->hit->plane = ft_calloc(1, sizeof(t_plane));
+	// if (!data->hit->plane)
+	// 	return (error_allocation());
+	// init_struct_plane(data->hit->plane);
+	// data->hit->cylinder = ft_calloc(1, sizeof(t_cylinder));
+	// if (!data->hit->cylinder)
+	// 	return (error_allocation());
+	// init_struct_cy(data->hit->cylinder);
+	data->hit->sphere = NULL;
+	data->hit->plane = NULL;
+	data->hit->cylinder = NULL;
 	return (0);
 }
 
 int	init_struct(t_data *data)
 {
 	init_struct_view(data);
-	init_struct_hit(data);
+	data->hit = ft_calloc(1, sizeof(t_hit));
+	if (!data->hit)
+		return (error_allocation());
+	// init_struct_hit(data);
 	data->white_light = ft_calloc(1, sizeof(t_vector));
 	if (!data->white_light)
 		return (error_allocation());
@@ -218,8 +225,7 @@ int	init_ambient(t_ambient *ambient)
 }
 
 void init_scene(t_data *data)
-{   
-	// data->scene = NULL;
+{
 	data->scene = ft_calloc(1, sizeof(t_scene));
 	if (data->scene == NULL)
 	{
@@ -233,8 +239,6 @@ void init_scene(t_data *data)
 		return ;
 	}
 	init_light(data->scene->light);
-	// if (data->scene->light == NULL)
-	// 	free_scene(data);
 	data->scene->camera = ft_calloc(1, sizeof(t_camera));
 	if (data->scene->camera == NULL)
 	{
@@ -242,11 +246,11 @@ void init_scene(t_data *data)
 		return ;
 	}
 	init_camera(data->scene->camera);
-	// if(data->scene->camera == NULL)
-	// {
-	// 	free_scene(data);
-	// 	// error_allocation();
-	// }
+	if(data->scene->camera == NULL)
+	{
+		free_scene(data->scene);
+		// error_allocation();
+	}
 	data->scene->ambient = ft_calloc(1, sizeof(t_ambient));
 	if(data->scene->ambient == NULL)
 	{
@@ -254,21 +258,19 @@ void init_scene(t_data *data)
 		return ;
 	}
 	init_ambient(data->scene->ambient);
-	// if(data->scene->ambient == NULL)
-	// 	free_scene(data);
-	data->scene->spheres = ft_calloc(1, sizeof(t_sphere));
-	init_struct_sphere(data->scene->spheres);
+	// data->scene->spheres = ft_calloc(1, sizeof(t_sphere));
 	// if(data->scene->spheres == NULL)
 	// 	free_scene(data);
-	data->scene->plane = ft_calloc(1, sizeof(t_plane));
-	init_plane(data->scene->plane);
+	// init_struct_sphere(data->scene->spheres);
+	// data->scene->plane = ft_calloc(1, sizeof(t_plane));
 	// if(data->scene->plane == NULL)
 	// 	free_scene(data);
-	data->scene->cylinder = ft_calloc(1, sizeof(t_cylinder));
-	init_cylinder(data->scene->cylinder);
+	// init_struct_plane(data->scene->plane);
+	// data->scene->cylinder = ft_calloc(1, sizeof(t_cylinder));
 	// if(data->scene->cylinder == NULL)
 	// 	free_scene(data);
-	// data->scene->spheres = NULL;
-	// data->scene->cylinder = NULL;
-	// data->scene->plane = NULL;
+	// init_struct_cy(data->scene->cylinder);
+	data->scene->spheres = NULL;
+	data->scene->cylinder = NULL;
+	data->scene->plane = NULL;
 }

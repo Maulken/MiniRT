@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 17:10:47 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:00:01 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_close(t_data *data)
 {
 	mlx_loop_end(data->mlx);
-	clean(data, 0);
+	// clean(data, 0);
 	return (0);
 }
 
@@ -174,21 +174,20 @@ void	free_view(t_view *view)
 	free(view->viewplane_y);
 }
 
-void	free_scene(t_data *data)
+void	free_scene(t_scene *scene)
 {
-		if (data->scene->plane != NULL)
-			free_plane_list(data->scene->plane);
-		if (data->scene->cylinder != NULL)
-			free_cylinder_list(data->scene->cylinder);
-		if (data->scene->spheres != NULL)
-			free_sphere_list(data->scene->spheres);
-		if (data->scene->light != NULL)
-			free_light(data->scene->light);
-		if (data->scene->camera != NULL)
-			free_camera(data->scene->camera);
-		if (data->scene->ambient != NULL)
-			free_ambient(data->scene->ambient);
-		free(data->scene);
+		if (scene->plane != NULL)
+			free_plane_list(scene->plane);
+		if (scene->cylinder != NULL)
+			free_cylinder_list(scene->cylinder);
+		if (scene->spheres != NULL)
+			free_sphere_list(scene->spheres);
+		if (scene->light != NULL)
+			free_light(scene->light);
+		if (scene->camera != NULL)
+			free_camera(scene->camera);
+		if (scene->ambient != NULL)
+			free_ambient(scene->ambient);
 }
 
 int	clean(t_data *data, int code_error)
@@ -200,7 +199,8 @@ int	clean(t_data *data, int code_error)
 	}
 	if (data->scene != NULL)
 	{
-		free_scene(data);
+		free_scene(data->scene);
+		free(data->scene);
 	}
 	if (data->view != NULL)
 	{
@@ -209,7 +209,7 @@ int	clean(t_data *data, int code_error)
 	}
 	if (data->hit != NULL)
 	{
-		free_inside_hit(data->hit);
+		// free_inside_hit(data->hit);
 		free(data->hit);
 	}
 	return (code_error);

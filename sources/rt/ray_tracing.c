@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 14:19:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:31:31 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,27 @@ int	is_sphere(t_data *data, t_scene tmp)
 }
 
 int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
-// int	get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray)
 {
+	// printf("\e[35mGET_HIT\e[0m\n");
 	int	object;
+	t_sphere	*next;
 	
 	object = NONE;
 	while (tmp.spheres)
 	{
-		obtain_ray_sphere(data, FOR_HIT, tmp, x_ray, y_ray);
+		next = tmp.spheres->next;
+		init_tmp_ray(&tmp, SPHERE);
+		// printf("BEFORE ray %f %f\n", tmp.spheres->ray->x, tmp.spheres->ray->y);
+		// printf("to check if there is something in sphere, diameter %f\n", tmp->spheres->diameter);
+		*tmp.spheres->ray = obtain_ray_sphere(data, x_ray, y_ray);
+		// printf("AFTER ray %f %f\n", tmp.spheres->ray->x, tmp.spheres->ray->y);
 		object = is_sphere(data, tmp);
+		// printf("object %d\n", object);
 		free(tmp.spheres->ray);
-		tmp.spheres->ray = NULL;
-		// free_inside_sphere(tmp.spheres);
-		tmp.spheres = tmp.spheres->next;
+		// tmp->spheres->ray = NULL;
+		// free_sphere(tmp.spheres);
+		// printf("HITdata.scene.sphere, diameter %f\n", data->scene->spheres->diameter);
+		tmp.spheres = next;
 	}
 	// while (tmp->plane)
 	// {
@@ -115,36 +123,90 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 	// 	object = is_cylinder(data, tmp, object);
 	// 	tmp->cylinder = tmp->cylinder->next;
 	// }
+	// printf("\e[36mGET_HIT fin\e[0m\n");
 	return (object);
 }
 
-void	reinit_hit(t_hit *hit)
+
+void	init_tmp_ray(t_scene *tmp, t_object object)
 {
-	if (hit->sphere != NULL)
-		hit->sphere = NULL;
-	if (hit->plane != NULL)
-		hit->plane = NULL;
-	if (hit->cylinder != NULL)
-		hit->cylinder = NULL;
+	if (tmp->spheres && object == SPHERE)
+	{
+		tmp->spheres->ray = ft_calloc(1, sizeof(t_vector));
+		if (tmp->spheres->ray == NULL)
+			error_allocation();
+		return ;
+	}
+	else if (tmp->plane && object == PLANE)
+	{
+		tmp->plane->ray = ft_calloc(1, sizeof(t_vector));
+		if (tmp->plane->ray == NULL)
+			error_allocation();
+		return ;
+	}
+	else if (tmp->cylinder && object == CYLINDER)
+	{
+		tmp->cylinder->ray = ft_calloc(1, sizeof(t_vector));
+		if (tmp->cylinder->ray == NULL)
+			error_allocation();
+		return ;
+	}
 }
 
-int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
-// int	get_color(t_data *data, float x_ray, float y_ray)
+void	free_tmp(t_scene *tmp)
 {
+	if (tmp->spheres->ray != NULL)
+		free(tmp->spheres->ray);
+	else if (tmp->plane->ray != NULL)
+		free(tmp->plane->ray);
+	else if (tmp->cylinder->ray != NULL)
+		free(tmp->cylinder->ray);
+}
+
+static void	init_hit_sphere(t_hit *hit)
+{
+	hit->sphere->ray = ft_calloc(1, sizeof(t_vector));
+	if (hit->sphere->ray == NULL)
+		error_allocation();
+	hit->sphere->ray_light = ft_calloc(1, sizeof(t_vector));
+	if (hit->sphere->ray_light == NULL)
+		error_allocation();
+	hit->sphere->impact_point = ft_calloc(1, sizeof(t_vector));
+	if (hit->sphere->impact_point == NULL)
+		error_allocation();
+	hit->sphere->dist_cam_sphere = 0;
+	hit->sphere->dist_light_sphere = 0;
+}
+
+// static void	reinit_hit(t_hit *hit)
+// {
+// 	if (hit->sphere->ray != NULL)
+// 		free(hit->sphere->ray);
+// 	if (hit->sphere->ray_light != NULL)
+// 		free(hit->sphere->ray_light);
+// 	if (hit->sphere->impact_point != NULL)
+// 		free(hit->sphere->impact_point);
+// }
+
+int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
+{
+	// printf("\e[35mGET_COLOR\e[0m\n");
 	int	color;
 	int	object;
 	t_scene	tmp;
-	
-	color = 0;
-	// color = 0xff0000;
+
+	// color = 0;
+	color = 0x00ff00;
 	tmp = *data->scene;
-	// data->hit->distance = INFINITY;
-	data->hit->distance = 100.0;
+	data->hit->distance = INFINITY;
 	object = NONE;
-	object = get_hit(data, tmp, x_ray, y_ray); 
+	object = get_hit(data, tmp, x_ray, y_ray);
 	if (object == SPHERE)
 	{
-		obtain_ray_sphere(data, FOR_COLOR, tmp, x_ray, y_ray);
+		init_hit_sphere(data->hit);
+		printf("\e[33mSPHERE\e[0m\n");
+		// printf("data.hit.sphere.ray, %f %f\n", data->hit->sphere->ray->x, data->hit->sphere->ray->y);
+		*data->hit->sphere->ray = obtain_ray_sphere(data, x_ray, y_ray);
 		color = get_color_sphere(data, data->hit);
 		// printf("color %d\n", color);
 	}
@@ -153,7 +215,8 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	// if (object == CYLINDER)
 	// 	color = get_color_cylinder(data->hit);
 	// printf("before color\n");
-	reinit_hit(data->hit);
+	// printf("FIN COLOR data.scene.sphere, diameter %f\n", data->scene->spheres->diameter);
+	// reinit_hit(data->hit);
 	return (color);
 }
 

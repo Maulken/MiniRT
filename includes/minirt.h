@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 18:48:58 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:28:56 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	free_light(t_light *light);
 void	free_camera(t_camera *camera);
 void	free_ambient(t_ambient *ambient);
 void	free_inside_hit(t_hit *hit);
-void	free_scene(t_data *data);
+void	free_scene(t_scene *scene);
 int		clean(t_data *data, int code_error);
 
 
@@ -208,13 +208,16 @@ int			get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray);
 int			get_color(t_data *data, t_vector x_ray, t_vector y_ray);
 // int			get_color(t_data *data, float x_ray, float y_ray);
 void		ray_tracing(t_data *data);
+void		init_tmp_ray(t_scene *tmp, t_object object);
+
 
 	//sphere
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 t_vector	get_diffuse_light(t_data *data, t_hit *hit);
-void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector x_ray, t_vector y_ray);
+// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector x_ray, t_vector y_ray);
 // void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
+t_vector	obtain_ray_sphere(t_data *data, t_vector x_ray, t_vector y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
 	//maths_util
@@ -236,5 +239,5 @@ int		error_allocation(void);
 int		init_struct(t_data *data);
 int		init_data(t_data *data);
 void	init_scene(t_data *data);
+int		init_struct_hit(t_data *data);
 #endif
-
