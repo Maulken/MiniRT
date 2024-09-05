@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:05:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/05 08:58:23 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_num(char *tab, char *str, int size_setting)
 		while (tab[i] != ' ' && tab[i] != '\t' && tab[i] != '\0')
 		{
 			if (ft_is_good_char(tab[i]))
-				return (ft_msg_error("A caracter in the line is not valid.", 1));
+				return (ft_msg_error(" caracter in the line is not valid.", 1));
 			i++;
 		}
 		while (tab[i] == ' ' || tab[i] == '\t')

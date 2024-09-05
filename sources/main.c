@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/22 16:39:59 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/05 08:50:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ int main(int argc, char **argv)
 
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean_data(&data, 1));
-	data.mlx = mlx_init();
-	if (data.mlx == NULL)
-		return (printf("ERROR : MLX"),clean_data(&data, 1));
-	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
-	event(&data);
-	mlx_key_hook(data.win, key_hook, &data);
-	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
-	mlx_loop(data.mlx);
-	mlx_destroy_window(data.mlx, data.win);
-	mlx_destroy_display(data.mlx);
-	free(data.mlx);
+	// data.mlx = mlx_init();
+	// if (data.mlx == NULL)
+	// 	return (printf("ERROR : MLX"),clean_data(&data, 1));
+	// data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
+	// event(&data);
+	// mlx_key_hook(data.win, key_hook, &data);
+	// mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
+	// mlx_loop(data.mlx);
+	// mlx_destroy_window(data.mlx, data.win);
+	// mlx_destroy_display(data.mlx);
+	// free(data.mlx);
+	printf("clear\n");
 	return(clean_data(&data,0));
 }
