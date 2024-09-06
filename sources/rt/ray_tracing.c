@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/05 15:31:31 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:35:55 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	get_view_plane(t_data *data)
 
 	up_y = new_vector(0,1,0);
 	data->view->distance = 1
-		/ (2 * tan(data->scene->camera->fov / 2 * (M_PI / 180)));
+		/ (2 * tanf(data->scene->camera->fov / 2 * (M_PI / 180)));
+	// data->view->distance = 1
+	// 	/ (2 * tanf(data->scene->camera->fov / 2));
 	*data->view->viewplane_x = vec_cross(data->scene->camera->direction, &up_y);
 	vec_normalize(data->view->viewplane_x);
 	*data->view->viewplane_y = vec_cross(data->scene->camera->direction,
@@ -78,8 +80,9 @@ int	is_sphere(t_data *data, t_scene tmp)
 	dist = 0;
 	dist = sphere_intersect(data->scene->camera->origine,
 			tmp.spheres->ray, tmp.spheres);
-	// printf("dist %f\n", dist);
-	if (dist < data->hit->distance && dist > 0)
+	if (dist != -1)
+		printf("dist %f\n", dist);
+	if (dist < data->hit->distance && dist > 1)
 	{
 		data->hit->distance = dist;
 		data->hit->sphere = tmp.spheres;
@@ -99,16 +102,11 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 	{
 		next = tmp.spheres->next;
 		init_tmp_ray(&tmp, SPHERE);
-		// printf("BEFORE ray %f %f\n", tmp.spheres->ray->x, tmp.spheres->ray->y);
-		// printf("to check if there is something in sphere, diameter %f\n", tmp->spheres->diameter);
 		*tmp.spheres->ray = obtain_ray_sphere(data, x_ray, y_ray);
-		// printf("AFTER ray %f %f\n", tmp.spheres->ray->x, tmp.spheres->ray->y);
+		// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 		object = is_sphere(data, tmp);
 		// printf("object %d\n", object);
 		free(tmp.spheres->ray);
-		// tmp->spheres->ray = NULL;
-		// free_sphere(tmp.spheres);
-		// printf("HITdata.scene.sphere, diameter %f\n", data->scene->spheres->diameter);
 		tmp.spheres = next;
 	}
 	// while (tmp->plane)
@@ -178,15 +176,15 @@ static void	init_hit_sphere(t_hit *hit)
 	hit->sphere->dist_light_sphere = 0;
 }
 
-// static void	reinit_hit(t_hit *hit)
-// {
-// 	if (hit->sphere->ray != NULL)
-// 		free(hit->sphere->ray);
-// 	if (hit->sphere->ray_light != NULL)
-// 		free(hit->sphere->ray_light);
-// 	if (hit->sphere->impact_point != NULL)
-// 		free(hit->sphere->impact_point);
-// }
+static void	reinit_hit(t_hit *hit)
+{
+	if (hit->sphere->ray != NULL)
+		free(hit->sphere->ray);
+	if (hit->sphere->ray_light != NULL)
+		free(hit->sphere->ray_light);
+	if (hit->sphere->impact_point != NULL)
+		free(hit->sphere->impact_point);
+}
 
 int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 {
@@ -203,12 +201,13 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	object = get_hit(data, tmp, x_ray, y_ray);
 	if (object == SPHERE)
 	{
+		// printf("center hit %f %f %f\n", data->hit->sphere->center->x, data->hit->sphere->center->y, data->hit->sphere->center->z);
 		init_hit_sphere(data->hit);
-		printf("\e[33mSPHERE\e[0m\n");
-		// printf("data.hit.sphere.ray, %f %f\n", data->hit->sphere->ray->x, data->hit->sphere->ray->y);
+		printf("\e[32mSPHERE\e[0m\n");
+		// printf("diam %f\n", data->hit->sphere->diameter);
 		*data->hit->sphere->ray = obtain_ray_sphere(data, x_ray, y_ray);
 		color = get_color_sphere(data, data->hit);
-		// printf("color %d\n", color);
+		reinit_hit(data->hit);
 	}
 	// if (object == PLANE)
 	// 	color = get_color_plane(data->hit);
@@ -216,7 +215,6 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	// 	color = get_color_cylinder(data->hit);
 	// printf("before color\n");
 	// printf("FIN COLOR data.scene.sphere, diameter %f\n", data->scene->spheres->diameter);
-	// reinit_hit(data->hit);
 	return (color);
 }
 

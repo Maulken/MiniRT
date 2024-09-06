@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 09:12:25 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:53:11 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,10 @@ void	free_camera(t_camera *camera)
 
 void	free_ambient(t_ambient *ambient)
 {
-	free(ambient->colors);
-	free(ambient->ambient_light);
+	if (ambient->colors != NULL)
+		free(ambient->colors);
+	if (ambient->ambient_light != NULL)
+		free(ambient->ambient_light);
 	free(ambient);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/05 13:55:12 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:42:51 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 	t_vector	origine_sphere;
 	
 	origine_sphere = vec_subtract(origin, sph->center);
-	b = 2 * vec_dot_product(direction, &origine_sphere);
+	b = 2 * vec_dot_product(&origine_sphere, direction);
 	c = vec_dot_product(&origine_sphere, &origine_sphere)
 		- ft_square(sph->diameter / 2);
-	// free(origine_sphere);
 	if (quadratic_equation(dist, 1, b, c) == EXIT_FAILURE)
 		return (-1);
 	if (dist[0] < dist[1])
@@ -90,12 +89,15 @@ int	get_color_sphere(t_data *data, t_hit *hit)
 t_vector	obtain_ray_sphere(t_data *data, t_vector x_ray, t_vector y_ray)
 {
 	t_vector	ray_without_z;
+	t_vector	z;
 	t_vector	result;
 
 	ray_without_z = vec_add(&x_ray, &y_ray);
-	// printf("ray_without_z %f %f %f\n", ray_without_z.x, ray_without_z.y, ray_without_z.z);
-	result = vec_add(&ray_without_z, data->scene->camera->direction);
+	// printf("view dist %f\n", data->view->distance);
+	z = vec_multiplying(data->scene->camera->direction, data->view->distance);
+	result = vec_add(&ray_without_z, &z);
 	vec_normalize(&result);
+	// printf("result %f %f %f\n", result.x, result.y, result.z);
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/05 15:28:56 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:15:59 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int		check_float_point(char **tab);
 t_vector	*add_vector_float(char *str);
 t_vector	*add_color_int(char *str);
 int			add_int(char *str);
-// float		add_float(char *str);
 
 	//check_object.c
 char	**check_error_type(char *str, char **tmp);
@@ -155,7 +154,6 @@ int		ft_is_space(char c);
 int		ft_is_digit(char c);
 int		ft_is_good_char(char c);
 int		check_num(char *tab, char *str, int size_setting);
-// double	ft_atof_custom(const char *str);
 
 	//check_type.c
 int		check_correct_intxyz(char **tmp, int j);
@@ -164,7 +162,6 @@ int		check_correct_char(char **tmp, int j);
 int		check_correct_int(char **tmp, int j);
 int		check_correct_float(char **tmp, int j);
 	//ft_atof.c
-// double	ft_atof_custom(const char *str);
 double	ft_atof(char *s);
 
 char	**ft_split_espace(char const *str);
@@ -215,8 +212,6 @@ void		init_tmp_ray(t_scene *tmp, t_object object);
 float		sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 t_vector	get_diffuse_light(t_data *data, t_hit *hit);
-// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, t_vector x_ray, t_vector y_ray);
-// void		obtain_ray_sphere(t_data *data, t_ray type_ray, t_scene tmp, float x_ray, float y_ray);
 t_vector	obtain_ray_sphere(t_data *data, t_vector x_ray, t_vector y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
@@ -238,6 +233,6 @@ int		event(t_data *data);
 int		error_allocation(void);
 int		init_struct(t_data *data);
 int		init_data(t_data *data);
-void	init_scene(t_data *data);
+int		init_scene(t_data *data);
 int		init_struct_hit(t_data *data);
 #endif
