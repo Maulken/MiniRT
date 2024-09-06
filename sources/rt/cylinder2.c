@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 12:02:17 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:13:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,24 @@ int	get_mix_color(t_data *data)
 	free(diffuse_light);
 	free(mix_color);
 	return (new_color);
+}
+int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
+{
+	t_vector	*ray_cross;
+	float		a;
+	float		b;
+	float		c;
+
+	ray_cross = vec_cross(vec_subtract(data->scene->camera->origine,
+		cy->center), cy->orientation);
+	// printf("ray_cross x = %f, y = %f, z = %f\n", ray_cross->x, ray_cross->y, ray_cross->z);
+	a = ft_square(vec_lenght(vec_cross(cy->ray, cy->orientation),
+		vec_cross(cy->ray, cy->orientation)));
+	// printf("a = %f\n", a);
+	b = 2 * vec_dot_product(vec_cross(cy->ray, cy->orientation), ray_cross);
+	// printf("b = %f\n", b);
+	c = ft_square(vec_lenght(ray_cross, ray_cross)) - (cy->diameter / 2) *
+		(1 - ft_square(vec_dot_product(cy->ray, cy->orientation)));
+	// printf("c = %f\n", c);
+	return(quadratic_equation(dist, a, b, c));
 }

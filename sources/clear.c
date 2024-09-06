@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:10:04 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 13:42:11 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:54:37 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	free_cylinder(t_cylinder *cylinder)
 		free(cylinder->orientation);
 	if (cylinder->impact_point != NULL)
 		free(cylinder->impact_point);
-	if (cylinder->ray != NULL)
-		free(cylinder->ray);
+	// if (cylinder->ray != NULL)
+	// 	free(cylinder->ray);
 	if (cylinder->ray_light != NULL)
 		free(cylinder->ray_light);
 	free(cylinder);

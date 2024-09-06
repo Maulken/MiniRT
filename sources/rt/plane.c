@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/03 17:49:05 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:38:28 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_vector	*get_diffuse_light_pl(t_data *data)
 		data->scene->light->origine);
 	vec_normalize(data->scene->plane->ray_light);
 	ratio = vec_dot_product(norm, data->scene->plane->ray_light);
-	printf("ratio = %f\n", ratio);
+	//printf("ratio = %f\n", ratio);
 	if (ratio < 0)
 		color = NULL;
 	else
@@ -86,13 +86,15 @@ t_vector	*get_diffuse_light_pl(t_data *data)
 	return (color);
 }
 
-void	obtain_ray_pl(t_data *data, float x_ray, float y_ray)
+void	obtain_ray_pl(t_data *data, t_ray type_ray, t_scene tmp,
+				float x_ray, float y_ray)
 {
 	// t_vector	*for_ray;
-
+	(void)type_ray;
+	(void)tmp;
 	// for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
 	data->scene->plane->ray= new_vector(x_ray, y_ray, 1.0);
-	printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
+	// printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
 	//data->scene->plane->ray = vec_subtract(for_ray,
 	///		data->scene->camera->origine);
 	vec_normalize(data->scene->plane->ray);

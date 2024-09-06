@@ -3,23 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
+#    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/22 10:42:44 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/09/04 14:09:43 by vmassoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC      = gcc
 CFLAGS  = -g -Wall -Wextra -Werror
-CLINKS  = -lXext -lX11 -lm 
+CLINKS  = -lXext -lX11 -lm
 
 ### EXECUTABLE ###
 NAME   = minirt
 
 ### PATH ###
-HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h 
+HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h
 SRC_PATH 		= sources
 MLX				= minilibx-linux
 LIBMLX			= $(MLX)/libmlx.a
@@ -28,9 +28,31 @@ LFLAGS			= -L libft -lft -fPIC
 
 ### SOURCE FILES ###
 SOURCES = main.c \
- init.c clear.c \
- parsing/parsing.c  parsing/check.c  parsing/get_file.c  parsing/utils.c parsing/conversion.c parsing/check_object.c parsing/check_object_essential.c parsing/check_object_liste.c parsing/check_type.c parsing/check_utils.c parsing/ft_atof.c parsing/utils2.c parsing/split_space.c \
- rt/ray_tracing.c rt/vector.c rt/vector2.c rt/colors.c rt/maths_util.c rt/sphere.c
+ init.c \
+ clear.c \
+ parsing/check_object_essential.c \
+ parsing/check_object_liste.c \
+ parsing/check_object.c \
+ parsing/check_type.c \
+ parsing/check_utils.c \
+ parsing/check.c \
+ parsing/conversion.c \
+ parsing/ft_atof.c \
+ parsing/get_file.c \
+ parsing/parsing.c \
+ parsing/split_space.c \
+ parsing/utils.c \
+ parsing/utils2.c \
+ rt/colors.c \
+ rt/cylinder.c \
+ rt/cylinder2.c \
+ rt/maths_util.c \
+ rt/plane.c \
+ rt/ray_tracing.c \
+ rt/sphere.c\
+ rt/vector.c \
+ rt/vector2.c \
+
 ### OBJECTS ###
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))

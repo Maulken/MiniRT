@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:45:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/08/21 19:05:05 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:12:59 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	quadratic_equation(float t[2], float a, float b, float c)
 	float	discr;
 
 	discr = (b * b) - (4 * a * c);
+	// printf("discr = %f\n", discr);
 	if (discr < 0)
 		return (EXIT_FAILURE);
 	discr = sqrtf(discr);
