@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:36:29 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_plane
 {
 	t_plane		*next;
 	t_vector	*origine;
-	t_vector	*orientation;
+	t_vector	*direction;
 	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
@@ -53,7 +53,7 @@ typedef struct s_cylinder
 {
 	t_cylinder	*next;
 	t_vector	*center;
-	t_vector	*orientation;
+	t_vector	*direction;
 	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 14:43:22 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_camera(char *tab, t_data *data)
 	data->scene->camera->direction = add_vector_float(tmp[2]);
 	if (check_vector_normalised(data->scene->camera->direction))
 	{
-		printf("ERROR : invalid Orientation");
+		printf("ERROR : invalid direction");
 		return (free_tab(tmp), 1);
 	}
 	data->scene->camera->fov = ft_atof(tmp[3]);

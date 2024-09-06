@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/05 17:21:47 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ float	cylinder_intersect(t_data *data, t_cylinder *cy)
 
 	// cy_cam = vec_subtract(data->scene->camera->origine, cy->center);
 	// // printf("cy_cam x %f , y %f, z %f \n", cy_cam->x, cy_cam->y, cy_cam->z);
-	// cross = vec_cross(cy->ray, cy->orientation);
+	// cross = vec_cross(cy->ray, cy->direction);
 	//  printf("cy_cam x %f , y %f, z %f \n", cross->x, cross->y, cross->z);
 	// a = ft_square(vec_lenght(cross, cross));
 	// // printf("a = %f\n", a);
-	// b = 2 * vec_dot_product(cy->orientation, cy_cam);
+	// b = 2 * vec_dot_product(cy->direction, cy_cam);
 
 	// c = vec_dot_product(cy_cam, cy_cam) - ft_square(cy->diameter / 2);
 	// free(cy_cam);
@@ -104,7 +104,7 @@ void	obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 	(void)type_ray;
 	(void)tmp;
 	//t_vector	*for_ray;
-	//for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
+	//for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
 	data->scene->cylinder->ray= new_vector(x_ray, y_ray, 1.0);
 	//printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
 	//data->scene->cylinder->ray = vec_subtract(for_ray,

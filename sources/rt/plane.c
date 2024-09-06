@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/04 14:38:28 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ float	plane_intersect(t_data *data, t_plane *pl)
 
 	pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
 	//vec_normalize(pl_cam);
-	num = vec_dot_product(pl_cam, pl->orientation);
+	num = vec_dot_product(pl_cam, pl->direction);
 	//printf("num = %f\n", num);
-	den = vec_dot_product(pl->ray, pl->orientation);
+	den = vec_dot_product(pl->ray, pl->direction);
 		//printf("den = %f\n", den);
 	if (den != 0.0)
 	{
@@ -92,7 +92,7 @@ void	obtain_ray_pl(t_data *data, t_ray type_ray, t_scene tmp,
 	// t_vector	*for_ray;
 	(void)type_ray;
 	(void)tmp;
-	// for_ray = new_vector(x_ray, y_ray, data->scene->camera->orientation->z);
+	// for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
 	data->scene->plane->ray= new_vector(x_ray, y_ray, 1.0);
 	// printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
 	//data->scene->plane->ray = vec_subtract(for_ray,

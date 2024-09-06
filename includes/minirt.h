@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:35:19 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_vector
 typedef struct s_camera
 {
 	t_vector	*origine;
-	t_vector	*orientation;
+	t_vector	*direction;
 	float		fov;
 }				t_camera;
 

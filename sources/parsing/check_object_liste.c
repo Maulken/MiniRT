@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 14:43:46 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	init_cylinder(t_cylinder *current, char **tmp)
 	current->direction = add_vector_float(tmp[2]);
 	if (check_vector_normalised(current->direction))
 	{
-		printf("ERROR : invalid Orientation");
+		printf("ERROR : invalid direction");
 		return (1);
 	}
 	current->diameter = ft_atof(tmp[3]);

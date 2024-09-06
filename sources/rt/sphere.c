@@ -6,13 +6,13 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/06 14:48:23 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float	sphere_intersect(t_vector *origin, t_vector *orientation, t_sphere *sph)
+float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 {
 	float	b;
 	float	c;
