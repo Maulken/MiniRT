@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 13:43:28 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:43:46 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	check_sphere(char *tab, t_data *data)
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_sphere));
+	// current = ft_calloc(1, sizeof(t_sphere));
 	if (current == NULL)
 		return (1);
 	current->next = NULL;
@@ -40,7 +41,12 @@ int	check_sphere(char *tab, t_data *data)
 static int	init_plane(t_plane *current, char **tmp)
 {
 	current->origine = add_vector_float(tmp[1]);
-	current->orientation = add_vector_float(tmp[2]);
+	current->direction = add_vector_float(tmp[2]);
+	if (check_vector_normalised(current->direction))
+	{
+		printf("ERROR : invalid vector plese [0][1]");
+		return (1);
+	}
 	current->color = add_color_int(tmp[3]);
 	current->impact_point = NULL;
 	current->ray = NULL;
@@ -64,7 +70,8 @@ int	check_plane(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	init_plane(current, tmp);
+	if (init_plane(current, tmp))
+		return (free_tab(tmp), 1);
 	last = &data->scene->plane;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -76,9 +83,14 @@ int	check_plane(char *tab, t_data *data)
 static int	init_cylinder(t_cylinder *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
-	current->orientation = add_vector_float(tmp[2]);
-	current->diameter = add_float(tmp[3]);
-	current->height = add_float(tmp[4]);
+	current->direction = add_vector_float(tmp[2]);
+	if (check_vector_normalised(current->direction))
+	{
+		printf("ERROR : invalid Orientation");
+		return (1);
+	}
+	current->diameter = ft_atof(tmp[3]);
+	current->height = ft_atof(tmp[4]);
 	current->color = add_color_int(tmp[5]);
 	current->impact_point = NULL;
 	current->ray = NULL;
@@ -102,7 +114,8 @@ int	check_cylinder(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	init_cylinder(current, tmp);
+	if (init_cylinder(current, tmp) == 1)
+		return (free_tab(tmp), 1);
 	last = &data->scene->cylinder;
 	while (*last != NULL)
 		last = &(*last)->next;

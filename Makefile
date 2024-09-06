@@ -6,7 +6,7 @@
 #    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/04 14:09:43 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/09/06 14:41:46 by vmassoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ NAME   = minirt
 
 ### PATH ###
 HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h
-SRC_PATH 		= sources
+PATH_MAIN 		= sources
+PATH_PARCING 	= sources/parsing
+PATH_RT 		= sources/rt
 MLX				= minilibx-linux
 LIBMLX			= $(MLX)/libmlx.a
 LIBFT			= libft/libft.a
@@ -29,7 +31,12 @@ LFLAGS			= -L libft -lft -fPIC
 ### SOURCE FILES ###
 SOURCES = main.c \
  init.c \
+ init_scene.c \
+ init_object.c \
  clear.c \
+ clear_object.c \
+ clear_object2.c \
+ clear_scene.c \
  parsing/check_object_essential.c \
  parsing/check_object_liste.c \
  parsing/check_object.c \
@@ -53,9 +60,14 @@ SOURCES = main.c \
  rt/vector.c \
  rt/vector2.c \
 
-### OBJECTS ###
 
-SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
+SOURCES_PATH_MAIN= $(addprefix $(PATH_MAIN)/,$(SOURCES_MAIN))
+SOURCES_PATH_PARSING = $(addprefix $(PATH_PARCING)/,$(SOURCES_PARSING))
+SOURCES_PATH_RT = $(addprefix $(PATH_RT)/,$(SOURCES_RT))
+
+SOURCES = $(SOURCES_PATH_MAIN) $(SOURCES_PATH_PARSING) $(SOURCES_PATH_RT)
+### OBJECTS ###
+SRCS = $(SOURCES)
 
 OBJS = $(SRCS:.c=.o)
 
