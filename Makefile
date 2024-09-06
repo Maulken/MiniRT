@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/06 14:41:46 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/09/06 15:09:26 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,36 +29,36 @@ LIBFT			= libft/libft.a
 LFLAGS			= -L libft -lft -fPIC
 
 ### SOURCE FILES ###
-SOURCES = main.c \
+SOURCES_MAIN = main.c \
  init.c \
  init_scene.c \
  init_object.c \
  clear.c \
  clear_object.c \
  clear_object2.c \
- clear_scene.c \
- parsing/check_object_essential.c \
- parsing/check_object_liste.c \
- parsing/check_object.c \
- parsing/check_type.c \
- parsing/check_utils.c \
- parsing/check.c \
- parsing/conversion.c \
- parsing/ft_atof.c \
- parsing/get_file.c \
- parsing/parsing.c \
- parsing/split_space.c \
- parsing/utils.c \
- parsing/utils2.c \
- rt/colors.c \
- rt/cylinder.c \
- rt/cylinder2.c \
- rt/maths_util.c \
- rt/plane.c \
- rt/ray_tracing.c \
- rt/sphere.c\
- rt/vector.c \
- rt/vector2.c \
+ clear_scene.c 
+ SOURCES_PARSING = check_object_essential.c \
+ check_object_liste.c \
+ check_object.c \
+ check_type.c \
+ check_utils.c \
+ check.c \
+ conversion.c \
+ ft_atof.c \
+ get_file.c \
+ parsing.c \
+ split_space.c \
+ utils.c \
+ utils2.c 
+ SOURCES_RT = colors.c \
+ cylinder.c \
+ cylinder2.c \
+ maths_util.c \
+ plane.c \
+ ray_tracing.c \
+ sphere.c\
+ vector.c \
+ vector2.c \
 
 
 SOURCES_PATH_MAIN= $(addprefix $(PATH_MAIN)/,$(SOURCES_MAIN))

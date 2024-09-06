@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:45:47 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:02:34 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,20 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		free(tmp.spheres->ray);
 		tmp.spheres = next;
 	}
-	while (tmp.plane)
-	{
-		obtain_ray_pl(data, FOR_HIT, tmp, x_ray, y_ray);
-		object = is_plane(data, tmp, object);
-		free(tmp.plane->ray);
-		tmp.plane = tmp.plane->next;
-	}
-	while (tmp.cylinder)
-	{
-		obtain_ray_cy(data, FOR_HIT, tmp, x_ray, y_ray);
-		object = is_cylinder(data, tmp, object);
-		free(tmp.cylinder->ray);
-		tmp.cylinder = tmp.cylinder->next;
-	}
+	// while (tmp.plane)
+	// {
+	// 	obtain_ray_pl(data, FOR_HIT, tmp, x_ray, y_ray);
+	// 	object = is_plane(data, tmp, object);
+	// 	free(tmp.plane->ray);
+	// 	tmp.plane = tmp.plane->next;
+	// }
+	// while (tmp.cylinder)
+	// {
+	// 	obtain_ray_cy(data, FOR_HIT, tmp, x_ray, y_ray);
+	// 	object = is_cylinder(data, tmp, object);
+	// 	free(tmp.cylinder->ray);
+	// 	tmp.cylinder = tmp.cylinder->next;
+	// }
 	return (object);
 }
 
@@ -206,17 +206,17 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 		*data->hit->sphere->ray = obtain_ray_sphere(data, x_ray, y_ray);
 		color = get_color_sphere(data, data->hit);
 	}
-	if (object == PLANE)
-	{
-		obtain_ray_pl(data,FOR_COLOR, tmp, x_ray, y_ray);
-		color = get_color_plane(data);
-	}
-	if (object == CYLINDER)
-	{
-		obtain_ray_cy(data,FOR_COLOR, tmp, x_ray, y_ray);
-		color = get_color_cylinder(data, data->scene->cylinder);
-		// printf("color %d\n", color);
-	}
+	// if (object == PLANE)
+	// {
+	// 	obtain_ray_pl(data,FOR_COLOR, tmp, x_ray, y_ray);
+	// 	color = get_color_plane(data);
+	// }
+	// if (object == CYLINDER)
+	// {
+	// 	obtain_ray_cy(data,FOR_COLOR, tmp, x_ray, y_ray);
+	// 	color = get_color_cylinder(data, data->scene->cylinder);
+	// 	// printf("color %d\n", color);
+	// }
 	//printf("before color\n");
 	//reinit_hit(data->hit);
 	return (color);
