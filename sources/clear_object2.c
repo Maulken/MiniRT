@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear_object2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:36:52 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 16:22:25 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:52:52 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	free_cylinder(t_cylinder *cylinder)
+static void	free_cylinder(t_cylinder *cylinder)
 {
 	if (cylinder == NULL)
 		return ;
@@ -22,12 +22,6 @@ void	free_cylinder(t_cylinder *cylinder)
 		free(cylinder->color);
 	if (cylinder->direction != NULL)
 		free(cylinder->direction);
-	if (cylinder->impact_point != NULL)
-		free(cylinder->impact_point);
-	if (cylinder->ray != NULL)
-		free(cylinder->ray);
-	if (cylinder->ray_light != NULL)
-		free(cylinder->ray_light);
 	free(cylinder);
 }
 

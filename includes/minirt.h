@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 13:15:24 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:02:46 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,21 +183,13 @@ int			init_struct_sphere(t_sphere *sphere);
 int			init_struct_plane(t_plane *plane);
 int			init_struct_cy(t_cylinder *cylinder);
 
-	//clear.c
+	//clear
 int			ft_close(t_data *data);
-void		free_sphere(t_sphere *sphere);
-void		free_inside_sphere(t_sphere *sphere);
+int			clean_data(t_data *data, int code_error);
+int			free_scene(t_scene *scene);
 void		free_sphere_list(t_sphere *head);
-void		free_plane(t_plane *plane);
 void		free_plane_list(t_plane *head);
-void		free_cylinder(t_cylinder *cylinder);
-void		free_cylinder_list(t_cylinder *cylinder_list);
-void		free_light(t_light *light);
-void		free_camera(t_camera *camera);
-void		free_ambient(t_ambient *ambient);
-void		free_inside_hit(t_hit *hit);
-void		free_scene(t_scene *scene);
-int			clean(t_data *data, int code_error);
+void		free_cylinder_list(t_cylinder *head);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -246,27 +238,5 @@ void		my_mlx_pixel_put(t_data *data, int color);
 void		limit_color(t_vector *color);
 
 int			event(t_data *data);
-
-	//clear.c
-int		ft_close(t_data *data);
-void	free_light(t_light *light);
-void	free_camera(t_camera *camera);
-void	free_ambient(t_ambient *ambient);
-void	free_inside_hit(t_hit *hit);
-int		clean_data(t_data *data, int code_error);
-
-	//clear_object.c
-void	free_inside_sphere(t_sphere *sphere);
-void	free_sphere(t_sphere *sphere);
-void	free_sphere_list(t_sphere *head);
-void	free_plane(t_plane *plane);
-void	free_plane_list(t_plane *head);
-
-	//clear_object2.c
-void	free_cylinder(t_cylinder *cylinder);
-void	free_cylinder_list(t_cylinder *head);
-
-	//clear_scene.c
-int clear_scene(t_data *data);
 
 #endif
