@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:36:52 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 18:39:13 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:21:28 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	ft_atof_c_signe(const char *str, int *sign)
 		i++;
 	return (i);
 }
-
 
 static int	ft_atof_next(const char *str, int result,
 	int *decimal_point, double *fraction)

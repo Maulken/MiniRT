@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 13:21:32 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:00:54 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	check_sphere(char *tab, t_data *data)
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_sphere));
-	// current = ft_calloc(1, sizeof(t_sphere));
 	if (current == NULL)
 		return (1);
 	current->next = NULL;
@@ -28,8 +27,9 @@ int	check_sphere(char *tab, t_data *data)
 		return (1);
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
+		return (free_tab(tmp), free(current), 1);
+	if (init_sphere(current, tmp))
 		return (free_tab(tmp), 1);
-	init_sphere(current, tmp);
 	last = &data->scene->spheres;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -38,7 +38,7 @@ int	check_sphere(char *tab, t_data *data)
 	return (0);
 }
 
-static int	init_plane(t_plane *current, char **tmp)
+int	init_plane(t_plane *current, char **tmp)
 {
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
@@ -69,7 +69,7 @@ int	check_plane(char *tab, t_data *data)
 		return (1);
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
-		return (free_tab(tmp), 1);
+		return (free_tab(tmp), free(current), 1);
 	if (init_plane(current, tmp))
 		return (free_tab(tmp), 1);
 	last = &data->scene->plane;
@@ -80,7 +80,7 @@ int	check_plane(char *tab, t_data *data)
 	return (0);
 }
 
-static int	init_cylinder(t_cylinder *current, char **tmp)
+int	init_cylinder(t_cylinder *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
@@ -113,7 +113,7 @@ int	check_cylinder(char *tab, t_data *data)
 		return (1);
 	tmp = check_correct_type(content, tab);
 	if (tmp == NULL)
-		return (free_tab(tmp), 1);
+		return (free_tab(tmp), free(current), 1);
 	if (init_cylinder(current, tmp) == 1)
 		return (free_tab(tmp), 1);
 	last = &data->scene->cylinder;

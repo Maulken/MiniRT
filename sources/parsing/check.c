@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/04 17:45:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:20:10 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_tab(char **rows, t_data *data)
 	i = 0;
 	if (check_min_scene(rows) == ERROR)
 	{
-		// free_tab(rows);
+		free_tab(rows);
 		printf("ERROR");
 		return (1);
 	}
@@ -74,7 +74,7 @@ int	check_tab(char **rows, t_data *data)
 	{
 		if (check_type(rows[i], data) != 0)
 		{
-			// free_tab(rows);
+			free_tab(rows);
 			printf("\nparse ERROR ligne : %d \n", i);
 			return (1);
 		}
@@ -96,6 +96,7 @@ int	check_min_scene(char **tab)
 	len_l = 0;
 	while (tab[i])
 	{
+		remouve_space_start_line(tab[i]);
 		if (!ft_strncmp(tab[i], "A ", 2))
 			len_a++;
 		if (!ft_strncmp(tab[i], "C ", 2))
@@ -105,10 +106,8 @@ int	check_min_scene(char **tab)
 		i++;
 	}
 	if (len_a != 1 || len_c != 1 || len_l < 1)
-	{
-		printf("error : il doit avoir  (1)A,(1)C,(inf)L");
-		return (ERROR);
-	}
+		return (printf("error : il doit y avoir"
+				"(1)A,(1)C,(inf)L \n"), ERROR);
 	return (OK);
 }
 
@@ -134,7 +133,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			ft_msg_error_tab("plese ckeck : is not object %s", 1, tab);
+			return (ft_msg_error_tab("plese ckeck : is not object %s", 1, tab));
 	}
 	free_tab(tab);
 	return (0);
