@@ -6,7 +6,7 @@
 /*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 09:42:37 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/06 10:22:56 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			return(ft_msg_error_tab("plese ckeck : is not object %s", 1, tab),1);
+			return (ft_msg_error_tab("plese ckeck : is not object %s", 1, tab));
 	}
 	free_tab(tab);
 	return (0);

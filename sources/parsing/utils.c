@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:59 by viktor            #+#    #+#             */
-/*   Updated: 2024/08/20 14:03:11 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:06:59 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	free(s1);
 	free(s2);
 	return (str);
-}
-
-void	printf_row(char **row)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (row[j])
-	{
-		i = 0;
-		while (row[j][i])
-			printf("%c", row[j][i++]);
-		j++;
-		printf("\n\n");
-	}
-	printf("\n");
 }
 
 int	size_tab(char **tab)

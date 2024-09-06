@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:09:45 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:09:40 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_sphere(char *tab, t_data *data)
 	return (0);
 }
 
-static int	init_plane(t_plane *current, char **tmp)
+int	init_plane(t_plane *current, char **tmp)
 {
 	current->origine = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);
@@ -79,7 +79,7 @@ int	check_plane(char *tab, t_data *data)
 	return (0);
 }
 
-static int	init_cylinder(t_cylinder *current, char **tmp)
+int	init_cylinder(t_cylinder *current, char **tmp)
 {
 	current->center = add_vector_float(tmp[1]);
 	current->direction = add_vector_float(tmp[2]);

@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/05 08:38:00 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:28:53 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-
-int is_normalized(float x , float y , float z)
+int	is_normalized(float x, float y, float z)
 {
-	double norm = 0;
+	double	norm;
+
+	norm = 0;
 	norm += x * x;
 	norm += y * y;
 	norm += z * z;
 	norm = sqrt(norm);
-	const double tolerance = 1e-9;
-	return fabs(norm - 1.0) < tolerance;
+	return (fabs(norm - 1.0) < 1e-9);
 }
-
 
 int	check_vector_normalised(t_vector *vector)
 {
@@ -34,7 +33,8 @@ int	check_vector_normalised(t_vector *vector)
 	if (vector->z > 1 || vector->z < -1)
 		return (1);
 	if (!is_normalized(vector->x, vector->y, vector->z))
-		printf("\033[38;5;208m WARNING: The vector is not normalized. \033[0m \n");
+		printf("\033[38;5;208m WARNING: The vector"
+			"is not normalized. \033[0m \n");
 	return (0);
 }
 
@@ -102,17 +102,5 @@ int	check_light(char *tab, t_data *data)
 	data->scene->light->origine = add_vector_float(tmp[1]);
 	data->scene->light->ratio = add_float(tmp[2]);
 	free_tab(tmp);
-	return (0);
-}
-
-/*because I have no space is une essential */
-int	init_sphere(t_sphere *current, char **tmp)
-{
-	current->center = add_vector_float(tmp[1]);
-	current->diameter = add_float(tmp[2]);
-	current->color = add_color_int(tmp[3]);
-	current->impact_point = NULL;
-	current->ray = NULL;
-	current->ray_light = NULL;
 	return (0);
 }

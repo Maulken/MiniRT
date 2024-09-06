@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:10:18 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:38:36 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+static char	**check_correct_value_type(const char *content, int j, char **tmp)
+{
+	if (content[j] == 'i')
+	{
+		if (check_correct_intxyz(tmp, j))
+			return (check_error_type("invalid RGB", tmp));
+	}
+	else if (content[j] == 'f' )
+	{
+		if (check_correct_floatxyz(tmp, j))
+			return (check_error_type("invalid XYZ", tmp));
+	}
+	if (content[j] == 'c')
+	{
+		if (check_correct_char(tmp, j))
+			return (check_error_type("invalid char", tmp));
+	}
+	else if (content[j] == 'k')
+	{
+		if (check_correct_int(tmp, j))
+			return (check_error_type("invalid int", tmp));
+	}
+	else if (content[j] == 't')
+		if (check_correct_float(tmp, j) == 1)
+			return (check_error_type("invalid float", tmp));
+	return (tmp); // i not like do you like . 
+}
+
+/*because I have no space is une essential */
+int	init_sphere(t_sphere *current, char **tmp)
+{
+	current->center = add_vector_float(tmp[1]);
+	current->diameter = add_float(tmp[2]);
+	current->color = add_color_int(tmp[3]);
+	current->impact_point = NULL;
+	current->ray = NULL;
+	current->ray_light = NULL;
+	return (0);
+}
 
 char	**check_error_type(char *str, char **tmp)
 {
@@ -39,29 +79,8 @@ char	**check_correct_type(const char *content, char *tab)
 	j = 0;
 	while (tmp[j])
 	{
-		if (content[j] == 'i')
-		{
-			if (check_correct_intxyz(tmp, j))
-				return (check_error_type("invalid RGB", tmp));
-		}
-		else if (content[j] == 'f' )
-		{
-			if (check_correct_floatxyz(tmp, j))
-				return (check_error_type("invalid XYZ", tmp));
-		}
-		if (content[j] == 'c')
-		{
-			if (check_correct_char(tmp, j))
-				return (check_error_type("invalid char", tmp));
-		}
-		else if (content[j] == 'k')
-		{
-			if (check_correct_int(tmp, j))
-				return (check_error_type("invalid int", tmp));
-		}
-		else if (content[j] == 't')
-			if (check_correct_float(tmp, j) == 1)
-				return (check_error_type("invalid float", tmp));
+		if (check_correct_value_type(content, j, tmp) == NULL)
+			return (NULL);
 		j++;
 	}
 	return (tmp);

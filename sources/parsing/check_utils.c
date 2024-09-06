@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/05 08:58:23 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:35:06 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,45 @@ int	check_num(char *tab, char *str, int size_setting)
 			i++;
 	}
 	if (count_words(tab) != size_setting)
-		return (ft_msg_error("There are either not enough or too many elements on the line.", 1));
+		return (ft_msg_error("There are either not enough or too many "
+				"elements on the line.", 1));
+	return (0);
+}
+
+int	check_signe(char *str)
+{
+	int	start_num;
+	int	nb_signe;
+	int	i;
+
+	start_num = 0;
+	nb_signe = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			start_num = 1;
+		if (str[i] == '+' || str[i] == '-' )
+		{
+			nb_signe++;
+			if (nb_signe == 2 || start_num == 1)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_signe_tab(char **tab)
+{
+	int		index;
+
+	index = 0;
+	while (tab[index])
+	{
+		if (check_signe(tab[index]) == 1)
+			return (1);
+		index++;
+	}
 	return (0);
 }

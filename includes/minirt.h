@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 16:39:18 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:07:57 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ typedef enum e_ray
 	//parsing.c
 int		parsing(int argc, char **argv, t_data *data);
 	//check.c
-int		ft_msg_error(char *str, int value);
-int		ft_msg_error_tab(char *str, int value, char **tab );
+
 int		endwith(char *argv, char *value);
 int		check_argument(int argc, char **argv);
 int		check_tab(char **rows, t_data *data);
@@ -123,10 +122,16 @@ char	*get_string(int fd);
 char	**checkget_file_content(int fd);
 	//utils.c
 char	*ft_strjoin_free(char *s1, char *s2);
-void	printf_row(char **row);
 int		size_tab(char **tab);
 void	free_tab(char **tab);
 int		check_float_point(char **tab);
+	//utils2.c
+int		ft_msg_error(char *str, int value);
+int		ft_msg_error_tab(char *str, int value, char **tab);
+int		ft_is_space(char c);
+int		ft_is_digit(char c);
+int		ft_is_good_char(char c);
+
 	//conversion.c
 t_vector	*add_vector_float(char *str);
 t_vector	*add_color_int(char *str);
@@ -134,26 +139,28 @@ int			add_int(char *str);
 float		add_float(char *str);
 
 	//check_object.c
+int		init_sphere(t_sphere *current, char **tmp);
 char	**check_error_type(char *str, char **tmp);
 char	**check_correct_type(const char *content, char *tab);
 
 	//check_objet_essential.c
-int check_vector_normalised(t_vector *vector);
+int	is_normalized(float x, float y, float z);
+int	check_vector_normalised(t_vector *vector);
 int	check_ambiance(char *tab, t_data *data);
 int	check_camera(char *tab, t_data *data);
 int	check_light(char *tab, t_data *data);
-int	init_sphere(t_sphere *current, char **tmp);
 
 	//chech_object_liste.c
 int	check_sphere(char *tab, t_data *data);
+int	init_plane(t_plane *current, char **tmp);
 int	check_plane(char *tab, t_data *data);
+int	init_cylinder(t_cylinder *current, char **tmp);
 int	check_cylinder(char *tab, t_data *data);
+
 	//check_utils.c
-int		ft_is_space(char c);
-int		ft_is_digit(char c);
-int		ft_is_good_char(char c);
-int		check_num(char *tab, char *str, int size_setting);
-double	ft_atof_custom(const char *str);
+int	check_num(char *tab, char *str, int size_setting);
+int	check_signe(char *str);
+int	check_signe_tab(char **tab);
 
 	//check_type.c
 int		check_correct_intxyz(char **tmp, int j);
@@ -161,10 +168,15 @@ int		check_correct_floatxyz(char **tmp, int j);
 int		check_correct_char(char **tmp, int j);
 int		check_correct_int(char **tmp, int j);
 int		check_correct_float(char **tmp, int j);
+
+
 	//ft_atof.c
 double	ft_atof_custom(const char *str);
-
 char	**ft_split_espace(char const *str);
+	//split_space.c a voir ... 
+char	**ft_split_espace(char const *str);
+
+
 
 /*RT*/
 	//clear.c
