@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 10:35:55 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:10:59 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,32 +222,27 @@ void	ray_tracing(t_data *data)
 {
 	float	x_scale;
 	float	y_scale;
-	// float	x_ray;
-	// float	y_ray;
 	t_vector	x_ray;
 	t_vector	y_ray;
 	
-	x_ray.x = 0;
-	x_ray.y = 0;
+	// x_ray.x = 0;
+	// x_ray.y = 0;
 	x_ray.z = 0;
-	y_ray.x = 0;
-	y_ray.y = 0;
+	// y_ray.x = 0;
+	// y_ray.y = 0;
 	y_ray.z = 0;
 	get_view_plane(data);
 	data->mlx_y = 0;
 	y_scale = (data->view->height / 2);
 	while (y_scale >= (data->view->height / 2) * (-1))
 	{
-		// y_ray = y_scale * data->view->y_pixel;
 		y_ray = vec_multiplying(data->view->viewplane_y, y_scale);
 		x_scale = (data->view->width / 2) * (-1);
 		data->mlx_x = 0;
 		while (x_scale <= data->view->width / 2)
 		{
-			// x_ray = x_scale * data->view->x_pixel;
 			x_ray = vec_multiplying(data->view->viewplane_x, x_scale);
-			// my_mlx_pixel_put(data, get_color(data, x_ray, y_ray));
-			my_mlx_pixel_put(data, get_color(data, x_ray, y_ray)); //avec t_vec pour x_ray et y_ray
+			my_mlx_pixel_put(data, get_color(data, x_ray, y_ray));
 			x_scale++;
 			data->mlx_x++;
 		}
