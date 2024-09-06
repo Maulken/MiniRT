@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:43:01 by bszabo            #+#    #+#             */
-/*   Updated: 2023/09/08 14:10:02 by bszabo           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:57:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,32 @@
 
 // allocate memory for num elements of size bytes each, set all values to zero
 // return a pointer to the allocated memory
+// void	*ft_calloc(size_t num, size_t size)
+// {
+// 	char	*ptr_mem;
+// 	int		len;
+
+// 	len = num * size;
+// 	ptr_mem = (char *)malloc(len);
+// 	if (ptr_mem == NULL)
+// 		return (NULL);
+// 	while (len > 0)
+// 	{
+// 		ptr_mem[len - 1] = '\0';
+// 		len--;
+// 	}
+// 	return ((void *)ptr_mem);
+// }
+
 void	*ft_calloc(size_t num, size_t size)
 {
-	char	*ptr_mem;
-	int		len;
+	char	*str;
 
-	len = num * size;
-	ptr_mem = (char *)malloc(len);
-	if (ptr_mem == NULL)
+	str = malloc(num * size);
+	if (!str)
 		return (NULL);
-	while (len > 0)
-	{
-		ptr_mem[len - 1] = '\0';
-		len--;
-	}
-	return ((void *)ptr_mem);
+	ft_bzero(str, num * size);
+	return (str);
 }
 /*
 #include <stdio.h>

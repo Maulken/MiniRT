@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/21 10:50:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:00:50 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef struct s_cylinder
 	t_cylinder	*next;
 	t_vector	*center;
 	t_vector	*direction;
+	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
 	t_vector	*ray_light;
-	t_vector	*color;
 	float		diameter;
 	float		height;
 	float		dist_light_cylinder;
@@ -81,10 +81,10 @@ typedef struct s_scene
 {
 	t_light		*light;
 	t_camera	*camera;
+	t_ambient	*ambient;
 	t_sphere	*spheres;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
-	t_ambient	*ambient;
 }				t_scene;
 
 #endif

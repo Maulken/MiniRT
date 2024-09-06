@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:45:32 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:45:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ int	check_tab(char **rows, t_data *data)
 	i = 0;
 	if (check_min_scene(rows) == ERROR)
 	{
-		free_tab(rows);
+		// free_tab(rows);
 		printf("ERROR");
 		return (1);
 	}
 	while (rows[i])
 	{
-		if (check_type(rows[i], data))
+		if (check_type(rows[i], data) != 0)
 		{
-			free_tab(rows);
+			// free_tab(rows);
 			printf("\nparse ERROR ligne : %d \n", i);
 			return (1);
 		}
@@ -121,7 +121,7 @@ int	check_type(char *src, t_data *data)
 		ft_msg_error_tab("", 1, NULL);
 	if (tab[0])
 	{
-		if (!ft_strncmp(tab[0], "A", 2))
+		if (ft_strncmp(tab[0], "A", 2) == 0)
 			return (free_tab(tab), check_ambiance(src, data));
 		else if (!ft_strncmp(tab[0], "C", 2))
 			return (free_tab(tab), check_camera(src, data));

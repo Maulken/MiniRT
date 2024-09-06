@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:09:45 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:21:32 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	check_sphere(char *tab, t_data *data)
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
 	current = malloc(sizeof(t_sphere));
+	// current = ft_calloc(1, sizeof(t_sphere));
 	if (current == NULL)
 		return (1);
 	current->next = NULL;
@@ -88,8 +89,8 @@ static int	init_cylinder(t_cylinder *current, char **tmp)
 		printf("ERROR : invalid Orientation");
 		return (1);
 	}
-	current->diameter = add_float(tmp[3]);
-	current->height = add_float(tmp[4]);
+	current->diameter = ft_atof(tmp[3]);
+	current->height = ft_atof(tmp[4]);
 	current->color = add_color_int(tmp[5]);
 	current->impact_point = NULL;
 	current->ray = NULL;
