@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 17:05:16 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:20:37 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ int	check_correct_intxyz(char **tmp, int j)
 	while (tmp[j][i] != '\0')
 	{
 		if ((tmp[j][i] < '0' || tmp[j][i] > '9') &&
-			tmp[j][i] != '-' && tmp[j][i] != '+' &&
+			tmp[j][i] != '+' && tmp[j][i] != '-' &&
 			tmp[j][i] != ',')
 			return (1);
 		i++;
 	}
 	tab = ft_split(tmp[j], ',');
-	if (size_tab(tab) != 3)
-	{
-		free_tab(tab);
-		return (1);
-	}
+	if (size_tab(tab) != 3 || check_signe_tab(tab) == 1)
+		return (free_tab(tab), 1);
 	free_tab(tab);
 	j++;
 	return (0);
@@ -52,7 +49,7 @@ int	check_correct_floatxyz(char **tmp, int j)
 		i++;
 	}
 	tab = ft_split(tmp[j], ',');
-	if (size_tab(tab) != 3 || check_float_point(tab))
+	if (size_tab(tab) != 3 || check_float_point(tab) || check_signe_tab(tab))
 	{
 		free_tab(tab);
 		return (1);
@@ -95,6 +92,8 @@ int	check_correct_int(char **tmp, int j)
 			return (1);
 		i++;
 	}
+	if (check_signe(tmp[j]))
+		return (1);
 	j++;
 	return (0);
 }
@@ -112,6 +111,8 @@ int	check_correct_float(char **tmp, int j)
 			return (1);
 		i++;
 	}
+	if (check_signe(tmp[j]))
+		return (1);
 	j++;
 	return (0);
 }

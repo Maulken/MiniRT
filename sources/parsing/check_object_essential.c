@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:49:52 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+int	is_normalized(float x, float y, float z)
+{
+	double	norm;
+
+	norm = 0;
+	norm += x * x;
+	norm += y * y;
+	norm += z * z;
+	norm = sqrt(norm);
+	return (fabs(norm - 1.0) < 1e-9);
+}
 
 int	check_vector_normalised(t_vector *vector)
 {
@@ -20,6 +32,9 @@ int	check_vector_normalised(t_vector *vector)
 		return (1);
 	if (vector->z > 1 || vector->z < -1)
 		return (1);
+	if (!is_normalized(vector->x, vector->y, vector->z))
+		printf("\033[38;5;208m WARNING: The vector"
+			"is not normalized. \033[0m \n");
 	return (0);
 }
 
@@ -85,20 +100,7 @@ int	check_light(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->light->origine = add_vector_float(tmp[1]);
-	// data->scene->light->ratio = add_float(tmp[2]);
 	data->scene->light->ratio = ft_atof(tmp[2]);
 	free_tab(tmp);
-	return (0);
-}
-
-/*because I have no space is une essential */
-int	init_sphere(t_sphere *current, char **tmp)
-{
-	current->center = add_vector_float(tmp[1]);
-	current->diameter = ft_atof(tmp[2]);
-	current->color = add_color_int(tmp[3]);
-	current->impact_point = NULL;
-	current->ray = NULL;
-	current->ray_light = NULL;
 	return (0);
 }
