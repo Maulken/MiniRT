@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 16:26:08 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:43:54 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,62 +113,74 @@ typedef enum e_ray
 /*                                                                            */
 /* ************************************************************************** */
 	//parsing.c
-int			parsing(int argc, char **argv, t_data *data);
+int		parsing(int argc, char **argv, t_data *data);
 	//check.c
-int			ft_msg_error(char *str, int value);
-int			ft_msg_error_tab(char *str, int value, char **tab );
-int			endwith(char *argv, char *value);
-int			check_argument(int argc, char **argv);
-int			check_tab(char **rows, t_data *data);
-int			check_min_scene(char **tab);
-int			check_type(char *src, t_data *data);
+int		endwith(char *argv, char *value);
+int		check_argument(int argc, char **argv);
+int		check_tab(char **rows, t_data *data);
+int		check_min_scene(char **tab);
+int		check_type(char *src, t_data *data);
 	//get_file
-char		check_last_char(char *str);
-void		delete_comment(char *str);
-char		*get_string(int fd);
-char		**checkget_file_content(int fd);
+char	check_last_char(char *str);
+void	delete_comment(char *str);
+char	*get_string(int fd);
+char	**checkget_file_content(int fd);
 	//utils.c
-char		*ft_strjoin_free(char *s1, char *s2);
-void		printf_row(char **row);
-int			size_tab(char **tab);
-void		free_tab(char **tab);
-int			check_float_point(char **tab);
+char	*ft_strjoin_free(char *s1, char *s2);
+int		size_tab(char **tab);
+void	free_tab(char **tab);
+int		check_float_point(char **tab);
+	//utils2.c
+int		ft_msg_error(char *str, int value);
+int		ft_msg_error_tab(char *str, int value, char **tab);
+int		ft_is_space(char c);
+int		ft_is_digit(char c);
+int		ft_is_good_char(char c);
+
 	//conversion.c
-t_vector	*add_vector_float(char *str);
-t_vector	*add_color_int(char *str);
-int			add_int(char *str);
+int				add_int(char *str);
+t_vector		*add_vector_float(char *str);
+t_vector		*add_color_int(char *str);
+
 
 	//check_object.c
-char		**check_error_type(char *str, char **tmp);
-char		**check_correct_type(const char *content, char *tab);
+int		init_sphere(t_sphere *current, char **tmp);
+char	**check_error_type(char *str, char **tmp);
+char	**check_correct_type(const char *content, char *tab);
+void	remouve_space_start_line(char *str);
 
 	//check_objet_essential.c
-int			check_vector_normalised(t_vector *vector);
-int			check_ambiance(char *tab, t_data *data);
-int			check_camera(char *tab, t_data *data);
-int			check_light(char *tab, t_data *data);
-int			init_sphere(t_sphere *current, char **tmp);
+int		is_normalized(float x, float y, float z);
+int		check_vector_normalised(t_vector *vector);
+int		check_ambiance(char *tab, t_data *data);
+int		check_camera(char *tab, t_data *data);
+int		check_light(char *tab, t_data *data);
 
 	//chech_object_liste.c
-int			check_sphere(char *tab, t_data *data);
-int			check_plane(char *tab, t_data *data);
-int			check_cylinder(char *tab, t_data *data);
+int		check_sphere(char *tab, t_data *data);
+int		init_plane(t_plane *current, char **tmp);
+int		check_plane(char *tab, t_data *data);
+int		init_cylinder(t_cylinder *current, char **tmp);
+int		check_cylinder(char *tab, t_data *data);
+
 	//check_utils.c
-int			ft_is_space(char c);
-int			ft_is_digit(char c);
-int			ft_is_good_char(char c);
-int			check_num(char *tab, char *str, int size_setting);
+int		check_num(char *tab, char *str, int size_setting);
+int		check_signe(char *str);
+int		check_signe_tab(char **tab);
 
 	//check_type.c
-int			check_correct_intxyz(char **tmp, int j);
-int			check_correct_floatxyz(char **tmp, int j);
-int			check_correct_char(char **tmp, int j);
-int			check_correct_int(char **tmp, int j);
-int			check_correct_float(char **tmp, int j);
-	//ft_atof.c
-double		ft_atof(char *s);
+int		check_correct_intxyz(char **tmp, int j);
+int		check_correct_floatxyz(char **tmp, int j);
+int		check_correct_char(char **tmp, int j);
+int		check_correct_int(char **tmp, int j);
+int		check_correct_float(char **tmp, int j);
 
-char		**ft_split_espace(char const *str);
+	//ft_atof.c
+double	ft_atof(char *s);
+
+	//split_space.c
+char	**ft_split_espace(char const *str);
+
 
 /* ************************************************************************** */
 /* Initialisation - Clear                                                     */

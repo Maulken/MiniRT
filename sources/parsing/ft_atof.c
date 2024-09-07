@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:36:52 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 16:26:26 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:46:56 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	ft_atof_c_signe(const char *str, int *sign)
 		i++;
 	return (i);
 }
-
 
 static int	ft_atof_next(const char *str, int result,
 	int *decimal_point, double *fraction)

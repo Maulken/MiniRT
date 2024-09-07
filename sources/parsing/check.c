@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/07 11:37:39 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:46:36 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	check_min_scene(char **tab)
 	len_l = 0;
 	while (tab[i])
 	{
+		remouve_space_start_line(tab[i]);
 		if (!ft_strncmp(tab[i], "A ", 2))
 			len_a++;
 		if (!ft_strncmp(tab[i], "C ", 2))
@@ -105,10 +106,8 @@ int	check_min_scene(char **tab)
 		i++;
 	}
 	if (len_a != 1 || len_c != 1 || len_l < 1)
-	{
-		printf("error : il doit avoir  (1)A,(1)C,(inf)L");
-		return (ERROR);
-	}
+		return (printf("error : il doit y avoir"
+				"(1)A,(1)C,(inf)L \n"), ERROR);
 	return (OK);
 }
 
@@ -134,7 +133,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			ft_msg_error_tab("plese ckeck : is not object %s", 1, tab);
+			return (ft_msg_error_tab("plese ckeck : is not object %s", 1, tab));
 	}
 	free_tab(tab);
 	return (0);
