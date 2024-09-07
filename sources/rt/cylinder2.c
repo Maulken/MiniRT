@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:37:44 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
+/*
 int	get_pl_intersect(t_data *data, t_cylinder *cy)
 {
-	t_vector	*pl_center;
-	t_vector	*pl_cam;
+	t_vector	pl_center;
+	t_vector	pl_cam;
 	float		num;
 	float		den;
 	float		dist;
 
 	pl_center = vec_multiplying(cy->center, cy->height / 2);
-	pl_cam = vec_subtract(data->scene->camera->origine, pl_center);
-	num = vec_dot_product(pl_cam, cy->direction);
+	pl_cam = vec_subtract(data->scene->camera->origine, &pl_center);
+	num = vec_dot_product(&pl_cam, cy->direction);
 	den = vec_dot_product(data->scene->plane->ray, cy->direction);
 	if (den != 0.0)
 	{
@@ -34,16 +34,17 @@ int	get_pl_intersect(t_data *data, t_cylinder *cy)
 
 int	add_plane(t_data *data, t_cylinder *cy)
 {
-	t_vector	*pl_center;
-	t_vector	*pl_impact;
+	t_vector	pl_center;
+	t_vector	pl_impact;
+	t_vector	for_pl_impact; //comme dans get_color_cylinder
 	float		dist;
 	int			new_color;
 
 	new_color = 0;
 	pl_center = vec_multiplying(cy->center, cy->height / 2);
-	pl_impact = vec_add(data->scene->camera->origine,
-			vec_multiplying(cy->ray, get_pl_intersect(data, cy)));
-	dist = vec_lenght(pl_impact, pl_center);
+	for_pl_impact = vec_multiplying(cy->ray, get_pl_intersect(data, cy));
+	pl_impact = vec_add(data->scene->camera->origine, &for_pl_impact);
+	dist = vec_lenght(&pl_impact, &pl_center);
 	if (dist < cy->diameter / 2)
 		new_color = get_mix_color(data);
 	return (new_color);
@@ -53,7 +54,7 @@ int	get_mix_color(t_data *data)
 {
 	int			new_color;
 	t_vector	*diffuse_light;
-	t_vector	*mix_color;
+	t_vector	mix_color;
 
 	mix_color = data->scene->ambient->ambient_light;
 	diffuse_light = get_diffuse_light_pl(data);
@@ -87,3 +88,4 @@ int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 	// printf("c = %f\n", c);
 	return(quadratic_equation(dist, a, b, c));
 }
+*/

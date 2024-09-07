@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:26:08 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ void		obtain_ray_pl(t_data *data, t_ray type_ray, t_scene tmp,
 float		cylinder_intersect(t_data *data, t_cylinder *cy);
 float		on_cy(t_cylinder *cy);
 int			get_color_cylinder(t_data *data, t_cylinder *cy);
-t_vector	*get_diffuse_light_cy(t_data *data);
+t_vector	get_diffuse_light_cy(t_data *data);
 void		obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 				float x_ray, float y_ray);
 
@@ -245,7 +245,7 @@ void		obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 int			get_pl_intersect(t_data *data, t_cylinder *cy);
 int			add_plane(t_data *data, t_cylinder *cy);
 int			get_mix_color(t_data *data);
-int		cy_quadratic(t_data *data, t_cylinder *cy, float dist[2]);
+int			cy_quadratic(t_data *data, t_cylinder *cy, float dist[2]);
 
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);

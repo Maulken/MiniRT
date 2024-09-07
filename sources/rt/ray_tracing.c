@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 15:02:34 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:59:47 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,36 @@ void	get_view_plane(t_data *data)
 // 	data->view->y_pixel = height / data->view->height;
 // }
 
-int	is_plane(t_data *data, t_scene tmp, int object)
-{
-	tmp.plane->dist_cam_plane = plane_intersect(data, tmp.plane);
-	if (tmp.plane->dist_cam_plane < data->hit->distance
-		&& tmp.plane->dist_cam_plane != EXIT_FAILURE)
-	{
-		data->hit->plane = tmp.plane;
-		data->hit->sphere = NULL;
-		return (PLANE);
-	}
-	if (object != NONE)
-		return (object);
-	return (NONE);
-}
+// int	is_plane(t_data *data, t_scene tmp, int object)
+// {
+// 	tmp.plane->dist_cam_plane = plane_intersect(data, tmp.plane);
+// 	if (tmp.plane->dist_cam_plane < data->hit->distance
+// 		&& tmp.plane->dist_cam_plane != EXIT_FAILURE)
+// 	{
+// 		data->hit->plane = tmp.plane;
+// 		data->hit->sphere = NULL;
+// 		return (PLANE);
+// 	}
+// 	if (object != NONE)
+// 		return (object);
+// 	return (NONE);
+// }
 
-int	is_cylinder(t_data *data, t_scene tmp, int object)
-{
-	tmp.cylinder->dist_cam_cylinder = cylinder_intersect(data, tmp.cylinder);
-	if (tmp.cylinder->dist_cam_cylinder < data->hit->distance
-		&& tmp.cylinder->dist_cam_cylinder != EXIT_FAILURE)
-	{
-		data->hit->cylinder = tmp.cylinder;
-		data->hit->sphere = NULL;
-		data->hit->plane = NULL;
-		return (CYLINDER);
-	}
-	if (object != NONE)
-		return (object);
-	return (NONE);
-}
+// int	is_cylinder(t_data *data, t_scene tmp, int object)
+// {
+// 	tmp.cylinder->dist_cam_cylinder = cylinder_intersect(data, tmp.cylinder);
+// 	if (tmp.cylinder->dist_cam_cylinder < data->hit->distance
+// 		&& tmp.cylinder->dist_cam_cylinder != EXIT_FAILURE)
+// 	{
+// 		data->hit->cylinder = tmp.cylinder;
+// 		data->hit->sphere = NULL;
+// 		data->hit->plane = NULL;
+// 		return (CYLINDER);
+// 	}
+// 	if (object != NONE)
+// 		return (object);
+// 	return (NONE);
+// }
 
 int	is_sphere(t_data *data, t_scene tmp)
 {
@@ -92,18 +92,19 @@ int	is_sphere(t_data *data, t_scene tmp)
 int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 {
 	// printf("\e[35mGET_HIT\e[0m\n");
-	int	object;
+	int			object;
 	t_sphere	*next;
 
 	object = NONE;
 	while (tmp.spheres)
 	{
+		printf("shf\n");
 		next = tmp.spheres->next;
 		init_tmp_ray(&tmp, SPHERE);
 		*tmp.spheres->ray = obtain_ray_sphere(data, x_ray, y_ray);
-		// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
+		printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 		object = is_sphere(data, tmp);
-		// printf("object %d\n", object);
+		printf("object %d\n", object);
 		free(tmp.spheres->ray);
 		tmp.spheres = next;
 	}
@@ -188,12 +189,15 @@ static void	reinit_hit(t_hit *hit)
 int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 {
 	// printf("\e[35mGET_COLOR\e[0m\n");
-	int	color;
-	int	object;
+	int		color;
+	int		object;
 	t_scene	tmp;
-	color = 0;
-	// color = 0xff0000;
+	
+	// color = 0;
+	color = 0x00ff00;
 	tmp = *data->scene;
+	printf("diam %f\n", data->scene->spheres->diameter);
+	// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 	data->hit->distance = INFINITY;
 	object = NONE;
 	object = get_hit(data, tmp, x_ray, y_ray);
@@ -205,6 +209,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 		// printf("diam %f\n", data->hit->sphere->diameter);
 		*data->hit->sphere->ray = obtain_ray_sphere(data, x_ray, y_ray);
 		color = get_color_sphere(data, data->hit);
+		reinit_hit(data->hit);
 	}
 	// if (object == PLANE)
 	// {
@@ -218,7 +223,6 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	// 	// printf("color %d\n", color);
 	// }
 	//printf("before color\n");
-	//reinit_hit(data->hit);
 	return (color);
 }
 
