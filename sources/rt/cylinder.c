@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:51:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/07 16:29:12 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,48 +53,53 @@ float	on_cy(t_cylinder *cy)
 	return(0);
 }
 
-int	get_color_cylinder(t_data *data, t_cylinder *cy)
+int	get_color_cylinder(t_data *data, t_hit *hit)
 {
 	int			new_color;
+	t_vector	for_impact;
 
 	new_color = 0;
-	cy->dist_cam_cylinder = cylinder_intersect(data, cy);
+	hit->cylinder->dist_cam_cylinder = cylinder_intersect(data, hit->cylinder);
 	// printf("dist = %f\n", cy->dist_cam_cylinder);
-	if (cy->dist_cam_cylinder >= 0)
+	if (hit->cylinder->dist_cam_cylinder >= 0)
 	{
 		printf("test\n");
-		cy->impact_point = vec_add(data->scene->camera->origine,
-			vec_multiplying(cy->ray, cy->dist_cam_cylinder));
-		if (on_cy(cy))
+		for_impact = vec_multiplying(hit->cylinder->ray,
+			hit->cylinder->dist_cam_cylinder);
+		*hit->cylinder->impact_point = vec_add(data->scene->camera->origine,
+			&for_impact);
+		if (on_cy(hit->cylinder))
 			new_color = get_mix_color(data);
 		else
-			add_plane(data, cy);
+			add_plane(data, hit->cylinder);
 	}
 	// else
 	// 	add_plane(data, cy);
 	return (new_color);
 }
 
-t_vector	*get_diffuse_light_cy(t_data *data)
+t_vector	get_diffuse_light_cy(t_data *data)
 {
-	t_vector	*norm;
-	t_vector	*color;
+	t_vector	norm;
+	t_vector	color;
 	float		ratio;
 
 	norm = vec_subtract(data->scene->cylinder->impact_point,
 			data->scene->cylinder->center);
-	vec_normalize(norm);
-	data->scene->cylinder->ray_light =
-		vec_subtract(data->scene->cylinder->impact_point,
-		data->scene->light->origine);
+	vec_normalize(&norm);
+	*data->scene->cylinder->ray_light =
+			vec_subtract(data->scene->cylinder->impact_point,
+			data->scene->light->origine);
 	vec_normalize(data->scene->cylinder->ray_light);
-	ratio = vec_dot_product(norm, data->scene->cylinder->ray_light);
+	ratio = vec_dot_product(&norm, data->scene->cylinder->ray_light);
 	printf("ratio = %f\n", ratio);
-	if (ratio < 0)
-		color = NULL;
-	else
+	// if (ratio < 0)
+	// 	color = NULL;
+	// else
+	// 	*color = vec_multiplying(data->white_light, ratio);
+	if (ratio >= 0)
 		color = vec_multiplying(data->white_light, ratio);
-	free(norm);
+	//free(&norm);
 	return (color);
 }
 
@@ -105,7 +110,7 @@ void	obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 	(void)tmp;
 	//t_vector	*for_ray;
 	//for_ray = new_vector(x_ray, y_ray, data->scene->camera->direction->z);
-	data->scene->cylinder->ray= new_vector(x_ray, y_ray, 1.0);
+	*data->scene->cylinder->ray= new_vector(x_ray, y_ray, 1.0);
 	//printf("ray: %f, %f, %f\n", x_ray, y_ray, 1.0);
 	//data->scene->cylinder->ray = vec_subtract(for_ray,
 	///		data->scene->camera->origine);
