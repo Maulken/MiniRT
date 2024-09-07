@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:50:39 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/06 14:49:39 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/07 13:45:35 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_vector	vec_vec_multi(t_vector *vec1, t_vector *vec2)
 
 t_vector	vec_cross(t_vector *vec1, t_vector *vec2)
 {
-	float	x;
-	float	y;
-	float	z;
+	float		x;
+	float		y;
+	float		z;
 	t_vector	result;
 
 	x = vec1->y * vec2->z - vec1->z * vec2->y;

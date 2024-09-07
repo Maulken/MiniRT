@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 10:58:17 by vmassoli          #+#    #+#              #
-#    Updated: 2024/08/22 09:43:49 by vharatyk         ###   ########.fr        #
+#    Updated: 2024/09/07 12:01:46 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ AR					=	ar rcs
 RM					=	rm -rf
 
 # Source files
-SRC					=	ft_atoi.c \
+SRC					=	ft_atof.c \
+						ft_atoi.c \
 						ft_bzero.c \
 						ft_calloc.c \
 						ft_isalnum.c \

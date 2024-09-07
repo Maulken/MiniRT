@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/07 11:46:36 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 12:05:44 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_tab(char **rows, t_data *data)
 	i = 0;
 	if (check_min_scene(rows) == ERROR)
 	{
-		// free_tab(rows); car free dans la fonction parsing
+		free_tab(rows); //car free dans la fonction parsing
 		printf("ERROR");
 		return (1);
 	}
@@ -74,7 +74,7 @@ int	check_tab(char **rows, t_data *data)
 	{
 		if (check_type(rows[i], data) != 0)
 		{
-			// free_tab(rows); car free dans la fonction parsing
+			free_tab(rows); //car free dans la fonction parsing
 			printf("\nparse ERROR ligne : %d \n", i);
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 15:59:47 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:35:23 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_view_plane(t_data *data)
 {
 	t_vector	up_y;
 
-	up_y = new_vector(0,1,0);
+	up_y = new_vector(0, 1, 0);
 	data->view->distance = 1
 		/ (2 * tanf(data->scene->camera->fov / 2 * (M_PI / 180)));
 	// data->view->distance = 1
@@ -78,8 +78,8 @@ int	is_sphere(t_data *data, t_scene tmp)
 	dist = 0;
 	dist = sphere_intersect(data->scene->camera->origine,
 			tmp.spheres->ray, tmp.spheres);
-	if (dist != -1)
-		printf("dist %f\n", dist);
+	// if (dist != -1)
+		// printf("dist %f\n", dist);
 	if (dist < data->hit->distance && dist > 1)
 	{
 		data->hit->distance = dist;
@@ -93,20 +93,21 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 {
 	// printf("\e[35mGET_HIT\e[0m\n");
 	int			object;
-	t_sphere	*next;
+	// t_sphere	*next;
 
 	object = NONE;
 	while (tmp.spheres)
 	{
-		printf("shf\n");
-		next = tmp.spheres->next;
+		// printf("shf\n");
+		// next = tmp.spheres->next;
 		init_tmp_ray(&tmp, SPHERE);
 		*tmp.spheres->ray = obtain_ray_sphere(data, x_ray, y_ray);
-		printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
+		// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 		object = is_sphere(data, tmp);
-		printf("object %d\n", object);
+		// printf("object %d\n", object);
 		free(tmp.spheres->ray);
-		tmp.spheres = next;
+		// tmp.spheres = next;
+		tmp.spheres = tmp.spheres->next;
 	}
 	// while (tmp.plane)
 	// {
@@ -196,7 +197,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	// color = 0;
 	color = 0x00ff00;
 	tmp = *data->scene;
-	printf("diam %f\n", data->scene->spheres->diameter);
+	// printf("diam %f\n", data->scene->spheres->diameter);
 	// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 	data->hit->distance = INFINITY;
 	object = NONE;
@@ -205,7 +206,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	{
 		// printf("center hit %f %f %f\n", data->hit->sphere->center->x, data->hit->sphere->center->y, data->hit->sphere->center->z);
 		init_hit_sphere(data->hit);
-		printf("\e[32mSPHERE\e[0m\n");
+		// printf("\e[32mSPHERE\e[0m\n");
 		// printf("diam %f\n", data->hit->sphere->diameter);
 		*data->hit->sphere->ray = obtain_ray_sphere(data, x_ray, y_ray);
 		color = get_color_sphere(data, data->hit);

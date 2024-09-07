@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 17:49:52 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/07 13:22:30 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_vector_normalised(t_vector *vector)
 		return (1);
 	if (vector->z > 1 || vector->z < -1)
 		return (1);
-	if (!is_normalized(vector->x, vector->y, vector->z))
+	if (!is_normalized(vector->x, vector->y, vector->z)) //on a deja une fonction vec_lenght qui calcule la longeur d'un vect et un vecteur normalise a une longueur de 1
 		printf("\033[38;5;208m WARNING: The vector"
 			"is not normalized. \033[0m \n");
 	return (0);

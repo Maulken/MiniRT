@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:12:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 14:49:21 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/07 13:49:00 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ float	vec_lenght(t_vector *vec1, t_vector *vec2)
 {
 	float result;
 
-	result = sqrt((vec1->x * vec2->x) + (vec1->y * vec2->y) +
-		(vec1->z * vec2->z));
+	// result = sqrt((vec1->x * vec2->x) + (vec1->y * vec2->y) +
+	// 	(vec1->z * vec2->z));
+	result = sqrt(vec_dot_product(vec1, vec2));
 	return(result);
 }
 

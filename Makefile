@@ -6,7 +6,7 @@
 #    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/06 15:15:08 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/09/07 11:48:43 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ SOURCES_PARSING =	check_object_essential.c \
 					check_utils.c \
 					check.c \
 					conversion.c \
-					ft_atof.c \
 					get_file.c \
 					parsing.c \
 					split_space.c \

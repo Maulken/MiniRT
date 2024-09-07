@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/07 11:45:52 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 15:07:17 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	main(int argc, char **argv)
 
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean_data(&data, 1));
-	printf("fov %f\n", data.scene->light->ratio);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"), clean_data(&data, 1));
-	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height, "MiniRT");
+	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height,
+			"MiniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);

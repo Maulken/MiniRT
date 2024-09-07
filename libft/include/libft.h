@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:57:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 11:42:32 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/07 13:10:50 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdio.h>
 
 // Linked list structure
 typedef struct s_list
