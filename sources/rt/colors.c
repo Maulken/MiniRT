@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:01:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/08/22 08:58:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:12:15 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	create_rgb(t_vector *colors)
 void	my_mlx_pixel_put(t_data *data, int color)
 {
 	char	*dst;
-
+	
 	dst = data->addr + (data->mlx_y * data->line_length + data->mlx_x *
 		(data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
