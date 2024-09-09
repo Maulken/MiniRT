@@ -6,12 +6,12 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 16:04:26 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:10:19 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-/*
+
 int	get_pl_intersect(t_data *data, t_cylinder *cy)
 {
 	t_vector	pl_center;
@@ -94,4 +94,3 @@ int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 	// printf("c = %f\n", c);
 	return(quadratic_equation(dist, a, b, c));
 }
-*/

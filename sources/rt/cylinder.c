@@ -6,12 +6,12 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 16:04:01 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:09:24 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-/*
+
 float	cylinder_intersect(t_data *data, t_cylinder *cy)
 {
 	// float	a;
@@ -123,4 +123,3 @@ void	obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 	vec_normalize(data->scene->cylinder->ray);
 	//free(for_ray);
 }
-*/

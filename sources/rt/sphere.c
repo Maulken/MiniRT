@@ -6,28 +6,41 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/07 14:53:56 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 17:58:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+#define NEAR 0.01
+#define FAR 250.0
+
 float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 {
 	float	b;
 	float	c;
-	float	dist[2];
+	// float	dist[2];
 	t_vector	origine_sphere;
+	(void)origin;
+	(void)direction;
 
-	origine_sphere = vec_subtract(origin, sph->center);
-	b = 2 * vec_dot_product(&origine_sphere, direction);
-	c = vec_dot_product(&origine_sphere, &origine_sphere)
-		- ft_square(sph->diameter / 2);
-	if (quadratic_equation(dist, 1, b, c) == EXIT_FAILURE)
+	origine_sphere = vec_subtract(sph->ray, sph->center);
+	b = vec_dot_product(&origine_sphere, sph->ray_dir);
+	c = b * b - vec_dot_product(sph->ray_dir, sph->ray_dir)
+		* (vec_dot_product(&origine_sphere, &origine_sphere) - ft_square(sph->diameter / 2));
+	if (c < 0)
 		return (-1);
-	if (dist[0] < dist[1])
-		return (dist[0]);
-	return (dist[1]);
+	float root = (-b - sqrt(c)) / vec_dot_product(sph->ray_dir, sph->ray_dir);
+	if (root < NEAR || root > FAR)
+		root = (-b + sqrt(c)) / vec_dot_product(sph->ray_dir, sph->ray_dir);
+	if (root < NEAR || root > FAR)
+		return (-1);
+	return (root);
+	// if (quadratic_equation(dist, 1, b, c) == EXIT_FAILURE)
+	// 	return (-1);
+	// if (dist[0] < dist[1])
+	// 	return (dist[0]);
+	// return (dist[1]);
 }
 
 t_vector	get_diffuse_light(t_data *data, t_hit *hit)
@@ -40,12 +53,11 @@ t_vector	get_diffuse_light(t_data *data, t_hit *hit)
 	color.x = '\0';
 	color.y = '\0';
 	color.z = '\0';
-	for_impact_p = vec_multiplying(hit->sphere->ray, hit->sphere->dist_cam_sphere);
-	*hit->sphere->impact_point = vec_add(data->scene->camera->origine, &for_impact_p);
+	for_impact_p = vec_multiplying(hit->sphere->ray_dir, hit->sphere->dist_cam_sphere);
+	*hit->sphere->impact_point = vec_add(hit->sphere->ray, &for_impact_p);
 	norm = vec_subtract(hit->sphere->impact_point, hit->sphere->center);
 	vec_normalize(&norm);
-	*hit->sphere->ray_light = vec_subtract(hit->sphere->impact_point,
-		data->scene->light->origine);
+	*hit->sphere->ray_light = vec_subtract(data->scene->light->origine, hit->sphere->impact_point);
 	vec_normalize(hit->sphere->ray_light);
 	ratio = vec_dot_product(&norm, hit->sphere->ray_light);
 	// if (ratio < 0)

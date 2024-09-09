@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:25:01 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/06 11:32:54 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:05:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	init_struct_sphere(t_sphere *sphere)
 		return (error_allocation());
 	sphere->ray = ft_calloc(1, sizeof(t_vector));
 	if (sphere->ray == NULL)
+		return (error_allocation());
+	sphere->ray_dir = ft_calloc(1, sizeof(t_vector));
+	if (sphere->ray_dir == NULL)
 		return (error_allocation());
 	sphere->ray_light = ft_calloc(1, sizeof(t_vector));
 	if (sphere->ray_light == NULL)
@@ -52,6 +55,9 @@ int	init_struct_plane(t_plane *plane)
 		return (error_allocation());
 	plane->ray = ft_calloc(1, sizeof(t_vector));
 	if (plane->ray == NULL)
+		return (error_allocation());
+	plane->ray_dir = ft_calloc(1, sizeof(t_vector));
+	if (plane->ray_dir == NULL)
 		return (error_allocation());
 	plane->ray_light = ft_calloc(1, sizeof(t_vector));
 	if (plane->ray_light == NULL)

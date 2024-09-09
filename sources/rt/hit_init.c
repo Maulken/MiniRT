@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:44:55 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 16:37:21 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:05:03 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@ void	init_tmp_ray(t_scene *tmp, t_object object)
 		tmp->spheres->ray = ft_calloc(1, sizeof(t_vector));
 		if (tmp->spheres->ray == NULL)
 			error_allocation();
+		tmp->spheres->ray_dir = ft_calloc(1, sizeof(t_vector));
+		if (tmp->spheres->ray_dir == NULL)
+			error_allocation();
 		return ;
 	}
 	else if (tmp->plane && object == PLANE)
 	{
 		tmp->plane->ray = ft_calloc(1, sizeof(t_vector));
 		if (tmp->plane->ray == NULL)
+			error_allocation();
+		tmp->plane->ray_dir = ft_calloc(1, sizeof(t_vector));
+		if (tmp->plane->ray_dir == NULL)
 			error_allocation();
 		return ;
 	}
@@ -49,8 +55,8 @@ void	free_tmp(t_scene *tmp)
 
 void	reinit_hit(t_hit *hit)
 {
-	if (hit->sphere->ray != NULL)
-		free(hit->sphere->ray);
+	// if (hit->sphere->ray != NULL)
+	// 	free(hit->sphere->ray);
 	if (hit->sphere->ray_light != NULL)
 		free(hit->sphere->ray_light);
 	if (hit->sphere->impact_point != NULL)

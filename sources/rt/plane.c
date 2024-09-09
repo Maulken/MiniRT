@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 16:05:52 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:25:03 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,36 @@
 
 float	plane_intersect(t_data *data, t_plane *pl)
 {
-	float		dist;
-	float		num;
-	float		den;
-	t_vector	pl_cam;
-	(void)data;
+	// float		dist;
+	// float		num;
+	// float		den;
+	// t_vector	pl_cam;
+	// (void)data;
 
-	// pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
-	pl_cam = vec_subtract(pl->direction, pl->origine);
-	vec_normalize(&pl_cam);
-	// printf("pl_cam: %f, %f, %f\n", pl_cam.x, pl_cam.y, pl_cam.z);
-	num = vec_dot_product(&pl_cam, pl->direction);
-	// printf("direction: %f, %f, %f\n", pl->direction->x, pl->direction->y, pl->direction->z);
-	// printf("num = %f\n", num);
-	den = vec_dot_product(pl->ray, pl->direction);
-		printf("den = %f\n", den);
-	if (den != 0.0)
-	{
-		dist = num / den;
-		return(dist);
-	}
-	return (-1);
+	// // pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
+	// pl_cam = vec_subtract(pl->direction, pl->origine);
+	// vec_normalize(&pl_cam);
+	// // printf("pl_cam: %f, %f, %f\n", pl_cam.x, pl_cam.y, pl_cam.z);
+	// num = vec_dot_product(&pl_cam, pl->direction);
+	// // printf("direction: %f, %f, %f\n", pl->direction->x, pl->direction->y, pl->direction->z);
+	// // printf("num = %f\n", num);
+	// den = vec_dot_product(pl->ray, pl->direction);
+	// 	printf("den = %f\n", den);
+	// if (den != 0.0)
+	// {
+	// 	dist = num / den;
+	// 	return(dist);
+	// }
+	// return (-1);
+
+	(void)data;
+	float d = vec_dot_product(pl->direction, pl->ray_dir);
+	if (d <= 0)
+		return (-1);
+	t_vector	v = vec_subtract(pl->origine, pl->ray);
+	d = vec_dot_product(&v, pl->direction) / d;
+	printf("%f\n", d);
+	return (d);
 }
 
 int	get_color_plane(t_data *data)

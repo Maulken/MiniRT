@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 13:12:45 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:04:31 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_sphere
 	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
+	t_vector	*ray_dir;
 	t_vector	*ray_light;
 	float		diameter;
 	float		dist_light_sphere;
@@ -44,6 +45,7 @@ typedef struct s_plane
 	t_vector	*color;
 	t_vector	*impact_point;
 	t_vector	*ray;
+	t_vector	*ray_dir;
 	t_vector	*ray_light;
 	float		dist_light_plane;
 	float		dist_cam_plane;
