@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 16:29:12 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:26:57 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,14 @@ float	on_cy(t_cylinder *cy)
 	float	height_pos;
 
 	dist = vec_lenght(cy->impact_point, cy->center);
-	height_pos = sqrt((cy->diameter / 2 * cy->diameter / 2) + (dist * dist));
+	printf("dist = %f\n", dist);
+	height_pos = sqrt((dist * dist) - (cy->diameter / 2 * cy->diameter / 2));
+	printf("pos = %f\n", height_pos);
+	printf("long = %f\n", cy->height);
 	if (height_pos <= cy->height / 2)
-		return (OK);
+	{
+		return (1);
+	}
 	return(0);
 }
 
@@ -70,11 +75,12 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 			&for_impact);
 		if (on_cy(hit->cylinder))
 			new_color = get_mix_color(data);
-		else
-			add_plane(data, hit->cylinder);
+		// else
+		// 	add_plane(data, hit->cylinder);
 	}
 	// else
 	// 	add_plane(data, cy);
+	printf("new_color = %d\n", new_color);
 	return (new_color);
 }
 

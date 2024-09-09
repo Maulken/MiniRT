@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 14:51:34 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:07:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	get_mix_color(t_data *data)
 	t_vector	mix_color;
 
 	mix_color = *data->scene->ambient->ambient_light;
-	diffuse_light = get_diffuse_light_pl(data);
+	diffuse_light = get_diffuse_light_cy(data);
 	if (diffuse_light.x)
 		mix_color = vec_add(data->scene->ambient->ambient_light,
 		&diffuse_light);
@@ -76,17 +76,21 @@ int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 	float		a;
 	float		b;
 	float		c;
+	(void)data;
 
 	for_cross = vec_cross(cy->ray, cy->direction);
-	for_sub = vec_subtract(data->scene->camera->origine, cy->center);
+	// for_sub = vec_subtract(data->scene->camera->origine, cy->center);
+	for_sub = vec_subtract(cy->direction, cy->center);
 	ray_cross = vec_cross(&for_sub, cy->direction);
 	// printf("ray_cross x = %f, y = %f, z = %f\n", ray_cross->x, ray_cross->y, ray_cross->z);
-	a = ft_square(vec_lenght(&for_cross, &for_cross));
+	// a = ft_square(vec_lenght(&for_cross, &for_cross));
+	a = vec_dot_product(&for_cross, &for_cross);
 	// printf("a = %f\n", a);
 	b = 2 * vec_dot_product(&for_cross, &ray_cross);
 	// printf("b = %f\n", b);
-	c = ft_square(vec_lenght(&ray_cross, &ray_cross)) - (cy->diameter / 2) *
-		(1 - ft_square(vec_dot_product(cy->ray, cy->direction)));
+	// c = ft_square(vec_lenght(&ray_cross, &ray_cross)) - (cy->diameter / 2) *
+	// 	(1 - ft_square(vec_dot_product(cy->ray, cy->direction)));
+	c = vec_dot_product(&ray_cross, &ray_cross) - (cy->diameter / 2);
 	// printf("c = %f\n", c);
 	return(quadratic_equation(dist, a, b, c));
 }

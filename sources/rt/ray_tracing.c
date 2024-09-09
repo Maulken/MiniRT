@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 16:59:59 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:34:12 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ int	is_plane(t_data *data, t_scene tmp)
 	float	dist;
 
 	dist = 0;
-	printf("hit_dist %f\n", data->hit->distance);
+	// printf("hit_dist %f\n", data->hit->distance);
 	dist = plane_intersect(data, tmp.plane);
 	if (dist != -1)
-		printf("dist %f\n", dist);
+		// printf("dist plane %f\n", dist);
 	if (dist < data->hit->distance && dist > 1)
 	{
 		data->hit->distance = dist;
+	// printf("hit dist = %f\n", data->hit->distance);
 		data->hit->plane = tmp.plane;
 		return (PLANE);
 	}
@@ -79,7 +80,7 @@ int	is_cylinder(t_data *data, t_scene tmp)
 	dist = 0;
 	dist = cylinder_intersect(data, tmp.cylinder);
 	if (dist != -1)
-		printf("dist %f\n", dist);
+		printf("dist cy %f\n", dist);
 	if (dist < data->hit->distance && dist > 1)
 	{
 		data->hit->distance = dist;
@@ -134,7 +135,7 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		*tmp.spheres->ray = obtain_ray(data, x_ray, y_ray);
 		// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 		object = is_sphere(data, tmp);
-		// printf("object %d\n", object);
+		printf("object sp %d\n", object);
 		free(tmp.spheres->ray);
 		tmp.spheres = tmp.spheres->next;
 	}
@@ -144,7 +145,7 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		*tmp.plane->ray = obtain_ray(data, x_ray, y_ray);
 		// printf("center tmp %f %f %f\n", tmp.plane->center->x, tmp.plane->center->y, tmp.plane->center->z);
 		object = is_plane(data, tmp);
-		// printf("object %d\n", object);
+		 printf("object pl %d\n", object);
 		free(tmp.plane->ray);
 		tmp.plane = tmp.plane->next;
 	}
@@ -154,7 +155,7 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		*tmp.cylinder->ray = obtain_ray(data, x_ray, y_ray);
 		// printf("center tmp %f %f %f\n", tmp.cylinder->center->x, tmp.cylinder->center->y, tmp.cylinder->center->z);
 		object = is_cylinder(data, tmp);
-		// printf("object %d\n", object);
+		// printf("object cy %d\n", object);
 		free(tmp.cylinder->ray);
 		tmp.cylinder = tmp.cylinder->next;
 	}
@@ -250,9 +251,11 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 		// printf("diam %f\n", data->hit->sphere->diameter);
 		*data->hit->plane->ray = obtain_ray(data, x_ray, y_ray);
 		color = get_color_plane(data);
+		printf("color plan %d\n", color);
 	}
 	if (object == CYLINDER)
 	{
+		printf("object cy %d\n", object);
 		init_hit_cylinder(data->hit);
 		//printf("\e[32mCYLINDER\e[0m\n");
 		// printf("diam %f\n", data->hit->cylinder->diameter);

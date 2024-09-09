@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 17:05:58 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:33:17 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ float	plane_intersect(t_data *data, t_plane *pl)
 	float		num;
 	float		den;
 	t_vector	pl_cam;
+	(void)data;
 
-	pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
-	// vec_normalize(&pl_cam);
-	printf("pl_cam: %f, %f, %f\n", pl_cam.x, pl_cam.y, pl_cam.z);
+	// pl_cam = vec_subtract(data->scene->camera->origine, pl->origine);
+	pl_cam = vec_subtract(pl->direction, pl->origine);
+	vec_normalize(&pl_cam);
+	// printf("pl_cam: %f, %f, %f\n", pl_cam.x, pl_cam.y, pl_cam.z);
 	num = vec_dot_product(&pl_cam, pl->direction);
-	printf("num = %f\n", num);
+	// printf("direction: %f, %f, %f\n", pl->direction->x, pl->direction->y, pl->direction->z);
+	// printf("num = %f\n", num);
 	den = vec_dot_product(pl->ray, pl->direction);
 		printf("den = %f\n", den);
 	if (den != 0.0)
@@ -55,6 +58,7 @@ int	get_color_plane(t_data *data)
 		mix_color = vec_add(data->scene->plane->color, &mix_color);
 		limit_color(&mix_color);
 		new_color = create_rgb(&mix_color);
+	printf("new color plan %d\n", new_color);
 	}
 	// free(diffuse_light);
 	// free(mix_color);
@@ -82,7 +86,8 @@ t_vector	get_diffuse_light_pl(t_data *data)
 	ratio = vec_dot_product(&norm, data->scene->plane->ray_light);
 	if (ratio >= 0)
 		color = vec_multiplying(data->white_light, ratio);
-	//printf("ratio = %f\n", ratio);
+	// printf("ratio = %f\n", ratio);
+	// printf("color = %f\n", color.x);
 	// if (ratio < 0)
 	// 	color = NULL;
 	// else
