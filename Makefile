@@ -6,7 +6,7 @@
 #    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/07 11:48:43 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/09/09 16:02:12 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SOURCES_MAIN =		main.c \
 					clear.c \
 					clear_object.c \
 					clear_object2.c \
-					clear_scene.c 
+					clear_scene.c
 SOURCES_PARSING =	check_object_essential.c \
 					check_object_liste.c \
 					check_object.c \
@@ -48,10 +48,12 @@ SOURCES_PARSING =	check_object_essential.c \
 					parsing.c \
 					split_space.c \
 					utils.c \
-					utils2.c 
+					utils2.c
 SOURCES_RT =		colors.c \
 					cylinder.c \
 					cylinder2.c \
+					hit_init.c \
+					hit_object.c\
 					maths_util.c \
 					plane.c \
 					ray_tracing.c \

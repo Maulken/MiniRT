@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 11:47:47 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:01:03 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,20 +232,20 @@ float		sphere_intersect(t_vector *origin, t_vector *direction,
 				t_sphere *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 t_vector	get_diffuse_light(t_data *data, t_hit *hit);
-t_vector	obtain_ray_sphere(t_data *data, t_vector x_ray, t_vector y_ray);
+t_vector	obtain_ray(t_data *data, t_vector x_ray, t_vector y_ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
 	//plane
 float		plane_intersect(t_data *data, t_plane *pl);
 int			get_color_plane(t_data *data);
-t_vector	*get_diffuse_light_pl(t_data *data);
-void		obtain_ray_pl(t_data *data, t_ray type_ray, t_scene tmp,
+t_vector	get_diffuse_light_pl(t_data *data);
+void		obtain_ray_plane(t_data *data, t_ray type_ray, t_scene tmp,
 				float x_ray, float y_ray);
 
 	//cylinder
 float		cylinder_intersect(t_data *data, t_cylinder *cy);
 float		on_cy(t_cylinder *cy);
-int			get_color_cylinder(t_data *data, t_cylinder *cy);
+int			get_color_cylinder(t_data *data, t_hit *hit);
 t_vector	get_diffuse_light_cy(t_data *data);
 void		obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
 				float x_ray, float y_ray);
@@ -255,6 +255,16 @@ int			get_pl_intersect(t_data *data, t_cylinder *cy);
 int			add_plane(t_data *data, t_cylinder *cy);
 int			get_mix_color(t_data *data);
 int			cy_quadratic(t_data *data, t_cylinder *cy, float dist[2]);
+
+	//hit_object
+void		init_hit_sphere(t_hit *hit);
+void		init_hit_plane(t_hit *hit);
+void		init_hit_cylinder(t_hit *hit);
+
+	//hit_init
+void		init_tmp_ray(t_scene *tmp, t_object object);
+void		free_tmp(t_scene *tmp);
+void		reinit_hit(t_hit *hit);
 
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);
