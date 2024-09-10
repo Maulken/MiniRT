@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/09 17:58:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:34:25 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	get_color_sphere(t_data *data, t_hit *hit)
 	t_vector	diffuse_light;
 	t_vector	mix_color;
 
-	new_color = 0;
+	// new_color = 0;
+	new_color = 0x3300ff;
 	// diffuse_light = NULL;
 	// mix_color = NULL;
 	hit->sphere->dist_cam_sphere

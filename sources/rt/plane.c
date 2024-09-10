@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 18:25:03 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:19:41 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	plane_intersect(t_data *data, t_plane *pl)
 		return (-1);
 	t_vector	v = vec_subtract(pl->origine, pl->ray);
 	d = vec_dot_product(&v, pl->direction) / d;
-	printf("%f\n", d);
+	// printf("%f\n", d);
 	return (d);
 }
 
