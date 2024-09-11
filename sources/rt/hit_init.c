@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:44:55 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/10 09:35:24 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:29:45 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,25 @@ void	free_tmp(t_scene *tmp)
 
 void	reinit_hit(t_hit *hit)
 {
-	// if (hit->sphere->ray != NULL)
-	// 	free(hit->sphere->ray);
-	if (hit->sphere->ray_light != NULL)
-		free(hit->sphere->ray_light);
-	if (hit->sphere->impact_point != NULL)
-		free(hit->sphere->impact_point);
+	if (hit->sphere != NULL)
+	{
+		if (hit->sphere->ray_light != NULL)
+			free(hit->sphere->ray_light);
+		if (hit->sphere->impact_point != NULL)
+			free(hit->sphere->impact_point);
+	}
+	else if (hit->plane != NULL)
+	{
+		if (hit->plane->ray_light != NULL)
+			free(hit->plane->ray_light);
+		if (hit->plane->impact_point != NULL)
+			free(hit->plane->impact_point);
+	}
+	else if (hit->cylinder != NULL)
+	{
+		if (hit->cylinder->ray_light != NULL)
+			free(hit->cylinder->ray_light);
+		if (hit->cylinder->impact_point != NULL)
+			free(hit->cylinder->impact_point);
+	}
 }
