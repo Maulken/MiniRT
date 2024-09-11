@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/10 15:59:46 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:03:38 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ float	cylinder_intersect(t_data *data, t_cylinder *cy)
 	// free(cy_cam);
 	if (quadra == ERROR)
 		return (-1);
-	// printf("dist[0] = %f dist[1] = %f\n", dist[0], dist[1]);
+	printf("dist[0] = %f dist[1] = %f\n", dist[0], dist[1]);
 	if (dist[0] < dist[1])
 			return (dist[0]);
 	return (dist[1]);

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 10:37:45 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:09:18 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ int	is_cylinder(t_data *data, t_scene tmp)
 	// if (dist != -1)
 	// 	return (NONE);
 		// printf("dist cy %f\n", dist);
-	if (dist < data->hit->distance && dist > 1)
+	if (dist < data->hit->distance && dist > 0)
 	{
 		data->hit->distance = dist;
 		data->hit->cylinder= tmp.cylinder;
+		init_hit_cylinder(data->hit);
 		return (CYLINDER);
 	}
 	return (NONE);
@@ -159,7 +160,8 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		vec_normalize(tmp.cylinder->ray_dir);
 		// printf("center tmp %f %f %f\n", tmp.cylinder->center->x, tmp.cylinder->center->y, tmp.cylinder->center->z);
 		object = is_cylinder(data, tmp);
-		// printf("object cy %d\n", object);
+		if (object == CYLINDER)
+			 printf("object cy %d\n", object);
 		free(tmp.cylinder->ray);
 		tmp.cylinder = tmp.cylinder->next;
 	}
@@ -264,7 +266,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	}
 	if (object == CYLINDER)
 	{
-		// printf("object cy %d\n", object);
+		printf("object cy %d\n", object);
 		init_hit_cylinder(data->hit);
 		//printf("\e[32mCYLINDER\e[0m\n");
 		// printf("diam %f\n", data->hit->cylinder->diameter);
