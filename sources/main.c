@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/07 15:07:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/10 09:52:48 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	ft_bzero(&data, sizeof(t_data));
 	init_struct(&data);
 	init_scene(&data);
 	init_data(&data);

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/10 14:50:05 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:37:45 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	get_view_plane(t_data *data)
 	t_vector	up_y;
 
 	up_y = new_vector(0, 1, 0);
-	data->view->distance = 1. / (tanf((M_PI / 180.) * data->scene->camera->fov / 2.));
+	data->view->distance = 1. / (tanf((M_PI / 180.) *
+		data->scene->camera->fov / 2.));
 	// data->view->distance = 1
 	// 	/ (2 * tanf(data->scene->camera->fov / 2));
 	*data->view->viewplane_x = vec_cross(data->scene->camera->direction, &up_y);
@@ -89,6 +90,14 @@ int	is_sphere(t_data *data, t_scene tmp)
 	{
 		data->hit->distance = dist;
 		data->hit->sphere = tmp.spheres;
+		init_hit_sphere(data->hit);
+		// printf("center x hit %f\n", data->hit->sphere->center->x);
+		return (SPHERE);
+	}
+	else if (data->hit->sphere != NULL)
+	{
+		free(tmp.spheres->ray);
+		free(tmp.spheres->ray_dir);
 		return (SPHERE);
 	}
 	return (NONE);
@@ -124,8 +133,11 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		// printf("center tmp %f %f %f\n", tmp.spheres->center->x, tmp.spheres->center->y, tmp.spheres->center->z);
 		object = is_sphere(data, tmp);
 		// printf("object sp %d\n", object);
-		free(tmp.spheres->ray);
+		// free(tmp.spheres->ray);
+		// free(tmp.spheres->ray_dir);
 		tmp.spheres = tmp.spheres->next;
+		// if (object == SPHERE && data->hit->sphere->center->x != 2.)
+		// 	printf("\e[31mcenter x hit\e[0m %f\n", data->hit->sphere->center->x);
 	}
 	while (tmp.plane)
 	{
@@ -232,7 +244,8 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	object = get_hit(data, tmp, x_ray, y_ray);
 	if (object == SPHERE)
 	{
-		// printf("center hit %f %f %f\n", data->hit->sphere->center->x, data->hit->sphere->center->y, data->hit->sphere->center->z);
+		// if (data->hit->sphere->center->x != 0.)
+			// printf("\e[35mcenter x hit\e[0m %f\n", data->hit->sphere->center->x);
 		init_hit_sphere(data->hit);
 		// printf("\e[32mSPHERE\e[0m\n");
 		// printf("diam %f\n", data->hit->sphere->diameter);
