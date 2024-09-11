@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:25:01 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/09 18:05:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:55:31 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int	init_struct_cy(t_cylinder *cylinder)
 		return (error_allocation());
 	cylinder->ray = ft_calloc(1, sizeof(t_vector));
 	if (cylinder->ray == NULL)
+		return (error_allocation());
+	cylinder->ray_dir = ft_calloc(1, sizeof(t_vector));
+	if (cylinder->ray_dir == NULL)
 		return (error_allocation());
 	cylinder->ray_light = ft_calloc(1, sizeof(t_vector));
 	if (cylinder->ray_light == NULL)

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/10 14:34:25 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:25:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ float	sphere_intersect(t_vector *origin, t_vector *direction, t_sphere *sph)
 	origine_sphere = vec_subtract(sph->ray, sph->center);
 	b = vec_dot_product(&origine_sphere, sph->ray_dir);
 	c = b * b - vec_dot_product(sph->ray_dir, sph->ray_dir)
-		* (vec_dot_product(&origine_sphere, &origine_sphere) - ft_square(sph->diameter / 2));
+		* (vec_dot_product(&origine_sphere, &origine_sphere) - sph->diameter * sph->diameter / 4.);
 	if (c < 0)
 		return (-1);
 	float root = (-b - sqrt(c)) / vec_dot_product(sph->ray_dir, sph->ray_dir);
