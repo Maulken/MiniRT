@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 15:07:28 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/11 14:08:43 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-static int	count_words(const char *phrase)
-{
-	int	count;
-	int	in_word;
+// static int	count_words(const char *phrase)
+// {
+// 	int	count;
+// 	int	in_word;
 
-	count = 0;
-	in_word = 0;
-	while (*phrase != '\0')
-	{
-		if (ft_is_space(*phrase))
-		{
-			in_word = 0;
-		}
-		else if (!in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		phrase++;
-	}
-	return (count);
-}
+// 	count = 0;
+// 	in_word = 0;
+// 	while (*phrase != '\0')
+// 	{
+// 		if (ft_is_space(*phrase))
+// 		{
+// 			in_word = 0;
+// 		}
+// 		else if (!in_word)
+// 		{
+// 			in_word = 1;
+// 			count++;
+// 		}
+// 		phrase++;
+// 	}
+// 	return (count);
+// }
 
 static int	check_num_str(char *tab, char *str, int i, int len)
 {
@@ -62,6 +62,8 @@ int	check_num(char *tab, char *str, int size_setting)
 
 	i = 0;
 	len = 0;
+	if(size_setting == 0)
+	
 	while (tab[i] != '\0')
 	{
 		i = check_num_str(tab, str, i, len);
@@ -77,9 +79,9 @@ int	check_num(char *tab, char *str, int size_setting)
 		while (tab[i] == ' ' || tab[i] == '\t')
 			i++;
 	}
-	if (count_words(tab) != size_setting)
-		return (ft_msg_error("There are either not enough or too many "
-				"elements on the line.", 1));
+	//if (count_words(tab) != size_setting)
+		//return (ft_msg_error("There are either not enough or too many "
+				//"elements on the line.", 1));
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 16:36:29 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/11 14:47:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,17 @@ char	**check_correct_type(const char *content, char *tab)
 	int		j;
 	char	**tmp;
 
+
+	// donc la imaagine nous avons cela (sp) (-2 , 0 , 4)       (2)     (241 , 155 , 21)
+	
 	tmp = ft_split_espace(tab);
+	tmp = ft_split_line(tab);
+	if(tmp == NULL)
+		return (NULL);
+	for(int i = 0; tmp[i]; i++)
+		printf("tmp: %s\n", tmp[i]);
+	printf("END \n");
+
 	j = 0;
 	while (tmp[j])
 	{

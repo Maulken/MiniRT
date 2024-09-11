@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
+#    By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/09 17:17:53 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/09/11 15:23:51 by vharatyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra -Werror -O2
+CFLAGS	= -g #-Wall -Wextra -Werror -O2
 CLINKS	= -lXext -lX11 -lm
 
 ### EXECUTABLE ###
