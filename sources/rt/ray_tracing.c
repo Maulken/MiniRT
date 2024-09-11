@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 18:24:33 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:50:05 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int	is_cylinder(t_data *data, t_scene tmp)
 
 	dist = 0;
 	dist = cylinder_intersect(data, tmp.cylinder);
-	if (dist != -1)
-		printf("dist cy %f\n", dist);
+	// if (dist != -1)
+	// 	return (NONE);
+		// printf("dist cy %f\n", dist);
 	if (dist < data->hit->distance && dist > 1)
 	{
 		data->hit->distance = dist;
@@ -142,6 +143,8 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 	{
 		init_tmp_ray(&tmp, CYLINDER);
 		*tmp.cylinder->ray = obtain_ray(data, x_ray, y_ray);
+		*tmp.cylinder->ray_dir = vec_subtract(tmp.cylinder->ray, data->scene->camera->origine);
+		vec_normalize(tmp.cylinder->ray_dir);
 		// printf("center tmp %f %f %f\n", tmp.cylinder->center->x, tmp.cylinder->center->y, tmp.cylinder->center->z);
 		object = is_cylinder(data, tmp);
 		// printf("object cy %d\n", object);
@@ -218,7 +221,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	int		color;
 	int		object;
 	t_scene	tmp;
-	
+
 	// color = 0;
 	color = 0x3300ff;
 	tmp = *data->scene;
@@ -248,11 +251,11 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	}
 	if (object == CYLINDER)
 	{
-		printf("object cy %d\n", object);
+		// printf("object cy %d\n", object);
 		init_hit_cylinder(data->hit);
 		//printf("\e[32mCYLINDER\e[0m\n");
 		// printf("diam %f\n", data->hit->cylinder->diameter);
-		*data->hit->cylinder->ray = obtain_ray(data, x_ray, y_ray);
+		//*data->hit->cylinder->ray = obtain_ray(data, x_ray, y_ray);
 		color = get_color_cylinder(data, data->hit);
 	}
 	//printf("before color\n");
@@ -279,7 +282,8 @@ void	ray_tracing(t_data *data)
 		data->mlx_x = 0;
 		while (data->mlx_x < data->view->width)
 		{
-			x = -(2 * data->mlx_x / data->view->width - 1) * (data->view->width / data->view->height);
+			x = -(2 * data->mlx_x / data->view->width - 1) *
+				(data->view->width / data->view->height);
 			x_ray = vec_multiplying(data->view->viewplane_x, x);
 			my_mlx_pixel_put(data, get_color(data, x_ray, y_ray));
 			data->mlx_x++;

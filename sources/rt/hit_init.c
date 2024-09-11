@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:44:55 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/09 18:05:03 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/10 09:35:24 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	init_tmp_ray(t_scene *tmp, t_object object)
 	{
 		tmp->cylinder->ray = ft_calloc(1, sizeof(t_vector));
 		if (tmp->cylinder->ray == NULL)
+			error_allocation();
+		tmp->cylinder->ray_dir = ft_calloc(1, sizeof(t_vector));
+		if (tmp->cylinder->ray_dir == NULL)
 			error_allocation();
 		return ;
 	}
