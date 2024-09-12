@@ -3,81 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 14:28:51 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:44:07 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "minirt.h"
+# include "vector.h"
 
-typedef struct s_sphere		t_sphere;
-typedef struct s_vector		t_vector;
-typedef struct s_camera		t_camera;
-typedef struct s_view		t_view;
-typedef struct s_plane		t_plane;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_ambient	t_ambient;
+typedef enum e_geometry_type
+{
+	GT_SPHERE,
+	GT_PLANE,
+	GT_CYLINDER
+}	t_geometry_type;
+
+typedef struct s_camera
+{
+	t_vector	origine;
+	t_vector	direction;
+	float		fov;
+}				t_camera;
 
 typedef struct s_sphere
 {
-	t_sphere	*next;
-	t_vector	*center;
-	t_vector	*color;
-	t_vector	*impact_point;
-	t_vector	*ray;
-	t_vector	*ray_dir;
-	t_vector	*ray_light;
-	float		diameter;
-	float		dist_light_sphere;
-	float		dist_cam_sphere;
+	t_vector		center;
+	float			diameter;
 }				t_sphere;
 
 typedef struct s_plane
 {
-	t_plane		*next;
-	t_vector	*origine;
-	t_vector	*direction;
-	t_vector	*color;
-	t_vector	*impact_point;
-	t_vector	*ray;
-	t_vector	*ray_dir;
-	t_vector	*ray_light;
-	float		dist_light_plane;
-	float		dist_cam_plane;
+	t_vector		origine;
+	t_vector		direction;
 }				t_plane;
 
 typedef struct s_cylinder
 {
-	t_cylinder	*next;
-	t_vector	*center;
-	t_vector	*direction;
-	t_vector	*color;
-	t_vector	*impact_point;
-	t_vector	*ray;
-	t_vector	*ray_dir;
-	t_vector	*ray_light;
-	float		diameter;
-	float		height;
-	float		dist_light_cylinder;
-	float		dist_cam_cylinder;
+	t_vector			center;
+	t_vector			direction;
+	float				diameter;
+	float				height;
 }				t_cylinder;
+
+typedef struct s_geometry
+{
+	struct s_geometry	*next;
+	t_vector			color;
+	t_vector			impact_point;
+	float				dist_light;
+	float				dist_cam;
+	t_geometry_type		type;
+	struct s_ray
+	{
+		t_vector			origin;
+		t_vector			dir;
+		t_vector			light;
+	}	ray;
+	union u_geometries
+	{
+		t_sphere		sphere;
+		t_plane			plane;
+		t_cylinder		cylinder;
+	}	data;
+}	t_geometry;
 
 typedef struct s_light
 {
-	t_vector	*origine;
+	t_vector	origine;
 	float		ratio;
 }				t_light;
 
 typedef struct s_ambient
 {
 	float		ratio;
-	t_vector	*colors;
-	t_vector	*ambient_light;
+	t_vector	colors;
+	t_vector	ambient_light;
 }				t_ambient;
 
 typedef struct s_scene
@@ -85,9 +89,7 @@ typedef struct s_scene
 	t_light		*light;
 	t_camera	*camera;
 	t_ambient	*ambient;
-	t_sphere	*spheres;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
+	t_geometry	*objects;
 }				t_scene;
 
 #endif

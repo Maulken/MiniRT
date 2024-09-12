@@ -6,13 +6,13 @@
 #    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/09 17:17:53 by mpelluet         ###   ########.fr        #
+#    Updated: 2024/09/12 20:45:56 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra -Werror -O2
+CFLAGS	= -Wall -Wextra -Werror -O2
 CLINKS	= -lXext -lX11 -lm
 
 ### EXECUTABLE ###
@@ -35,7 +35,6 @@ SOURCES_MAIN =		main.c \
 					init_object.c \
 					clear.c \
 					clear_object.c \
-					clear_object2.c \
 					clear_scene.c
 SOURCES_PARSING =	check_object_essential.c \
 					check_object_liste.c \
@@ -52,8 +51,6 @@ SOURCES_PARSING =	check_object_essential.c \
 SOURCES_RT =		colors.c \
 					cylinder.c \
 					cylinder2.c \
-					hit_init.c \
-					hit_object.c\
 					maths_util.c \
 					plane.c \
 					ray_tracing.c \

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/09 18:35:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:36:51 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int	check_sphere(char *tab, t_data *data)
 {
-	t_sphere			*current;
-	t_sphere			**last;
+	t_geometry			*current;
+	t_geometry			**last;
 	char				**tmp;
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
-	current = malloc(sizeof(t_sphere));
+	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
-	current->next = NULL;
 	if (check_num(tab, "sp", 4))
 		return (1);
 	tmp = check_correct_type(content, tab);
@@ -30,7 +29,7 @@ int	check_sphere(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_sphere(current, tmp))
 		return (free_tab(tmp), 1);
-	last = &data->scene->spheres;
+	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
 	*last = current;
@@ -38,33 +37,30 @@ int	check_sphere(char *tab, t_data *data)
 	return (0);
 }
 
-int	init_plane(t_plane *current, char **tmp)
+int	init_plane(t_geometry *current, char **tmp)
 {
-	current->origine = add_vector_float(tmp[1]);
-	current->direction = add_vector_float(tmp[2]);
-	if (check_vector_normalised(current->direction))
-	{
-		printf("ERROR : invalid vector plese [0][1]");
-		return (1);
-	}
-	current->color = add_color_int(tmp[3]);
-	current->impact_point = NULL;
-	current->ray = NULL;
-	current->ray_light = NULL;
-	return (0);
+	t_plane *const	plane = &current->data.plane;
+
+	current->type = GT_PLANE;
+	add_vector_float(&plane->origine, tmp[1]);
+	add_vector_float(&plane->direction, tmp[2]);
+	add_color_int(&current->color, tmp[3]);
+	if (!check_vector_normalised(&plane->direction))
+		return (0);
+	printf("ERROR : invalid vector plese [0][1]");
+	return (1);
 }
 
 int	check_plane(char *tab, t_data *data)
 {
-	t_plane				*current;
-	t_plane				**last;
-	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 'i', 'v', 'v'};
+	t_geometry			*current;
+	t_geometry			**last;
+	char				**tmp;
 
-	current = malloc(sizeof(t_plane));
+	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
-	current->next = NULL;
 	if (check_num(tab, "pl", 4))
 		return (1);
 	tmp = check_correct_type(content, tab);
@@ -72,7 +68,7 @@ int	check_plane(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_plane(current, tmp))
 		return (free_tab(tmp), 1);
-	last = &data->scene->plane;
+	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
 	*last = current;
@@ -80,35 +76,30 @@ int	check_plane(char *tab, t_data *data)
 	return (0);
 }
 
-int	init_cylinder(t_cylinder *current, char **tmp)
+int	init_cylinder(t_geometry *current, char **tmp)
 {
-	current->center = add_vector_float(tmp[1]);
-	current->direction = add_vector_float(tmp[2]);
-	if (check_vector_normalised(current->direction))
-	{
-		printf("ERROR : invalid direction");
-		return (1);
-	}
-	current->diameter = ft_atof(tmp[3]);
-	current->height = ft_atof(tmp[4]);
-	current->color = add_color_int(tmp[5]);
-	current->impact_point = NULL;
-	current->ray = NULL;
-	current->ray_light = NULL;
+	t_cylinder *const	cylinder = &current->data.cylinder;
+
+	add_vector_float(&cylinder->center, tmp[1]);
+	add_vector_float(&cylinder->direction, tmp[2]);
+	if (check_vector_normalised(&cylinder->direction))
+		return (printf("ERROR : invalid direction"), 1);
+	cylinder->diameter = ft_atof(tmp[3]);
+	cylinder->height = ft_atof(tmp[4]);
+	add_color_int(&current->color, tmp[5]);
 	return (0);
 }
 
 int	check_cylinder(char *tab, t_data *data)
 {
-	t_cylinder			*current;
-	t_cylinder			**last;
+	t_geometry			*current;
+	t_geometry			**last;
 	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 't', 't', 'i'};
 
-	current = malloc(sizeof(t_cylinder));
+	current = calloc(1, sizeof(t_cylinder));
 	if (current == NULL)
 		return (1);
-	current->next = NULL;
 	if (check_num(tab, "cy", 6))
 		return (1);
 	tmp = check_correct_type(content, tab);
@@ -116,7 +107,7 @@ int	check_cylinder(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_cylinder(current, tmp) == 1)
 		return (free_tab(tmp), 1);
-	last = &data->scene->cylinder;
+	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
 	*last = current;

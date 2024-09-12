@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:28:41 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/06 12:07:54 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:52:15 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static int	init_ambient(t_ambient *ambient)
 {
-	ambient->ambient_light = ft_calloc(1, sizeof(t_vector));
-	if (ambient->ambient_light == NULL)
-		return (error_allocation());
+	*ambient = (t_ambient){0};
 	ambient->ratio = -1;
 	return (0);
 }
@@ -36,8 +34,6 @@ int	init_scene(t_data *data)
 	if (data->scene->ambient == NULL)
 		return (error_allocation());
 	init_ambient(data->scene->ambient);
-	data->scene->spheres = NULL;
-	data->scene->cylinder = NULL;
-	data->scene->plane = NULL;
+	data->scene->objects = NULL;
 	return (0);
 }
