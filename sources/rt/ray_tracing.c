@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 12:59:11 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 10:22:53 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,67 +164,6 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 	}
 	return (object);
 }
-
-
-// void	init_tmp_ray(t_scene *tmp, t_object object)
-// {
-// 	if (tmp->spheres && object == SPHERE)
-// 	{
-// 		tmp->spheres->ray = ft_calloc(1, sizeof(t_vector));
-// 		if (tmp->spheres->ray == NULL)
-// 			error_allocation();
-// 		return ;
-// 	}
-// 	else if (tmp->plane && object == PLANE)
-// 	{
-// 		tmp->plane->ray = ft_calloc(1, sizeof(t_vector));
-// 		if (tmp->plane->ray == NULL)
-// 			error_allocation();
-// 		return ;
-// 	}
-// 	else if (tmp->cylinder && object == CYLINDER)
-// 	{
-// 		tmp->cylinder->ray = ft_calloc(1, sizeof(t_vector));
-// 		if (tmp->cylinder->ray == NULL)
-// 			error_allocation();
-// 		return ;
-// 	}
-// }
-
-// void	free_tmp(t_scene *tmp)
-// {
-// 	if (tmp->spheres->ray != NULL)
-// 		free(tmp->spheres->ray);
-// 	else if (tmp->plane->ray != NULL)
-// 		free(tmp->plane->ray);
-// 	else if (tmp->cylinder->ray != NULL)
-// 		free(tmp->cylinder->ray);
-// }
-
-// static void	init_hit_sphere(t_hit *hit)
-// {
-// 	hit->sphere->ray = ft_calloc(1, sizeof(t_vector));
-// 	if (hit->sphere->ray == NULL)
-// 		error_allocation();
-// 	hit->sphere->ray_light = ft_calloc(1, sizeof(t_vector));
-// 	if (hit->sphere->ray_light == NULL)
-// 		error_allocation();
-// 	hit->sphere->impact_point = ft_calloc(1, sizeof(t_vector));
-// 	if (hit->sphere->impact_point == NULL)
-// 		error_allocation();
-// 	hit->sphere->dist_cam_sphere = 0;
-// 	hit->sphere->dist_light_sphere = 0;
-// }
-
-// static void	reinit_hit(t_hit *hit)
-// {
-// 	if (hit->sphere->ray != NULL)
-// 		free(hit->sphere->ray);
-// 	if (hit->sphere->ray_light != NULL)
-// 		free(hit->sphere->ray_light);
-// 	if (hit->sphere->impact_point != NULL)
-// 		free(hit->sphere->impact_point);
-// }
 
 int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 {
