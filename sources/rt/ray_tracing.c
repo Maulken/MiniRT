@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 10:22:53 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 11:18:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ int	is_cylinder(t_data *data, t_scene tmp)
 
 	dist = 0;
 	dist = cylinder_intersect(data, tmp.cylinder);
-	// if (dist != -1)
+	if (dist == -1)
+		return (NONE);
+	// if(dist != 0)
 	// 	printf("dist cy %f\n", dist);
-	if (dist < data->hit->distance && dist > 1)
+	if (dist < data->hit->distance && dist > 0)
 	{
 		data->hit->distance = dist;
 		data->hit->cylinder= tmp.cylinder;
+		init_hit_cylinder(data->hit);
 		return (CYLINDER);
 	}
 	return (NONE);
@@ -88,7 +91,7 @@ int	is_sphere(t_data *data, t_scene tmp)
 	// if (dist != -1)
 	// 	printf("dist %f\n", dist);
 	// if (dist < data->hit->distance && dist > 1)
-	if (dist < data->hit->distance && dist > 0)
+	if (dist < data->hit->distance && dist >= 0)
 	{
 		data->hit->distance = dist;
 		data->hit->sphere = tmp.spheres;
@@ -152,13 +155,17 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		// free(tmp.plane->ray);
 		tmp.plane = tmp.plane->next;
 	}
+	// printf("szdfg\n");
 	while (tmp.cylinder)
 	{
 		init_tmp_ray(&tmp, CYLINDER);
 		*tmp.cylinder->ray = obtain_ray(data, x_ray, y_ray);
+		*tmp.cylinder->ray_dir = vec_subtract(tmp.cylinder->ray, data->scene->camera->origine);
+		vec_normalize(tmp.cylinder->ray_dir);
 		// printf("center tmp %f %f %f\n", tmp.cylinder->center->x, tmp.cylinder->center->y, tmp.cylinder->center->z);
 		object = is_cylinder(data, tmp);
-		// printf("object cy %d\n", object);
+		if (object == CYLINDER)
+			printf("object cy %d\n", object);
 		free(tmp.cylinder->ray);
 		tmp.cylinder = tmp.cylinder->next;
 	}
@@ -171,7 +178,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	int		color;
 	int		object;
 	t_scene	tmp;
-	
+
 	// color = 0;
 	color = 0x3300ff;
 	tmp = *data->scene;
@@ -193,6 +200,7 @@ int	get_color(t_data *data, t_vector x_ray, t_vector y_ray)
 	if (object == CYLINDER)
 	{
 		init_hit_cylinder(data->hit);
+		// printf("color\n");
 		color = get_color_cylinder(data, data->hit);
 		reinit_hit(data->hit);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 10:01:42 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:29:58 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_color_plane(t_data *data)
 	return (new_color);
 }
 
-t_vector	get_diffuse_light_pl(t_data *data)
+t_vector	get_diffuse_light_pl(t_data *data) // a check origine
 {
 	t_vector	norm;
 	t_vector	for_impact;
