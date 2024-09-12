@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 11:57:09 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 11:04:18 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,76 +80,43 @@ int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 	float		a;
 	float		b;
 	float		c;
-	(void)dist[2];
+	// (void)dist[2];
 
 
 	x = vec_subtract(cy->ray, cy->center);
 	mult = vec_multiplying(cy->direction, cy->height);
+	// printf("mult = %f %f %f\n",mult.x,mult.y,mult.z);
+	// printf("cy->direction = %f %f %f\n",cy->direction->x,cy->direction->y,cy->direction->z);
 	add = vec_add(cy->center, &mult);
+// printf("add = %f %f %f\n", add.x, add.y, add.z);
 	diff = vec_subtract(cy->center, &add);
+	// printf("cy.center = %f %f %f\n", cy->center->x, cy->center->y, cy->center->z);
+	// printf("diff = %f %f %f\n", diff.x, diff.y, diff.z);
 	x_x_diff = vec_cross(&x, &diff);
+	// printf("x_x_diff = %f %f %f\n", x_x_diff.x, x_x_diff.y, x_x_diff.z);
 	d_x_diff = vec_cross(cy->ray_dir, &diff);
 	radius = vec_dot_product(&diff, &diff);
+	// printf("radius = %f\n", radius);
 	// t_vector	for_cross;
 	// t_vector	for_sub;
 	// t_vector	ray_cross;
 	(void)data;
 	a = vec_dot_product(&d_x_diff, &d_x_diff);
+	// printf("a = %f\n", a);
 	b = 2 * vec_dot_product(&d_x_diff, &x_x_diff);
+	// printf("b = %f\n", b);
 	c = vec_dot_product(&x_x_diff, &x_x_diff) - ((cy->diameter / 2) *
 		(cy->diameter / 2) * radius);
+	// printf("c = %f\n", c);
 	float	discr;
-
 	discr = (b * b) - (4 * a * c);
 	// printf("discr = %f\n", discr);
 	if (discr < 0)
 		return (ERROR);
-	// //printf("cy->ray_dir x = %f, y = %f, z = %f\n", cy->ray_dir->x, cy->ray_dir->y, cy->ray_dir->z);
-	// for_cross = vec_cross(cy->ray_dir, cy->direction);
-	// // // for_sub = vec_subtract(data->scene->camera->origine, cy->center);
-	// //printf("for_cross x = %f, y = %f, z = %f\n", for_cross.x, for_cross.y, for_cross.z);
-	// for_sub = vec_subtract(cy->ray, cy->center);
-	// ray_cross = vec_cross(&for_sub, cy->direction);
-	// // printf("ray_cross x = %f, y = %f, z = %f\n", ray_cross.x, ray_cross.y, ray_cross.z);
-	// // // a = ft_square(vec_lenght(&for_cross, &for_cross));
-	// a = vec_dot_product(&for_cross, &for_cross);
-	// // printf("a = %f\n", a);
-	// b = 2 * vec_dot_product(&for_cross, &ray_cross);
-	// // printf("b = %f\n", b);
-	// // // c = ft_square(vec_lenght(&ray_cross, &ray_cross)) - (cy->diameter / 2) *
-	// // // 	(1 - ft_square(vec_dot_product(cy->ray, cy->direction)));
-	// c = vec_dot_product(&ray_cross, &ray_cross) - (cy->diameter / 2) *
-	// 	(cy->diameter / 2) * 1 - vec_dot_product(cy->ray_dir, cy->direction) *
-	// 	 vec_dot_product(cy->ray_dir, cy->direction);
-	// // printf("c = %f\n", c);
-	return(discr);
+	discr = sqrtf(discr);
+	if (dist[0] < dist[1])
+			return (dist[0]);
+	return (dist[1]);
 }
 
 // ************************************************************************** //
-
-// static void	_cylinder_hit_compute(
-// 				t_object_cylinder *cylinder,
-// 				const t_ray *ray,
-// 				t_cylinder_vars *vars
-// 				)
-// {
-	// t_vector3	x;
-	// t_vector3	diff;
-	// t_vector3	x_x_diff;
-	// t_vector3	d_x_diff;
-// 	t_coord		radius;
-
-// 	vec3_sub(&x, &ray->origin, &cylinder->origin);
-// 	vec3_sub(&diff, &cylinder->origin,
-// 		vec3_add(&diff, &cylinder->origin,
-// 			vec3_mul(&diff, &cylinder->axis, cylinder->height)));
-// 	vec3_cross(&x_x_diff, &x, &diff);
-// 	vec3_cross(&d_x_diff, &ray->dir, &diff);
-// 	radius = vec3_dot(&diff, &diff);
-// 	vars->a = vec3_dot(&d_x_diff, &d_x_diff);
-// 	vars->b = 2 * vec3_dot(&d_x_diff, &x_x_diff);
-// 	vars->c = vec3_dot(&x_x_diff, &x_x_diff)
-// 		- ((cylinder->diameter / 2.) * (cylinder->diameter / 2.) * radius);
-// 	vars->d = vars->b * vars->b - 4 * vars->a * vars->c;
-// 	vars->d_sqrt = sqrt(vars->d);
-// }

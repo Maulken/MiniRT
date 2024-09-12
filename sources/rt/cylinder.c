@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 12:03:38 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 10:31:25 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ float	cylinder_intersect(t_data *data, t_cylinder *cy)
 	// float	a;
 	// float	b;
 	// float	c;
-	float	dist[2];
+	float	dist_quadra[2];
 	// t_vector	*cross;
 	// t_vector	*cy_cam;
-	int		quadra;
+	int		dist;
+	// float	on_cylinder;
 
-	quadra = cy_quadratic(data, cy, dist);
-	// printf("quadr = %d\n", quadra);
+	dist = cy_quadratic(data, cy, dist_quadra);
 
 	// cy_cam = vec_subtract(data->scene->camera->origine, cy->center);
 	// // printf("cy_cam x %f , y %f, z %f \n", cy_cam->x, cy_cam->y, cy_cam->z);
@@ -35,20 +35,25 @@ float	cylinder_intersect(t_data *data, t_cylinder *cy)
 
 	// c = vec_dot_product(cy_cam, cy_cam) - ft_square(cy->diameter / 2);
 	// free(cy_cam);
-	if (quadra == ERROR)
+	if (dist == ERROR)
 		return (-1);
-	printf("dist[0] = %f dist[1] = %f\n", dist[0], dist[1]);
-	if (dist[0] < dist[1])
-			return (dist[0]);
-	return (dist[1]);
+	// printf(" ");
+	// if (dist != 0)
+	// 	printf("quadra = %d\n", dist);
+	// on_cylinder = on_cy(cy);
+	// if (on_cylinder)
+	// printf("dist[0] = %f dist[1] = %f\n", dist[0], dist[1]);
+	return (dist);
 }
 float	on_cy(t_cylinder *cy)
 {
 	float	dist;
 	float	height_pos;
 	float	pyth;
+	t_vector	for_impact;
 
-
+	for_impact = vec_multiplying(cy->ray_dir, cy->dist_cam_cylinder);
+	*cy->impact_point = vec_add(cy->ray, &for_impact);
 	dist = vec_lenght(cy->impact_point, cy->center);
 	if (dist < 0)
 		return (0);
@@ -84,7 +89,8 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 			hit->cylinder->dist_cam_cylinder);
 		*hit->cylinder->impact_point = vec_add(data->scene->cylinder->ray,
 			&for_impact);
-	printf("impact: %f, %f, %f\n", hit->cylinder->impact_point->x, hit->cylinder->impact_point->y, hit->cylinder->impact_point->z);
+	printf("impact: %f, %f, %f\n", hit->cylinder->impact_point->x,
+		hit->cylinder->impact_point->y, hit->cylinder->impact_point->z);
 		if (on_cy(hit->cylinder))
 			new_color = get_mix_color(data);
 		// else
