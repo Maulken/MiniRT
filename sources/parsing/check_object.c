@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/06 16:36:29 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/12 20:35:10 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+// I don't like it, do you ?
 static char	**check_correct_value_type(const char *content, int j, char **tmp)
 {
 	if (content[j] == 'i')
@@ -37,18 +38,16 @@ static char	**check_correct_value_type(const char *content, int j, char **tmp)
 	else if (content[j] == 't')
 		if (check_correct_float(tmp, j) == 1)
 			return (check_error_type("invalid float", tmp));
-	return (tmp); // i not like do you like . 
+	return (tmp);
 }
 
 /*because I have no space is une essential */
-int	init_sphere(t_sphere *current, char **tmp)
+int	init_sphere(t_geometry *current, char **tmp)
 {
-	current->center = add_vector_float(tmp[1]);
-	current->diameter = ft_atof(tmp[2]);
-	current->color = add_color_int(tmp[3]);
-	current->impact_point = NULL;
-	current->ray = NULL;
-	current->ray_light = NULL;
+	current->type = GT_SPHERE;
+	current->data.sphere.diameter = ft_atof(tmp[2]);
+	add_vector_float(&current->data.sphere.center, tmp[1]);
+	add_color_int(&current->color, tmp[3]);
 	return (0);
 }
 

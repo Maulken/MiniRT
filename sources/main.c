@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/10 09:52:48 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:12:46 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	event(t_data *data)
 {
-	data->img = mlx_new_image(data->mlx, data->view->width, data->view->height);
+	data->img = mlx_new_image(data->mlx, data->view.width, data->view.height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endin);
 	ray_tracing(data);
@@ -34,17 +34,15 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	ft_bzero(&data, sizeof(t_data));
-	init_struct(&data);
+	data = (t_data){0};
 	init_scene(&data);
 	init_data(&data);
-
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean_data(&data, 1));
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"), clean_data(&data, 1));
-	data.win = mlx_new_window(data.mlx, data.view->width, data.view->height,
+	data.win = mlx_new_window(data.mlx, data.view.width, data.view.height,
 			"MiniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);

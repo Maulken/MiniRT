@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 11:31:53 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:38:47 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include "scene.h"
+# include "vector.h"
+
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -26,7 +29,6 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
-# include "scene.h"
 
 # define M_PI 3.14159265358979323846
 # define OK 0
@@ -38,9 +40,7 @@
 
 typedef struct s_hit
 {
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
+	t_geometry	*geometry;
 	float		distance;
 }				t_hit;
 
@@ -49,16 +49,16 @@ typedef struct s_view
 	float		width;
 	float		height;
 	float		distance;
-	t_vector	*viewplane_x;
-	t_vector	*viewplane_y;
+	t_vector	viewplane_x;
+	t_vector	viewplane_y;
 }				t_view;
 
 typedef struct s_data
 {
 	t_scene		*scene;
-	t_view		*view;
-	t_hit		*hit;
-	t_vector	*white_light;
+	t_view		view;
+	t_hit		hit;
+	t_vector	white_light;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -71,20 +71,6 @@ typedef struct s_data
 	int			fd;
 	int			count_object;
 }			t_data;
-
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_vector;
-
-typedef struct s_camera
-{
-	t_vector	*origine;
-	t_vector	*direction;
-	float		fov;
-}				t_camera;
 
 /* ************************************************************************** */
 /* Enum                                                                       */
@@ -113,158 +99,118 @@ typedef enum e_ray
 /*                                                                            */
 /* ************************************************************************** */
 	//parsing.c
-int		parsing(int argc, char **argv, t_data *data);
+int			parsing(int argc, char **argv, t_data *data);
 	//check.c
-int		endwith(char *argv, char *value);
-int		check_argument(int argc, char **argv);
-int		check_tab(char **rows, t_data *data);
-int		check_min_scene(char **tab);
-int		check_type(char *src, t_data *data);
+int			endwith(char *argv, char *value);
+int			check_argument(int argc, char **argv);
+int			check_tab(char **rows, t_data *data);
+int			check_min_scene(char **tab);
+int			check_type(char *src, t_data *data);
 	//get_file
-char	check_last_char(char *str);
-void	delete_comment(char *str);
-char	*get_string(int fd);
-char	**checkget_file_content(int fd);
+char		check_last_char(char *str);
+void		delete_comment(char *str);
+char		*get_string(int fd);
+char		**checkget_file_content(int fd);
 	//utils.c
-char	*ft_strjoin_free(char *s1, char *s2);
-int		size_tab(char **tab);
-void	free_tab(char **tab);
-int		check_float_point(char **tab);
+char		*ft_strjoin_free(char *s1, char *s2);
+int			size_tab(char **tab);
+void		free_tab(char **tab);
+int			check_float_point(char **tab);
 	//utils2.c
-int		ft_msg_error(char *str, int value);
-int		ft_msg_error_tab(char *str, int value, char **tab);
-int		ft_is_space(char c);
-int		ft_is_digit(char c);
-int		ft_is_good_char(char c);
+int			ft_msg_error(char *str, int value);
+int			ft_msg_error_tab(char *str, int value, char **tab);
+int			ft_is_space(char c);
+int			ft_is_digit(char c);
+int			ft_is_good_char(char c);
 
 	//conversion.c
-int				add_int(char *str);
-t_vector		*add_vector_float(char *str);
-t_vector		*add_color_int(char *str);
-
+t_vector	*add_vector_float(t_vector *vec, char *str);
+t_vector	*add_color_int(t_vector *rgb, char *str);
 
 	//check_object.c
-int		init_sphere(t_sphere *current, char **tmp);
-char	**check_error_type(char *str, char **tmp);
-char	**check_correct_type(const char *content, char *tab);
-void	remouve_space_start_line(char *str);
+int			init_sphere(t_geometry *current, char **tmp);
+char		**check_error_type(char *str, char **tmp);
+char		**check_correct_type(const char *content, char *tab);
+void		remouve_space_start_line(char *str);
 
 	//check_objet_essential.c
-int		is_normalized(float x, float y, float z);
-int		check_vector_normalised(t_vector *vector);
-int		check_ambiance(char *tab, t_data *data);
-int		check_camera(char *tab, t_data *data);
-int		check_light(char *tab, t_data *data);
+int			is_normalized(float x, float y, float z);
+int			check_vector_normalised(t_vector *vector);
+int			check_ambiance(char *tab, t_data *data);
+int			check_camera(char *tab, t_data *data);
+int			check_light(char *tab, t_data *data);
 
 	//chech_object_liste.c
-int		check_sphere(char *tab, t_data *data);
-int		init_plane(t_plane *current, char **tmp);
-int		check_plane(char *tab, t_data *data);
-int		init_cylinder(t_cylinder *current, char **tmp);
-int		check_cylinder(char *tab, t_data *data);
+int			check_sphere(char *tab, t_data *data);
+int			init_plane(t_geometry *current, char **tmp);
+int			check_plane(char *tab, t_data *data);
+int			init_cylinder(t_geometry *current, char **tmp);
+int			check_cylinder(char *tab, t_data *data);
 
 	//check_utils.c
-int		check_num(char *tab, char *str, int size_setting);
-int		check_signe(char *str);
-int		check_signe_tab(char **tab);
+int			check_num(char *tab, char *str, int size_setting);
+int			check_signe(char *str);
+int			check_signe_tab(char **tab);
 
 	//check_type.c
-int		check_correct_intxyz(char **tmp, int j);
-int		check_correct_floatxyz(char **tmp, int j);
-int		check_correct_char(char **tmp, int j);
-int		check_correct_int(char **tmp, int j);
-int		check_correct_float(char **tmp, int j);
+int			check_correct_intxyz(char **tmp, int j);
+int			check_correct_floatxyz(char **tmp, int j);
+int			check_correct_char(char **tmp, int j);
+int			check_correct_int(char **tmp, int j);
+int			check_correct_float(char **tmp, int j);
 
 	//split_space.c
-char	**ft_split_espace(char const *str);
-
+char		**ft_split_espace(char const *str);
 
 /* ************************************************************************** */
 /* Initialisation - Clear                                                     */
 /* ************************************************************************** */
 	//initialisation
 int			error_allocation(void);
-int			init_struct(t_data *data);
 int			init_data(t_data *data);
 int			init_scene(t_data *data);
-int			init_struct_sphere(t_sphere *sphere);
-int			init_struct_plane(t_plane *plane);
-int			init_struct_cy(t_cylinder *cylinder);
 
 	//clear
 int			ft_close(t_data *data);
 int			clean_data(t_data *data, int code_error);
 int			free_scene(t_scene *scene);
-void		free_sphere_list(t_sphere *head);
-void		free_plane_list(t_plane *head);
-void		free_cylinder_list(t_cylinder *head);
+void		free_geometry_list(t_geometry *geometry);
 
 /* ************************************************************************** */
 /*                                                                            */
 /* Raytracing                                                                 */
 /*                                                                            */
 /* ************************************************************************** */
-	//vector.c
-t_vector	new_vector(float x, float y, float z);
-t_vector	vec_subtract(t_vector *vec1, t_vector *vec2);
-void		vec_normalize(t_vector *vec);
-float		vec_lenght(t_vector *vec1, t_vector *vec2);
-float		vec_dot_product(t_vector *vec1, t_vector *vec2);
-
-	//vector2.c
-t_vector	vec_add(t_vector *vec1, t_vector *vec2);
-t_vector	vec_multiplying(t_vector *vec1, float nbr);
-bool		vec_compare(t_vector *vec1, t_vector *vec2);
-t_vector	vec_vec_multi(t_vector *vec1, t_vector *vec2);
-t_vector	vec_cross(t_vector *vec1, t_vector *vec2);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
-int			get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray);
-// int			get_hit(t_data *data, t_scene tmp, float x_ray, float y_ray);
-int			get_color(t_data *data, t_vector x_ray, t_vector y_ray);
-// int			get_color(t_data *data, float x_ray, float y_ray);
+void		get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry);
+int			get_color(t_data *data, t_vector *x_ray, t_vector *y_ray);
 void		ray_tracing(t_data *data);
-void		init_tmp_ray(t_scene *tmp, t_object object);
 
 	//sphere
-float		sphere_intersect(t_vector *origin, t_vector *direction,
-				t_sphere *sph);
+float		sphere_intersect(t_geometry *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
-t_vector	get_diffuse_light(t_data *data, t_hit *hit);
-t_vector	obtain_ray(t_data *data, t_vector x_ray, t_vector y_ray);
+void		get_diffuse_light(t_data *data, t_hit *hit, t_vector *color);
+void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
 int			is_sphere(t_data *data, t_scene tmp);
 
 	//plane
-float		plane_intersect(t_data *data, t_plane *pl);
+float		plane_intersect(t_data *data, t_geometry *pl);
 int			get_color_plane(t_data *data);
-t_vector	get_diffuse_light_pl(t_data *data);
-void		obtain_ray_plane(t_data *data, t_ray type_ray, t_scene tmp,
-				float x_ray, float y_ray);
+void		get_diffuse_light_pl(t_data *data, t_vector *color);
 
 	//cylinder
-float		cylinder_intersect(t_data *data, t_cylinder *cy);
-float		on_cy(t_cylinder *cy);
+float		cylinder_intersect(t_data *data, t_geometry *cy);
+float		on_cy(t_geometry *cy);
 int			get_color_cylinder(t_data *data, t_hit *hit);
-t_vector	get_diffuse_light_cy(t_data *data);
-void		obtain_ray_cy(t_data *data, t_ray type_ray, t_scene tmp,
-				float x_ray, float y_ray);
+void		get_diffuse_light_cy(t_data *data, t_vector *color);
 
 	//cylinder2
-int			get_pl_intersect(t_data *data, t_cylinder *cy);
-int			add_plane(t_data *data, t_cylinder *cy);
+int			get_pl_intersect(t_data *data, t_geometry *cy);
+int			add_plane(t_data *data, t_geometry *cy);
 int			get_mix_color(t_data *data);
-int			cy_quadratic(t_data *data, t_cylinder *cy, float dist[2]);
-
-	//hit_object
-void		init_hit_sphere(t_hit *hit);
-void		init_hit_plane(t_hit *hit);
-void		init_hit_cylinder(t_hit *hit);
-
-	//hit_init
-void		init_tmp_ray(t_scene *tmp, t_object object);
-void		free_tmp(t_scene *tmp);
-void		reinit_hit(t_hit *hit);
+int			cy_quadratic(t_data *data, t_geometry *cy, float dist[2]);
 
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);
