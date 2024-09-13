@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 14:39:18 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/13 01:03:38 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef enum e_ray
 /* ************************************************************************** */
 	//parsing.c
 int		parsing(int argc, char **argv, t_data *data);
-char	**ft_split_line(char *tab);
+char	*remouve_space_cord(char *tab);
 	//check.c
 int		endwith(char *argv, char *value);
 int		check_argument(int argc, char **argv);

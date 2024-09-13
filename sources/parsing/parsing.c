@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/11 16:24:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/13 08:59:39 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,61 +27,31 @@ int	parsing(int argc, char **argv, t_data *data)
 	return (OK);
 }
 
-static int  get_str_len(char const *str)
+char	*remouve_space_cord(char *tab)
 {
-    int count = 0;
-    int len_vir = 0;
-    int i = 0;
-    
-    while (str[i])
-    {
-        if (str[i] != ' ' && str[i] != '\t')
-        {
-            count++;
-            while (str[i] != ' ' && str[i] != '\t' && str[i])
-            {
-                if (str[i] == ',')
-                {
-                    len_vir = 0;
-                    while (len_vir != 3 && str[i])
-                    {
-                        if (str[i] == ',')
-                        {
-                            len_vir++;  
-                            i++;
-                        }
-                        else
-                        {
-                            i++;
-                        }
-                    }
-                    printf("\n");
-                }
-                i++;
-                
-            }
-            i++;
-            printf("]");
-        }
-    }
-    return (count);
-}
+	char	*tab_split;
+	int		j;
+	int		k;
 
-
-
-
-char **ft_split_line(char *tab)
-{
-	char **tab_split;
-	int i = 0 ;
-	int len = 0;
-	
-	printf("tab %s\n", tab);
-	len = get_str_len(tab);
-	printf("len %d\n", len);
-	tab_split = malloc(sizeof(char) * (len + 1));
-	i++;
-
-
-	return (NULL);
+	j = 0;
+	tab_split = ft_calloc(ft_strlen(tab) + 1, sizeof(char));
+	k = 0;
+	while (tab[j] != '\0')
+	{
+		if (tab[j] == ',')
+		{
+			while (k > 0 && tab_split[k - 1] == ' ')
+				k--;
+			tab_split[k++] = tab[j];
+			while (tab[j + 1] == ' ')
+				j++;
+		}
+		else
+		{
+			tab_split[k++] = tab[j];
+		}
+		j++;
+	}
+	tab_split[k] = '\0';
+	return (tab_split);
 }

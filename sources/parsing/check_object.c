@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/11 14:47:36 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:03:47 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ char	**check_error_type(char *str, char **tmp)
 char	**check_correct_type(const char *content, char *tab)
 {
 	int		j;
+	char	*line;
 	char	**tmp;
 
-
-	// donc la imaagine nous avons cela (sp) (-2 , 0 , 4)       (2)     (241 , 155 , 21)
-	
-	tmp = ft_split_espace(tab);
-	tmp = ft_split_line(tab);
-	if(tmp == NULL)
+	line = remouve_space_cord(tab);
+	tmp = ft_split_espace(line);
+	free(line);
+	if (tmp == NULL)
 		return (NULL);
-	for(int i = 0; tmp[i]; i++)
+	// temporary debug for you ..... 
+	for (int i = 0; tmp[i]; i++)
 		printf("tmp: %s\n", tmp[i]);
 	printf("END \n");
-
+	//END
 	j = 0;
 	while (tmp[j])
 	{
