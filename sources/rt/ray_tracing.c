@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 10:39:06 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:05:12 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int	is_cylinder(t_data *data, t_scene tmp)
 	float	dist;
 
 	dist = 0;
+	tmp.cylinder->impact_point = ft_calloc(1, sizeof(t_vector));
+	if (tmp.cylinder->impact_point == NULL)
+		error_allocation();
+	tmp.cylinder->dist_cam_cylinder = 0;
 	dist = cylinder_intersect(data, tmp.cylinder);
 	if (dist == -1)
 		return (NONE);
@@ -164,8 +168,8 @@ int	get_hit(t_data *data, t_scene tmp, t_vector x_ray, t_vector y_ray)
 		vec_normalize(tmp.cylinder->ray_dir);
 		// printf("center tmp %f %f %f\n", tmp.cylinder->center->x, tmp.cylinder->center->y, tmp.cylinder->center->z);
 		object = is_cylinder(data, tmp);
-		if (object == CYLINDER)
-			printf("object cy %d\n", object);
+		// if (object == CYLINDER)
+		// 	printf("object cy %d\n", object);
 		free(tmp.cylinder->ray);
 		tmp.cylinder = tmp.cylinder->next;
 	}

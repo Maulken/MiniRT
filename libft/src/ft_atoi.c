@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 13:36:36 by bszabo            #+#    #+#             */
-/*   Updated: 2024/08/19 20:25:33 by mpelluet         ###   ########.fr       */
+/*   Created: 2024/09/12 16:30:49 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/09/12 16:30:50 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// convert the initial portion of the string to an integer
+
 int	ft_atoi(const char *str)
 {
 	int	num;

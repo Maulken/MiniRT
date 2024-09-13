@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes_2d.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bszabo <bszabo@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 11:34:43 by bszabo            #+#    #+#             */
-/*   Updated: 2024/05/06 14:20:12 by bszabo           ###   ########.fr       */
+/*   Created: 2024/09/12 16:34:47 by vmassoli          #+#    #+#             */
+/*   Updated: 2024/09/12 16:34:49 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// split an array of strings by a character
-// return a 2d array of strings, or NULL if malloc fails
 char	***ft_split_quotes_2d(char **arr, char c)
 {
 	char	***split;

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:47:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/10 09:35:53 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:01:29 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,8 @@ void	init_hit_plane(t_hit *hit)
 
 void	init_hit_cylinder(t_hit *hit)
 {
-	// hit->cylinder->ray = ft_calloc(1, sizeof(t_vector));
-	// if (hit->cylinder->ray == NULL)
-	// 	error_allocation();
 	hit->cylinder->ray_light = ft_calloc(1, sizeof(t_vector));
 	if (hit->cylinder->ray_light == NULL)
 		error_allocation();
-	hit->cylinder->impact_point = ft_calloc(1, sizeof(t_vector));
-	if (hit->cylinder->impact_point == NULL)
-		error_allocation();
-	hit->cylinder->dist_cam_cylinder = 0;
 	hit->cylinder->dist_light_cylinder = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:33:21 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:33:24 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:31:42 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,4 @@ char	*ft_itoa(int n)
 		str[0] = '-';
 	return (str);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	int	num = -2147483648;
-	//int num = 0;
-	char *str = ft_itoa(num);
-	printf("num: %d\nstr: %s\n", num, str);
-	free(str);
-	return (0);
-}
-*/
+
