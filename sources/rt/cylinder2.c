@@ -68,7 +68,7 @@ int	get_mix_color(t_data *data)
 }
 int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 {
-	float		radius;
+	/*float		radius;
 	t_vector	x;
 	t_vector	diff;
 	t_vector	x_x_diff;
@@ -100,6 +100,28 @@ int	cy_quadratic(t_data *data, t_cylinder *cy, float dist[2])
 	dist[1] = (-b + discr) / (2 * a);
 	if (dist[0] < dist[1])
 			return (dist[0]);
+	return (dist[1]);
+	*/
+		t_vector	diff;
+	t_vector	x_x_diff;
+	t_vector	d_x_diff;
+	float		discr;
+
+	(void)data;
+	vec_subtract(&x_x_diff, &cy->ray.origin, &cy->data.cylinder.center);
+	vec_multiplying(&diff,
+		&cy->data.cylinder.direction, cy->data.cylinder.height);
+	vec_add(&diff, &cy->data.cylinder.center, &diff);
+	vec_subtract(&diff, &cy->data.cylinder.center, &diff);
+	vec_cross(&x_x_diff, &x_x_diff, &diff);
+	vec_cross(&d_x_diff, &cy->ray.dir, &diff);
+	discr = vec_length2(&d_x_diff) * vec_length2(&diff)
+		* cy->data.cylinder.diameter * cy->data.cylinder.diameter;
+	if (discr < 0)
+		return (ERROR);
+	discr = sqrtf(discr);
+	if (dist[0] < dist[1])
+		return (dist[0]);
 	return (dist[1]);
 }
 
