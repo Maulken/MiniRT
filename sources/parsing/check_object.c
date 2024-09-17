@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 14:58:05 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:26:58 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**check_error_type(char *str, char **tmp)
 
 /*
     explication du tableau content
-    c = char 
+    c = char
     f = cordonner flote mais sous trois axe x,y,z
 	g = cordonner flote normalized mais sous trois axe x,y,z
     i = cordonner int sous trois axe z,y,z
@@ -80,10 +80,10 @@ char	**check_correct_type(const char *content, char *tab)
 	free(line);
 	if (tmp == NULL)
 		return (NULL);
-	// temporary debug for you ..... 
-	for (int i = 0; tmp[i]; i++)
-		printf("tmp: %s\n", tmp[i]);
-	printf("END \n");
+	// temporary debug for you .....
+	// for (int i = 0; tmp[i]; i++)
+	// 	printf("tmp: %s\n", tmp[i]);
+	// printf("END \n");
 	//END
 	j = 0;
 	while (tmp[j])

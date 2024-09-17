@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/12 20:36:51 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:35:24 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	init_cylinder(t_geometry *current, char **tmp)
 {
 	t_cylinder *const	cylinder = &current->data.cylinder;
 
+	current->type = GT_CYLINDER;
 	add_vector_float(&cylinder->center, tmp[1]);
 	add_vector_float(&cylinder->direction, tmp[2]);
 	if (check_vector_normalised(&cylinder->direction))
@@ -97,7 +98,7 @@ int	check_cylinder(char *tab, t_data *data)
 	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 't', 't', 'i'};
 
-	current = calloc(1, sizeof(t_cylinder));
+	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
 	if (check_num(tab, "cy", 6))
