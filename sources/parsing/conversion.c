@@ -6,36 +6,29 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/09 18:37:39 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:30:51 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_vector	*add_vector_float(char *str)
+// TODO: Malloc non protege !
+t_vector	*add_vector_float(t_vector *vec, char *str)
 {
 	char		**tmp;
-	t_vector	*vector;
 
-	vector = malloc(sizeof(t_vector));
-	if (!vector)
-		return (NULL);
 	tmp = ft_split(str, ',');
-	vector->x = ft_atof(tmp[0]);
-	vector->y = ft_atof(tmp[1]);
-	vector->z = ft_atof(tmp[2]);
+	vec->x = ft_atof(tmp[0]);
+	vec->y = ft_atof(tmp[1]);
+	vec->z = ft_atof(tmp[2]);
 	free_tab(tmp);
-	return (vector);
+	return (vec);
 }
 
-t_vector	*add_color_int(char *str)
+t_vector	*add_color_int(t_vector *rgb, char *str)
 {
 	char		**tmp;
-	t_vector	*rgb;
 
-	rgb = malloc(sizeof(t_vector));
-	if (!rgb)
-		return (NULL);
 	tmp = ft_split(str, ',');
 	if (!tmp)
 		return (NULL);
@@ -47,9 +40,4 @@ t_vector	*add_color_int(char *str)
 	checking_limit(rgb->z, 0.0f, 255.0f);
 	free_tab(tmp);
 	return (rgb);
-}
-
-int	add_int(char *str)
-{
-	return (ft_atoi(str));
 }

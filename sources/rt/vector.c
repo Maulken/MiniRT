@@ -6,53 +6,39 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:12:17 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/07 13:49:00 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:23:30 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_vector new_vector(float x, float y, float z)
+t_vector	*vec_subtract(t_vector *dst, t_vector *vec1, t_vector *vec2)
 {
-	t_vector	vec;
-
-	// vec = malloc(sizeof(t_vector));
-	// if(!vec)
-	// 	return(NULL);
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-
-	return (vec);
+	dst->x = vec1->x - vec2->x;
+	dst->y = vec1->y - vec2->y;
+	dst->z = vec1->z - vec2->z;
+	return (dst);
 }
 
-t_vector vec_subtract(t_vector *vec1, t_vector *vec2)
+float	vec_length2(t_vector *vec)
 {
-	t_vector	result;
-
-	result = new_vector(vec1->x - vec2->x, vec1->y -
-		vec2->y, vec1->z - vec2->z);
-	return(result);
+	return (vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-float	vec_lenght(t_vector *vec1, t_vector *vec2)
+float	vec_lenght(t_vector *vec)
 {
-	float result;
-
-	// result = sqrt((vec1->x * vec2->x) + (vec1->y * vec2->y) +
-	// 	(vec1->z * vec2->z));
-	result = sqrt(vec_dot_product(vec1, vec2));
-	return(result);
+	return (sqrt(vec_length2(vec)));
 }
 
-void	vec_normalize(t_vector *vec)
+t_vector	*vec_normalize(t_vector *vec)
 {
 	float	lenght;
 
-	lenght = vec_lenght(vec, vec);
+	lenght = vec_lenght(vec);
 	vec->x /= lenght;
 	vec->y /= lenght;
 	vec->z /= lenght;
+	return (vec);
 }
 
 float	vec_dot_product(t_vector *vec1, t_vector *vec2)

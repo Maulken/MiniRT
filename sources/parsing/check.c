@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/07 12:05:44 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:51:45 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	check_argument(int argc, char **argv)
 	return (fd);
 }
 
+// free_tab -> Par ce que free dans la fonction de parsing
 int	check_tab(char **rows, t_data *data)
 {
 	int	i;
@@ -66,7 +67,7 @@ int	check_tab(char **rows, t_data *data)
 	i = 0;
 	if (check_min_scene(rows) == ERROR)
 	{
-		free_tab(rows); //car free dans la fonction parsing
+		free_tab(rows);
 		printf("ERROR");
 		return (1);
 	}
@@ -74,7 +75,7 @@ int	check_tab(char **rows, t_data *data)
 	{
 		if (check_type(rows[i], data) != 0)
 		{
-			free_tab(rows); //car free dans la fonction parsing
+			free_tab(rows);
 			printf("\nparse ERROR ligne : %d \n", i);
 			return (1);
 		}
@@ -106,7 +107,7 @@ int	check_min_scene(char **tab)
 		i++;
 	}
 	if (len_a != 1 || len_c != 1 || len_l < 1)
-		return (printf("error : il doit y avoir"
+		return (printf("error : il doit y avoir "
 				"(1)A,(1)C,(inf)L \n"), ERROR);
 	return (OK);
 }
