@@ -6,7 +6,7 @@
 /*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/06 16:36:47 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/13 08:59:39 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,33 @@ int	parsing(int argc, char **argv, t_data *data)
 	free_tab(tab);
 	printf("OK Parsing\n\n");
 	return (OK);
+}
+
+char	*remouve_space_cord(char *tab)
+{
+	char	*tab_split;
+	int		j;
+	int		k;
+
+	j = 0;
+	tab_split = ft_calloc(ft_strlen(tab) + 1, sizeof(char));
+	k = 0;
+	while (tab[j] != '\0')
+	{
+		if (tab[j] == ',')
+		{
+			while (k > 0 && tab_split[k - 1] == ' ')
+				k--;
+			tab_split[k++] = tab[j];
+			while (tab[j + 1] == ' ')
+				j++;
+		}
+		else
+		{
+			tab_split[k++] = tab[j];
+		}
+		j++;
+	}
+	tab_split[k] = '\0';
+	return (tab_split);
 }

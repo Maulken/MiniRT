@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/13 11:38:47 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:59:40 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef enum e_ray
 /* ************************************************************************** */
 	//parsing.c
 int			parsing(int argc, char **argv, t_data *data);
+char		*remouve_space_cord(char *tab);
 	//check.c
 int			endwith(char *argv, char *value);
 int			check_argument(int argc, char **argv);
@@ -193,7 +194,7 @@ float		sphere_intersect(t_geometry *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 void		get_diffuse_light(t_data *data, t_hit *hit, t_vector *color);
 void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
-int			is_sphere(t_data *data, t_scene tmp);
+void		is_sphere(t_data *data, t_scene tmp);
 
 	//plane
 float		plane_intersect(t_data *data, t_geometry *pl);

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 11:14:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 17:13:13 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:49:34 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static int	fill_arr(char **arr, char const *str)
 	return (0);
 }
 
-// split string 'str' into substrings using char 'c' as delimiter
-// return array of substrings with NULL ending if successful, NULL if fails
 char	**ft_split_espace(char const *str)
 {
 	int		substrs;

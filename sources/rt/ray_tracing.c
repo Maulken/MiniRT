@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/13 11:40:01 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:59:57 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	get_view_plane(t_data *data)
 			&data->scene->camera->direction, &data->view.viewplane_x));
 }
 
-int	is_plane(t_data *data, t_scene tmp)
+void	is_plane(t_data *data, t_scene tmp)
 {
 	float	dist;
 
@@ -33,32 +33,22 @@ int	is_plane(t_data *data, t_scene tmp)
 	{
 		data->hit.distance = dist;
 		data->hit.geometry = tmp.objects;
-		return (PLANE);
 	}
-	if (data->hit.geometry != NULL)
-		return (SPHERE);
-	return (NONE);
 }
 
-int	is_cylinder(t_data *data, t_scene tmp)
+void	is_cylinder(t_data *data, t_scene tmp)
 {
 	float	dist;
 
 	dist = cylinder_intersect(data, tmp.objects);
-	if (dist == -1)
-		return (NONE);
 	if (dist < data->hit.distance && dist > 0)
 	{
 		data->hit.distance = dist;
 		data->hit.geometry = tmp.objects;
-		return (CYLINDER);
 	}
-	if (data->hit.geometry != NULL)
-		return (SPHERE);
-	return (NONE);
 }
 
-int	is_sphere(t_data *data, t_scene tmp)
+void	is_sphere(t_data *data, t_scene tmp)
 {
 	float	dist;
 
@@ -67,11 +57,7 @@ int	is_sphere(t_data *data, t_scene tmp)
 	{
 		data->hit.distance = dist;
 		data->hit.geometry = tmp.objects;
-		return (SPHERE);
 	}
-	if (data->hit.geometry == NULL)
-		return (NONE);
-	return (SPHERE);
 }
 
 void	obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray)

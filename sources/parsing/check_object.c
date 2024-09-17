@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/12 20:35:10 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:58:05 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,19 @@ char	**check_error_type(char *str, char **tmp)
 char	**check_correct_type(const char *content, char *tab)
 {
 	int		j;
+	char	*line;
 	char	**tmp;
 
-	tmp = ft_split_espace(tab);
+	line = remouve_space_cord(tab);
+	tmp = ft_split_espace(line);
+	free(line);
+	if (tmp == NULL)
+		return (NULL);
+	// temporary debug for you ..... 
+	for (int i = 0; tmp[i]; i++)
+		printf("tmp: %s\n", tmp[i]);
+	printf("END \n");
+	//END
 	j = 0;
 	while (tmp[j])
 	{
@@ -86,7 +96,7 @@ char	**check_correct_type(const char *content, char *tab)
 }
 
 void	remouve_space_start_line(char *str)
-	{
+{
 	int	i;
 	int	j;
 
