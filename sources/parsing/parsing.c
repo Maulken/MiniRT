@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:30:22 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/13 08:59:39 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:20:49 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,15 @@ char	*remouve_space_cord(char *tab)
 	{
 		if (tab[j] == ',')
 		{
-			while (k > 0 && tab_split[k - 1] == ' ')
+			while (k > 0 && (tab_split[k - 1] == ' '
+					|| tab_split[k - 1] == '\t'))
 				k--;
 			tab_split[k++] = tab[j];
-			while (tab[j + 1] == ' ')
+			while (tab[j + 1] == ' ' || tab[j + 1] == '\t')
 				j++;
 		}
 		else
-		{
 			tab_split[k++] = tab[j];
-		}
 		j++;
 	}
 	tab_split[k] = '\0';

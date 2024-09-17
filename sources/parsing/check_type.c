@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/11 14:20:33 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:39:51 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	check_correct_intxyz(char **tmp, int j)
 			return (1);
 		i++;
 	}
-	
 	tab = ft_split(tmp[j], ',');
 	if (size_tab(tab) != 3 || check_signe_tab(tab) == 1)
 		return (free_tab(tab), 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 14:59:40 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:06:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ t_vector	*add_color_int(t_vector *rgb, char *str);
 	//check_object.c
 int			init_sphere(t_geometry *current, char **tmp);
 char		**check_error_type(char *str, char **tmp);
-char		**check_correct_type(const char *content, char *tab);
+char	**check_correct_type(const char *content, char *tab, char *type, int len);
 void		remouve_space_start_line(char *str);
 
 	//check_objet_essential.c
