@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 20:21:56 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:38:46 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ float		sphere_intersect(t_geometry *sph);
 int			get_color_sphere(t_data *data, t_hit *hit);
 void		get_diffuse_light(t_data *data, t_hit *hit, t_vector *color);
 void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
-int			is_sphere(t_data *data, t_scene tmp);
+void		is_sphere(t_data *data, t_scene tmp);
 
 	//plane
 float		plane_intersect(t_data *data, t_geometry *pl);
