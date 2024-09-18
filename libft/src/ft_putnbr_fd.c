@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:34:20 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 16:34:23 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:27:23 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, &c_num, 1);
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 16:06:24 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:17:18 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+#include  <limits.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <signal.h>
