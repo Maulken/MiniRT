@@ -6,26 +6,36 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:48:51 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:47:03 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+#define NEAR 0.01
+#define FAR 250.0
+
 float	cylinder_intersect(t_geometry *cy)
 {
-	float	dist[2];
+	//float	dist[2];
+	float	root;
 	float	math_value[3];
 	int		discr;
 
 	discr = cy_quadratic(cy, math_value);
 	if (discr == ERROR)
 		return (-1);
-	dist[0] = (- math_value[1] + discr) / (2 * math_value[0]);
-	dist[1] = (- math_value[1] - discr) / (2 * math_value[0]);
-	if (dist[0] < dist[1])
-		return (dist[0]);
-	return (dist[1]);
+	// dist[0] = (-math_value[1] + discr) / (2 * math_value[0]);
+	// dist[1] = (-math_value[1] - discr) / (2 * math_value[0]);
+	// if (dist[0] < dist[1])
+	// 	return (dist[0]);
+	// return (dist[1]);
+	root = (-math_value[1] - discr) / (2 * math_value[0]);
+	if (root < NEAR || root > FAR)
+		root = (-math_value[1] + discr) / (2 * math_value[0]);
+	if (root < NEAR || root > FAR)
+		return (-1);
+	return (root);
 }
 
 float	on_cy(t_geometry *cy)
@@ -49,28 +59,49 @@ float	on_cy(t_geometry *cy)
 		return (1);
 	return (0);
 }
+int	get_caps(t_hit *hit)
+{
+	t_vector	top_cap;
+	// t_vector	bottom_cap;
+	t_vector	cy_size;
+	//t_vector	pl_cy;
+	t_vector	hit_cy;
+	t_geometry	pl;
+	float		dist;
 
+	pl.data.plane.direction = hit->geometry->data.cylinder.direction;
+	vec_add(&top_cap, &hit->geometry->data.cylinder.center,
+		vec_multiplying(&top_cap, &hit->geometry->data.cylinder.direction,
+		(hit->geometry->data.cylinder.height / 2)));
+	pl.data.plane.origine = top_cap;
+	vec_multiplying(&hit_cy, &pl.data.plane.direction,
+		plane_intersect(&pl, &hit->geometry->ray.origin,
+		&hit->geometry->ray.dir));
+    vec_add(&hit_cy, &pl.data.plane.origine, &hit_cy);
+	dist = vec_lenght(vec_subtract(&cy_size, &hit_cy, &pl.data.plane.origine));
+	if (dist <= (hit->geometry->data.cylinder.diameter / 2))
+		return (1);
+	return (0);
+	// vec_subtract(&bottom_cap, &cy->center,
+	// 	vec_multiplying(&cy_size, &cy->direction, (cy->height / 2)));
+
+}
 int	get_color_cylinder(t_data *data, t_hit *hit)
 {
-	//int	new_color;
-//
-//	new_color = 0;
-//	if (hit->cylinder->dist_cam_cylinder >= 0)
-//		new_color = get_mix_color(data);
-//	return (new_color);
 	int			new_color;
-	t_vector	for_impact;
 
 	new_color = 0x3300ff;
 	hit->geometry->dist_cam = cylinder_intersect(hit->geometry);
-	if (hit->geometry->dist_cam < 0)
+	if (hit->geometry->dist_cam <= 0)
 		return (new_color);
-	vec_multiplying(&for_impact, &hit->geometry->ray.dir,
-		hit->geometry->dist_cam);
-	vec_add(&hit->geometry->impact_point, &data->scene->objects->ray.origin,
-		&for_impact);
-	if (on_cy(hit->geometry))
+	if (on_cy(hit->geometry) && get_caps(hit))
 		new_color = get_mix_color(data);
+	// else if (on_cy(hit->geometry) == 0)
+	// 	new_color = 0x3300ff;
+	// vec_multiplying(&for_impact, &hit->geometry->ray.dir,
+	// 	hit->geometry->dist_cam);
+	// vec_add(&hit->geometry->impact_point, &data->scene->objects->ray.origin,
+	// 	&for_impact);
 	return (new_color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:25:13 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:37:50 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	is_plane(t_data *data, t_scene tmp)
 {
 	float	dist;
 
-	dist = plane_intersect(data, tmp.objects);
+	dist = plane_intersect(tmp.objects,
+		&tmp.objects->ray.origin, &tmp.objects->ray.dir);
 	if (dist < data->hit.distance && dist > 0)
 	{
 		data->hit.distance = dist;
@@ -83,9 +84,9 @@ void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)
 				&tmp.objects->ray.origin, &data->scene->camera->origine));
 		if (tmp.objects->type == GT_SPHERE)
 			is_sphere(data, tmp);
-		else if (tmp.objects->type == GT_PLANE)
+		if (tmp.objects->type == GT_PLANE)
 			is_plane(data, tmp);
-		else if (tmp.objects->type == GT_CYLINDER)
+		if (tmp.objects->type == GT_CYLINDER)
 			is_cylinder(data, tmp);
 		tmp.objects = tmp.objects->next;
 	}
