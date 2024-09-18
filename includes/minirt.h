@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:24:50 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:53:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,14 +190,16 @@ int			get_color(t_data *data, t_vector *x_ray, t_vector *y_ray);
 void		ray_tracing(t_data *data);
 
 	//sphere
-float		sphere_intersect(t_geometry *sph);
+// float		sphere_intersect(t_geometry *sph);
+float		sphere_intersect(t_geometry *sph, t_vector *origin, t_vector *dir);
 int			get_color_sphere(t_data *data, t_hit *hit);
 void		get_diffuse_light(t_data *data, t_hit *hit, t_vector *color);
 void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
 void		is_sphere(t_data *data, t_scene tmp);
 
 	//plane
-float		plane_intersect(t_data *data, t_geometry *pl);
+// float		plane_intersect(t_data *data, t_geometry *pl);
+float		plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir);
 int			get_color_plane(t_data *data);
 void		get_diffuse_light_pl(t_data *data, t_vector *color);
 

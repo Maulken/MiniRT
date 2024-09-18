@@ -6,22 +6,34 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 20:43:06 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:03:14 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float	plane_intersect(t_data *data, t_geometry *pl)
+// float	plane_intersect(t_data *data, t_geometry *pl)
+// {
+// 	t_vector	v;
+// 	float		d;
+
+// 	(void)data;
+// 	d = vec_dot_product(&pl->data.plane.direction, &pl->ray.dir);
+// 	if (d <= 0)
+// 		return (-1);
+// 	vec_subtract(&v, &pl->data.plane.origine, &pl->ray.origin);
+// 	d = vec_dot_product(&v, &pl->data.plane.direction) / d;
+// 	return (d);
+// }
+float	plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir)
 {
 	t_vector	v;
 	float		d;
 
-	(void)data;
-	d = vec_dot_product(&pl->data.plane.direction, &pl->ray.dir);
+	d = vec_dot_product(&pl->data.plane.direction, dir);
 	if (d <= 0)
 		return (-1);
-	vec_subtract(&v, &pl->data.plane.origine, &pl->ray.origin);
+	vec_subtract(&v, &pl->data.plane.origine, origin);
 	d = vec_dot_product(&v, &pl->data.plane.direction) / d;
 	return (d);
 }
@@ -31,16 +43,18 @@ int	get_color_plane(t_data *data)
 	t_vector	diffuse_light;
 	t_vector	mix_color;
 
-	data->scene->objects->dist_cam
-		= plane_intersect(data, data->scene->objects);
-	if (data->scene->objects->dist_cam < 0)
-		return (0);
+	// data->scene->objects->dist_cam
+	// 	= plane_intersect(data, data->scene->objects);
+	data->hit.geometry->dist_cam = plane_intersect(data->hit.geometry,
+			&data->hit.geometry->ray.origin, &data->hit.geometry->ray.dir);
+	if (data->hit.geometry->dist_cam <= 0)
+		return (0x3300ff);
 	mix_color = data->scene->ambient->ambient_light;
 	get_diffuse_light_pl(data, &diffuse_light);
 	if (diffuse_light.x)
 		vec_add(&mix_color, &data->scene->ambient->ambient_light,
 			&diffuse_light);
-	vec_add(&mix_color, &data->scene->objects->color, &mix_color);
+	vec_add(&mix_color, &data->hit.geometry->color, &mix_color);
 	limit_color(&mix_color);
 	return (create_rgb(&mix_color));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:25:13 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:55:18 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	is_plane(t_data *data, t_scene tmp)
 {
 	float	dist;
 
-	dist = plane_intersect(data, tmp.objects);
+	dist = plane_intersect(tmp.objects, &tmp.objects->ray.origin,
+			&tmp.objects->ray.dir);
 	if (dist < data->hit.distance && dist > 0)
 	{
 		data->hit.distance = dist;
@@ -51,8 +52,9 @@ void	is_cylinder(t_data *data, t_scene tmp)
 void	is_sphere(t_data *data, t_scene tmp)
 {
 	float	dist;
-
-	dist = sphere_intersect(tmp.objects);
+	// dist = sphere_intersect(tmp.objects);
+	dist = sphere_intersect(tmp.objects, &tmp.objects->ray.origin,
+			&tmp.objects->ray.dir);
 	if (dist < data->hit.distance && dist >= 0)
 	{
 		data->hit.distance = dist;
@@ -69,8 +71,7 @@ void	obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray)
 	vec_multiplying(&z, &data->scene->camera->direction, data->view.distance);
 	vec_add(ray,
 		&data->scene->camera->origine,
-		vec_add(ray, &ray_without_z, &z)
-		);
+		vec_add(ray, &ray_without_z, &z));
 }
 
 void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)
