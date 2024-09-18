@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 14:59:57 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:25:13 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	is_cylinder(t_data *data, t_scene tmp)
 {
 	float	dist;
 
-	dist = cylinder_intersect(data, tmp.objects);
+	dist = cylinder_intersect(tmp.objects);
 	if (dist < data->hit.distance && dist > 0)
 	{
 		data->hit.distance = dist;
@@ -77,6 +77,7 @@ void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)
 {
 	while (tmp.objects)
 	{
+
 		obtain_ray(data, rx, ry, &tmp.objects->ray.origin);
 		vec_normalize(vec_subtract(&tmp.objects->ray.dir,
 				&tmp.objects->ray.origin, &data->scene->camera->origine));

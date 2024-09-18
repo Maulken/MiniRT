@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/12 20:51:45 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:22:04 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ int	check_argument(int argc, char **argv)
 
 	i = 0;
 	if (argc != 2)
-		return (ft_msg_error("plese ./Minirt enter the secene.rt", -1));
+		return (ft_msg_error("please ./Minirt enter the scene.rt", -1));
 	if (!argv[1] || !*argv[1])
-		return (ft_msg_error("error fichier vide", -1));
+		return (ft_msg_error("error empty file", -1));
 	while (argv[i])
 		i++;
 	if (i >= 3)
 		return (ft_msg_error("error size of the ... ", -1));
 	if (endwith(argv[1], ".rt") == 1)
-		return (ft_msg_error("error plese file finish.rt", -1));
+		return (ft_msg_error("error: file must finished by .rt", -1));
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 		return (ft_msg_error("no accessed the file.rt", -1));
@@ -107,8 +107,7 @@ int	check_min_scene(char **tab)
 		i++;
 	}
 	if (len_a != 1 || len_c != 1 || len_l < 1)
-		return (printf("error : il doit y avoir "
-				"(1)A,(1)C,(inf)L \n"), ERROR);
+		return (printf("error: there must be ""(1)A,(1)C,(inf)L \n"), ERROR);
 	return (OK);
 }
 
@@ -134,7 +133,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			return (ft_msg_error_tab("plese ckeck : is not object %s", 1, tab));
+			return (ft_msg_error_tab("please check: is not object %s", 1, tab));
 	}
 	free_tab(tab);
 	return (0);

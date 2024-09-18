@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 16:43:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:37:27 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**check_error_type(char *str, char **tmp)
 
 /*
     explication du tableau content
-    c = char 
+    c = char
     f = cordonner flote mais sous trois axe x,y,z
 	g = cordonner flote normalized mais sous trois axe x,y,z
     i = cordonner int sous trois axe z,y,z

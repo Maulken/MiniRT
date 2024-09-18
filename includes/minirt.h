@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 14:17:18 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:36:12 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ int			get_color_plane(t_data *data);
 void		get_diffuse_light_pl(t_data *data, t_vector *color);
 
 	//cylinder
-float		cylinder_intersect(t_data *data, t_geometry *cy);
+float		cylinder_intersect(t_geometry *cy);
 float		on_cy(t_geometry *cy);
 int			get_color_cylinder(t_data *data, t_hit *hit);
 void		get_diffuse_light_cy(t_data *data, t_vector *color);
@@ -212,7 +212,7 @@ void		get_diffuse_light_cy(t_data *data, t_vector *color);
 int			get_pl_intersect(t_data *data, t_geometry *cy);
 int			add_plane(t_data *data, t_geometry *cy);
 int			get_mix_color(t_data *data);
-int			cy_quadratic(t_data *data, t_geometry *cy, float dist[2]);
+int			cy_quadratic(t_geometry *cy, float math_value[3]);
 
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);

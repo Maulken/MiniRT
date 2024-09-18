@@ -6,21 +6,26 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/13 11:39:02 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:48:51 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float	cylinder_intersect(t_data *data, t_geometry *cy)
+float	cylinder_intersect(t_geometry *cy)
 {
-	float	dist_quadra[2];
-	int		dist;
+	float	dist[2];
+	float	math_value[3];
+	int		discr;
 
-	dist = cy_quadratic(data, cy, dist_quadra);
-	if (dist == ERROR)
+	discr = cy_quadratic(cy, math_value);
+	if (discr == ERROR)
 		return (-1);
-	return (dist);
+	dist[0] = (- math_value[1] + discr) / (2 * math_value[0]);
+	dist[1] = (- math_value[1] - discr) / (2 * math_value[0]);
+	if (dist[0] < dist[1])
+		return (dist[0]);
+	return (dist[1]);
 }
 
 float	on_cy(t_geometry *cy)
@@ -41,10 +46,7 @@ float	on_cy(t_geometry *cy)
 		return (0);
 	height_pos = sqrt(pyth);
 	if (height_pos <= cy->data.cylinder.height / 2)
-	{
-		printf("tewG\n");
 		return (1);
-	}
 	return (0);
 }
 
@@ -59,16 +61,14 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 	int			new_color;
 	t_vector	for_impact;
 
-	new_color = 0;
-	hit->geometry->dist_cam = cylinder_intersect(data, hit->geometry);
+	new_color = 0x3300ff;
+	hit->geometry->dist_cam = cylinder_intersect(hit->geometry);
 	if (hit->geometry->dist_cam < 0)
 		return (new_color);
 	vec_multiplying(&for_impact, &hit->geometry->ray.dir,
 		hit->geometry->dist_cam);
 	vec_add(&hit->geometry->impact_point, &data->scene->objects->ray.origin,
 		&for_impact);
-	printf("impact: %f, %f, %f\n", hit->geometry->impact_point.x,
-		hit->geometry->impact_point.y, hit->geometry->impact_point.z);
 	if (on_cy(hit->geometry))
 		new_color = get_mix_color(data);
 	return (new_color);
