@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:48:51 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:20:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-float	cylinder_intersect(t_geometry *cy)
+float	cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir)
 {
 	float	dist[2];
 	float	math_value[3];
 	int		discr;
 
-	discr = cy_quadratic(cy, math_value);
+	discr = cy_quadratic(cy, math_value, origin, dir);
 	if (discr == ERROR)
 		return (-1);
-	dist[0] = (- math_value[1] + discr) / (2 * math_value[0]);
-	dist[1] = (- math_value[1] - discr) / (2 * math_value[0]);
+	dist[0] = (-math_value[1] + discr) / (2 * math_value[0]);
+	dist[1] = (-math_value[1] - discr) / (2 * math_value[0]);
 	if (dist[0] < dist[1])
 		return (dist[0]);
 	return (dist[1]);
@@ -62,7 +62,8 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 	t_vector	for_impact;
 
 	new_color = 0x3300ff;
-	hit->geometry->dist_cam = cylinder_intersect(hit->geometry);
+	hit->geometry->dist_cam = cylinder_intersect(hit->geometry,
+			&hit->geometry->ray.origin, &hit->geometry->ray.dir);
 	if (hit->geometry->dist_cam < 0)
 		return (new_color);
 	vec_multiplying(&for_impact, &hit->geometry->ray.dir,
@@ -74,17 +75,15 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 	return (new_color);
 }
 
-void	get_diffuse_light_cy(t_data *data, t_vector *color)
+void	is_cylinder(t_data *data, t_scene tmp)
 {
-	t_vector	norm;
-	float		ratio;
+	float	dist;
 
-	vec_normalize(vec_subtract(&norm, &data->scene->objects->impact_point,
-			&data->scene->objects->data.cylinder.center));
-	vec_normalize(vec_subtract(&data->scene->objects->ray.light,
-			&data->scene->objects->impact_point, &data->scene->light->origine));
-	ratio = vec_dot_product(&norm, &data->scene->objects->ray.light);
-	*color = (t_vector){0};
-	if (ratio >= 0)
-		vec_multiplying(color, &data->white_light, ratio);
+	dist = cylinder_intersect(tmp.objects, &tmp.objects->ray.origin,
+			&tmp.objects->ray.dir);
+	if (dist < data->hit.distance && dist > 0)
+	{
+		data->hit.distance = dist;
+		data->hit.geometry = tmp.objects;
+	}
 }

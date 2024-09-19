@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/17 17:44:47 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:37:08 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,21 @@ int	get_mix_color(t_data *data)
 	return (new_color);
 }
 
-int	cy_quadratic(t_geometry *cy, float math_value[3])
+int	cy_quadratic(t_geometry *cy, float math_value[3],
+				t_vector *origin, t_vector *dir)
 {
 	t_vector	diff;
 	t_vector	x_x_diff;
 	t_vector	d_x_diff;
 	float		discr;
 
-	vec_subtract(&x_x_diff, &cy->ray.origin, &cy->data.cylinder.center);
+	vec_subtract(&x_x_diff, origin, &cy->data.cylinder.center);
 	vec_multiplying(&diff,
 		&cy->data.cylinder.direction, cy->data.cylinder.height);
 	vec_add(&diff, &cy->data.cylinder.center, &diff);
 	vec_subtract(&diff, &cy->data.cylinder.center, &diff);
 	vec_cross(&x_x_diff, &x_x_diff, &diff);
-	vec_cross(&d_x_diff, &cy->ray.dir, &diff);
+	vec_cross(&d_x_diff, dir, &diff);
 	math_value[0] = vec_dot_product(&d_x_diff, &d_x_diff);
 	math_value[1] = 2 * vec_dot_product(&d_x_diff, &x_x_diff);
 	math_value[2] = vec_dot_product(&x_x_diff, &x_x_diff)

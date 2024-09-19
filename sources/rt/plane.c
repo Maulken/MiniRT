@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 16:03:14 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:19:53 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@ int	get_color_plane(t_data *data)
 	t_vector	diffuse_light;
 	t_vector	mix_color;
 
-	// data->scene->objects->dist_cam
-	// 	= plane_intersect(data, data->scene->objects);
 	data->hit.geometry->dist_cam = plane_intersect(data->hit.geometry,
 			&data->hit.geometry->ray.origin, &data->hit.geometry->ray.dir);
-	if (data->hit.geometry->dist_cam <= 0)
-		return (0x3300ff);
 	mix_color = data->scene->ambient->ambient_light;
-	get_diffuse_light_pl(data, &diffuse_light);
+	get_diffuse_light_pl(data, &data->hit, &diffuse_light);
 	if (diffuse_light.x)
 		vec_add(&mix_color, &data->scene->ambient->ambient_light,
 			&diffuse_light);
@@ -59,22 +55,15 @@ int	get_color_plane(t_data *data)
 	return (create_rgb(&mix_color));
 }
 
-void	get_diffuse_light_pl(t_data *data, t_vector *color) // a check origine
+void	is_plane(t_data *data, t_scene tmp)
 {
-	t_vector	norm;
-	t_vector	for_impact;
-	float		ratio;
+	float	dist;
 
-	vec_multiplying(&for_impact, &data->scene->objects->ray.origin,
-		data->scene->objects->dist_cam);
-	vec_add(&data->scene->objects->impact_point, &data->scene->camera->origine,
-		&for_impact);
-	vec_normalize(vec_subtract(&norm, &data->scene->objects->impact_point,
-			&data->scene->objects->data.plane.origine));
-	vec_normalize(vec_subtract(&data->scene->objects->ray.light,
-			&data->scene->objects->impact_point, &data->scene->light->origine));
-	ratio = vec_dot_product(&norm, &data->scene->objects->ray.light);
-	*color = (t_vector){0};
-	if (ratio >= 0)
-		vec_multiplying(color, &data->white_light, ratio);
+	dist = plane_intersect(tmp.objects, &tmp.objects->ray.origin,
+			&tmp.objects->ray.dir);
+	if (dist < data->hit.distance && dist > 0)
+	{
+		data->hit.distance = dist;
+		data->hit.geometry = tmp.objects;
+	}
 }

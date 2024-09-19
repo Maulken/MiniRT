@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 15:55:18 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:21:16 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,6 @@ void	get_view_plane(t_data *data)
 			&data->scene->camera->direction, &up_y));
 	vec_normalize(vec_cross(&data->view.viewplane_y,
 			&data->scene->camera->direction, &data->view.viewplane_x));
-}
-
-void	is_plane(t_data *data, t_scene tmp)
-{
-	float	dist;
-
-	dist = plane_intersect(tmp.objects, &tmp.objects->ray.origin,
-			&tmp.objects->ray.dir);
-	if (dist < data->hit.distance && dist > 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
-}
-
-void	is_cylinder(t_data *data, t_scene tmp)
-{
-	float	dist;
-
-	dist = cylinder_intersect(tmp.objects);
-	if (dist < data->hit.distance && dist > 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
-}
-
-void	is_sphere(t_data *data, t_scene tmp)
-{
-	float	dist;
-	// dist = sphere_intersect(tmp.objects);
-	dist = sphere_intersect(tmp.objects, &tmp.objects->ray.origin,
-			&tmp.objects->ray.dir);
-	if (dist < data->hit.distance && dist >= 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
 }
 
 void	obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray)

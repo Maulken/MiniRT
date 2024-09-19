@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/17 16:22:40 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/09/19 16:18:19 by mpelluet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SOURCES_PARSING =	check_object_essential.c \
 SOURCES_RT =		colors.c \
 					cylinder.c \
 					cylinder2.c \
+					light.c\
 					maths_util.c \
 					plane.c \
 					ray_tracing.c \
