@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 16:47:03 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:06:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ float	on_cy(t_geometry *cy)
 		return (1);
 	return (0);
 }
-int	get_caps(t_hit *hit)
+int	get_caps_top(t_hit *hit)
 {
 	t_vector	top_cap;
 	// t_vector	bottom_cap;
@@ -86,6 +86,33 @@ int	get_caps(t_hit *hit)
 	// 	vec_multiplying(&cy_size, &cy->direction, (cy->height / 2)));
 
 }
+int	get_caps_bottom(t_hit *hit)
+{
+	// t_vector	top_cap;
+	t_vector	bottom_cap;
+	t_vector	cy_size;
+	//t_vector	pl_cy;
+	t_vector	hit_cy;
+	t_geometry	pl;
+	float		dist;
+
+	pl.data.plane.direction = hit->geometry->data.cylinder.direction;
+	vec_subtract(&bottom_cap, &hit->geometry->data.cylinder.center,
+		vec_multiplying(&bottom_cap, &hit->geometry->data.cylinder.direction,
+		(hit->geometry->data.cylinder.height / 2)));
+	pl.data.plane.origine = bottom_cap;
+	vec_multiplying(&hit_cy, &pl.data.plane.direction,
+		plane_intersect(&pl, &hit->geometry->ray.origin,
+		&hit->geometry->ray.dir));
+    vec_add(&hit_cy, &pl.data.plane.origine, &hit_cy);
+	dist = vec_lenght(vec_subtract(&cy_size, &hit_cy, &pl.data.plane.origine));
+	if (dist <= (hit->geometry->data.cylinder.diameter / 2))
+		return (1);
+	return (0);
+	// vec_subtract(&bottom_cap, &cy->center,
+	// 	vec_multiplying(&cy_size, &cy->direction, (cy->height / 2)));
+
+}
 int	get_color_cylinder(t_data *data, t_hit *hit)
 {
 	int			new_color;
@@ -94,7 +121,7 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 	hit->geometry->dist_cam = cylinder_intersect(hit->geometry);
 	if (hit->geometry->dist_cam <= 0)
 		return (new_color);
-	if (on_cy(hit->geometry) && get_caps(hit))
+	if (on_cy(hit->geometry) && get_caps_bottom(hit) && get_caps_top(hit))
 		new_color = get_mix_color(data);
 	// else if (on_cy(hit->geometry) == 0)
 	// 	new_color = 0x3300ff;
