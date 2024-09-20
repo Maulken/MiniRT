@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 11:10:58 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:00:45 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ int	get_mix_color(t_data *data)
 	t_vector	mix_color;
 
 	mix_color = data->scene->ambient->ambient_light;
-	get_diffuse_light_cy(data, &diffuse_light);
+	get_diffuse_light_cy(data, &data->hit, &diffuse_light);
 	if (diffuse_light.x)
+	{
+		printf("rlg\n");
 		vec_add(&mix_color, &data->scene->ambient->ambient_light,
 			&diffuse_light);
-	vec_add(&mix_color, &data->scene->objects->color, &mix_color);
+	}
+	vec_add(&mix_color, &data->hit.geometry->color, &mix_color);
 	limit_color(&mix_color);
 	new_color = create_rgb(&mix_color);
 	return (new_color);

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 11:10:03 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:32:24 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,13 @@ int	get_color_cylinder(t_data *data, t_hit *hit)
 	int			new_color;
 	// t_vector	for_impact;
 
-	
+	// (void)hit;
 	new_color = 0x3300ff;
 	// hit->geometry->dist_cam = cylinder_intersect(hit->geometry);
 	// if (hit->geometry->dist_cam <= 0)
-		return (new_color);
-	if (on_cy(hit->geometry) && get_caps_bottom(hit) && get_caps_top(hit))
+		// return (new_color);
+	// if (on_cy(hit->geometry) && get_caps_bottom(hit) && get_caps_top(hit))
+	if (on_cy(hit->geometry))
 		new_color = get_mix_color(data);
 	// else if (on_cy(hit->geometry) == 0)
 	// 	new_color = 0x3300ff;

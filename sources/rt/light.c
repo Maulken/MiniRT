@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/19 16:15:36 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:27:47 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,43 @@ void	get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color)
 	}
 }
 
-void	get_diffuse_light_cy(t_data *data, t_vector *color)
+void	normal_cy(t_hit	*hit, t_vector *norm)
+{
+	t_vector	p_proj;
+	t_vector	impact_ori;
+	float		first_dot;
+	t_vector	sd_dot;
+
+	vec_subtract(&impact_ori, &hit->geometry->impact_point,
+		&hit->geometry->data.cylinder.center);
+	first_dot = vec_dot_product(&impact_ori,
+		&hit->geometry->data.cylinder.direction);
+	vec_multiplying(&sd_dot, &hit->geometry->data.cylinder.direction,
+		first_dot);
+	vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
+
+	vec_normalize(vec_subtract(norm, &hit->geometry->impact_point, &p_proj));
+	
+}
+
+void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 {
 	t_vector	norm;
 	float		ratio;
 
 	*color = (t_vector){0};
-	vec_normalize(vec_subtract(&data->scene->objects->ray.light,
-			&data->scene->objects->impact_point, &data->scene->light->origine));
+	vec_normalize(vec_subtract(&hit->geometry->ray.light,
+			&hit->geometry->impact_point, &data->scene->light->origine));
 	if (is_obstacle(*data->scene, &data->hit) == false)
 	{
-		vec_normalize(vec_subtract(&norm, &data->scene->objects->impact_point,
-				&data->scene->objects->data.cylinder.center));
-		ratio = vec_dot_product(&norm, &data->scene->objects->ray.light);
+		normal_cy(hit, &norm);
+		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
+		ratio *= -1;
 		if (ratio >= 0)
+		{
+			printf("ratio %f\n", ratio);
 			vec_multiplying(color, &data->white_light, ratio);
+		}
 	}
 }
+

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 11:04:52 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:24:56 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void		limit_color(t_vector *color);
 	//light
 void		get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color);
 void		get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color);
-void		get_diffuse_light_cy(t_data *data, t_vector *color);
+void		get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color);
 
 
 int			event(t_data *data);
