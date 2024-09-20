@@ -6,25 +6,12 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/19 16:19:53 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:12:02 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// float	plane_intersect(t_data *data, t_geometry *pl)
-// {
-// 	t_vector	v;
-// 	float		d;
-
-// 	(void)data;
-// 	d = vec_dot_product(&pl->data.plane.direction, &pl->ray.dir);
-// 	if (d <= 0)
-// 		return (-1);
-// 	vec_subtract(&v, &pl->data.plane.origine, &pl->ray.origin);
-// 	d = vec_dot_product(&v, &pl->data.plane.direction) / d;
-// 	return (d);
-// }
 float	plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir)
 {
 	t_vector	v;
@@ -35,6 +22,8 @@ float	plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir)
 		return (-1);
 	vec_subtract(&v, &pl->data.plane.origine, origin);
 	d = vec_dot_product(&v, &pl->data.plane.direction) / d;
+	if (d < 0)
+		return (0);
 	return (d);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/19 16:21:16 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:12:21 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)
 				&tmp.objects->ray.origin, &data->scene->camera->origine));
 		if (tmp.objects->type == GT_SPHERE)
 			is_sphere(data, tmp);
-		else if (tmp.objects->type == GT_PLANE)
+		if (tmp.objects->type == GT_PLANE)
 			is_plane(data, tmp);
-		else if (tmp.objects->type == GT_CYLINDER)
+		if (tmp.objects->type == GT_CYLINDER)
 			is_cylinder(data, tmp);
 		tmp.objects = tmp.objects->next;
 	}
