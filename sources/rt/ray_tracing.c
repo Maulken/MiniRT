@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 16:37:50 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:52:45 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void	obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray)
 	vec_multiplying(&z, &data->scene->camera->direction, data->view.distance);
 	vec_add(ray,
 		&data->scene->camera->origine,
-		vec_add(ray, &ray_without_z, &z)
-		);
+		vec_add(ray, &ray_without_z, &z));
 }
 
 void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)

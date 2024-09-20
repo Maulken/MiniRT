@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 16:26:13 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:49:45 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,33 +185,31 @@ void		free_geometry_list(t_geometry *geometry);
 
 	//ray_tracing
 void		get_view_plane(t_data *data);
+void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
 void		get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry);
 int			get_color(t_data *data, t_vector *x_ray, t_vector *y_ray);
 void		ray_tracing(t_data *data);
 
 	//sphere
-float		sphere_intersect(t_geometry *sph);
+float		sphere_intersect(t_geometry *sph, t_vector *origin, t_vector *dir);
 int			get_color_sphere(t_data *data, t_hit *hit);
-void		get_diffuse_light(t_data *data, t_hit *hit, t_vector *color);
-void		obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray);
 void		is_sphere(t_data *data, t_scene tmp);
 
 	//plane
 float		plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir);
 int			get_color_plane(t_data *data);
-void		get_diffuse_light_pl(t_data *data, t_vector *color);
+void		is_plane(t_data *data, t_scene tmp);
 
 	//cylinder
-float		cylinder_intersect(t_geometry *cy);
+float		cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir);
 float		on_cy(t_geometry *cy);
 int			get_color_cylinder(t_data *data, t_hit *hit);
-void		get_diffuse_light_cy(t_data *data, t_vector *color);
+void		is_cylinder(t_data *data, t_scene tmp);
 
 	//cylinder2
-int			get_pl_intersect(t_data *data, t_geometry *cy);
-int			add_plane(t_data *data, t_geometry *cy);
 int			get_mix_color(t_data *data);
-int			cy_quadratic(t_geometry *cy, float math_value[3]);
+int			cy_quadratic(t_geometry *cy, float math_value[3],
+				t_vector *origin, t_vector *dir);
 
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);
@@ -222,6 +220,12 @@ float		checking_limit(float a, float min, float max);
 int			create_rgb(t_vector *colors);
 void		my_mlx_pixel_put(t_data *data, int color);
 void		limit_color(t_vector *color);
+
+	//light
+void		get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color);
+void		get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color);
+void		get_diffuse_light_cy(t_data *data, t_vector *color);
+
 
 int			event(t_data *data);
 
