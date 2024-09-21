@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 11:24:56 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:17:45 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ typedef enum e_object
 	CYLINDER
 }	t_object;
 
-typedef enum e_ray
+typedef enum e_iocy
 {
-	FOR_HIT,
-	FOR_COLOR
-}			t_ray;
+	OUTSIDE,
+	INSIDE
+}			t_iocy;
 
 //##########fonction#########//
 
@@ -207,7 +207,7 @@ int			get_color_cylinder(t_data *data, t_hit *hit);
 void		is_cylinder(t_data *data, t_scene tmp);
 
 	//cylinder2
-int			get_mix_color(t_data *data);
+int			get_mix_color(t_data *data, t_hit *hit);
 int			cy_quadratic(t_geometry *cy, float math_value[3],
 				t_vector *origin, t_vector *dir);
 

@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/20 12:27:47 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:47:20 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ void	normal_cy(t_hit	*hit, t_vector *norm)
 	t_vector	impact_ori;
 	float		first_dot;
 	t_vector	sd_dot;
+	// t_vector	epsilon;
 
+	// epsilon = (t_vector){0.1, 0.1, 0.1};
 	vec_subtract(&impact_ori, &hit->geometry->impact_point,
 		&hit->geometry->data.cylinder.center);
 	first_dot = vec_dot_product(&impact_ori,
@@ -97,9 +99,20 @@ void	normal_cy(t_hit	*hit, t_vector *norm)
 	vec_multiplying(&sd_dot, &hit->geometry->data.cylinder.direction,
 		first_dot);
 	vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
-
-	vec_normalize(vec_subtract(norm, &hit->geometry->impact_point, &p_proj));
+	vec_normalize(vec_subtract(norm, 
+			&hit->geometry->impact_point, &p_proj));
 	
+	if (hit->geometry->in_out == INSIDE)
+	{
+		vec_multiplying(norm, norm, -1);
+		// vec_normalize(norm);
+		// vec_subtract(norm, &hit->geometry->impact_point, &p_proj);
+		// vec_multiplying(norm, vec_add(norm, norm, &epsilon), -1);
+		// vec_normalize(norm);
+	}
+	// else
+	// 	vec_normalize(vec_subtract(norm, 
+	// 		&hit->geometry->impact_point, &p_proj));
 }
 
 void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
@@ -117,7 +130,7 @@ void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 		ratio *= -1;
 		if (ratio >= 0)
 		{
-			printf("ratio %f\n", ratio);
+			// printf("ratio %f\n", ratio);
 			vec_multiplying(color, &data->white_light, ratio);
 		}
 	}

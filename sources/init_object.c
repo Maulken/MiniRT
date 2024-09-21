@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:25:01 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/12 20:30:10 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:19:13 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	init_geometry(t_geometry *geometry)
 {
 	*geometry = (t_geometry){0};
-	geometry->dist_light = -1;
+	geometry->in_out = OUTSIDE;
 	geometry->dist_cam = -1;
 }

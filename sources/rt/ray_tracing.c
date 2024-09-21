@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 11:12:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:26:17 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	get_color(t_data *data, t_vector *x_ray, t_vector *y_ray)
 	if (data->hit.geometry->type == GT_PLANE)
 		return (get_color_plane(data));
 	if (data->hit.geometry->type == GT_CYLINDER)
-		return (get_color_cylinder(data, &data->hit));
+		return (get_mix_color(data, &data->hit));
 	return (0x3300ff);
 }
 

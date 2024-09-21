@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 12:00:45 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:59:49 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,22 @@
 // 	return (new_color);
 // }
 
-int	get_mix_color(t_data *data)
+int	get_mix_color(t_data *data, t_hit *hit)
 {
 	int			new_color;
 	t_vector	diffuse_light;
 	t_vector	mix_color;
 
+	hit->geometry->dist_cam = cylinder_intersect(hit->geometry,
+			&hit->geometry->ray.origin, &hit->geometry->ray.dir);
+	if (hit->geometry->dist_cam <= 0)
+		return (0x3300ff);
 	mix_color = data->scene->ambient->ambient_light;
+	// printf("\e[35mimpact point %f\e[0m\n", data->hit.geometry->impact_point.x);
 	get_diffuse_light_cy(data, &data->hit, &diffuse_light);
 	if (diffuse_light.x)
 	{
-		printf("rlg\n");
+		// printf("rlg\n");
 		vec_add(&mix_color, &data->scene->ambient->ambient_light,
 			&diffuse_light);
 	}
