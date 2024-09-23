@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/18 15:36:31 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:01:46 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ int	main(int argc, char **argv)
 	if (parsing(argc, argv, &data) == ERROR)
 		return (clean_data(&data, 1));
 	data.mlx = mlx_init();
-
-	printf("%f\n",data.scene->camera->origine.x);
-
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"), clean_data(&data, 1));
 	data.win = mlx_new_window(data.mlx, data.view.width, data.view.height,

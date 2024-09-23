@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/18 15:37:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:59:15 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	check_sphere(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_sphere(current, tmp))
 		return (free_tab(tmp), 1);
+	current->id = data->id++;
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -62,6 +63,7 @@ int	check_plane(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab, "pl", 4);
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
+	current->id = data->id++;
 	if (init_plane(current, tmp))
 		return (free_tab(tmp), 1);
 	last = &data->scene->objects;
@@ -100,6 +102,7 @@ int	check_cylinder(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab, "cy", 6);
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
+	current->id = data->id++;
 	if (init_cylinder(current, tmp) == 1)
 		return (free_tab(tmp), 1);
 	last = &data->scene->objects;
