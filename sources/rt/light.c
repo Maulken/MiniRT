@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/23 19:30:46 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:04:50 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static bool	is_obstacle(t_scene tmp, t_hit *hit)
 {
-	// if (hit->geometry->type == GT_SPHERE || (hit->geometry->type == GT_CYLINDER
-	// 	&& hit->geometry->in_out == INSIDE))
-	// else
-	// 	vec_multiplying(&ray, &hit->geometry->ray.light, -1.);
 	while (tmp.objects)
 	{
+		// if (hit->geometry->type == GT_PLANE)
+		// 	printf("object type %d\n", tmp.objects->type);
 		if (tmp.objects->type == GT_SPHERE
 			&& sphere_intersect(tmp.objects,
 				&hit->geometry->impact_point, &hit->geometry->ray.light) > 0)
@@ -88,9 +86,7 @@ void	normal_cy(t_hit	*hit, t_vector *norm)
 	t_vector	impact_ori;
 	float		first_dot;
 	t_vector	sd_dot;
-	// t_vector	epsilon;
 
-	// epsilon = (t_vector){0.1, 0.1, 0.1};
 	vec_normalize(vec_subtract(&impact_ori, &hit->geometry->impact_point,
 		&hit->geometry->data.cylinder.center));
 	first_dot = vec_dot_product(&impact_ori,
@@ -100,17 +96,6 @@ void	normal_cy(t_hit	*hit, t_vector *norm)
 	vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
 	vec_normalize(vec_subtract(norm, 
 			&hit->geometry->impact_point, &p_proj));
-	// if (hit->geometry->in_out == INSIDE)
-	// {
-	// 	vec_multiplying(norm, norm, -1);
-	// 	// vec_normalize(norm);
-	// 	// vec_subtract(norm, &hit->geometry->impact_point, &p_proj);
-	// 	// vec_multiplying(norm, vec_add(norm, norm, &epsilon), -1);
-	// 	// vec_normalize(norm);
-	// }
-	// else
-	// 	vec_normalize(vec_subtract(norm, 
-	// 		&hit->geometry->impact_point, &p_proj));
 }
 
 void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
@@ -130,9 +115,11 @@ void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 	{
 		normal_cy(hit, &norm);
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
-		if (ratio > 0)
+		// if (ratio < 0)
+		// 	ratio = -ratio;
+		if (ratio >= 0)
 			vec_multiplying(color, &data->white_light, ratio);
-			// printf("ratio %f\n", ratio);
+		// printf("ratio %f\n", ratio);
 	}
 }
 

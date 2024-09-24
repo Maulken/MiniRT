@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/23 19:16:03 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:51:40 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 #define NEAR 0.01
 #define FAR 250.0
 
-float	dist_cy(t_geometry *cy, float dist1, float dist2)
+float	dist_cy(t_geometry *cy, float dist0, float dist1, t_vector *origin, t_vector *dir)
 {
 	t_vector	for_impact;
 
-	if (dist1 >= NEAR && dist1 <= FAR)
+	if (dist0 >= NEAR && dist0 <= FAR)
 	{
-		vec_multiplying(&for_impact, &cy->ray.dir, dist1);
-		vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
+		vec_multiplying(&for_impact, dir, dist0);
+		vec_add(&cy->impact_point, origin, &for_impact);
 		if (on_cy(cy))
 		{
 			cy->in_out = OUTSIDE;
-			return (dist1);
+			return (dist0);
 		}
 	}
-	if (dist2 >= NEAR && dist2 <= FAR)
+	if (dist1 >= NEAR && dist1 <= FAR)
 	{
-		vec_multiplying(&for_impact, &cy->ray.dir, dist2);
-		vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
+		vec_multiplying(&for_impact, dir, dist1);
+		vec_add(&cy->impact_point, origin, &for_impact);
 		if (on_cy(cy))
 		{
 			cy->in_out = INSIDE;
-			return (dist2);
+			return (dist1);
 		}
 	}
 	return (-1);
@@ -53,7 +53,7 @@ float	cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir)
 		return (-1);
 	dist[0] = (-abc_value[1] - discr) / (2 * abc_value[0]);
 	dist[1] = (-abc_value[1] + discr) / (2 * abc_value[0]);
-	return (dist_cy(cy, dist[0], dist[1]));
+	return (dist_cy(cy, dist[0], dist[1], origin, dir));
 }
 
 float	on_cy(t_geometry *cy)
@@ -66,7 +66,8 @@ float	on_cy(t_geometry *cy)
 	// vec_multiplying(&for_impact, &cy->ray.dir, cy->dist_cam);
 	// vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
 	// pyth = vec_dot_product(&cy->impact_point, &cy->data.cylinder.center);
-	pyth = vec_length2(vec_subtract(&for_impact, &cy->impact_point, &cy->data.cylinder.center));
+	pyth = vec_length2(vec_subtract(&for_impact, &cy->impact_point,
+			&cy->data.cylinder.center));
 	pyth -= cy->data.cylinder.diameter * cy->data.cylinder.diameter / 4.;
 	if (pyth < 0)
 		return (0);

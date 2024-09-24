@@ -6,13 +6,11 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/23 17:08:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:17:32 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-#define BACKGROUND_COLOR 0x3300ff
 
 void	get_view_plane(t_data *data)
 {
