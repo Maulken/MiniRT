@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/21 16:27:10 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:16:03 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@
 float	dist_cy(t_geometry *cy, float dist1, float dist2)
 {
 	t_vector	for_impact;
-	
-	vec_multiplying(&for_impact, &cy->ray.dir, dist1);
-	vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
-	if (on_cy(cy))
+
+	if (dist1 >= NEAR && dist1 <= FAR)
 	{
-		cy->in_out = OUTSIDE;
-		return (dist1);
+		vec_multiplying(&for_impact, &cy->ray.dir, dist1);
+		vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
+		if (on_cy(cy))
+		{
+			cy->in_out = OUTSIDE;
+			return (dist1);
+		}
 	}
-	else
+	if (dist2 >= NEAR && dist2 <= FAR)
 	{
 		vec_multiplying(&for_impact, &cy->ray.dir, dist2);
 		vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
@@ -42,54 +45,33 @@ float	dist_cy(t_geometry *cy, float dist1, float dist2)
 float	cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir)
 {
 	float	dist[2];
-	float	root;
 	float	abc_value[3];
-	int		discr;
+	float	discr;
 
 	discr = cy_quadratic(cy, abc_value, origin, dir);
 	if (discr == ERROR)
 		return (-1);
-	dist[0] = (-abc_value[1] + discr) / (2 * abc_value[0]);
-	dist[1] = (-abc_value[1] - discr) / (2 * abc_value[0]);
-	if (dist[0] <= 0 || dist[1] <= 0)
-		return (-1);
-	if (dist[0] < dist[1])
-		root = dist_cy(cy, dist[0], dist[1]);
-	else
-		root = dist_cy(cy, dist[1], dist[0]);
-	if (root == -1)
-		return (-1);
-	// printf("impact point %f\n", cy->impact_point.x);
-	return (root);
-	// if (dist[0] < dist[1])
-	// 	return (dist[0]);
-	// return (dist[1]);
-	// root = (-math_value[1] - discr) / (2 * math_value[0]);
-	// if (root < NEAR || root > FAR)
-	// 	root = (-math_value[1] + discr) / (2 * math_value[0]);
-	// if (root < NEAR || root > FAR)
-	// 	return (-1);
-	// return (root);
+	dist[0] = (-abc_value[1] - discr) / (2 * abc_value[0]);
+	dist[1] = (-abc_value[1] + discr) / (2 * abc_value[0]);
+	return (dist_cy(cy, dist[0], dist[1]));
 }
 
 float	on_cy(t_geometry *cy)
 {
-	// t_vector	for_impact;
-	float		dist;
-	float		height_pos;
+	t_vector	for_impact;
+	// float		dist;
+	// float		height_pos;
 	float		pyth;
 
 	// vec_multiplying(&for_impact, &cy->ray.dir, cy->dist_cam);
 	// vec_add(&cy->impact_point, &cy->ray.origin, &for_impact);
-	dist = sqrt(vec_dot_product(&cy->impact_point, &cy->data.cylinder.center));
-	if (dist < 0)
-		return (0);
-	pyth = dist * dist;
+	// pyth = vec_dot_product(&cy->impact_point, &cy->data.cylinder.center);
+	pyth = vec_length2(vec_subtract(&for_impact, &cy->impact_point, &cy->data.cylinder.center));
 	pyth -= cy->data.cylinder.diameter * cy->data.cylinder.diameter / 4.;
 	if (pyth < 0)
 		return (0);
-	height_pos = sqrt(pyth);
-	if (height_pos <= cy->data.cylinder.height / 2)
+	// height_pos = sqrt(pyth);
+	if (pyth <= cy->data.cylinder.height * cy->data.cylinder.height / 4.)
 		return (1);
 	return (0);
 }
@@ -189,10 +171,13 @@ void	is_cylinder(t_data *data, t_scene tmp)
 
 	tmp.objects->dist_cam = cylinder_intersect(tmp.objects,
 			&tmp.objects->ray.origin, &tmp.objects->ray.dir);
-	// printf("impact point %f\n", tmp.objects->impact_point.x);
-	if (tmp.objects->dist_cam < data->hit.distance && tmp.objects->dist_cam > 0)
+	// if (tmp.objects->dist_cam != -1)
+	// 	printf("dist cam %f\n", tmp.objects->dist_cam);
+	if (tmp.objects->dist_cam < data->hit.distance
+		&& (tmp.objects->dist_cam) > 0)
 		// && on_cy(tmp.objects) == 1)
 	{
+		// printf("ici\n");
 		data->hit.distance = tmp.objects->dist_cam;
 		data->hit.geometry = tmp.objects;
 		vec_multiplying(&for_impact, &data->hit.geometry->ray.dir,

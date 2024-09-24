@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/21 16:17:45 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:00:01 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	int			mlx_y;
 	int			fd;
 	int			count_object;
+	int			id;
 }			t_data;
 
 /* ************************************************************************** */
@@ -208,7 +209,7 @@ void		is_cylinder(t_data *data, t_scene tmp);
 
 	//cylinder2
 int			get_mix_color(t_data *data, t_hit *hit);
-int			cy_quadratic(t_geometry *cy, float math_value[3],
+float		cy_quadratic(t_geometry *cy, float math_value[3],
 				t_vector *origin, t_vector *dir);
 
 	//maths_util

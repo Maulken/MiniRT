@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 16:35:24 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:13:42 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	check_sphere(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_sphere(current, tmp))
 		return (free_tab(tmp), 1);
+	current->id = data->id++;
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -68,6 +69,7 @@ int	check_plane(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_plane(current, tmp))
 		return (free_tab(tmp), 1);
+	current->id = data->id++;
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -108,6 +110,7 @@ int	check_cylinder(char *tab, t_data *data)
 		return (free_tab(tmp), free(current), 1);
 	if (init_cylinder(current, tmp) == 1)
 		return (free_tab(tmp), 1);
+	current->id = data->id++;
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;

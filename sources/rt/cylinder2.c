@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/21 15:59:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:01:29 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	get_mix_color(t_data *data, t_hit *hit)
 	int			new_color;
 	t_vector	diffuse_light;
 	t_vector	mix_color;
-
-	hit->geometry->dist_cam = cylinder_intersect(hit->geometry,
-			&hit->geometry->ray.origin, &hit->geometry->ray.dir);
+	// printf("ICI\n");
+	// hit->geometry->dist_cam = cylinder_intersect(hit->geometry,
+	// 		&hit->geometry->ray.origin, &hit->geometry->ray.dir);
 	if (hit->geometry->dist_cam <= 0)
 		return (0x3300ff);
 	mix_color = data->scene->ambient->ambient_light;
@@ -74,7 +74,7 @@ int	get_mix_color(t_data *data, t_hit *hit)
 	return (new_color);
 }
 
-int	cy_quadratic(t_geometry *cy, float math_value[3],
+float	cy_quadratic(t_geometry *cy, float math_value[3],
 				t_vector *origin, t_vector *dir)
 {
 	t_vector	diff;
@@ -84,19 +84,16 @@ int	cy_quadratic(t_geometry *cy, float math_value[3],
 
 	vec_subtract(&x_x_diff, origin, &cy->data.cylinder.center);
 	vec_multiplying(&diff,
-		&cy->data.cylinder.direction, cy->data.cylinder.height);
-	vec_add(&diff, &cy->data.cylinder.center, &diff);
-	vec_subtract(&diff, &cy->data.cylinder.center, &diff);
+		&cy->data.cylinder.direction, -cy->data.cylinder.height);
 	vec_cross(&x_x_diff, &x_x_diff, &diff);
 	vec_cross(&d_x_diff, dir, &diff);
 	math_value[0] = vec_dot_product(&d_x_diff, &d_x_diff);
-	math_value[1] = 2 * vec_dot_product(&d_x_diff, &x_x_diff);
+	math_value[1] = 2. * vec_dot_product(&d_x_diff, &x_x_diff);
 	math_value[2] = vec_dot_product(&x_x_diff, &x_x_diff)
-		- ((cy->data.cylinder.diameter / 2) * (cy->data.cylinder.diameter / 2)
+		- ((cy->data.cylinder.diameter / 2.) * (cy->data.cylinder.diameter / 2.)
 			* vec_dot_product(&diff, &diff));
-	discr = math_value[1] * math_value[1] - 4 * math_value[0] * math_value[2];
+	discr = math_value[1] * math_value[1] - 4. * math_value[0] * math_value[2];
 	if (discr < 0)
 		return (ERROR);
-	discr = sqrtf(discr);
-	return (discr);
+	return (sqrtf(discr));
 }

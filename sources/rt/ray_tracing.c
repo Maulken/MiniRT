@@ -6,11 +6,13 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/21 15:26:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:08:17 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+#define BACKGROUND_COLOR 0x3300ff
 
 void	get_view_plane(t_data *data)
 {
@@ -59,14 +61,14 @@ int	get_color(t_data *data, t_vector *x_ray, t_vector *y_ray)
 	data->hit.distance = INFINITY;
 	get_hit(data, *data->scene, x_ray, y_ray);
 	if (data->hit.geometry == NULL)
-		return (0x3300ff);
+		return (BACKGROUND_COLOR);
 	if (data->hit.geometry->type == GT_SPHERE)
 		return (get_color_sphere(data, &data->hit));
 	if (data->hit.geometry->type == GT_PLANE)
 		return (get_color_plane(data));
 	if (data->hit.geometry->type == GT_CYLINDER)
 		return (get_mix_color(data, &data->hit));
-	return (0x3300ff);
+	return (BACKGROUND_COLOR);
 }
 
 void	ray_tracing(t_data *data)

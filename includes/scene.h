@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/21 16:18:52 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:02:06 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_geometry
 	t_vector			color;
 	t_vector			impact_point;
 	int					in_out;
+	int					id;
 	float				dist_cam;
 	t_geometry_type		type;
 	struct s_ray
