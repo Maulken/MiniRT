@@ -6,25 +6,12 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:11:07 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 10:52:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:42:05 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// float	plane_intersect(t_data *data, t_geometry *pl)
-// {
-// 	t_vector	v;
-// 	float		d;
-
-// 	(void)data;
-// 	d = vec_dot_product(&pl->data.plane.direction, &pl->ray.dir);
-// 	if (d <= 0)
-// 		return (-1);
-// 	vec_subtract(&v, &pl->data.plane.origine, &pl->ray.origin);
-// 	d = vec_dot_product(&v, &pl->data.plane.direction) / d;
-// 	return (d);
-// }
 float	plane_intersect(t_geometry *pl, t_vector *origin, t_vector *dir)
 {
 	t_vector	v;
@@ -46,9 +33,7 @@ int	get_color_plane(t_data *data)
 	t_vector	mix_color;
 
 	data->hit.geometry->dist_cam = plane_intersect(data->hit.geometry,
-		&data->hit.geometry->ray.origin, &data->hit.geometry->ray.dir);
-	if (data->hit.geometry->dist_cam < 0)
-		return (0);
+			&data->hit.geometry->ray.origin, &data->hit.geometry->ray.dir);
 	mix_color = data->scene->ambient->ambient_light;
 	get_diffuse_light_pl(data, &data->hit, &diffuse_light);
 	if (diffuse_light.x)

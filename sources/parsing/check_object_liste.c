@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 16:35:24 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:23:47 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ int	check_sphere(char *tab, t_data *data)
 	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
-	if (check_num(tab, "sp", 4))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "sp", 4);
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_sphere(current, tmp))
@@ -61,9 +59,7 @@ int	check_plane(char *tab, t_data *data)
 	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
-	if (check_num(tab, "pl", 4))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "pl", 4);
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_plane(current, tmp))
@@ -101,9 +97,7 @@ int	check_cylinder(char *tab, t_data *data)
 	current = calloc(1, sizeof(t_geometry));
 	if (current == NULL)
 		return (1);
-	if (check_num(tab, "cy", 6))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "cy", 6);
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_cylinder(current, tmp) == 1)

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 10:26:39 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/21 16:28:01 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:58:05 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ char	**checkget_file_content(int fd)
 	str = get_string(fd);
 	if (!str)
 	{
-		printf("error malloc");
+		printf("ERROR1 : Malloc returned empty rows or"
+			" no space left in memory.\n");
 		close(fd);
 		return (NULL);
 	}
@@ -82,7 +83,8 @@ char	**checkget_file_content(int fd)
 	rows = ft_split(str, '\n');
 	if (!rows)
 	{
-		printf("error malloc");
+		printf("ERROR2 : Malloc returned empty rows or"
+			" no space left in memory.\n");
 		free(str);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 10:49:45 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:40:28 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <signal.h>
@@ -33,6 +34,7 @@
 # define M_PI 3.14159265358979323846
 # define OK 0
 # define ERROR -1
+# define BACKGROUND_COLOR 0x22063d
 
 /* ************************************************************************** */
 /* Structures                                                                 */
@@ -85,11 +87,11 @@ typedef enum e_object
 	CYLINDER
 }	t_object;
 
-typedef enum e_ray
+typedef enum e_iocy
 {
-	FOR_HIT,
-	FOR_COLOR
-}			t_ray;
+	OUTSIDE,
+	INSIDE
+}			t_iocy;
 
 //##########fonction#########//
 
@@ -131,7 +133,8 @@ t_vector	*add_color_int(t_vector *rgb, char *str);
 	//check_object.c
 int			init_sphere(t_geometry *current, char **tmp);
 char		**check_error_type(char *str, char **tmp);
-char		**check_correct_type(const char *content, char *tab);
+char		**check_correct_type(const char *content, char *tab,
+				char *type, int len);
 void		remouve_space_start_line(char *str);
 
 	//check_objet_essential.c
@@ -202,13 +205,15 @@ void		is_plane(t_data *data, t_scene tmp);
 
 	//cylinder
 float		cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir);
+float		cylinder_intersect2(t_geometry *cy, t_vector *origin, t_vector *dir);
 float		on_cy(t_geometry *cy);
+float		on_cy2(t_geometry *cy);
 int			get_color_cylinder(t_data *data, t_hit *hit);
 void		is_cylinder(t_data *data, t_scene tmp);
 
 	//cylinder2
-int			get_mix_color(t_data *data);
-int			cy_quadratic(t_geometry *cy, float math_value[3],
+int			get_mix_color(t_data *data, t_hit *hit);
+float		cy_quadratic(t_geometry *cy, float math_value[3],
 				t_vector *origin, t_vector *dir);
 
 	//maths_util
@@ -224,7 +229,7 @@ void		limit_color(t_vector *color);
 	//light
 void		get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color);
 void		get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color);
-void		get_diffuse_light_cy(t_data *data, t_vector *color);
+void		get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color);
 
 
 int			event(t_data *data);

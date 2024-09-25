@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 17:26:58 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:01:24 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	**check_error_type(char *str, char **tmp)
 	n = normalalized vector [0.0,1.0]
     v = void
 */
-char	**check_correct_type(const char *content, char *tab)
+char	**check_correct_type(const char *content, char *tab, char *type,
+		int len)
 {
 	int		j;
 	char	*line;
@@ -77,14 +78,14 @@ char	**check_correct_type(const char *content, char *tab)
 
 	line = remouve_space_cord(tab);
 	tmp = ft_split_espace(line);
+	if (check_num(line, type, len) == 1)
+	{
+		free(line);
+		return (NULL);
+	}
 	free(line);
 	if (tmp == NULL)
 		return (NULL);
-	// temporary debug for you .....
-	// for (int i = 0; tmp[i]; i++)
-	// 	printf("tmp: %s\n", tmp[i]);
-	// printf("END \n");
-	//END
 	j = 0;
 	while (tmp[j])
 	{

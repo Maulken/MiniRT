@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:41:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/20 10:52:56 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:42:22 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_color_sphere(t_data *data, t_hit *hit)
 	hit->geometry->dist_cam = sphere_intersect(hit->geometry,
 			&hit->geometry->ray.origin, &hit->geometry->ray.dir);
 	if (hit->geometry->dist_cam <= 0)
-		return (0x3300ff);
+		return (BACKGROUND_COLOR);
 	mix_color = data->scene->ambient->ambient_light;
 	get_diffuse_light_sp(data, hit, &diffuse_light);
 	if (diffuse_light.x)

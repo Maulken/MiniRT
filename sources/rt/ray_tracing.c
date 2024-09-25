@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 10:52:45 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:42:15 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,6 @@ void	get_view_plane(t_data *data)
 			&data->scene->camera->direction, &up_y));
 	vec_normalize(vec_cross(&data->view.viewplane_y,
 			&data->scene->camera->direction, &data->view.viewplane_x));
-}
-
-void	is_plane(t_data *data, t_scene tmp)
-{
-	float	dist;
-
-	dist = plane_intersect(tmp.objects,
-		&tmp.objects->ray.origin, &tmp.objects->ray.dir);
-	if (dist < data->hit.distance && dist > 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
-}
-
-void	is_cylinder(t_data *data, t_scene tmp)
-{
-	float	dist;
-
-	dist = cylinder_intersect(tmp.objects);
-	if (dist < data->hit.distance && dist > 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
-}
-
-void	is_sphere(t_data *data, t_scene tmp)
-{
-	float	dist;
-
-	dist = sphere_intersect(tmp.objects);
-	if (dist < data->hit.distance && dist >= 0)
-	{
-		data->hit.distance = dist;
-		data->hit.geometry = tmp.objects;
-	}
 }
 
 void	obtain_ray(t_data *data, t_vector *rx, t_vector *ry, t_vector *ray)
@@ -96,14 +59,14 @@ int	get_color(t_data *data, t_vector *x_ray, t_vector *y_ray)
 	data->hit.distance = INFINITY;
 	get_hit(data, *data->scene, x_ray, y_ray);
 	if (data->hit.geometry == NULL)
-		return (0x3300ff);
+		return (BACKGROUND_COLOR);
 	if (data->hit.geometry->type == GT_SPHERE)
 		return (get_color_sphere(data, &data->hit));
 	if (data->hit.geometry->type == GT_PLANE)
 		return (get_color_plane(data));
 	if (data->hit.geometry->type == GT_CYLINDER)
-		return (get_color_cylinder(data, &data->hit));
-	return (0x3300ff);
+		return (get_mix_color(data, &data->hit));
+	return (BACKGROUND_COLOR);
 }
 
 void	ray_tracing(t_data *data)

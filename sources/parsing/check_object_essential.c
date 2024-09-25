@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/12 20:51:23 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:50:43 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	check_ambiance(char *tab, t_data *data)
 	char				**tmp;
 	static const char	content[6] = {'c', 't', 'i', 'v', 'v', 'v'};
 
-	if (check_num(tab, "A", 3))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "A", 3);
 	if (tmp == NULL)
 	{
 		free_tab(tmp);
@@ -64,9 +62,7 @@ int	check_camera(char *tab, t_data *data)
 	char				**tmp;
 	static const char	content[6] = {'c', 'f', 'f', 't', 'v', 'v'};
 
-	if (check_num(tab, "C", 4))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "C", 4);
 	if (tmp == NULL)
 		return (1);
 	add_vector_float(&data->scene->camera->origine, tmp[1]);
@@ -91,9 +87,7 @@ int	check_light(char *tab, t_data *data)
 	char				**tmp;
 	static const char	content[6] = {'c', 'f', 't', 'i', 'v', 'v'};
 
-	if (check_num(tab, "L", 4))
-		return (1);
-	tmp = check_correct_type(content, tab);
+	tmp = check_correct_type(content, tab, "L", 4);
 	if (tmp == NULL)
 	{
 		free(tmp);

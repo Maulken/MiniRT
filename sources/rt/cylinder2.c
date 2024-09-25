@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:08:39 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/20 10:50:56 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:41:58 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,32 @@
 // 	return (new_color);
 // }
 
-int	get_mix_color(t_data *data)
+int	get_mix_color(t_data *data, t_hit *hit)
 {
 	int			new_color;
 	t_vector	diffuse_light;
 	t_vector	mix_color;
-
+	// printf("ICI\n");
+	// hit->geometry->dist_cam = cylinder_intersect(hit->geometry,
+	// 		&hit->geometry->ray.origin, &hit->geometry->ray.dir);
+	if (hit->geometry->dist_cam <= 0)
+		return (BACKGROUND_COLOR);
 	mix_color = data->scene->ambient->ambient_light;
-	get_diffuse_light_cy(data, &diffuse_light);
+	// printf("\e[35mimpact point %f\e[0m\n", data->hit.geometry->impact_point.x);
+	get_diffuse_light_cy(data, &data->hit, &diffuse_light);
 	if (diffuse_light.x)
+	{
+		// printf("rlg\n");
 		vec_add(&mix_color, &data->scene->ambient->ambient_light,
 			&diffuse_light);
-	vec_add(&mix_color, &data->scene->objects->color, &mix_color);
+	}
+	vec_add(&mix_color, &data->hit.geometry->color, &mix_color);
 	limit_color(&mix_color);
 	new_color = create_rgb(&mix_color);
 	return (new_color);
 }
 
-int	cy_quadratic(t_geometry *cy, float math_value[3],
+float	cy_quadratic(t_geometry *cy, float abc_value[3],
 				t_vector *origin, t_vector *dir)
 {
 	t_vector	diff;
@@ -76,19 +84,16 @@ int	cy_quadratic(t_geometry *cy, float math_value[3],
 
 	vec_subtract(&x_x_diff, origin, &cy->data.cylinder.center);
 	vec_multiplying(&diff,
-		&cy->data.cylinder.direction, cy->data.cylinder.height);
-	vec_add(&diff, &cy->data.cylinder.center, &diff);
-	vec_subtract(&diff, &cy->data.cylinder.center, &diff);
+		&cy->data.cylinder.direction, -cy->data.cylinder.height);
 	vec_cross(&x_x_diff, &x_x_diff, &diff);
 	vec_cross(&d_x_diff, dir, &diff);
-	math_value[0] = vec_dot_product(&d_x_diff, &d_x_diff);
-	math_value[1] = 2 * vec_dot_product(&d_x_diff, &x_x_diff);
-	math_value[2] = vec_dot_product(&x_x_diff, &x_x_diff)
-		- ((cy->data.cylinder.diameter / 2) * (cy->data.cylinder.diameter / 2)
+	abc_value[0] = vec_dot_product(&d_x_diff, &d_x_diff);
+	abc_value[1] = 2. * vec_dot_product(&d_x_diff, &x_x_diff);
+	abc_value[2] = vec_dot_product(&x_x_diff, &x_x_diff)
+		- ((cy->data.cylinder.diameter / 2.) * (cy->data.cylinder.diameter / 2.)
 			* vec_dot_product(&diff, &diff));
-	discr = math_value[1] * math_value[1] - 4 * math_value[0] * math_value[2];
+	discr = abc_value[1] * abc_value[1] - 4. * abc_value[0] * abc_value[2];
 	if (discr < 0)
 		return (ERROR);
-	discr = sqrtf(discr);
-	return (discr);
+	return (sqrtf(discr));
 }

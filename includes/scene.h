@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 16:30:37 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/12 20:44:07 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:03:12 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_geometry
 	struct s_geometry	*next;
 	t_vector			color;
 	t_vector			impact_point;
-	float				dist_light;
+	int					in_out;
 	float				dist_cam;
 	t_geometry_type		type;
 	struct s_ray
