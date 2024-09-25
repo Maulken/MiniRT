@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/23 16:13:42 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:38:13 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_plane(char *tab, t_data *data)
 int	init_cylinder(t_geometry *current, char **tmp)
 {
 	t_cylinder *const	cylinder = &current->data.cylinder;
-
+	
 	current->type = GT_CYLINDER;
 	add_vector_float(&cylinder->center, tmp[1]);
 	add_vector_float(&cylinder->direction, tmp[2]);

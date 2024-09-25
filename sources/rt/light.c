@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/24 15:04:50 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:47:49 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color)
 		vec_normalize(vec_subtract(&norm, &hit->geometry->impact_point,
 				&hit->geometry->data.sphere.center));
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
+		// ratio *= ratio;
 		if (ratio >= 0)
 			vec_multiplying(color, &data->white_light, ratio);
 	}
@@ -82,20 +83,27 @@ void	get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color)
 
 void	normal_cy(t_hit	*hit, t_vector *norm)
 {
-	t_vector	p_proj;
-	t_vector	impact_ori;
-	float		first_dot;
-	t_vector	sd_dot;
+	// t_vector	p_proj;
+	// t_vector	impact_ori;
+	// float		first_dot;
+	// t_vector	sd_dot;
 
-	vec_normalize(vec_subtract(&impact_ori, &hit->geometry->impact_point,
-		&hit->geometry->data.cylinder.center));
-	first_dot = vec_dot_product(&impact_ori,
-		&hit->geometry->data.cylinder.direction);
-	vec_multiplying(&sd_dot, &hit->geometry->data.cylinder.direction,
-		first_dot * hit->geometry->data.cylinder.height);
-	vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
-	vec_normalize(vec_subtract(norm, 
-			&hit->geometry->impact_point, &p_proj));
+	// vec_normalize(vec_subtract(&impact_ori, 
+	// 	&hit->geometry->data.cylinder.center,&hit->geometry->impact_point));
+	// first_dot = vec_dot_product(&impact_ori,
+	// 	&hit->geometry->data.cylinder.direction);
+	// vec_multiplying(&sd_dot, &hit->geometry->data.cylinder.direction,
+	// 	first_dot * hit->geometry->data.cylinder.height);
+	// vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
+	// vec_normalize(vec_subtract(norm, 
+	// 		&hit->geometry->impact_point, &p_proj));
+	t_vector	tmp;
+	float		lambda;
+
+	vec_subtract(&tmp, &hit->geometry->data.cylinder.center, &hit->geometry->impact_point);
+	lambda = vec_dot_product(&tmp, &hit->geometry->data.cylinder.direction);
+	vec_multiplying(norm, &hit->geometry->data.cylinder.direction, lambda);
+	vec_normalize(vec_subtract(norm, norm, &tmp));
 }
 
 void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
@@ -115,8 +123,9 @@ void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 	{
 		normal_cy(hit, &norm);
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
-		// if (ratio < 0)
-		// 	ratio = -ratio;
+		// ratio = cosf(acosf(
+		// 	vec_dot_product(&hit->geometry->data.cylinder.direction,
+		// 	&hit->geometry->ray.light)) - (M_PI / 2));
 		if (ratio >= 0)
 			vec_multiplying(color, &data->white_light, ratio);
 		// printf("ratio %f\n", ratio);
