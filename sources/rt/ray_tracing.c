@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 17:42:15 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:45:39 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	get_hit(t_data *data, t_scene tmp, t_vector *rx, t_vector *ry)
 {
 	while (tmp.objects)
 	{
-
 		obtain_ray(data, rx, ry, &tmp.objects->ray.origin);
 		vec_normalize(vec_subtract(&tmp.objects->ray.dir,
 				&tmp.objects->ray.origin, &data->scene->camera->origine));

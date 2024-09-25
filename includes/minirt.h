@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 17:40:28 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:45:19 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,9 +205,7 @@ void		is_plane(t_data *data, t_scene tmp);
 
 	//cylinder
 float		cylinder_intersect(t_geometry *cy, t_vector *origin, t_vector *dir);
-float		cylinder_intersect2(t_geometry *cy, t_vector *origin, t_vector *dir);
 float		on_cy(t_geometry *cy);
-float		on_cy2(t_geometry *cy);
 int			get_color_cylinder(t_data *data, t_hit *hit);
 void		is_cylinder(t_data *data, t_scene tmp);
 
@@ -231,7 +229,5 @@ void		get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color);
 void		get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color);
 void		get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color);
 
-
 int			event(t_data *data);
-
 #endif
