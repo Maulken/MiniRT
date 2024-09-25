@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/24 14:00:51 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:02:54 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <signal.h>
@@ -71,7 +72,6 @@ typedef struct s_data
 	int			mlx_y;
 	int			fd;
 	int			count_object;
-	int			id;
 }			t_data;
 
 /* ************************************************************************** */
@@ -133,7 +133,8 @@ t_vector	*add_color_int(t_vector *rgb, char *str);
 	//check_object.c
 int			init_sphere(t_geometry *current, char **tmp);
 char		**check_error_type(char *str, char **tmp);
-char		**check_correct_type(const char *content, char *tab);
+char		**check_correct_type(const char *content, char *tab,
+				char *type, int len);
 void		remouve_space_start_line(char *str);
 
 	//check_objet_essential.c
