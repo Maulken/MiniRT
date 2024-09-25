@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/25 15:47:49 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:08:06 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color)
 		vec_normalize(vec_subtract(&norm, &hit->geometry->impact_point,
 				&hit->geometry->data.sphere.center));
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
-		// ratio *= ratio;
+		ratio *= ratio;
 		if (ratio >= 0)
 			vec_multiplying(color, &data->white_light, ratio);
 	}
