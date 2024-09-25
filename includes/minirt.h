@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:54 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:28:35 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define M_PI 3.14159265358979323846
 # define OK 0
 # define ERROR -1
-# define BACKGROUND_COLOR 0x3300ff
+# define BACKGROUND_COLOR 0x22063d
 
 /* ************************************************************************** */
 /* Structures                                                                 */
