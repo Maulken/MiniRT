@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:43:22 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:41:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	check_ambiance(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
-	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < -1)
+	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
-		printf("ERROR : ratio");
+		ft_msg_error("ratio between 1 and 0 ",1);
 		return (free_tab(tmp), 1);
 	}
 	if (add_color_int(&data->scene->ambient->colors, tmp[2]) == NULL)
@@ -73,15 +73,11 @@ int	check_camera(char *tab, t_data *data)
 		return (free_tab(tmp), 1);
 	add_vector_float(&data->scene->camera->origine, tmp[1]);
 	add_vector_float(&data->scene->camera->direction, tmp[2]);
-	if (check_vector_normalised(&data->scene->camera->direction))
-	{
-		printf("ERROR : invalid direction");
-		return (free_tab(tmp), 1);
-	}
+	check_vector_normalised(&data->scene->camera->direction);
 	data->scene->camera->fov = ft_atof(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
-		printf("ERROR fov superieur a 180 ou inferieur a 0");
+		ft_msg_error("fov superieur a 180 ou inferieur a 0",1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
@@ -101,9 +97,9 @@ int	check_light(char *tab, t_data *data)
 	}
 	add_vector_float(&data->scene->light->origine, tmp[1]);
 	data->scene->light->ratio = ft_atof(tmp[2]);
-	if (data->scene->light->ratio > 1 || data->scene->light->ratio < -1)
+	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
-		printf("ERROR : ratio ");
+		ft_msg_error("ratio between 1 and 0",1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
