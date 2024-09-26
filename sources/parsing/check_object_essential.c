@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:43:22 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:04:17 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_ambiance(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
-	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < -1)
+	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
 		printf("ERROR : ratio");
 		return (free_tab(tmp), 1);
@@ -73,11 +73,7 @@ int	check_camera(char *tab, t_data *data)
 		return (free_tab(tmp), 1);
 	add_vector_float(&data->scene->camera->origine, tmp[1]);
 	add_vector_float(&data->scene->camera->direction, tmp[2]);
-	if (check_vector_normalised(&data->scene->camera->direction))
-	{
-		printf("ERROR : invalid direction");
-		return (free_tab(tmp), 1);
-	}
+	check_vector_normalised(&data->scene->camera->direction);
 	data->scene->camera->fov = ft_atof(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
@@ -101,7 +97,7 @@ int	check_light(char *tab, t_data *data)
 	}
 	add_vector_float(&data->scene->light->origine, tmp[1]);
 	data->scene->light->ratio = ft_atof(tmp[2]);
-	if (data->scene->light->ratio > 1 || data->scene->light->ratio < -1)
+	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
 		printf("ERROR : ratio ");
 		return (free_tab(tmp), 1);

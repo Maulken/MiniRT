@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 16:37:12 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:08:07 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	init_plane(t_geometry *current, char **tmp)
 	add_vector_float(&plane->direction, tmp[2]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
-	if (check_vector_normalised(&plane->direction))
-		return (printf("ERROR : invalid vector plese [0][1]"), 1);
+	check_vector_normalised(&plane->direction);
 	return (0);
 }
 
@@ -79,12 +78,11 @@ int	init_cylinder(t_geometry *current, char **tmp)
 	current->type = GT_CYLINDER;
 	add_vector_float(&cylinder->center, tmp[1]);
 	add_vector_float(&cylinder->direction, tmp[2]);
-	if (check_vector_normalised(&cylinder->direction))
-		return (printf("ERROR : invalid direction"), 1);
+	check_vector_normalised(&cylinder->direction);
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
-	if (cylinder->diameter < 0 || cylinder->diameter < 0)
-		return (printf("ERROR : size min is 1"), 1);
+	if (cylinder->diameter < 0 || cylinder->height < 0)
+		return (printf("ERROR : size min is 0"), 1);
 	if (add_color_int(&current->color, tmp[5]) == NULL)
 		return (1);
 	return (0);

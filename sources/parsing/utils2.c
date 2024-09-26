@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 13:59:54 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/08/22 10:46:25 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:12:28 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_msg_error(char *str, int value)
 {
-	printf("ERROR : %s", str);
+	printf("ERROR : %s\n", str);
 	return (value);
 }
 
