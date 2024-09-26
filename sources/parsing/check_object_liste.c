@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:45:10 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:37:12 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	init_cylinder(t_geometry *current, char **tmp)
 		return (printf("ERROR : invalid direction"), 1);
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
+	if (cylinder->diameter < 0 || cylinder->diameter < 0)
+		return (printf("ERROR : size min is 1"), 1);
 	if (add_color_int(&current->color, tmp[5]) == NULL)
 		return (1);
 	return (0);
