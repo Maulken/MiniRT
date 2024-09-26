@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:44:46 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:36:56 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,13 @@ static char	**check_correct_value_type(const char *content, int j, char **tmp)
 /*because I have no space is une essential */
 int	init_sphere(t_geometry *current, char **tmp)
 {
+	t_sphere *const	sphere = &current->data.sphere;
+
 	current->type = GT_SPHERE;
-	current->data.sphere.diameter = ft_atof(tmp[2]);
-	add_vector_float(&current->data.sphere.center, tmp[1]);
+	sphere->diameter = ft_atof(tmp[2]);
+	if (sphere->diameter < 0)
+		return (1);
+	add_vector_float(&sphere->center, tmp[1]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
 	return (0);
