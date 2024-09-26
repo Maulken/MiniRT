@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:54 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:54:35 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int			ft_is_good_char(char c);
 t_vector	*add_vector_float(t_vector *vec, char *str);
 t_vector	*add_color_int(t_vector *rgb, char *str);
 
+
 	//check_object.c
 int			init_sphere(t_geometry *current, char **tmp);
 char		**check_error_type(char *str, char **tmp);
@@ -219,7 +220,7 @@ float		cy_quadratic(t_geometry *cy, float math_value[3],
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);
 float		ft_square(float a);
-float		checking_limit(float a, float min, float max);
+float		checking_limit(float a, int min, int max);
 
 	//colors
 int			create_rgb(t_vector *colors);

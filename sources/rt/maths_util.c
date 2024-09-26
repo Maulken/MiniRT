@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:45:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/13 11:39:43 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:53:06 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ float	ft_square(float a)
 	return (a * a);
 }
 
-float	checking_limit(float a, float min, float max)
+float	checking_limit(float a, int min, int max)
 {
 	if (a < min)
-		return (min);
+		return (1);
 	if (a > max)
-		return (max);
+		return (1);
 	return (a);
 }

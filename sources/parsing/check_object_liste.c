@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 12:31:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:51:29 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_sphere(char *tab, t_data *data)
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_sphere(current, tmp))
-		return (free_tab(tmp), 1);
+		return (free_tab(tmp), free(current), 1);
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -42,11 +42,11 @@ int	init_plane(t_geometry *current, char **tmp)
 	current->type = GT_PLANE;
 	add_vector_float(&plane->origine, tmp[1]);
 	add_vector_float(&plane->direction, tmp[2]);
-	add_color_int(&current->color, tmp[3]);
-	if (!check_vector_normalised(&plane->direction))
-		return (0);
-	printf("ERROR : invalid vector plese [0][1]");
-	return (1);
+	if(add_color_int(&current->color, tmp[3]) == NULL)
+		return (free_tab(tmp), 0);
+	if (check_vector_normalised(&plane->direction))
+		return (printf("ERROR : invalid vector plese [0][1]"), 1);
+	return (0);
 }
 
 int	check_plane(char *tab, t_data *data)
@@ -83,7 +83,8 @@ int	init_cylinder(t_geometry *current, char **tmp)
 		return (printf("ERROR : invalid direction"), 1);
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
-	add_color_int(&current->color, tmp[5]);
+	if(add_color_int(&current->color, tmp[5]) == NULL)
+		return (free_tab(tmp), 1);
 	return (0);
 }
 
