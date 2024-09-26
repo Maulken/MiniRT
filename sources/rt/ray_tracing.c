@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:43:57 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 17:45:39 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:29:34 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ int	get_color(t_data *data, t_vector *x_ray, t_vector *y_ray)
 	if (data->hit.geometry->type == GT_PLANE)
 		return (get_color_plane(data));
 	if (data->hit.geometry->type == GT_CYLINDER)
+	{
+		if (data->hit.geometry->data.cylinder.diameter == 0)
+			return (BACKGROUND_COLOR);
 		return (get_mix_color(data, &data->hit));
+	}
 	return (BACKGROUND_COLOR);
 }
 
