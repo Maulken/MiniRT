@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 14:24:10 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:43:22 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	check_ambiance(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
-	if(data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < -1 )
+	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < -1)
 	{
-		printf("ERROR ratio ");
+		printf("ERROR : ratio");
 		return (free_tab(tmp), 1);
 	}
-	if(add_color_int(&data->scene->ambient->colors, tmp[2]) == NULL)
+	if (add_color_int(&data->scene->ambient->colors, tmp[2]) == NULL)
 		return (free_tab(tmp), 1);
 	vec_multiplying(&data->scene->ambient->ambient_light,
 		&data->scene->ambient->colors, data->scene->ambient->ratio);
@@ -101,9 +101,9 @@ int	check_light(char *tab, t_data *data)
 	}
 	add_vector_float(&data->scene->light->origine, tmp[1]);
 	data->scene->light->ratio = ft_atof(tmp[2]);
-	if(data->scene->light->ratio > 1 || data->scene->light->ratio < -1 )
+	if (data->scene->light->ratio > 1 || data->scene->light->ratio < -1)
 	{
-		printf("ERROR ratio ");
+		printf("ERROR : ratio ");
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
