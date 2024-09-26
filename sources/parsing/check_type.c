@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 16:39:51 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:55:49 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int	check_correct_int(char **tmp, int j)
 	while (tmp[j][i] != '\0')
 	{
 		if ((tmp[j][i] < '0' || tmp[j][i] > '9') &&
-				tmp[j][i] != '-' && tmp[j][i] != '+' &&
-				tmp[j][i] != ',')
+				tmp[j][i] != '-' && tmp[j][i] != '+' )
 			return (1);
 		i++;
 	}
@@ -107,7 +106,7 @@ int	check_correct_float(char **tmp, int j)
 	{
 		if ((tmp[j][i] < '0' || tmp[j][i] > '9') &&
 			tmp[j][i] != '.' && tmp[j][i] != '-' &&
-			tmp[j][i] != '+' && tmp[j][i] != ',')
+			tmp[j][i] != '+' )
 			return (1);
 		i++;
 	}

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 19:21:36 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:25:09 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// I don't like it, do you ?
 static char	**check_correct_value_type(const char *content, int j, char **tmp)
 {
 	if (content[j] == 'i')
@@ -49,7 +48,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 	current->type = GT_SPHERE;
 	sphere->diameter = ft_atof(tmp[2]);
 	if (sphere->diameter < 0)
-		return (ft_msg_error("ERROR : size min is 0",1));
+		return (ft_msg_error("ERROR : size min is 0", 1));
 	add_vector_float(&sphere->center, tmp[1]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
@@ -58,7 +57,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 
 char	**check_error_type(char *str, char **tmp)
 {
-	printf("ERROR : %s\n", str);
+	printf("\033[31mERROR: %s\033[0m\n", str);
 	free_tab(tmp);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 18:41:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:41:37 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_ambiance(char *tab, t_data *data)
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
 	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
-		ft_msg_error("ratio between 1 and 0 ",1);
+		ft_msg_error("ratio between 1 and 0 ", 1);
 		return (free_tab(tmp), 1);
 	}
 	if (add_color_int(&data->scene->ambient->colors, tmp[2]) == NULL)
@@ -77,7 +77,7 @@ int	check_camera(char *tab, t_data *data)
 	data->scene->camera->fov = ft_atof(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
-		ft_msg_error("fov superieur a 180 ou inferieur a 0",1);
+		ft_msg_error("fov superieur a 180 ou inferieur a 0", 1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
@@ -99,7 +99,7 @@ int	check_light(char *tab, t_data *data)
 	data->scene->light->ratio = ft_atof(tmp[2]);
 	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
-		ft_msg_error("ratio between 1 and 0",1);
+		ft_msg_error("ratio between 1 and 0", 1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
