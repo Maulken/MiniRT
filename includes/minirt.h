@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/26 11:39:40 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:24:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int			ft_is_good_char(char c);
 	//conversion.c
 t_vector	*add_vector_float(t_vector *vec, char *str);
 t_vector	*add_color_int(t_vector *rgb, char *str);
+
 
 	//check_object.c
 int			init_sphere(t_geometry *current, char **tmp);

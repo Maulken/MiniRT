@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/23 16:58:48 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:37:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_tab(char **rows, t_data *data)
 
 	i = 0;
 	if (rows == NULL)
-		return (ft_msg_error("file is empty or is the directory", 1));
+		return (ft_msg_error("file is empty", 1));
 	if (check_min_scene(rows) == ERROR)
 	{
 		free_tab(rows);

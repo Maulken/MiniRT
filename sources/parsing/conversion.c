@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/26 14:58:57 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:52:15 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ t_vector	*add_color_int(t_vector *rgb, char *str)
 	tmp = ft_split(str, ',');
 	if (!tmp)
 		return (NULL);
-	rgb->x = (float)ft_atoi(tmp[0]);
+	rgb->x = ft_atoi(tmp[0]);
 	rgb->y = ft_atoi(tmp[1]);
 	rgb->z = ft_atoi(tmp[2]);
-	checking_limit(rgb->x, 0.0f, 255.0f);
-	checking_limit(rgb->y, 0.0f, 255.0f);
-	checking_limit(rgb->z, 0.0f, 255.0f);
+	if ((rgb->x > 255 || rgb->x < 0)
+		|| rgb->y > 255 || rgb->y < 0
+		|| rgb->z > 255 || rgb->z < 0)
+	{
+		printf("ERROR : color DEFAULT\n");
+		free_tab(tmp);
+		return (NULL);
+	}
 	free_tab(tmp);
 	return (rgb);
 }
