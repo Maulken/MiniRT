@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:08:06 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:30:08 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static bool	is_obstacle(t_scene tmp, t_hit *hit)
 {
 	while (tmp.objects)
 	{
-		// if (hit->geometry->type == GT_PLANE)
-		// 	printf("object type %d\n", tmp.objects->type);
 		if (tmp.objects->type == GT_SPHERE
 			&& sphere_intersect(tmp.objects,
 				&hit->geometry->impact_point, &hit->geometry->ray.light) > 0)
@@ -83,24 +81,11 @@ void	get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color)
 
 void	normal_cy(t_hit	*hit, t_vector *norm)
 {
-	// t_vector	p_proj;
-	// t_vector	impact_ori;
-	// float		first_dot;
-	// t_vector	sd_dot;
-
-	// vec_normalize(vec_subtract(&impact_ori, 
-	// 	&hit->geometry->data.cylinder.center,&hit->geometry->impact_point));
-	// first_dot = vec_dot_product(&impact_ori,
-	// 	&hit->geometry->data.cylinder.direction);
-	// vec_multiplying(&sd_dot, &hit->geometry->data.cylinder.direction,
-	// 	first_dot * hit->geometry->data.cylinder.height);
-	// vec_add(&p_proj, &hit->geometry->data.cylinder.center, &sd_dot);
-	// vec_normalize(vec_subtract(norm, 
-	// 		&hit->geometry->impact_point, &p_proj));
 	t_vector	tmp;
 	float		lambda;
 
-	vec_subtract(&tmp, &hit->geometry->data.cylinder.center, &hit->geometry->impact_point);
+	vec_subtract(&tmp, &hit->geometry->data.cylinder.center,
+		&hit->geometry->impact_point);
 	lambda = vec_dot_product(&tmp, &hit->geometry->data.cylinder.direction);
 	vec_multiplying(norm, &hit->geometry->data.cylinder.direction, lambda);
 	vec_normalize(vec_subtract(norm, norm, &tmp));
@@ -123,12 +108,7 @@ void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 	{
 		normal_cy(hit, &norm);
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
-		// ratio = cosf(acosf(
-		// 	vec_dot_product(&hit->geometry->data.cylinder.direction,
-		// 	&hit->geometry->ray.light)) - (M_PI / 2));
 		if (ratio >= 0)
 			vec_multiplying(color, &data->white_light, ratio);
-		// printf("ratio %f\n", ratio);
 	}
 }
-
