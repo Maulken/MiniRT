@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/25 16:01:24 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:29:37 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ char	**check_correct_type(const char *content, char *tab, char *type,
 	if (check_num(line, type, len) == 1)
 	{
 		free(line);
+		free_tab(tmp);
 		return (NULL);
 	}
 	free(line);
 	if (tmp == NULL)
-		return (NULL);
+		return (free_tab(tmp), NULL);
 	j = 0;
 	while (tmp[j])
 	{

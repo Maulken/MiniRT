@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:29 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:31:08 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_plane(char *tab, t_data *data)
 int	init_cylinder(t_geometry *current, char **tmp)
 {
 	t_cylinder *const	cylinder = &current->data.cylinder;
-	
+
 	current->type = GT_CYLINDER;
 	add_vector_float(&cylinder->center, tmp[1]);
 	add_vector_float(&cylinder->direction, tmp[2]);
