@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/23 15:50:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:29:13 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_camera(char *tab, t_data *data)
 
 	tmp = check_correct_type(content, tab, "C", 4);
 	if (tmp == NULL)
-		return (1);
+		return (free_tab(tmp), 1);
 	add_vector_float(&data->scene->camera->origine, tmp[1]);
 	add_vector_float(&data->scene->camera->direction, tmp[2]);
 	if (check_vector_normalised(&data->scene->camera->direction))
@@ -90,7 +90,7 @@ int	check_light(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab, "L", 4);
 	if (tmp == NULL)
 	{
-		free(tmp);
+		free_tab(tmp);
 		return (1);
 	}
 	add_vector_float(&data->scene->light->origine, tmp[1]);
