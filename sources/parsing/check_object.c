@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 14:41:56 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:15:40 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 	current->data.sphere.diameter = ft_atof(tmp[2]);
 	add_vector_float(&current->data.sphere.center, tmp[1]);
 	if(add_color_int(&current->color, tmp[3]) == NULL)
-	{
-		free_tab(tmp);
 		return (1);
-	}
 	return (0);
 }
 

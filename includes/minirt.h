@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/26 15:08:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:24:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ float		cy_quadratic(t_geometry *cy, float math_value[3],
 	//maths_util
 int			quadratic_equation(float t[2], float a, float b, float c);
 float		ft_square(float a);
-float		checking_limit(float a, int min, int max);
+float		checking_limit(float a, float min, float max);
 
 	//colors
 int			create_rgb(t_vector *colors);

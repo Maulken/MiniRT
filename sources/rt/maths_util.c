@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:45:08 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/26 14:53:06 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:27:22 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ float	ft_square(float a)
 	return (a * a);
 }
 
-float	checking_limit(float a, int min, int max)
+float	checking_limit(float a, float min, float max)
 {
 	if (a < min)
-		return (1);
+		return (min);
 	if (a > max)
-		return (1);
+		return (max);
 	return (a);
 }

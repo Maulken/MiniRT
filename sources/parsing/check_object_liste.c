@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:08:31 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:33:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_plane(t_geometry *current, char **tmp)
 	add_vector_float(&plane->origine, tmp[1]);
 	add_vector_float(&plane->direction, tmp[2]);
 	if(add_color_int(&current->color, tmp[3]) == NULL)
-		return (free_tab(tmp), 0);
+		return (1);
 	if (check_vector_normalised(&plane->direction))
 		return (printf("ERROR : invalid vector plese [0][1]"), 1);
 	return (0);
@@ -63,7 +63,7 @@ int	check_plane(char *tab, t_data *data)
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_plane(current, tmp))
-		return (free_tab(tmp), 1);
+		return (free_tab(tmp),free(current), 1);
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
@@ -84,7 +84,7 @@ int	init_cylinder(t_geometry *current, char **tmp)
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
 	if(add_color_int(&current->color, tmp[5]) == NULL)
-		return (free_tab(tmp), 1);
+		return (1);
 	return (0);
 }
 
@@ -102,7 +102,7 @@ int	check_cylinder(char *tab, t_data *data)
 	if (tmp == NULL)
 		return (free_tab(tmp), free(current), 1);
 	if (init_cylinder(current, tmp) == 1)
-		return (free_tab(tmp), 1);
+		return (free_tab(tmp), free(current), 1);
 	last = &data->scene->objects;
 	while (*last != NULL)
 		last = &(*last)->next;
