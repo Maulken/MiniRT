@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 18:46:15 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:23:25 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	check_min_scene(char **tab)
 	while (tab[i])
 	{
 		remouve_space_start_line(tab[i]);
-		printf("{%s}\n", tab[i]);
 		if (!ft_strncmp(tab[i], "A ", 1))
 			len_a++;
 		if (!ft_strncmp(tab[i], "C ", 1))
@@ -102,7 +101,6 @@ int	check_min_scene(char **tab)
 			len_l++;
 		i++;
 	}
-	printf("%d , %d , %d \n" ,len_a, len_c , len_l );
 	if (len_a != 1 || len_c != 1 || len_l != 1)
 		return (ERROR);
 	return (OK);

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 19:02:25 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:21:36 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 	current->type = GT_SPHERE;
 	sphere->diameter = ft_atof(tmp[2]);
 	if (sphere->diameter < 0)
-		return (printf("ERROR : size min is 0"), 1);
+		return (ft_msg_error("ERROR : size min is 0",1));
 	add_vector_float(&sphere->center, tmp[1]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
