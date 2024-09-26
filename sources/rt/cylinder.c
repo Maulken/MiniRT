@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:00:44 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/25 17:45:28 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:28:25 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,14 @@ static float	dist_cy(t_geometry *cy, float dist[2], t_vector *origin,
 		vec_multiplying(&for_impact, dir, dist[0]);
 		vec_add(&cy->impact_point, origin, &for_impact);
 		if (on_cy(cy))
-		{
-			cy->in_out = OUTSIDE;
 			return (dist[0]);
-		}
 	}
 	if (dist[1] >= NEAR && dist[1] <= FAR)
 	{
 		vec_multiplying(&for_impact, dir, dist[1]);
 		vec_add(&cy->impact_point, origin, &for_impact);
 		if (on_cy(cy))
-		{
-			cy->in_out = INSIDE;
 			return (dist[1]);
-		}
 	}
 	return (-1);
 }
