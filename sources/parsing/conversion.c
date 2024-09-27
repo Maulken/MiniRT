@@ -6,7 +6,7 @@
 /*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/27 14:03:09 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:20:40 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_vector	*add_color_int(t_vector *rgb, char *str)
 	rgb->x = ft_atoi(tmp[0]);
 	rgb->y = ft_atoi(tmp[1]);
 	rgb->z = ft_atoi(tmp[2]);
-
 	if (rgb->x == IERROR || rgb->y == IERROR || rgb->z == IERROR)
 	{
 		free_tab(tmp);
