@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:06:18 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:11:57 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 
 	current->type = GT_SPHERE;
 	sphere->diameter = ft_atof(tmp[2]);
-	if (sphere->diameter == ERROR)
+	if (sphere->diameter == LERROR)
 		return (1);
 	if (sphere->diameter < 0)
 		return (ft_msg_error("Size must not be below 0", 1));

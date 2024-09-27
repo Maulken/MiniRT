@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/26 15:24:36 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:23:01 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define OK 0
 # define ERROR -1
 # define BACKGROUND_COLOR 0x22063d
+# define LERROR LONG_MAX
+# define IERROR INT_MAX
 
 /* ************************************************************************** */
 /* Structures                                                                 */

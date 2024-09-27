@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:30:49 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/18 15:26:40 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:51:09 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "libft.h"
 
 int	ft_atoi(const char *str)
@@ -32,6 +33,8 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if (num > ((INT_MAX - 1) - (str[i] - '0')) / 10)
+			return (INT_MAX);
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}

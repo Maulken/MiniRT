@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:11:31 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/27 11:31:43 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:11:06 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-
 #define ERROR -1
+#define LERROR LONG_MAX
 
 static int	skip_wspace_sign(char *s, int *sign)
 {
@@ -43,10 +43,10 @@ static long	long_add(char *s, int *i)
 	integer_part = 0;
 	while (s[*i] != '.' && s[*i])
 	{
-		if (integer_part > (LONG_MAX - (s[*i] - '0')) / 10)
+		if (integer_part > ((LONG_MAX - 1) - (s[*i] - '0')) / 10)
 		{
 			printf("Error:overflow detected\n");
-			return (ERROR);
+			return (LERROR);
 		}
 		integer_part = integer_part * 10 + s[*i] - '0';
 		(*i)++;
@@ -68,8 +68,8 @@ double	ft_atof(char *s)
 	div = 1;
 	i = skip_wspace_sign(s, &sign);
 	integer_part = long_add(s, &i);
-	if (integer_part == ERROR)
-		return (ERROR);
+	if (integer_part == LERROR)
+		return (LERROR);
 	if (s[i] == '.')
 		i++;
 	while (s[i] && (s[i] >= 48 && s[i] <= 57))

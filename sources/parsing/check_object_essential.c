@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:04:35 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:13:58 by viktor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_ambiance(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
-	if (data->scene->ambient->ratio == ERROR)
+	if (data->scene->ambient->ratio == LERROR)
 		return (free_tab(tmp), 1);
 	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
@@ -78,7 +78,7 @@ int	check_camera(char *tab, t_data *data)
 		return (free_tab(tmp), 1);
 	check_vector_normalised(&data->scene->camera->direction);
 	data->scene->camera->fov = ft_atof(tmp[3]);
-	if (data->scene->camera->fov == ERROR)
+	if (data->scene->camera->fov == LERROR)
 		return (free_tab(tmp), 1);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
@@ -103,7 +103,7 @@ int	check_light(char *tab, t_data *data)
 	if (add_vector_float(&data->scene->light->origine, tmp[1]) == NULL)
 		return (free_tab(tmp), 1);
 	data->scene->light->ratio = ft_atof(tmp[2]);
-	if (data->scene->light->ratio == ERROR)
+	if (data->scene->light->ratio == LERROR)
 		return (free_tab(tmp), 1);
 	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
