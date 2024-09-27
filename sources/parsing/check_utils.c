@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 08:30:51 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:21:31 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ int	check_num(char *tab, char *str, int size_setting)
 		while (tab[i] != ' ' && tab[i] != '\t' && tab[i] != '\0')
 		{
 			if (ft_is_good_char(tab[i]))
-				return (ft_msg_error(" caracter in the line is not valid.", 1));
+				return (ft_msg_error(" character is not valid", 1));
 			i++;
 		}
 		while (tab[i] == ' ' || tab[i] == '\t')
 			i++;
 	}
 	if (count_words(tab) != size_setting)
-		return (ft_msg_error("There are not enough or too many"
-				"elements on the line.", 1));
+		return (ft_msg_error("error arguments", 1));
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:26:30 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 08:34:36 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:46:31 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ int	check_correct_int(char **tmp, int j)
 int	check_correct_float(char **tmp, int j)
 {
 	int		i;
+	int		value;
 
+	value = 0;
 	i = 0;
 	while (tmp[j][i] != '\0')
 	{
@@ -108,9 +110,13 @@ int	check_correct_float(char **tmp, int j)
 			tmp[j][i] != '.' && tmp[j][i] != '-' &&
 			tmp[j][i] != '+' )
 			return (1);
+		if (tmp[j][i] > '0' && tmp[j][i] < '9')
+			value++;
 		i++;
 	}
 	if (check_signe(tmp[j]))
+		return (1);
+	if (value == 0)
 		return (1);
 	j++;
 	return (0);

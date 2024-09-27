@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/27 08:42:40 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:25:04 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vector	*add_color_int(t_vector *rgb, char *str)
 		|| rgb->y > 255 || rgb->y < 0
 		|| rgb->z > 255 || rgb->z < 0)
 	{
-		ft_msg_error("Out of range of the RGB.", 1);
+		ft_msg_error("RGB out of range", 1);
 		free_tab(tmp);
 		return (NULL);
 	}

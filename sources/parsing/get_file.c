@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 10:26:39 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 08:34:30 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:41:22 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**checkget_file_content(int fd)
 	if (!str)
 	{
 		printf("ERROR1 : Malloc returned empty rows or"
-			" no space left in memory.\n");
+			" no space left in memory\n");
 		close(fd);
 		return (NULL);
 	}
@@ -84,7 +84,7 @@ char	**checkget_file_content(int fd)
 	if (!rows)
 	{
 		printf("ERROR2 : Malloc returned empty rows or"
-			" no space left in memory.\n");
+			" no space left in memory\n");
 		free(str);
 		exit(1);
 	}

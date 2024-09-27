@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 08:32:06 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:41:55 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_tab(char **rows, t_data *data)
 
 	i = 0;
 	if (rows == NULL)
-		return (ft_msg_error("file is empty", 1));
+		return (ft_msg_error("empty file", 1));
 	if (check_min_scene(rows) == ERROR)
 	{
 		free_tab(rows);
@@ -70,7 +70,7 @@ int	check_tab(char **rows, t_data *data)
 		if (check_type(rows[i], data) != 0)
 		{
 			free_tab(rows);
-			printf("\033[31mparse ERROR ligne :%d\033[0m\n", i);
+			printf("\033[31mERROR Parse ligne :%d\033[0m\n", i);
 			return (1);
 		}
 		i++;
@@ -127,7 +127,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			return (ft_msg_error_tab("Please check: this is not an object. -> "
+			return (ft_msg_error_tab("Please check: this is not an object -> "
 					, 1, tab));
 	}
 	free_tab(tab);
