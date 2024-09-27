@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:05:43 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:48:39 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	init_plane(t_geometry *current, char **tmp)
 	t_plane *const	plane = &current->data.plane;
 
 	current->type = GT_PLANE;
-	if (add_vector_float(&plane->origine, tmp[1]) == NULL
-		|| add_vector_float(&plane->direction, tmp[2]) == NULL)
+	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+		|| ft_strlen(tmp[3]) > LIMIT)
 		return (1);
+	add_vector_float(&plane->origine, tmp[1]);
+	add_vector_float(&plane->direction, tmp[2]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
 	check_vector_normalised(&plane->direction);
@@ -77,14 +79,15 @@ int	init_cylinder(t_geometry *current, char **tmp)
 	t_cylinder *const	cylinder = &current->data.cylinder;
 
 	current->type = GT_CYLINDER;
-	if (add_vector_float(&cylinder->center, tmp[1]) == NULL
-		|| add_vector_float(&cylinder->direction, tmp[2]) == NULL)
+	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+		|| ft_strlen(tmp[3]) > LIMIT || ft_strlen(tmp[4]) > LIMIT
+		|| ft_strlen(tmp[5]) > LIMIT)
 		return (1);
+	add_vector_float(&cylinder->center, tmp[1]);
+	add_vector_float(&cylinder->direction, tmp[2]);
 	check_vector_normalised(&cylinder->direction);
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
-	if (cylinder->diameter == ERROR || cylinder->height == ERROR)
-		return (1);
 	if (cylinder->diameter < 0 || cylinder->height < 0)
 		return (ft_msg_error("Size must not be below 0.", 1));
 	if (add_color_int(&current->color, tmp[5]) == NULL)

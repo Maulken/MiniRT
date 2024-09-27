@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:06:18 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:47:24 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	init_sphere(t_geometry *current, char **tmp)
 	t_sphere *const	sphere = &current->data.sphere;
 
 	current->type = GT_SPHERE;
-	sphere->diameter = ft_atof(tmp[2]);
-	if (sphere->diameter == ERROR)
+	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+		|| ft_strlen(tmp[3]) > LIMIT)
 		return (1);
+	sphere->diameter = ft_atof(tmp[2]);
 	if (sphere->diameter < 0)
 		return (ft_msg_error("Size must not be below 0", 1));
-	if (add_vector_float(&sphere->center, tmp[1]) == NULL)
-		return (1);
+	add_vector_float(&sphere->center, tmp[1]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
 	return (0);
