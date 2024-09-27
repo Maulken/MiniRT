@@ -6,7 +6,7 @@
 /*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:43:58 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/26 15:01:38 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:38:47 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	get_diffuse_light_sp(t_data *data, t_hit *hit, t_vector *color)
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
 		ratio *= ratio;
 		if (ratio >= 0)
-			vec_multiplying(color, &data->white_light, ratio);
+			vec_multiplying(color, &data->white_light,
+				ratio * data->scene->light->ratio);
 	}
 }
 
@@ -75,7 +76,8 @@ void	get_diffuse_light_pl(t_data *data, t_hit *hit, t_vector *color)
 				&hit->geometry->ray.light);
 		if (ratio < 0)
 			ratio = -ratio;
-		vec_multiplying(color, &data->white_light, ratio);
+		vec_multiplying(color, &data->white_light,
+			ratio * data->scene->light->ratio);
 	}
 }
 
@@ -109,6 +111,7 @@ void	get_diffuse_light_cy(t_data *data, t_hit *hit, t_vector *color)
 		normal_cy(hit, &norm);
 		ratio = vec_dot_product(&norm, &hit->geometry->ray.light);
 		if (ratio >= 0)
-			vec_multiplying(color, &data->white_light, ratio);
+			vec_multiplying(color, &data->white_light,
+				ratio * data->scene->light->ratio);
 	}
 }
