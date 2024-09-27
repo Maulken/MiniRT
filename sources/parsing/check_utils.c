@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:32:05 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/17 16:39:02 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:30:51 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_num(char *tab, char *str, int size_setting)
 			i++;
 	}
 	if (count_words(tab) != size_setting)
-		return (ft_msg_error("There are either not enough or too many "
+		return (ft_msg_error("There are not enough or too many"
 				"elements on the line.", 1));
 	return (0);
 }

@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/27 00:10:07 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/27 08:42:40 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// TODO: Malloc non protege !
 t_vector	*add_vector_float(t_vector *vec, char *str)
 {
 	char		**tmp;
 
 	tmp = ft_split(str, ',');
+	if (!tmp)
+		return (NULL);
 	vec->x = ft_atof(tmp[0]);
 	vec->y = ft_atof(tmp[1]);
 	vec->z = ft_atof(tmp[2]);

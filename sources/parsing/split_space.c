@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 11:14:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 11:45:25 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:42:30 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	count_substrs(char const *str)
 	return (count);
 }
 
-// count number of characters in substring starting at index 'i'
 static int	get_substr_len(char const *str, int i)
 {
 	int	count;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 23:41:37 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/27 08:25:44 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	check_camera(char *tab, t_data *data)
 	data->scene->camera->fov = ft_atof(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
-		ft_msg_error("fov superieur a 180 ou inferieur a 0", 1);
+		ft_msg_error("FOV greater than 180 or less than 0", 1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
