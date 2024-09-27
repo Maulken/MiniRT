@@ -6,7 +6,7 @@
 #    By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:30:15 by vmassoli          #+#    #+#              #
-#    Updated: 2024/09/26 11:33:29 by vmassoli         ###   ########.fr        #
+#    Updated: 2024/09/27 11:24:00 by vmassoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS	= -Wall -Wextra -Werror -O2 -g
 CLINKS	= -lXext -lX11 -lm
 
 ### EXECUTABLE ###
-NAME	= minirt
+NAME	= miniRT
 
 ### PATH ###
 HEADER_PATH		= includes/minirt.h libft/includes/libt.h includes/scene.h

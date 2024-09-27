@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/27 10:11:28 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:57:57 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_vector	*add_vector_float(t_vector *vec, char *str)
 	vec->x = ft_atof(tmp[0]);
 	vec->y = ft_atof(tmp[1]);
 	vec->z = ft_atof(tmp[2]);
+	if (vec->x == ERROR || vec->y == ERROR || vec->z == ERROR)
+		return (free_tab(tmp), NULL);
 	free_tab(tmp);
 	return (vec);
 }

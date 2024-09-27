@@ -6,7 +6,7 @@
 /*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 10:11:07 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:04:35 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	check_ambiance(char *tab, t_data *data)
 		return (1);
 	}
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
+	if (data->scene->ambient->ratio == ERROR)
+		return (free_tab(tmp), 1);
 	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
 		ft_msg_error("ratio between 0 and 1 ", 1);
@@ -71,10 +73,13 @@ int	check_camera(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab, "C", 4);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	add_vector_float(&data->scene->camera->origine, tmp[1]);
-	add_vector_float(&data->scene->camera->direction, tmp[2]);
+	if (add_vector_float(&data->scene->camera->origine, tmp[1]) == NULL
+		|| add_vector_float(&data->scene->camera->direction, tmp[2]) == NULL)
+		return (free_tab(tmp), 1);
 	check_vector_normalised(&data->scene->camera->direction);
 	data->scene->camera->fov = ft_atof(tmp[3]);
+	if (data->scene->camera->fov == ERROR)
+		return (free_tab(tmp), 1);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
 		ft_msg_error("FOV between 0 and 180", 1);
@@ -95,8 +100,11 @@ int	check_light(char *tab, t_data *data)
 		free_tab(tmp);
 		return (1);
 	}
-	add_vector_float(&data->scene->light->origine, tmp[1]);
+	if (add_vector_float(&data->scene->light->origine, tmp[1]) == NULL)
+		return (free_tab(tmp), 1);
 	data->scene->light->ratio = ft_atof(tmp[2]);
+	if (data->scene->light->ratio == ERROR)
+		return (free_tab(tmp), 1);
 	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
 		ft_msg_error("ratio between 0 and 1", 1);
