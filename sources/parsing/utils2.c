@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 13:59:54 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 17:12:28 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:11:39 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_msg_error(char *str, int value)
 {
-	printf("ERROR : %s\n", str);
+	printf("\033[31mERROR: %s\033[0m\n", str);
 	return (value);
 }
 
 int	ft_msg_error_tab(char *str, int value, char **tab)
 {
-	printf("%s %s\n", str, tab[0]);
+	printf("\033[31m%s %s\033[0m\n", str, tab[0]);
 	free_tab(tab);
 	return (value);
 }

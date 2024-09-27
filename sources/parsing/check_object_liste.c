@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 17:08:07 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:11:22 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	init_cylinder(t_geometry *current, char **tmp)
 	cylinder->diameter = ft_atof(tmp[3]);
 	cylinder->height = ft_atof(tmp[4]);
 	if (cylinder->diameter < 0 || cylinder->height < 0)
-		return (printf("ERROR : size min is 0"), 1);
+		return (ft_msg_error("Size must not be below 0.", 1));
 	if (add_color_int(&current->color, tmp[5]) == NULL)
 		return (1);
 	return (0);

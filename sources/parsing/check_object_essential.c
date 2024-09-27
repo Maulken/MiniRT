@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 17:04:17 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:11:07 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_ambiance(char *tab, t_data *data)
 	data->scene->ambient->ratio = ft_atof(tmp[1]);
 	if (data->scene->ambient->ratio > 1 || data->scene->ambient->ratio < 0)
 	{
-		printf("ERROR : ratio");
+		ft_msg_error("ratio between 0 and 1 ", 1);
 		return (free_tab(tmp), 1);
 	}
 	if (add_color_int(&data->scene->ambient->colors, tmp[2]) == NULL)
@@ -77,7 +77,7 @@ int	check_camera(char *tab, t_data *data)
 	data->scene->camera->fov = ft_atof(tmp[3]);
 	if (data->scene->camera->fov > 180 || data->scene->camera->fov < 0)
 	{
-		printf("ERROR fov superieur a 180 ou inferieur a 0");
+		ft_msg_error("FOV between 0 and 180", 1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);
@@ -99,7 +99,7 @@ int	check_light(char *tab, t_data *data)
 	data->scene->light->ratio = ft_atof(tmp[2]);
 	if (data->scene->light->ratio > 1 || data->scene->light->ratio < 0)
 	{
-		printf("ERROR : ratio ");
+		ft_msg_error("ratio between 0 and 1", 1);
 		return (free_tab(tmp), 1);
 	}
 	free_tab(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 15:37:39 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:41:55 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,24 @@ int	check_argument(int argc, char **argv)
 	return (fd);
 }
 
-// free_tab -> Par ce que free dans la fonction de parsing
 int	check_tab(char **rows, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	if (rows == NULL)
-		return (ft_msg_error("file is empty", 1));
+		return (ft_msg_error("empty file", 1));
 	if (check_min_scene(rows) == ERROR)
 	{
 		free_tab(rows);
-		return (ft_msg_error("", 1));
+		return (ft_msg_error("there must be (1)A,(1)C,(1)L", 1));
 	}
 	while (rows[i])
 	{
 		if (check_type(rows[i], data) != 0)
 		{
 			free_tab(rows);
-			printf("\nparse ERROR ligne : %d \n", i);
+			printf("\033[31mERROR Parse ligne :%d\033[0m\n", i);
 			return (1);
 		}
 		i++;
@@ -93,16 +92,16 @@ int	check_min_scene(char **tab)
 	while (tab[i])
 	{
 		remouve_space_start_line(tab[i]);
-		if (!ft_strncmp(tab[i], "A ", 2))
+		if (!ft_strncmp(tab[i], "A ", 1))
 			len_a++;
-		if (!ft_strncmp(tab[i], "C ", 2))
+		if (!ft_strncmp(tab[i], "C ", 1))
 			len_c++;
-		if (!ft_strncmp(tab[i], "L ", 2))
+		if (!ft_strncmp(tab[i], "L ", 1))
 			len_l++;
 		i++;
 	}
-	if (len_a != 1 || len_c != 1 || len_l < 1)
-		return (printf("error: there must be ""(1)A,(1)C,(1)L \n"), ERROR);
+	if (len_a != 1 || len_c != 1 || len_l != 1)
+		return (ERROR);
 	return (OK);
 }
 
@@ -112,7 +111,7 @@ int	check_type(char *src, t_data *data)
 
 	tab = ft_split_espace(src);
 	if (!tab)
-		ft_msg_error_tab("", 1, NULL);
+		ft_msg_error(" alloc ", 1);
 	if (tab[0])
 	{
 		if (ft_strncmp(tab[0], "A", 2) == 0)
@@ -128,7 +127,7 @@ int	check_type(char *src, t_data *data)
 		else if (!ft_strncmp(tab[0], "cy", 3))
 			return (free_tab(tab), check_cylinder(src, data));
 		else
-			return (ft_msg_error_tab("Please check: this is not an object. -> "
+			return (ft_msg_error_tab("Please check: this is not an object -> "
 					, 1, tab));
 	}
 	free_tab(tab);

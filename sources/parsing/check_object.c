@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/26 17:08:21 by mpelluet         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:11:03 by vmassoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// I don't like it, do you ?
 static char	**check_correct_value_type(const char *content, int j, char **tmp)
 {
 	if (content[j] == 'i')
@@ -49,7 +48,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 	current->type = GT_SPHERE;
 	sphere->diameter = ft_atof(tmp[2]);
 	if (sphere->diameter < 0)
-		return (printf("ERROR : size min is 0"), 1);
+		return (ft_msg_error("Size must not be below 0", 1));
 	add_vector_float(&sphere->center, tmp[1]);
 	if (add_color_int(&current->color, tmp[3]) == NULL)
 		return (1);
@@ -58,7 +57,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 
 char	**check_error_type(char *str, char **tmp)
 {
-	printf("ERROR : %s\n", str);
+	printf("\033[31mERROR: %s\033[0m\n", str);
 	free_tab(tmp);
 	return (NULL);
 }
@@ -108,7 +107,7 @@ void	remouve_space_start_line(char *str)
 	int	j;
 
 	i = 0;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (i > 0)
 	{
