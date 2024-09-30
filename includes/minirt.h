@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/27 12:46:20 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:52:31 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define OK 0
 # define ERROR -1
 # define BACKGROUND_COLOR 0x22063d
-# define LIMIT 18
+# define LIMIT 10
+# define LIMIT_VEC 24
 
 /* ************************************************************************** */
 /* Structures                                                                 */

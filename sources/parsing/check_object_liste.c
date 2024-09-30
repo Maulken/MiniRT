@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_liste.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:36:59 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:48:39 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:55:15 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	init_plane(t_geometry *current, char **tmp)
 	t_plane *const	plane = &current->data.plane;
 
 	current->type = GT_PLANE;
-	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+	if (ft_strlen(tmp[1]) > LIMIT_VEC || ft_strlen(tmp[2]) > LIMIT_VEC
 		|| ft_strlen(tmp[3]) > LIMIT)
 		return (1);
 	add_vector_float(&plane->origine, tmp[1]);
@@ -79,7 +79,7 @@ int	init_cylinder(t_geometry *current, char **tmp)
 	t_cylinder *const	cylinder = &current->data.cylinder;
 
 	current->type = GT_CYLINDER;
-	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+	if (ft_strlen(tmp[1]) > LIMIT_VEC || ft_strlen(tmp[2]) > LIMIT_VEC
 		|| ft_strlen(tmp[3]) > LIMIT || ft_strlen(tmp[4]) > LIMIT
 		|| ft_strlen(tmp[5]) > LIMIT)
 		return (1);

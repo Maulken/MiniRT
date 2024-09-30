@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:47:24 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:55:45 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_sphere(t_geometry *current, char **tmp)
 	t_sphere *const	sphere = &current->data.sphere;
 
 	current->type = GT_SPHERE;
-	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT
+	if (ft_strlen(tmp[1]) > LIMIT_VEC || ft_strlen(tmp[2]) > LIMIT
 		|| ft_strlen(tmp[3]) > LIMIT)
 		return (1);
 	sphere->diameter = ft_atof(tmp[2]);

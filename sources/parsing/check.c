@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 09:39:57 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 09:41:55 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:48:46 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_argument(int argc, char **argv)
 	int	fd;
 
 	if (argc != 2)
-		return (ft_msg_error("Please run './Minirt scene.rt'", -1));
+		return (ft_msg_error("Please run './miniRT scene.rt'", -1));
 	if (!argv[1] || !*argv[1])
 		return (ft_msg_error("empty file", -1));
 	if (endwith(argv[1], ".rt") == 1)

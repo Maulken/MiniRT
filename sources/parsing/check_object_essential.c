@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object_essential.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:34:29 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 12:48:20 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:54:33 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_camera(char *tab, t_data *data)
 	tmp = check_correct_type(content, tab, "C", 4);
 	if (tmp == NULL)
 		return (free_tab(tmp), 1);
-	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT)
+	if (ft_strlen(tmp[1]) > LIMIT_VEC || ft_strlen(tmp[2]) > LIMIT_VEC)
 		return (1);
 	add_vector_float(&data->scene->camera->origine, tmp[1]);
 	add_vector_float(&data->scene->camera->direction, tmp[2]);
@@ -99,7 +99,7 @@ int	check_light(char *tab, t_data *data)
 		free_tab(tmp);
 		return (1);
 	}
-	if (ft_strlen(tmp[1]) > LIMIT || ft_strlen(tmp[2]) > LIMIT)
+	if (ft_strlen(tmp[1]) > LIMIT_VEC || ft_strlen(tmp[2]) > LIMIT)
 		return (1);
 	add_vector_float(&data->scene->light->origine, tmp[1]);
 	data->scene->light->ratio = ft_atof(tmp[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmassoli <vmassoli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpelluet <mpelluet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:33:20 by mpelluet          #+#    #+#             */
-/*   Updated: 2024/09/27 09:37:43 by vmassoli         ###   ########.fr       */
+/*   Updated: 2024/09/30 08:48:01 by mpelluet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	if (data.mlx == NULL)
 		return (printf("ERROR : MLX"), clean_data(&data, 1));
 	data.win = mlx_new_window(data.mlx, data.view.width, data.view.height,
-			"MiniRT");
+			"miniRT");
 	event(&data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 1L << 5, ft_close, &data);
