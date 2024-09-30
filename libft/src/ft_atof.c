@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:11:31 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/27 13:11:06 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/30 09:31:29 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 #define ERROR -1
-#define LERROR LONG_MAX
+#define LERROR 9223372036854775807.0
 
 static int	skip_wspace_sign(char *s, int *sign)
 {
@@ -36,14 +36,14 @@ static int	skip_wspace_sign(char *s, int *sign)
 	return (i);
 }
 
-static long	long_add(char *s, int *i)
+static double	long_add(char *s, int *i)
 {
 	long	integer_part;
 
 	integer_part = 0;
 	while (s[*i] != '.' && s[*i])
 	{
-		if (integer_part > ((LONG_MAX - 1) - (s[*i] - '0')) / 10)
+		if (integer_part > ((LONG_MAX - 5) - (s[*i] - '0')) / 10)
 		{
 			printf("Error:overflow detected\n");
 			return (LERROR);
@@ -56,7 +56,7 @@ static long	long_add(char *s, int *i)
 
 double	ft_atof(char *s)
 {
-	long	integer_part;
+	double	integer_part;
 	double	decimal_part;
 	int		sign;
 	double	div;
