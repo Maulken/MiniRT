@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:31:23 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/30 08:42:41 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:55:41 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define ERROR -1
 # define BACKGROUND_COLOR 0x22063d
 # define LERROR 9223372036854775807.0
-# define IERROR INT_MAX
+# define IERROR 2147483646
 
 /* ************************************************************************** */
 /* Structures                                                                 */

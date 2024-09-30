@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:23:43 by viktor            #+#    #+#             */
-/*   Updated: 2024/09/30 09:30:31 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:25:41 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_vector	*add_color_int(t_vector *rgb, char *str)
 	rgb->z = ft_atoi(tmp[2]);
 	if (rgb->x == IERROR || rgb->y == IERROR || rgb->z == IERROR)
 	{
+		printf("Error : overflow INT detected\n");
 		free_tab(tmp);
 		return (NULL);
 	}

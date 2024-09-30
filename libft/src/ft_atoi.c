@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:30:49 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/27 13:51:09 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/30 09:40:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "libft.h"
+# define IERROR 2147483646
 
 int	ft_atoi(const char *str)
 {
@@ -33,8 +34,8 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (num > ((INT_MAX - 1) - (str[i] - '0')) / 10)
-			return (INT_MAX);
+		if (num > ((INT_MAX - 5) - (str[i] - '0')) / 10)
+			return (IERROR);
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}

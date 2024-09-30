@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viktor <viktor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/27 13:11:57 by viktor           ###   ########.fr       */
+/*   Updated: 2024/09/30 10:26:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static char	**check_correct_value_type(const char *content, int j, char **tmp)
 	return (tmp);
 }
 
-/*because I have no space is une essential */
 int	init_sphere(t_geometry *current, char **tmp)
 {
 	t_sphere *const	sphere = &current->data.sphere;
