@@ -6,13 +6,13 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:30:49 by vmassoli          #+#    #+#             */
-/*   Updated: 2024/09/30 09:40:53 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:05:33 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "libft.h"
-# define IERROR 2147483646
+#define IERROR 2147483646
 
 int	ft_atoi(const char *str)
 {
@@ -34,7 +34,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (num > ((INT_MAX - 5) - (str[i] - '0')) / 10)
+		if (num > ((INT_MAX - 3) - (str[i] - '0')) / 10)
 			return (IERROR);
 		num = num * 10 + (str[i] - '0');
 		i++;

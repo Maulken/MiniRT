@@ -6,11 +6,22 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:53:36 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/09/30 10:26:24 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:01:52 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+/*
+    explication du tableau content
+    c = char
+    f = cord float axe x,y,z
+	g = cord flote normalized axe x,y,z
+    i = cord int axe z,y,z
+    k = int
+    t = float
+    v = void
+*/
 
 static char	**check_correct_value_type(const char *content, int j, char **tmp)
 {
@@ -64,17 +75,6 @@ char	**check_error_type(char *str, char **tmp)
 	return (NULL);
 }
 
-/*
-    explication du tableau content
-    c = char
-    f = cordonner flote mais sous trois axe x,y,z
-	g = cordonner flote normalized mais sous trois axe x,y,z
-    i = cordonner int sous trois axe z,y,z
-    k = une FOV , en int 1 valeur attendu
-    t = une taille de volume floate (utile pour L , cy)
-	n = normalalized vector [0.0,1.0]
-    v = void
-*/
 char	**check_correct_type(const char *content, char *tab, char *type,
 		int len)
 {
